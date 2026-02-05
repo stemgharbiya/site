@@ -2,11 +2,22 @@ name = "stemgharbiya"
 compatibility_date = "2026-02-04"
 pages_build_output_dir = "public"
 
+[[ratelimits]]
+name = "SUBMIT_RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 1
+  period = 60
+
+
 [[d1_databases]]
 binding = "DB"
 database_name = "stemgharbiya-applications"
 database_id = "724cedac-bd4f-45ce-aa5f-2b925d6c87a2"
 
 [vars]
-RESEND_SENDER_EMAIL = "github@stem.a8k.dev"
+RESEND_SENDER_EMAIL = "stemgharbiya@stem.a8k.dev"
 TEAM_NOTIFICATION_EMAIL = "team@stem.a8k.dev"
+DISABLE_EMAILS = false
+TURNSTILE_SITE_KEY = "0x4AAAAAACYCSDOBa1wv0RmS"

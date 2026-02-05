@@ -6,16 +6,18 @@ A modern, serverless application for students to apply for joining the STEM Ghar
 
 - **Responsive Form**: Clean, accessible form with real-time validation
 - **Dark/Light Theme**: Automatic theme detection with manual toggle
+- **Rate Limiting**: Prevents abuse with configurable rate limits on form submissions
+- **Bot Protection**: Cloudflare Turnstile captcha integration for enhanced security
 - **Duplicate Prevention**: Prevents multiple submissions with same email + GitHub username
 - **Serverless Backend**: Cloudflare Workers for API endpoints
 - **Database Storage**: Cloudflare D1 for persistent data storage
-- **Email Notifications**: Automated emails to applicants and team via Resend
+- **Email Notifications**: Automated emails to applicants and team via Resend (configurable)
 - **Error Handling**: Comprehensive client and server-side error management
 
 ## Tech Stack
 
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Backend**: Cloudflare Workers
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript, Cloudflare Turnstile
+- **Backend**: Cloudflare Workers (TypeScript)
 - **Database**: Cloudflare D1 (SQLite)
 - **Email**: Resend API
 - **Deployment**: Cloudflare Pages
@@ -31,12 +33,14 @@ A modern, serverless application for students to apply for joining the STEM Ghar
 ## Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/stemgharbiya/join.git
    cd stemgharbiya-join
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -44,6 +48,7 @@ A modern, serverless application for students to apply for joining the STEM Ghar
    ```
 
 3. **Set up Cloudflare D1 database**
+
    ```bash
    npx wrangler d1 create stemgharbiya-applications
    npx wrangler d1 execute stemgharbiya-applications --command="
@@ -63,13 +68,17 @@ A modern, serverless application for students to apply for joining the STEM Ghar
 4. **Configure environment variables**
 
    Create `.dev.vars` file:
+
    ```
    RESEND_API_KEY=your_resend_api_key
    RESEND_SENDER_EMAIL=your-verified-email@resend.dev
    TEAM_NOTIFICATION_EMAIL=team@example.com
+   TURNSTILE_SECRET_KEY=your_turnstile_secret_key
+   DISABLE_EMAILS=false
    ```
 
 5. **Start development server**
+
    ```bash
    npm run dev
    # or
@@ -85,6 +94,15 @@ A modern, serverless application for students to apply for joining the STEM Ghar
 3. Get your API key
 4. Update environment variables
 
+## Turnstile Configuration
+
+1. Sign up for [Cloudflare](https://cloudflare.com)
+2. Go to Security > Turnstile
+3. Create a new site key
+4. Get your secret key
+5. Update the `TURNSTILE_SECRET_KEY` environment variable
+6. Update the site key in your frontend configuration
+
 ## Deployment
 
 1. **Update wrangler.toml**
@@ -92,6 +110,7 @@ A modern, serverless application for students to apply for joining the STEM Ghar
    - Update environment variables in Cloudflare Dashboard
 
 2. **Deploy to Cloudflare Pages**
+
    ```bash
    npx wrangler pages deploy .
    ```
@@ -101,21 +120,26 @@ A modern, serverless application for students to apply for joining the STEM Ghar
    npx wrangler secret put RESEND_API_KEY
    npx wrangler secret put RESEND_SENDER_EMAIL
    npx wrangler secret put TEAM_NOTIFICATION_EMAIL
+   npx wrangler secret put TURNSTILE_SECRET_KEY
+   npx wrangler secret put DISABLE_EMAILS
    ```
 
 ## Database Management
 
 ### View submissions (local)
+
 ```bash
 npx wrangler d1 execute stemgharbiya-applications --command="SELECT * FROM applications;"
 ```
 
 ### View submissions (production)
+
 ```bash
 npx wrangler d1 execute stemgharbiya-applications --remote --command="SELECT * FROM applications;"
 ```
 
 ### Backup database
+
 ```bash
 npx wrangler d1 backup create stemgharbiya-applications --name backup-$(date +%Y%m%d)
 ```
@@ -130,25 +154,35 @@ npx wrangler d1 backup create stemgharbiya-applications --name backup-$(date +%Y
    - Interests (select at least one)
    - Motivation (10-500 characters)
 
-2. Submit the form
-3. Receive confirmation email
-4. Team gets notification email
+2. Complete the Turnstile captcha verification
+3. Submit the form
+4. Receive confirmation email (if enabled)
+5. Team gets notification email (if enabled)
+
+**Note**: Set `DISABLE_EMAILS=true` in environment variables to disable email notifications during development or testing.
 
 ## Development
 
 ### Project Structure
+
 ```
-├── join/
-│   └── index.html          # Main application form
+├── public/
+│   └── join/
+│       ├── index.html          # Main application form
+│       ├── script.js           # Frontend JavaScript
+│       └── styles.css          # Styling
 ├── functions/
-│   └── api/
-│       └── submit.js       # Cloudflare Worker API
-├── wrangler.toml           # Cloudflare configuration
+│   ├── api/
+│   │   └── submit.ts           # Cloudflare Worker API (TypeScript)
+│   ├── tsconfig.json           # TypeScript configuration
+│   └── types.d.ts              # Type definitions
+├── wrangler.toml               # Cloudflare configuration
 ├── package.json
 └── README.md
 ```
 
 ### Available Scripts
+
 - `npm run dev` - Start development server
 - `npm run deploy` - Deploy to production
 
@@ -170,10 +204,12 @@ npx wrangler d1 backup create stemgharbiya-applications --name backup-$(date +%Y
 
 ## Security
 
-- Input sanitization and validation
-- SQL injection prevention via prepared statements
-- XSS protection via HTML escaping in emails
-- Environment variables for sensitive data
+- **Rate Limiting**: Configurable rate limits to prevent abuse and spam
+- **Bot Protection**: Cloudflare Turnstile captcha verification
+- **Input Validation**: Comprehensive sanitization and validation
+- **SQL Injection Prevention**: Prepared statements and parameterized queries
+- **XSS Protection**: HTML escaping in emails and outputs
+- **Environment Security**: Sensitive data stored in environment variables
 
 ## License
 
