@@ -1,15 +1,45 @@
 ---
 import "../styles/global.css";
+import { siteConfig } from "../data/constants";
+
+interface Props {
+  title?: string;
+  description?: string;
+  linksInHead?: string[];
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  linksInHead = [],
+} = Astro.props;
+
+const metaTitle = title
+	? `${title} | ${siteConfig.title}`
+	: siteConfig.title;
+const metaDescription = description || siteConfig.description;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={siteConfig.locale}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{metaTitle}</title>
+		<meta name="description" content={metaDescription} />
+		<meta name="keywords" content={siteConfig.keywords.join(", ")} />
+		<link rel="canonical" href={siteConfig.url} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={siteConfig.title} />
+		<meta property="og:title" content={metaTitle} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:url" content={siteConfig.url} />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:title" content={metaTitle} />
+		<meta name="twitter:description" content={metaDescription} />
+		{linksInHead.map((link) => <Fragment set:html={link} />)}
 	</head>
 	<body>
 		<slot />
