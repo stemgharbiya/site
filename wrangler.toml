@@ -2,14 +2,9 @@ name = "stemgharbiya"
 compatibility_date = "2026-02-04"
 pages_build_output_dir = "public"
 
-[[ratelimits]]
-name = "SUBMIT_RATE_LIMITER"
-namespace_id = "1001"
-
-  [ratelimits.simple]
-  limit = 1
-  period = 60
-
+[[kv_namespaces]]
+binding = "SUBMIT_RATE_LIMITER"
+id = "e64ec22f67a544f2966276af2d5e8beb"
 
 [[d1_databases]]
 binding = "DB"

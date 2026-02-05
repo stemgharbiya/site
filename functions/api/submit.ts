@@ -1,3 +1,5 @@
+import { rateLimit } from "./ratelimit";
+
 // Types
 interface ApplicationData {
   fullName: string;
@@ -14,20 +16,6 @@ interface EmailData {
   to: string[];
   subject: string;
   html: string;
-}
-
-async function rateLimit(env: Env, userKey: string) {
-  const { success } = await env.SUBMIT_RATE_LIMITER.limit({ key: userKey });
-  if (!success) {
-    return new Response(
-      JSON.stringify({ error: "Too many requests, try again later" }),
-      {
-        status: 429,
-        headers: { "Content-Type": "application/json" },
-      },
-    );
-  }
-  return null;
 }
 
 async function verifyTurnstile(token: string, secret: string, ip: string) {

@@ -19,6 +19,7 @@ A modern, serverless application for students to apply for joining the STEM Ghar
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript, Cloudflare Turnstile
 - **Backend**: Cloudflare Workers (TypeScript)
 - **Database**: Cloudflare D1 (SQLite)
+- **Rate Limiting**: Cloudflare KV for distributed rate limiting
 - **Email**: Resend API
 - **Deployment**: Cloudflare Pages
 - **Development**: Wrangler CLI
@@ -65,7 +66,14 @@ A modern, serverless application for students to apply for joining the STEM Ghar
    "
    ```
 
-4. **Configure environment variables**
+4. **Set up Cloudflare KV namespace for rate limiting**
+
+   ```bash
+   npx wrangler kv:namespace create "SUBMIT_RATE_LIMITER"
+   # Update the id in wrangler.toml with the generated namespace ID
+   ```
+
+5. **Configure environment variables**
 
    Create `.dev.vars` file:
 
@@ -77,7 +85,7 @@ A modern, serverless application for students to apply for joining the STEM Ghar
    DISABLE_EMAILS=false
    ```
 
-5. **Start development server**
+6. **Start development server**
 
    ```bash
    npm run dev
@@ -107,6 +115,7 @@ A modern, serverless application for students to apply for joining the STEM Ghar
 
 1. **Update wrangler.toml**
    - Replace placeholder database ID with your actual D1 database ID
+   - Replace placeholder KV namespace ID with your actual KV namespace ID
    - Update environment variables in Cloudflare Dashboard
 
 2. **Deploy to Cloudflare Pages**
@@ -173,7 +182,8 @@ npx wrangler d1 backup create stemgharbiya-applications --name backup-$(date +%Y
 │       └── styles.css          # Styling
 ├── functions/
 │   ├── api/
-│   │   └── submit.ts           # Cloudflare Worker API (TypeScript)
+│   │   ├── submit.ts           # Cloudflare Worker API (TypeScript)
+│   │   └── ratelimit.ts        # KV-based rate limiting logic
 │   ├── tsconfig.json           # TypeScript configuration
 │   └── types.d.ts              # Type definitions
 ├── wrangler.toml               # Cloudflare configuration
@@ -204,7 +214,7 @@ npx wrangler d1 backup create stemgharbiya-applications --name backup-$(date +%Y
 
 ## Security
 
-- **Rate Limiting**: Configurable rate limits to prevent abuse and spam
+- **Rate Limiting**: KV-based distributed rate limiting to prevent abuse and spam
 - **Bot Protection**: Cloudflare Turnstile captcha verification
 - **Input Validation**: Comprehensive sanitization and validation
 - **SQL Injection Prevention**: Prepared statements and parameterized queries
