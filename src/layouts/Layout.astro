@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { siteConfig } from "../data/constants";
+import { pwaInfo } from 'virtual:pwa-info';
 
 interface Props {
   title?: string;
@@ -31,6 +32,7 @@ const metaDescription = description || siteConfig.description;
 		<meta name="description" content={metaDescription} />
 		<meta name="keywords" content={siteConfig.keywords.join(", ")} />
 		<link rel="canonical" href={siteConfig.url} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={siteConfig.title} />
 		<meta property="og:title" content={metaTitle} />
@@ -40,6 +42,7 @@ const metaDescription = description || siteConfig.description;
 		<meta name="twitter:title" content={metaTitle} />
 		<meta name="twitter:description" content={metaDescription} />
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
+		    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 	</head>
 	<body>
 		<slot />
