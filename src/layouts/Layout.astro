@@ -44,16 +44,14 @@ const metaDescription = description || siteConfig.description;
 		<meta name="twitter:description" content={metaDescription} />
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
 		    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+		<script is:inline>
+			const savedTheme = localStorage.getItem('theme');
+			if (savedTheme) {
+				document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+			}
+		</script>
 	</head>
 	<body>
-		<script>
-			document.addEventListener('DOMContentLoaded', () => {
-				const savedTheme = localStorage.getItem('theme');
-				if (savedTheme) {
-					document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-				}
-			});
-		</script>
 		<nav class="flex items-center justify-between p-4 bg-background border-b border-border">
 			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 w-full">
 				<div class="flex items-center justify-between">
