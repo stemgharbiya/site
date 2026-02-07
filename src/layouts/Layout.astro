@@ -45,7 +45,7 @@ const metaDescription = description || siteConfig.description;
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
 		    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 		<script is:inline>
-			const savedTheme = localStorage.getItem('theme');
+			const savedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
 			if (savedTheme) {
 				document.documentElement.classList.toggle('dark', savedTheme === 'dark');
 			}
