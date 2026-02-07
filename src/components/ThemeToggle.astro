@@ -4,31 +4,21 @@
     
     const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
     updateToggle(currentTheme);
-    updateLogos(currentTheme);
     
     toggle?.addEventListener('click', () => {
         const isDark = html.classList.toggle('dark');
         const newTheme = isDark ? 'dark' : 'light';
         updateToggle(newTheme);
-        updateLogos(newTheme);
         localStorage.setItem('theme', newTheme);
     });
     
     function updateToggle(theme: string) {
+        const isDark = theme === 'dark';
         toggle?.setAttribute('data-theme', theme);
-    }
-    
-    function updateLogos(theme: string) {
-        if (theme === 'dark') {
-            const logos = document.querySelectorAll('img[src="/logo.png"]');
-            logos.forEach(logo => {
-                logo.setAttribute('src', '/logo.dark.png');
-        });
+        if (isDark) {
+            toggle?.classList.add('dark');
         } else {
-        const logos = document.querySelectorAll('img[src="/logo.dark.png"]');
-        logos.forEach(logo => {
-            logo.setAttribute('src', '/logo.png');
-        });
+            toggle?.classList.remove('dark');
         }
     }
 </script>
