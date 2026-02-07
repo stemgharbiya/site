@@ -1,26 +1,28 @@
 <script>
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    
-    const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
-    updateToggle(currentTheme);
-    
-    toggle?.addEventListener('click', () => {
-        const isDark = html.classList.toggle('dark');
-        const newTheme = isDark ? 'dark' : 'light';
-        updateToggle(newTheme);
-        localStorage.setItem('theme', newTheme);
-    });
-    
-    function updateToggle(theme: string) {
-        const isDark = theme === 'dark';
-        toggle?.setAttribute('data-theme', theme);
-        if (isDark) {
-            toggle?.classList.add('dark');
-        } else {
-            toggle?.classList.remove('dark');
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+        updateToggle(currentTheme);
+        
+        toggle?.addEventListener('click', () => {
+            const isDark = html.classList.toggle('dark');
+            const newTheme = isDark ? 'dark' : 'light';
+            updateToggle(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        function updateToggle(theme: string) {
+            const isDark = theme === 'dark';
+            toggle?.setAttribute('data-theme', theme);
+            if (isDark) {
+                toggle?.classList.add('dark');
+            } else {
+                toggle?.classList.remove('dark');
+            }
         }
-    }
+    });
 </script>
 
 <button
