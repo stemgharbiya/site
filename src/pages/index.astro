@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Carousel from '../components/Carousel.astro';
+import Statistics from '../components/Statistics.astro';
 ---
 
 <Layout>
@@ -9,5 +10,10 @@ import Carousel from '../components/Carousel.astro';
         altText="STEM Gharbiya"
         heading="STEM Gharbiya High School"
         caption="Empowering the next generation of innovators and leaders in STEM education."
+    />
+    <Statistics
+        stat1={{ label: "Students Enrolled", value: "1200" }}
+        stat2={{ label: "Courses Offered", value: "35" }}
+        stat3={{ label: "Awards Won", value: "15" }}
     />
 </Layout>

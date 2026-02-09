@@ -17,3 +17,38 @@ interface Props {
 const { stat1, stat2, stat3 } = Astro.props;
 
 ---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-card rounded-lg p-6 text-center">
+        <p class="text-muted-foreground text-sm font-medium">{stat1.label}</p>
+        <p class="text-3xl font-bold text-foreground mt-2 counter" data-value={stat1.value}>0</p>
+    </div>
+    <div class="bg-card rounded-lg p-6 text-center">
+        <p class="text-muted-foreground text-sm font-medium">{stat2.label}</p>
+        <p class="text-3xl font-bold text-foreground mt-2 counter" data-value={stat2.value}>0</p>
+    </div>
+    <div class="bg-card rounded-lg p-6 text-center">
+        <p class="text-muted-foreground text-sm font-medium">{stat3.label}</p>
+        <p class="text-3xl font-bold text-foreground mt-2 counter" data-value={stat3.value}>0</p>
+    </div>
+</div>
+
+<script>
+    const animateCounters = () => {
+        document.querySelectorAll('.counter').forEach(el => {
+            const target = parseInt((el as HTMLElement).dataset.value || '0') || 0;
+            const duration = 2500;
+            const start = Date.now();
+            
+            const animate = () => {
+                const elapsed = Date.now() - start;
+                const progress = Math.min(elapsed / duration, 1);
+                el.textContent = String(Math.floor(target * progress));
+                if (progress < 1) requestAnimationFrame(animate);
+            };
+            animate();
+        });
+    };
+    
+    animateCounters();
+</script>
