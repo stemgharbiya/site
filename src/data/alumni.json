@@ -1,0 +1,16 @@
+{
+    "alumni": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "image": "https://example.com/images/john_doe.jpg",
+            "graduationYear": 2019
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith",
+            "image": "https://example.com/images/jane_smith.jpg",
+            "graduationYear": 2020
+        }
+    ]
+}
