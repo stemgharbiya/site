@@ -112,7 +112,7 @@
           "instagram": ""
         },
         "university": {
-          "logo": "",
+          "logo": "../assets/images/alumni/franklin-marshall.png",
           "name": "Franklin & Marshall",
           "classYear": 2026,
           "major": "Engineering",
@@ -134,7 +134,7 @@
           "instagram": ""
         },
         "university": {
-          "logo": "",
+          "logo": "../assets/images/alumni/franklin-marshall.png",
           "name": "Franklin & Marshall",
           "classYear": 2025,
           "major": "Engineering",
@@ -143,7 +143,7 @@
       },
       {
         "name": "Yara Tarek",
-        "image": "../assets/images/alumni/yara-taerk.jpg",
+        "image": "../assets/images/alumni/yara-tarek.jpg",
         "class": "2022",
         "classRank": "Math",
         "nationalRank": "",
