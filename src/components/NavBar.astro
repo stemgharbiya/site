@@ -1,6 +1,12 @@
 ---
+import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+import { ICONS } from "../data/icons";
+import { siteConfig } from "../data/constants";
+
+const navItems = siteConfig.nav.primary;
+const cta = siteConfig.nav.cta;
 ---
 
 <nav class="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
@@ -14,58 +20,75 @@ import ThemeToggle from "./ThemeToggle.astro";
 		</a>
 
 		<div class="hidden items-center gap-1 lg:flex">
-			<a href="/" class="nav-link">Home</a>
-			<div class="relative group">
-				<button class="nav-link flex items-center gap-1">
-					About
-					<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 text-muted-foreground">
-						<path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-					</svg>
-				</button>
-				<div class="absolute left-0 mt-3 w-56 rounded-2xl border border-border bg-background p-2 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-					<a href="/about/school" class="dropdown-link">School</a>
-					<a href="/about/faculty-staff" class="dropdown-link">Faculty & Staff</a>
-					<a href="/about/facilities" class="dropdown-link">Facilities</a>
-					<a href="/about/dorm" class="dropdown-link">Dorm</a>
-					<a href="/about/academics" class="dropdown-link">Academics</a>
-					<a href="/about/developers" class="dropdown-link">Developers</a>
-				</div>
-			</div>
-			<a href="/admission" class="nav-link">Admission</a>
-			<a href="/contact" class="nav-link">Contact</a>
-			<a href="https://portal.stemgharbiya.app" class="nav-link">Portal</a>
+			{navItems.map((item) =>
+				item.children ? (
+					<div class="relative group">
+						<button class="nav-link flex items-center gap-2">
+							<Icon name={ICONS[item.icon]} class="h-[18px] w-[18px]" aria-hidden="true" />
+							{item.label}
+							<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5 text-muted-foreground">
+								<path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+							</svg>
+						</button>
+						<div class="absolute left-0 mt-3 w-56 rounded-2xl border border-border bg-background p-2 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+							{item.children.map((child) => (
+								<a href={child.href} class="dropdown-link">
+									<span class="inline-flex items-center gap-2">
+										<Icon name={ICONS[child.icon]} class="h-[18px] w-[18px]" aria-hidden="true" />
+										{child.label}
+									</span>
+								</a>
+							))}
+						</div>
+					</div>
+				) : (
+					<a href={item.href} class="nav-link">
+						<span class="inline-flex items-center gap-2">
+							<Icon name={ICONS[item.icon]} class="h-[18px] w-[18px]" aria-hidden="true" />
+							{item.label}
+						</span>
+					</a>
+				)
+			)}
 		</div>
 
 		<div class="flex items-center gap-2">
 			<details class="relative lg:hidden">
 				<summary class="list-none rounded-full border border-border bg-background/80 p-2 text-foreground transition hover:bg-secondary">
 					<span class="sr-only">Toggle navigation</span>
-					<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
-					</svg>
+					<Icon name={ICONS.menu} class="h-5 w-5" aria-hidden="true" />
 				</summary>
 				<div class="absolute right-0 mt-3 w-72 rounded-2xl border border-border bg-background p-4 shadow-xl">
 					<div class="grid gap-2 text-sm">
-						<a href="/" class="dropdown-link">Home</a>
-						<div class="rounded-xl border border-border bg-secondary/40 p-3">
-							<p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">About</p>
-							<div class="mt-2 grid gap-2">
-								<a href="/about/school" class="dropdown-link">School</a>
-								<a href="/about/faculty-staff" class="dropdown-link">Faculty & Staff</a>
-								<a href="/about/facilities" class="dropdown-link">Facilities</a>
-								<a href="/about/dorm" class="dropdown-link">Dorm</a>
-								<a href="/about/academics" class="dropdown-link">Academics</a>
-								<a href="/about/developers" class="dropdown-link">Developers</a>
-							</div>
-						</div>
-						<a href="/admission" class="dropdown-link">Admission</a>
-						<a href="/contact" class="dropdown-link">Contact</a>
-						<a href="https://portal.stemgharbiya.app" class="dropdown-link">Portal</a>
-						<a href="/admission" class="btn-primary mt-2">Apply now</a>
+						{navItems.map((item) =>
+							item.children ? (
+								<div class="rounded-xl border border-border bg-secondary/40 p-3">
+									<p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">{item.label}</p>
+									<div class="mt-2 grid gap-2">
+										{item.children.map((child) => (
+											<a href={child.href} class="dropdown-link">
+												<span class="inline-flex items-center gap-2">
+													<Icon name={ICONS[child.icon]} class="h-[18px] w-[18px]" aria-hidden="true" />
+													{child.label}
+												</span>
+											</a>
+										))}
+									</div>
+								</div>
+							) : (
+								<a href={item.href} class="dropdown-link">
+									<span class="inline-flex items-center gap-2">
+										<Icon name={ICONS[item.icon]} class="h-[18px] w-[18px]" aria-hidden="true" />
+										{item.label}
+									</span>
+								</a>
+							)
+						)}
+						<a href={cta.href} class="btn-primary mt-2">{cta.label}</a>
 					</div>
 				</div>
 			</details>
-			<a href="/admission" class="btn-primary hidden sm:inline-flex">Apply now</a>
+			<a href={cta.href} class="btn-primary hidden sm:inline-flex">{cta.label}</a>
 			<ThemeToggle />
 		</div>
 	</div>

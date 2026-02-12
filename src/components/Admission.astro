@@ -1,3 +1,14 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS, type IconKey } from "../data/icons";
+
+const checklist: { icon: IconKey; text: string }[] = [
+    { icon: "eligibility", text: "Eligibility criteria and required documents." },
+    { icon: "timeline", text: "Step-by-step enrollment timeline." },
+    { icon: "exam", text: "Entrance exam format and preparation tips." },
+];
+---
+
 <section class="section">
     <div class="section-inner">
         <div class="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-background via-background to-secondary/60 p-8 md:p-12">
@@ -18,18 +29,12 @@
                 <div class="surface p-6">
                     <h3 class="text-base font-semibold text-foreground">What to expect</h3>
                     <ul class="mt-4 space-y-3 text-sm text-muted-foreground">
-                        <li class="flex gap-3">
-                            <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-                            Eligibility criteria and required documents.
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-                            Step-by-step enrollment timeline.
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-                            Entrance exam format and preparation tips.
-                        </li>
+                        {checklist.map((item) => (
+                            <li class="flex gap-3">
+                                <Icon name={ICONS[item.icon as IconKey]} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
+                                {item.text}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>

@@ -1,21 +1,35 @@
 ---
-const experiences = [
+import { Icon } from "astro-icon/components";
+import { ICONS, type IconKey } from "../data/icons";
+
+const experiences: { icon: IconKey; title: string; description: string }[] = [
   {
+    icon: "clubs",
     title: "Clubs and competitions",
     description: "Academic teams, debate, entrepreneurship, and national STEM contests.",
   },
   {
+    icon: "research",
     title: "Research culture",
     description: "Mentorship, lab access, and opportunities to publish and present.",
   },
   {
+    icon: "community",
     title: "Residential community",
     description: "A safe, supportive campus with leadership development and events.",
   },
   {
+    icon: "global",
     title: "Global exposure",
     description: "Guest lectures, exchange programs, and international collaborations.",
   },
+];
+
+const highlights: { icon: IconKey; text: string }[] = [
+  { icon: "labs", text: "Dedicated innovation labs and maker spaces." },
+  { icon: "talks", text: "Weekly research talks with university partners." },
+  { icon: "leadership", text: "Leadership pathways for student initiative owners." },
+  { icon: "mentorship", text: "Residential advisors and mentorship support." },
 ];
 ---
 
@@ -31,7 +45,10 @@ const experiences = [
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
         {experiences.map((item) => (
           <div class="surface p-5">
-            <h3 class="text-base font-semibold text-foreground">{item.title}</h3>
+            <div class="flex items-center gap-2">
+              <Icon name={ICONS[item.icon]} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
+              <h3 class="text-base font-semibold text-foreground">{item.title}</h3>
+            </div>
             <p class="mt-2 text-sm text-muted-foreground">{item.description}</p>
           </div>
         ))}
@@ -41,22 +58,12 @@ const experiences = [
     <div class="surface p-8">
       <h3 class="text-lg font-semibold text-foreground">Campus highlights</h3>
       <ul class="mt-6 space-y-4 text-sm text-muted-foreground">
-        <li class="flex gap-3">
-          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-          Dedicated innovation labs and maker spaces.
-        </li>
-        <li class="flex gap-3">
-          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-          Weekly research talks with university partners.
-        </li>
-        <li class="flex gap-3">
-          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-          Leadership pathways for student initiative owners.
-        </li>
-        <li class="flex gap-3">
-          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
-          Residential advisors and mentorship support.
-        </li>
+        {highlights.map((item) => (
+          <li class="flex gap-3">
+            <Icon name={ICONS[item.icon]} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
+            {item.text}
+          </li>
+        ))}
       </ul>
       <a class="btn-secondary mt-8" href="/about/academics">Discover academics</a>
     </div>

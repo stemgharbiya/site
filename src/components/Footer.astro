@@ -1,8 +1,8 @@
 ---
-import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
 import { siteConfig } from "../data/constants";
-import { ICONS } from "../data/icons";
+
+const { footer } = siteConfig;
 ---
 
 <footer class="relative border-t border-border bg-background/95 text-foreground">
@@ -22,15 +22,14 @@ import { ICONS } from "../data/icons";
 			</div>
 			<div class="rounded-2xl border border-border bg-background p-5">
 				<p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Campus address</p>
-				<p class="mt-3 text-sm text-foreground">Galaa St., Tanta, Gharbiya, Egypt</p>
+				<p class="mt-3 text-sm text-foreground">{footer.address}</p>
 				<div class="mt-4 flex flex-col gap-3">
 					<a
-						href="https://maps.app.goo.gl/qAHoUc5avbPMAyoU8"
+						href={footer.mapUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition"
+						class="text-sm text-muted-foreground hover:text-foreground transition"
 					>
-						<Icon name={ICONS.mapMarker} class="h-4 w-4" aria-hidden="true" />
 						View on Maps
 					</a>
 				</div>
@@ -48,28 +47,37 @@ import { ICONS } from "../data/icons";
 			<div>
 				<h3 class="text-sm font-semibold text-foreground">Explore</h3>
 				<ul class="mt-4 space-y-2 text-sm">
-					<li><a href="/about/school" class="footer-link">About the school</a></li>
-					<li><a href="/about/academics" class="footer-link">Academics</a></li>
-					<li><a href="/about/facilities" class="footer-link">Facilities</a></li>
-					<li><a href="/about/dorm" class="footer-link">Dorm life</a></li>
+					{footer.explore.map((item) => (
+						<li>
+							<a href={item.href} class="footer-link">
+								{item.label}
+							</a>
+						</li>
+					))}
 				</ul>
 			</div>
 			<div>
 				<h3 class="text-sm font-semibold text-foreground">Admissions</h3>
 				<ul class="mt-4 space-y-2 text-sm">
-					<li><a href="/admission" class="footer-link">Requirements</a></li>
-					<li><a href="/admission" class="footer-link">Application timeline</a></li>
-					<li><a href="/admission" class="footer-link">Entrance exam</a></li>
-					<li><a href="/contact" class="footer-link">Talk to admissions</a></li>
+					{footer.admissions.map((item) => (
+						<li>
+							<a href={item.href} class="footer-link">
+								{item.label}
+							</a>
+						</li>
+					))}
 				</ul>
 			</div>
 			<div>
 				<h3 class="text-sm font-semibold text-foreground">Quick links</h3>
 				<ul class="mt-4 space-y-2 text-sm">
-					<li><a href="/contact" class="footer-link">Contact</a></li>
-					<li><a href="/about/developers" class="footer-link">Developers</a></li>
-					<li><a href="https://portal.stemgharbiya.app" class="footer-link">Portal</a></li>
-					<li><a href="/admission" class="footer-link">Apply now</a></li>
+					{footer.quickLinks.map((item) => (
+						<li>
+							<a href={item.href} class="footer-link">
+								{item.label}
+							</a>
+						</li>
+					))}
 				</ul>
 			</div>
 		</div>
@@ -78,8 +86,11 @@ import { ICONS } from "../data/icons";
 			<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
 				<p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
 				<div class="flex items-center gap-4">
-					<a href="/privacy" class="footer-link">Privacy</a>
-					<a href="/terms" class="footer-link">Terms</a>
+					{footer.legal.map((item) => (
+						<a href={item.href} class="footer-link">
+							{item.label}
+						</a>
+					))}
 				</div>
 			</div>
 		</div>

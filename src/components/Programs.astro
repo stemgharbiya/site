@@ -1,18 +1,24 @@
 ---
-const programs = [
+import { Icon } from "astro-icon/components";
+import { ICONS, type IconKey } from "../data/icons";
+
+const programs: { icon: IconKey; title: string; description: string; highlights: string[] }[] = [
   {
+    icon: "math",
     title: "Mathematics Track",
     description:
       "Advanced problem-solving, olympiad training, and deep theoretical foundations.",
     highlights: ["Olympiad prep", "Proof-based courses", "Applied modeling"],
   },
   {
+    icon: "science",
     title: "Sciences Track",
     description:
       "Lab-driven learning across physics, chemistry, and biology with real research outputs.",
     highlights: ["Research labs", "Mentored projects", "Science fairs"],
   },
   {
+    icon: "engineering",
     title: "Engineering Core",
     description:
       "Build solutions with design thinking, prototyping, and computational tools.",
@@ -38,12 +44,15 @@ const programs = [
           <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">
             {String(index + 1).padStart(2, "0")}
           </p>
-          <h3 class="mt-3 text-xl font-semibold text-foreground">{program.title}</h3>
+          <div class="mt-3 flex items-center gap-2">
+            <Icon name={ICONS[program.icon]} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
+            <h3 class="text-xl font-semibold text-foreground">{program.title}</h3>
+          </div>
           <p class="mt-3 text-sm text-muted-foreground">{program.description}</p>
           <ul class="mt-4 space-y-2 text-sm text-foreground">
             {program.highlights.map((highlight) => (
               <li class="flex items-center gap-2">
-                <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+                <Icon name={ICONS.checkCircle} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
                 {highlight}
               </li>
             ))}

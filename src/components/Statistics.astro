@@ -1,4 +1,8 @@
 ---
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../data/icons";
+import type { IconKey } from "../data/icons";
+
 interface Props {
     title: string;
     lead: string;
@@ -6,6 +10,7 @@ interface Props {
         label: string;
         value: string;
         detail?: string;
+        icon?: IconKey;
     }[];
 }
 
@@ -22,15 +27,15 @@ const { title, lead, items } = Astro.props;
                 <p class="text-sm text-muted-foreground">Recent highlights</p>
                 <ul class="mt-4 space-y-3 text-sm text-foreground">
                     <li class="flex items-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-primary"></span>
+                        <Icon name={ICONS.trophy} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
                         National STEM competitions and Olympiad placements.
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-primary"></span>
+                        <Icon name={ICONS.handshake} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
                         University partnerships and research mentorship.
                     </li>
                     <li class="flex items-center gap-2">
-                        <span class="h-2 w-2 rounded-full bg-primary"></span>
+                        <Icon name={ICONS.certificate} class="h-[18px] w-[18px] text-primary" aria-hidden="true" />
                         Full and partial scholarships for top performers.
                     </li>
                 </ul>
@@ -40,7 +45,12 @@ const { title, lead, items } = Astro.props;
         <div class="grid gap-4 sm:grid-cols-2">
             {items.map((item) => (
                 <div class="surface p-6 text-left">
-                    <p class="text-sm text-muted-foreground">{item.label}</p>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                        {item.icon && (
+                            <Icon name={ICONS[item.icon]} class="h-[18px] w-[18px]" aria-hidden="true" />
+                        )}
+                        <span>{item.label}</span>
+                    </div>
                     <p class="mt-2 text-3xl font-semibold text-foreground counter" data-value={item.value}>
                         0
                     </p>
