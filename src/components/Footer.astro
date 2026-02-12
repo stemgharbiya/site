@@ -1,6 +1,8 @@
 ---
+import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
 import { siteConfig } from "../data/constants";
+import { ICONS } from "../data/icons";
 ---
 
 <footer class="relative border-t border-border bg-background/95 text-foreground">
@@ -28,9 +30,7 @@ import { siteConfig } from "../data/constants";
 						rel="noopener noreferrer"
 						class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition"
 					>
-						<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-							<path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-						</svg>
+						<Icon name={ICONS.mapMarker} class="h-4 w-4" aria-hidden="true" />
 						View on Maps
 					</a>
 				</div>
