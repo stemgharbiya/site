@@ -1,30 +1,26 @@
 ---
 import "../styles/global.css";
-import logo from "../assets/images/logo.png";
-import logoDark from "../assets/images/logo.dark.png";
 import { siteConfig } from "../data/constants";
-import { pwaInfo } from 'virtual:pwa-info';
-import ThemeToggle from "../components/ThemeToggle.astro";
-import { Image } from "astro:assets";
+import { pwaInfo } from "virtual:pwa-info";
+import NavBar from "../components/NavBar.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
-  title?: string;
-  description?: string;
-  linksInHead?: string[];
+	title?: string;
+	description?: string;
+	linksInHead?: string[];
 }
 
 const {
-  title = siteConfig.title,
-  description = siteConfig.description,
-  linksInHead = [],
+	title,
+	description = siteConfig.description,
+	linksInHead = [],
 } = Astro.props;
 
-const metaTitle = title
-	? `${title} | ${siteConfig.title}`
-	: siteConfig.title;
+const metaTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
 const metaDescription = description || siteConfig.description;
-
 ---
+
 <!doctype html>
 <html lang={siteConfig.locale}>
 	<head>
@@ -46,91 +42,20 @@ const metaDescription = description || siteConfig.description;
 		<meta name="twitter:title" content={metaTitle} />
 		<meta name="twitter:description" content={metaDescription} />
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
-		    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 		<script is:inline>
-			const savedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+			const savedTheme =
+				typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
 			if (savedTheme) {
-				document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+				document.documentElement.classList.toggle("dark", savedTheme === "dark");
 			}
 		</script>
 	</head>
 	<body>
-		<nav class="flex items-center justify-between p-4 bg-background border-b border-border">
-			<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 w-full">
-				<div class="flex items-center justify-between">
-					<div class="flex items-center space-x-4">
-						<Image src={logoDark} alt="STEM Gharbiya" class="h-10 w-auto hidden dark:block" />
-						<Image src={logo} alt="STEM Gharbiya" class="h-10 w-auto dark:hidden" />
-						<div class="hidden sm:ml-6 sm:block">
-							<div class="flex space-x-4">
-								<a href="/" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary">Home</a>
-								<div class="relative group">
-									<button class="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary">
-										About
-										<svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 text-gray-400">
-											<path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-										</svg>
-									</button>
-									<div class="mt-3 absolute left-0 mt-0 w-48 bg-background border border-border rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
-										<a href="/about/school" class="block px-4 py-2 text-sm hover:bg-secondary first:rounded-t-md">School</a>
-										<a href="/about/faculty-staff" class="block px-4 py-2 text-sm hover:bg-secondary">Faculty & Staff</a>
-										<a href="/about/facilities" class="block px-4 py-2 text-sm hover:bg-secondary">Facilities</a>
-										<a href="/about/dorm" class="block px-4 py-2 text-sm hover:bg-secondary">Dorm</a>
-										<a href="/about/academics" class="block px-4 py-2 text-sm hover:bg-secondary last:rounded-b-md">Academics</a>								
-										<a href="/about/developers" class="block px-4 py-2 text-sm hover:bg-secondary last:rounded-b-md">Developers</a>
-									</div>
-								</div>
-								<a href="/admission" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary">Admission</a>
-								<a href="/contact" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary">Contact</a>
-								<a href="https://portal.stemgharbiya.app" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary">Portal</a>
-							</div>
-						</div>
-					</div>
-					<div class="absolute inset-y-0 right-0 flex pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-						<ThemeToggle />
-					</div>
-				</div>
-			</div>
-			</div>
-		</nav>
+		<NavBar />
 		<main>
 			<slot />
 		</main>
-		<footer class="bg-secondary border-t border-border text-foreground">
-			<div class="max-w-7xl mx-auto px-4 py-12">
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-					<div>
-						<Image src={logoDark} alt="STEM Gharbiya" class="h-30 w-auto hidden dark:block" />
-						<Image src={logo} alt="STEM Gharbiya" class="h-30 w-auto dark:hidden" />
-					</div>
-					<div>
-						<h3 class="font-semibold mb-4 text-foreground">Sitemap</h3>
-						<ul class="space-y-2 text-sm">
-							<li><a href="/" class="text-muted-foreground hover:text-foreground transition">Home</a></li>
-							<li><a href="/about/school" class="text-muted-foreground hover:text-foreground transition">About</a></li>
-							<li><a href="/admission" class="text-muted-foreground hover:text-foreground transition">Admission</a></li>
-							<li><a href="/contact" class="text-muted-foreground hover:text-foreground transition">Contact</a></li>
-						</ul>
-					</div>
-					<div>
-						<h3 class="font-semibold mb-4 text-foreground">Address</h3>
-						<p class="text-sm text-muted-foreground">
-							Galaa St., Tanta, Gharbiya, Egypt<br />
-							<a href="https://maps.app.goo.gl/qAHoUc5avbPMAyoU8" target="_blank" rel="noopener noreferrer" class="text-muted-foreground hover:text-foreground transition inline-flex items-center gap-1">
-								<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-									<path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-								</svg>
-								View on Maps
-							</a>
-						</p>
-					</div>
-				</div>
-				<div class="border-t border-border pt-6">
-					<p class="text-sm text-muted-foreground text-center">
-						&copy; {new Date().getFullYear()} {siteConfig.title}. All rights reserved.
-					</p>
-				</div>
-			</div>
-		</footer>
+		<Footer />
 	</body>
 </html>

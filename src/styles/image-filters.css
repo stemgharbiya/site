@@ -1,0 +1,19 @@
+.filter-none {
+    filter: none;
+}
+
+.filter-grayscale {
+    filter: grayscale(100%);
+}
+
+.filter-blacked-50 {
+    filter: grayscale(100%) brightness(50%);
+}
+
+.filter-blacked-75 {
+    filter: grayscale(100%) brightness(25%);
+}
+
+.filter-blacked-out {
+    filter: grayscale(100%) brightness(0%);
+}

@@ -1,0 +1,27 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  imagePath: string;
+  altText: string;
+  heading: string;
+  caption: string;
+}
+
+const { imagePath, altText, heading, caption } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>("../assets/images/*.{jpg,png,gif,webp,jpeg}");
+if (!images[imagePath]) {
+  throw new Error(`Image not found: ${imagePath}`);
+}
+---
+
+<div class="carousel w-full relative overflow-hidden">
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
+        <h1 class="text-center text-4xl md:text-6xl lg:text-7xl font-bold text-white">{heading}</h1>
+        <p class="text-center text-lg md:text-xl lg:text-2xl mt-4 text-white">{caption}</p>
+    </div>
+    <div class="carousel-item w-full">
+        <Image src={images[imagePath]()} alt={altText} />
+    </div>
+</div>

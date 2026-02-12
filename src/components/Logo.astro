@@ -1,0 +1,37 @@
+---
+import logo from "../assets/images/logo.png";
+import logoDark from "../assets/images/logo.dark.png";
+import logoWithText from "../assets/images/logo-with-text.png";
+import logoWithTextDark from "../assets/images/logo-with-text.dark.png";
+import { Image } from "astro:assets";
+
+type Size = "sm" | "md" | "lg" | "xl";
+
+interface Props {
+  size?: Size;
+  alt?: string;
+  withText?: boolean;
+  class?: string;
+}
+
+const {
+  size = "md",
+  alt = "STEM Gharbiya",
+  withText = false,
+  class: className = "",
+} = Astro.props;
+
+const sizeClasses: Record<Size, string> = {
+  sm: "h-10",
+  md: "h-20",
+  lg: "h-20",
+  xl: "h-50",
+};
+
+const logoClass = `${sizeClasses[size]} w-auto ${className}`.trim();
+const lightSrc = withText ? logoWithText : logo;
+const darkSrc = withText ? logoWithTextDark : logoDark;
+---
+
+<Image src={darkSrc} alt={alt} class={`${logoClass} hidden dark:block`} />
+<Image src={lightSrc} alt={alt} class={`${logoClass} dark:hidden`} />

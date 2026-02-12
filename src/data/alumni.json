@@ -1,0 +1,620 @@
+[
+  {
+    "id": "batches-2021",
+    "year": 2021,
+    "students": [
+      {
+        "name": "Hesham Elshafey",
+        "image": "../assets/images/alumni/hesham-elshafey.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/rochester.png",
+          "name": "Rochester University",
+          "classYear": 2025,
+          "major": "Electrical Engineering",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Abdelrahman Mohamed",
+        "image": "../assets/images/alumni/abdelrahman-mohamed.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/zewail.png",
+          "name": "Zewail University",
+          "classYear": 2026,
+          "major": "Engineering",
+          "financialAid": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "batches-2022",
+    "year": 2022,
+    "students": [
+      {
+        "name": "Kareem Elrokh",
+        "image": "../assets/images/alumni/kareem-elrokh.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": "USAID-AUC Merit Award-Public School Scholarship"
+        }
+      },
+      {
+        "name": "Seif Eldeen",
+        "image": "../assets/images/alumni/seif-eldeen.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/ala.png",
+          "name": "African Leader Academy (ALA)",
+          "classYear": 2024,
+          "major": "",
+          "financialAid": "Full Scholarship"
+        }
+      },
+      {
+        "name": "Aya Harby",
+        "image": "../assets/images/alumni/aya-harby.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/franklin-marshall.png",
+          "name": "Franklin & Marshall",
+          "classYear": 2026,
+          "major": "Engineering",
+          "financialAid": "Fully funded Scholarship"
+        }
+      },
+      {
+        "name": "Youssef Elgharably",
+        "image": "../assets/images/alumni/youssef-elgharably.jpeg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/franklin-marshall.png",
+          "name": "Franklin & Marshall",
+          "classYear": 2025,
+          "major": "Engineering",
+          "financialAid": "Fully funded Scholarship"
+        }
+      },
+      {
+        "name": "Yara Tarek",
+        "image": "../assets/images/alumni/yara-tarek.jpg",
+        "class": "2022",
+        "classRank": "Math",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": "USAID-AUC Merit Award-Public School Scholarship"
+        }
+      },
+      {
+        "name": "Hana Salah",
+        "image": "../assets/images/alumni/hana-salah.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": "USAID-AUC Merit Award-Public School Scholarship"
+        }
+      },
+      {
+        "name": "Ziad Hassan",
+        "image": "../assets/images/alumni/ziad-hassan.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2026,
+          "major": "Engineering",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Abdelrahman Helal",
+        "image": "../assets/images/alumni/abdelrahman-helal.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/minerva.png",
+          "name": "Minerva University",
+          "classYear": 2026,
+          "major": "Computer Science",
+          "financialAid": "Diana Scholarship"
+        }
+      }
+    ]
+  },
+  {
+    "id": "batches-2023",
+    "year": 2023,
+    "students": [
+      {
+        "name": "Mohamed Emad",
+        "image": "../assets/images/alumni/mohamed-emad.png",
+        "class": "Math",
+        "classRank": "2nd",
+        "nationalRank": "8th",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/w&l.svg",
+          "name": "Washington And Lee University (W&L)",
+          "classYear": 2027,
+          "major": "Computer Science",
+          "financialAid": "Need-blind Scholarship"
+        }
+      },
+      {
+        "name": "Omar Ramy",
+        "image": "../assets/images/alumni/omar-ramy.jpg",
+        "class": "Math",
+        "classRank": "1st",
+        "nationalRank": "4th",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": "Merit-based Scholarship"
+        }
+      },
+      {
+        "name": "Abdelrahman Elgebaly",
+        "image": "../assets/images/alumni/abdelrahman-elgebaly.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/guc.png",
+          "name": "German University in Cairo (GUC)",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Mohamed Glawash",
+        "image": "../assets/images/alumni/mohamed-galwash.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/nile.png",
+          "name": "Nile University",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Yasmeen Helmy",
+        "image": "../assets/images/alumni/yasmeen-helmy.jpg",
+        "class": "Sciences",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/selcuk.png",
+          "name": "Selcuk University",
+          "classYear": 2027,
+          "major": "Pharmacy",
+          "financialAid": "Turkiya Scholarship"
+        }
+      },
+      {
+        "name": "Abdelrahman Osama",
+        "image": "../assets/images/alumni/abdelrahman-osama.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2027,
+          "major": "Engineering",
+          "financialAid": "Full Scholarship"
+        }
+      },
+      {
+        "name": "Youssef El-Dershapy",
+        "image": "../assets/images/alumni/youssef-eldershapy.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/ala.png",
+          "name": "African Leader Academy (ALA)",
+          "classYear": 2025,
+          "major": "",
+          "financialAid": "Full Scholarship"
+        }
+      },
+      {
+        "name": "Ahmed Walid",
+        "image": "../assets/images/alumni/ahmed-walid.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/ala.png",
+          "name": "African Leader Academy (ALA)",
+          "classYear": 2025,
+          "major": "",
+          "financialAid": "Full Scholarship"
+        }
+      },
+      {
+        "name": "Ahmed Guoda",
+        "image": "../assets/images/alumni/ahmed-guoda.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/minerva.png",
+          "name": "Minerva University",
+          "classYear": 2027,
+          "major": "Computer Science",
+          "financialAid": "Diana Scholarship"
+        }
+      },
+      {
+        "name": "Rawan Ahmed",
+        "image": "../assets/images/alumni/rawan-ahmed.jpeg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/nile.png",
+          "name": "Nile University",
+          "classYear": 2027,
+          "major": "",
+          "financialAid": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "batches-2024",
+    "year": 2024,
+    "students": [
+      {
+        "name": "Kareem Morgan",
+        "image": "../assets/images/alumni/karim-morgan.jpg",
+        "class": "Sciences",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/sewanee.png",
+          "name": "Sewanee: The University of the South",
+          "classYear": 2027,
+          "major": "",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Basel Ezz",
+        "image": "../assets/images/alumni/basel-ezz.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2028,
+          "major": "Engineering",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Adham Abotarboush",
+        "image": "../assets/images/alumni/adham-mohamed.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2028,
+          "major": "Engineering",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Anas Galal",
+        "image": "../assets/images/alumni/anas-galal.jpg",
+        "class": "Math",
+        "classRank": "1st",
+        "nationalRank": "81th",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/ain-shams.png",
+          "name": "Ain Shams University",
+          "classYear": 2028,
+          "major": "Engineering",
+          "financialAid": "Full Scholarship"
+        }
+      },
+      {
+        "name": "Sarah Mandour",
+        "image": "../assets/images/alumni/sarah-mandour.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/bryn-mawr.svg",
+          "name": "Bryn Mawr College",
+          "classYear": 2028,
+          "major": "",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Hend Adel",
+        "image": "../assets/images/alumni/hend-adel.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/merit.png",
+          "name": "Merit University",
+          "classYear": 2028,
+          "major": "",
+          "financialAid": ""
+        }
+      },
+      {
+        "name": "Yomna Osama",
+        "image": "../assets/images/alumni/yomna-osama.jpg",
+        "class": "Math",
+        "classRank": "",
+        "nationalRank": "",
+        "socialMedia": {
+          "cv": "",
+          "website": "",
+          "email": "",
+          "linkedin": "",
+          "facebook": "",
+          "instagram": ""
+        },
+        "university": {
+          "logo": "../assets/images/alumni/auc.png",
+          "name": "American University in Cairo (AUC)",
+          "classYear": 2028,
+          "major": "Engineering",
+          "financialAid": "Tomorrow's Leaders Scholarship"
+        }
+      }
+    ]
+  }
+]
