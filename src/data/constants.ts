@@ -1,5 +1,6 @@
 export const siteConfig = {
-  title: "STEM Gharbiya",
+  name: "STEM Gharbiya",
+  title: "STEM Gharbiya - A Public STEM High School in Egypt",
   description:
     "STEM Gharbiya is a public STEM high school in Egypt focused on project-based learning, innovation, and research-driven education.",
   url: "https://stemgharbiya.app",
