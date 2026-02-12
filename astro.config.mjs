@@ -11,9 +11,6 @@ export default defineConfig({
   site: siteConfig.url,
   vite: {
     plugins: [tailwindcss()],
-    server: {
-      allowedHosts: ["mill-max-orientation-gentle.trycloudflare.com"]
-    }
   },
   integrations: [AstroPWA({}), sitemap()],
 });
