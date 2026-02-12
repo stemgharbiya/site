@@ -6,7 +6,6 @@ import { ICONS } from "../data/icons";
 import { siteConfig } from "../data/constants";
 
 const navItems = siteConfig.nav.primary;
-const cta = siteConfig.nav.cta;
 ---
 
 <nav class="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
@@ -84,11 +83,9 @@ const cta = siteConfig.nav.cta;
 								</a>
 							)
 						)}
-						<a href={cta.href} class="btn-primary mt-2">{cta.label}</a>
 					</div>
 				</div>
 			</details>
-			<a href={cta.href} class="btn-primary hidden sm:inline-flex">{cta.label}</a>
 			<ThemeToggle />
 		</div>
 	</div>

@@ -20,7 +20,6 @@ type SiteConfig = {
   locale: string;
   nav: {
     primary: NavItem[];
-    cta: NavItem;
   };
   footer: {
     explore: FooterLink[];
@@ -61,11 +60,10 @@ export const siteConfig: SiteConfig = {
           { label: "Developers", href: "/about/developers", icon: "developers" },
         ],
       },
-      { label: "Admission", href: "/admission", icon: "admission" },
-      { label: "Contact", href: "/contact", icon: "contact" },
+      { label: "How to Join", href: "/admission", icon: "admission" },
+      { label: "Contact Us", href: "/contact", icon: "contact" },
       { label: "Portal", href: "https://portal.stemgharbiya.app", icon: "portal" },
     ],
-    cta: { label: "Apply now", href: "/admission", icon: "apply" },
   },
   footer: {
     explore: [
@@ -75,16 +73,16 @@ export const siteConfig: SiteConfig = {
       { label: "Dorm life", href: "/about/dorm" },
     ],
     admissions: [
-      { label: "Requirements", href: "/admission" },
-      { label: "Application timeline", href: "/admission" },
+      { label: "Eligibility", href: "/admission" },
+      { label: "How to join", href: "/admission" },
       { label: "Entrance exam", href: "/admission" },
-      { label: "Talk to admissions", href: "/contact" },
+      { label: "Have a question?", href: "/contact" },
     ],
     quickLinks: [
-      { label: "Contact", href: "/contact" },
+      { label: "Contact us", href: "/contact" },
       { label: "Developers", href: "/about/developers" },
       { label: "Portal", href: "https://portal.stemgharbiya.app" },
-      { label: "Apply now", href: "/admission" },
+      { label: "Learn how to join", href: "/admission" },
     ],
     legal: [
       { label: "Privacy", href: "/privacy" },
