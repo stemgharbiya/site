@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/landing.jpg";
+---
+
+<section class="section relative overflow-hidden bg-gradient-to-b from-secondary/70 via-background to-background">
+  <div class="absolute -top-32 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
+  <div class="absolute -bottom-32 left-0 h-72 w-72 rounded-full bg-secondary/80 blur-3xl" aria-hidden="true"></div>
+
+  <div class="section-inner relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <div>
+      <p class="eyebrow">STEM Gharbiya</p>
+      <h1 class="section-title mt-3 text-4xl md:text-5xl lg:text-6xl">
+        A public STEM high school that builds future researchers and innovators.
+      </h1>
+      <p class="section-lead max-w-xl">
+        Rigorous academics, residential life, and real-world research experiences that prepare students
+        for the world’s top universities.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a class="btn-primary" href="/admission">Start your application</a>
+        <a class="btn-secondary" href="/about/school">Explore the campus</a>
+      </div>
+
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        <div class="surface p-4">
+          <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Outcomes</p>
+          <p class="mt-2 text-2xl font-semibold text-foreground">90%+</p>
+          <p class="text-sm text-muted-foreground">graduates in STEM majors</p>
+        </div>
+        <div class="surface p-4">
+          <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Community</p>
+          <p class="mt-2 text-2xl font-semibold text-foreground">40+</p>
+          <p class="text-sm text-muted-foreground">student-led clubs and teams</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="surface p-2">
+        <Image src={heroImage} alt="STEM Gharbiya campus" class="h-full w-full rounded-2xl object-cover" />
+      </div>
+      <div class="absolute -bottom-6 right-6 hidden w-56 rounded-2xl border border-border bg-card p-4 shadow-lg lg:block">
+        <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Residential</p>
+        <p class="mt-2 text-lg font-semibold text-foreground">Boarding campus</p>
+        <p class="text-sm text-muted-foreground">Live, learn, and build together.</p>
+      </div>
+    </div>
+  </div>
+</section>

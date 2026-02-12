@@ -2,53 +2,61 @@
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import defaultImage from "../assets/images/alumni/default.png";
-const alumni = await getCollection("alumniCollection");
-const students = alumni.flatMap((batch: any) => batch.data.students).slice(0, 10);
----
-<div class="w-full overflow-hidden bg-gradient-to-r from-background via-background to-background py-8">
-    <div class="flex animate-marquee">
-        {[...students, ...students].map((student: any) => {
-            const batch = alumni.find((b: any) => b.data.students.includes(student))?.data;
-            return (
-                <div class="flex flex-col items-center flex-shrink-0 gap-4 mx-6">
-                    <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-primary shadow-lg">
-                        <Image 
-                            src={student.image || defaultImage} 
-                            alt={student.name}
-                            class="w-full h-full object-cover"
-                        />
-                    </div>
-                    <div class="text-center">
-                        <p class="text-base font-semibold text-foreground whitespace-nowrap">
-                            {student.name} | {batch?.year}
-                        </p>
-                        <p class="text-sm text-muted-foreground whitespace-nowrap">
-                            {student.university.name}
-                        </p>
-                    </div>
-                </div>
-            );
-        })}
-    </div>
-</div>
 
-<style>
-    @keyframes marquee {
-        from {
-            transform: translateX(0);
-        }
-        to {
-            transform: translateX(-50%);
-        }
+const alumni = await getCollection("alumniCollection");
+const students = alumni.flatMap((batch: any) => batch.data.students).slice(0, 6);
+const universityLogos: { logo: any; name: string }[] = [];
+const seen = new Set<string>();
+
+for (const student of alumni.flatMap((batch: any) => batch.data.students)) {
+    const logo = student.university?.logo;
+    const name = student.university?.name || "";
+    if (logo && name && !seen.has(name)) {
+        seen.add(name);
+        universityLogos.push({ logo, name });
     }
-    
-    .animate-marquee {
-        display: flex;
-        animation: marquee 30s linear infinite;
-        width: max-content;
-    }
-    
-    .animate-marquee:hover {
-        animation-play-state: paused;
-    }
-</style>
+    if (universityLogos.length >= 8) break;
+}
+---
+
+<section class="section bg-gradient-to-b from-background via-background to-secondary/40">
+    <div class="section-inner grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+            <p class="eyebrow">Outcomes</p>
+            <h2 class="section-title mt-3">Alumni thriving at top universities.</h2>
+            <p class="section-lead">
+                Graduates earn scholarships and admission to competitive STEM programs across Egypt
+                and abroad.
+            </p>
+
+            <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                {students.map((student: any) => (
+                    <div class="surface p-4">
+                        <div class="flex items-center gap-4">
+                            <div class="h-12 w-12 overflow-hidden rounded-full border border-border">
+                                <Image src={student.image || defaultImage} alt={student.name} />
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-foreground">{student.name}</p>
+                                <p class="text-xs text-muted-foreground">{student.university?.name}</p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <a class="btn-secondary mt-8" href="/alumni">Explore alumni stories</a>
+        </div>
+
+        <div class="surface p-6">
+            <h3 class="text-lg font-semibold text-foreground">University placements</h3>
+            <div class="mt-6 flex flex-wrap items-center gap-4">
+                {universityLogos.map((item) => (
+                    <div class="rounded-lg border border-border bg-background px-3 py-2">
+                        <Image src={item.logo} alt={item.name} class="h-8 w-auto" />
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>

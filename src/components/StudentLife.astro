@@ -1,0 +1,64 @@
+---
+const experiences = [
+  {
+    title: "Clubs and competitions",
+    description: "Academic teams, debate, entrepreneurship, and national STEM contests.",
+  },
+  {
+    title: "Research culture",
+    description: "Mentorship, lab access, and opportunities to publish and present.",
+  },
+  {
+    title: "Residential community",
+    description: "A safe, supportive campus with leadership development and events.",
+  },
+  {
+    title: "Global exposure",
+    description: "Guest lectures, exchange programs, and international collaborations.",
+  },
+];
+---
+
+<section class="section bg-secondary/40">
+  <div class="section-inner grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+    <div>
+      <p class="eyebrow">Student Life</p>
+      <h2 class="section-title mt-3">A campus built for curiosity and leadership.</h2>
+      <p class="section-lead">
+        Beyond academics, students collaborate, compete, and build community through clubs,
+        residential life, and a culture of mentorship.
+      </p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2">
+        {experiences.map((item) => (
+          <div class="surface p-5">
+            <h3 class="text-base font-semibold text-foreground">{item.title}</h3>
+            <p class="mt-2 text-sm text-muted-foreground">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="surface p-8">
+      <h3 class="text-lg font-semibold text-foreground">Campus highlights</h3>
+      <ul class="mt-6 space-y-4 text-sm text-muted-foreground">
+        <li class="flex gap-3">
+          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+          Dedicated innovation labs and maker spaces.
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+          Weekly research talks with university partners.
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+          Leadership pathways for student initiative owners.
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-1 h-2 w-2 rounded-full bg-primary"></span>
+          Residential advisors and mentorship support.
+        </li>
+      </ul>
+      <a class="btn-secondary mt-8" href="/about/academics">Discover academics</a>
+    </div>
+  </div>
+</section>

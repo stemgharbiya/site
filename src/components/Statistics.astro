@@ -1,45 +1,63 @@
 ---
 interface Props {
-    stat1: {
+    title: string;
+    lead: string;
+    items: {
         label: string;
         value: string;
-    };
-    stat2: {
-        label: string;
-        value: string;
-    };
-    stat3: {
-        label: string;
-        value: string;
-    };
+        detail?: string;
+    }[];
 }
 
-const { stat1, stat2, stat3 } = Astro.props;
-
+const { title, lead, items } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="bg-card rounded-lg p-6 text-center">
-        <p class="text-muted-foreground text-sm font-medium">{stat1.label}</p>
-        <p class="text-3xl font-bold text-foreground mt-2 counter" data-value={stat1.value}>0</p>
+<section class="section">
+    <div class="section-inner grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+            <p class="eyebrow">Proof</p>
+            <h2 class="section-title mt-3">{title}</h2>
+            <p class="section-lead">{lead}</p>
+            <div class="mt-8 surface p-6">
+                <p class="text-sm text-muted-foreground">Recent highlights</p>
+                <ul class="mt-4 space-y-3 text-sm text-foreground">
+                    <li class="flex items-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-primary"></span>
+                        National STEM competitions and Olympiad placements.
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-primary"></span>
+                        University partnerships and research mentorship.
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="h-2 w-2 rounded-full bg-primary"></span>
+                        Full and partial scholarships for top performers.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+            {items.map((item) => (
+                <div class="surface p-6 text-left">
+                    <p class="text-sm text-muted-foreground">{item.label}</p>
+                    <p class="mt-2 text-3xl font-semibold text-foreground counter" data-value={item.value}>
+                        0
+                    </p>
+                    {item.detail && <p class="mt-2 text-sm text-muted-foreground">{item.detail}</p>}
+                </div>
+            ))}
+        </div>
     </div>
-    <div class="bg-card rounded-lg p-6 text-center">
-        <p class="text-muted-foreground text-sm font-medium">{stat2.label}</p>
-        <p class="text-3xl font-bold text-foreground mt-2 counter" data-value={stat2.value}>0</p>
-    </div>
-    <div class="bg-card rounded-lg p-6 text-center">
-        <p class="text-muted-foreground text-sm font-medium">{stat3.label}</p>
-        <p class="text-3xl font-bold text-foreground mt-2 counter" data-value={stat3.value}>0</p>
-    </div>
-</div>
+</section>
 
 <script>
     const animateCounters = () => {
-        document.querySelectorAll('.counter').forEach(el => {
-            const target = parseInt((el as HTMLElement).dataset.value || '0') || 0;
-            const duration = 2500;
+        document.querySelectorAll('.counter').forEach((el) => {
+            const target = parseInt((el as HTMLElement).dataset.value || '0', 10) || 0;
+            const duration = 2000;
             const start = Date.now();
-            
+
             const animate = () => {
                 const elapsed = Date.now() - start;
                 const progress = Math.min(elapsed / duration, 1);
@@ -49,6 +67,6 @@ const { stat1, stat2, stat3 } = Astro.props;
             animate();
         });
     };
-    
+
     animateCounters();
 </script>
