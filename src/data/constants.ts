@@ -61,6 +61,7 @@ export const siteConfig: SiteConfig = {
         ],
       },
       { label: "How to Join", href: "/admission", icon: "admission" },
+      {label: "Alumni", href: "/alumni", icon: "graduates"},
       { label: "Contact Us", href: "/contact", icon: "contact" },
       { label: "Portal", href: "https://portal.stemgharbiya.app", icon: "portal" },
     ],
