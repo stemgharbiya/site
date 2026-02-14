@@ -5,7 +5,7 @@ import { ICONS } from "../../data/icons";
 
 <section class="section bg-secondary/40">
   <div class="section-inner">
-    <div class="max-w-3xl">
+    <div class="max-w-7xl">
       <p class="eyebrow">Questions</p>
       <h2 class="section-title mt-3">Frequently asked questions.</h2>
       <p class="section-lead">
@@ -14,14 +14,14 @@ import { ICONS } from "../../data/icons";
       </p>
     </div>
 
-    <div class="mt-10 max-w-3xl space-y-4">
+    <div class="mt-10 max-w-7xl faq-grid">
       <details
         class="surface cursor-pointer p-6 transition hover:shadow-md"
         open
       >
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>What's the difference between the two eligibility cases?</span>
-          <Icon name={ICONS.info} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.info} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -38,7 +38,7 @@ import { ICONS } from "../../data/icons";
       <details class="surface cursor-pointer p-6 transition hover:shadow-md">
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>When do applications open and close?</span>
-          <Icon name={ICONS.timeline} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.timeline} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -52,7 +52,7 @@ import { ICONS } from "../../data/icons";
       <details class="surface cursor-pointer p-6 transition hover:shadow-md">
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>How competitive is the admission process?</span>
-          <Icon name={ICONS.trophy} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.trophy} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -66,7 +66,7 @@ import { ICONS } from "../../data/icons";
       <details class="surface cursor-pointer p-6 transition hover:shadow-md">
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>Can I apply to multiple STEM schools?</span>
-          <Icon name={ICONS.apply} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.apply} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -80,7 +80,7 @@ import { ICONS } from "../../data/icons";
       <details class="surface cursor-pointer p-6 transition hover:shadow-md">
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>What's the application fee?</span>
-          <Icon name={ICONS.chat} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.chat} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -93,7 +93,7 @@ import { ICONS } from "../../data/icons";
       <details class="surface cursor-pointer p-6 transition hover:shadow-md">
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>How are results determined?</span>
-          <Icon name={ICONS.certificate} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.certificate} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -107,7 +107,7 @@ import { ICONS } from "../../data/icons";
       <details class="surface cursor-pointer p-6 transition hover:shadow-md">
         <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
           <span>What if I don't get accepted?</span>
-          <Icon name={ICONS.chat} class="h-5 w-5 text-primary" aria-hidden="true" />
+          <Icon name={ICONS.chat} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
         </summary>
         <div class="mt-4 text-sm text-muted-foreground">
           <p>
@@ -122,8 +122,21 @@ import { ICONS } from "../../data/icons";
 </section>
 
 <style>
+  .faq-grid {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .faq-grid {
+      column-count: 2;
+    }
+  }
+
   details {
     will-change: max-height;
+    break-inside: avoid;
+    margin-bottom: 1rem;
   }
 
   details[open] summary {
