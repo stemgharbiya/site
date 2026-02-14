@@ -1,0 +1,123 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+
+const steps = [
+  {
+    number: "01",
+    title: "Application Period",
+    timeline: "Mid to Late July",
+    description: "Submit your application online through the STEM admissions portal.",
+    details: [
+      "Enter personal and academic information",
+      "Rank the 21 STEM Schools by preference",
+      "Upload required documents digitally",
+    ],
+    icon: "apply",
+  },
+  {
+    number: "02",
+    title: "Document Submission",
+    timeline: "During Application",
+    description: "Prepare and submit all required papers during the application window.",
+    details: [
+      "Official Grade 9 transcript",
+      "Birth certificate",
+      "Parent National ID copy",
+      "Personal photos (6x4)",
+      "Bank transfer receipt (150 L.E.)",
+    ],
+    icon: "eligibility",
+  },
+  {
+    number: "03",
+    title: "Entrance Examination",
+    timeline: "Mid August",
+    description: "Take the comprehensive digital assessment across 4 sections.",
+    details: [
+      "Mathematics: 60 questions (45 min)",
+      "English: 60 questions (45 min)",
+      "Science: 60 questions (45 min)",
+      "IQ Test: 60 questions (45 min)",
+    ],
+    icon: "exam",
+  },
+  {
+    number: "04",
+    title: "Results Released",
+    timeline: "First week of September",
+    description: "Check your results and school placement on the admissions portal.",
+    details: [
+      "View acceptance status and ranking",
+      "Receive assigned STEM School",
+      "See overall test score",
+      "No waitlist (accept or reject only)",
+    ],
+    icon: "certificate",
+  },
+  {
+    number: "05",
+    title: "Final Registration",
+    timeline: "September",
+    description: "Complete registration at your assigned school with final documents.",
+    details: [
+      "Submit original documents to school",
+      "Complete enrollment paperwork",
+      "Receive boarding accommodation details",
+      "Attend orientation and welcome sessions",
+    ],
+    icon: "portal",
+  },
+];
+---
+
+<section class="section bg-secondary/40">
+  <div class="section-inner">
+    <div class="max-w-3xl">
+      <p class="eyebrow">Timeline</p>
+      <h2 class="section-title mt-3">The admission process in 5 steps.</h2>
+      <p class="section-lead">
+        From application to enrollment, the STEM admissions process is transparent and well-structured. 
+        Here's what to expect throughout the journey.
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-6">
+      {steps.map((step, index) => (
+        <div class="surface overflow-hidden transition hover:shadow-md">
+          <div class="flex flex-col md:flex-row">
+            <div class="flex min-h-[200px] flex-col items-center justify-center border-b border-border bg-gradient-to-br from-primary/5 to-primary/10 px-6 py-6 text-center md:min-h-auto md:border-b-0 md:border-r md:w-32">
+              <div class="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                {step.timeline}
+              </div>
+              <div class="mt-4 text-4xl font-bold text-primary">{step.number}</div>
+              <Icon
+                name={ICONS[step.icon as keyof typeof ICONS]}
+                class="mt-4 h-6 w-6 text-primary"
+                aria-hidden="true"
+              />
+            </div>
+
+            <div class="flex flex-1 flex-col justify-center p-6 md:p-8">
+              <h3 class="text-xl font-semibold text-foreground">{step.title}</h3>
+              <p class="mt-2 text-sm text-muted-foreground">{step.description}</p>
+
+              <ul class="mt-5 space-y-2">
+                {step.details.map((detail) => (
+                  <li class="flex items-start gap-3 text-sm text-foreground">
+                    <Icon
+                      name={ICONS.checkCircle}
+                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

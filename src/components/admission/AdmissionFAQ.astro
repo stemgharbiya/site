@@ -1,0 +1,149 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+---
+
+<section class="section bg-secondary/40">
+  <div class="section-inner">
+    <div class="max-w-7xl">
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title mt-3">Frequently asked questions.</h2>
+      <p class="section-lead">
+        Answers to common questions about the STEM admission process. 
+        Get in touch if you don't find what you're looking for.
+      </p>
+    </div>
+
+    <div class="mt-10 max-w-7xl faq-grid">
+      <details
+        class="surface cursor-pointer p-6 transition hover:shadow-md"
+        open
+      >
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>What's the difference between the two eligibility cases?</span>
+          <Icon name={ICONS.info} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            <strong>Case 1:</strong> If your total Grade 9 average is 98% or higher, you're automatically 
+            eligible to apply. You don't need perfect marks in any individual subject.
+          </p>
+          <p class="mt-3">
+            <strong>Case 2:</strong> If your average is between 95-98%, you're also eligible, but you must 
+            have scored 100% in at least one of: Maths, Science, or English.
+          </p>
+        </div>
+      </details>
+
+      <details class="surface cursor-pointer p-6 transition hover:shadow-md">
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>When do applications open and close?</span>
+          <Icon name={ICONS.timeline} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            The application window opens in <strong>mid to late July</strong> each year. 
+            The exact dates are announced by the Ministry of Education. 
+            Mark your calendar and submit early to avoid last-minute issues!
+          </p>
+        </div>
+      </details>
+
+      <details class="surface cursor-pointer p-6 transition hover:shadow-md">
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>How competitive is the admission process?</span>
+          <Icon name={ICONS.trophy} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            STEM schools across Egypt accept only the top performers nationwide. 
+            Gharbiya STEM typically receives thousands of applications and accepts only top-ranking candidates. 
+            The entrance exam is rigorous—preparation is key.
+          </p>
+        </div>
+      </details>
+
+      <details class="surface cursor-pointer p-6 transition hover:shadow-md">
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>Can I apply to multiple STEM schools?</span>
+          <Icon name={ICONS.apply} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            Yes! During the application, you rank all 21 STEM schools in Egypt by your preference. 
+            If you're accepted, you're assigned to one school based on your ranking and test score. 
+            You can't choose your school—placement is based on your ranking and overall competition.
+          </p>
+        </div>
+      </details>
+
+      <details class="surface cursor-pointer p-6 transition hover:shadow-md">
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>What's the application fee?</span>
+          <Icon name={ICONS.chat} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            The application fee is <strong>150 Egyptian Pounds (L.E.)</strong>, which goes to the Ministry of Education. 
+            You'll receive a bank transfer receipt as proof of payment—keep this with your other documents.
+          </p>
+        </div>
+      </details>
+
+      <details class="surface cursor-pointer p-6 transition hover:shadow-md">
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>How are results determined?</span>
+          <Icon name={ICONS.certificate} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            Your final ranking is based solely on your <strong>entrance exam score</strong> (not your Grade 9 grades). 
+            The exam has 4 sections: Maths, English, Science, and IQ—each with equal weight. 
+            Students are ranked nationally by total score.
+          </p>
+        </div>
+      </details>
+
+      <details class="surface cursor-pointer p-6 transition hover:shadow-md">
+        <summary class="flex items-center justify-between text-lg font-semibold text-foreground">
+          <span>What if I don't get accepted?</span>
+          <Icon name={ICONS.chat} class="h-5 w-5 text-primary flex-shrink-0 ml-2" aria-hidden="true" />
+        </summary>
+        <div class="mt-4 text-sm text-muted-foreground">
+          <p>
+            STEM schools no longer maintain waitlists. Acceptance decisions are final—there are no appeals or 
+            waitlist positions. We encourage students to reach out to the school counselor for feedback and guidance 
+            on alternative pathways.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-grid {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .faq-grid {
+      column-count: 2;
+    }
+  }
+
+  details {
+    will-change: max-height;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+
+  details[open] summary {
+    color: var(--color-primary);
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

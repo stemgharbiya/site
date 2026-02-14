@@ -1,0 +1,74 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+---
+
+<section class="section">
+  <div class="section-inner">
+    <div class="mx-auto max-w-2xl">
+      <div>
+        <div>
+          <p class="eyebrow">Get in touch</p>
+          <h2 class="section-title mt-3">Questions about admission?</h2>
+          <p class="section-lead mt-4">
+            Our admissions team and school counselors are here to help guide you through the process.
+          </p>
+
+          <div class="mt-8 space-y-6">
+            <div class="flex gap-4">
+              <Icon name={ICONS.mapMarker} class="h-6 w-6 flex-shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-foreground">Address</h3>
+                <p class="mt-1 text-sm text-muted-foreground">
+                  Gharbiya STEM School, School Campus
+                  <br />
+                  El-Galaa, Tanta
+                  <br />
+                  El Gharbiya, Egypt
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <Icon name={ICONS.contact} class="h-6 w-6 flex-shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-foreground">Phone</h3>
+                <a href="tel:+20403556263" class="mt-1 text-sm text-primary transition hover:underline">
+                  (+2) 0403556263
+                </a>
+                <p class="text-xs text-muted-foreground">Available during school hours</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <Icon name={ICONS.contact} class="h-6 w-6 flex-shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-foreground">School Email</h3>
+                <a
+                  href="mailto:gharbiasch@stemgharbiya.moe.edu.eg"
+                  class="mt-1 text-sm text-primary transition hover:underline"
+                >
+                  gharbiasch@stemgharbiya.moe.edu.eg
+                </a>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <Icon name={ICONS.contact} class="h-6 w-6 flex-shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <h3 class="font-semibold text-foreground">Counselor</h3>
+                <a
+                  href="mailto:ereny.awad@stemgharbiya.moe.edu.eg"
+                  class="mt-1 text-sm text-primary transition hover:underline"
+                >
+                  ereny.awad@stemgharbiya.moe.edu.eg
+                </a>
+                <p class="mt-1 text-xs text-muted-foreground">For personal guidance and mentorship</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

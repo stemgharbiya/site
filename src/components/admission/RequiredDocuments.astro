@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+
+const documents = [
+  {
+    category: "Academic",
+    items: [
+      "Official Grade 9 transcript with total and individual subject grades",
+      "Birth certificate (official copy)",
+    ],
+  },
+  {
+    category: "Personal Identification",
+    items: [
+      "Copy of student's National ID or passport information page",
+      "Copy of parent/guardian National ID (both pages)",
+      "4-6 personal photographs (6x4 cm size)",
+    ],
+  },
+  {
+    category: "Application & Payment",
+    items: [
+      "Printout of school ranking list from the application website",
+      "Bank transfer receipt of 150 L.E. payment to Ministry of Education",
+      "Application confirmation from admissions portal",
+    ],
+  },
+];
+---
+
+<section class="section">
+  <div class="section-inner">
+    <div class="max-w-3xl">
+      <p class="eyebrow">Requirements</p>
+      <h2 class="section-title mt-3">Documents you'll need to gather.</h2>
+      <p class="section-lead">
+        Make sure you have all required documents ready before the application deadline. 
+        Missing documents may delay or disqualify your application.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 lg:grid-cols-3">
+      {documents.map((section) => (
+        <div class="surface p-6">
+          <div class="mb-6 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+              <Icon name={ICONS.eligibility} class="h-5 w-5 text-primary" aria-hidden="true" />
+            </div>
+            <h3 class="text-lg font-semibold text-foreground">{section.category}</h3>
+          </div>
+
+          <ul class="space-y-3">
+            {section.items.map((item) => (
+              <li class="flex gap-3 text-sm text-foreground">
+                <Icon
+                  name={ICONS.checkCircle}
+                  class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
+                  aria-hidden="true"
+                />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 rounded-xl border border-primary/30 bg-primary/5 p-6 md:p-8">
+      <div class="flex gap-4">
+        <Icon name={ICONS.info} class="h-6 w-6 flex-shrink-0 text-primary" aria-hidden="true" />
+        <div>
+          <h3 class="font-semibold text-foreground">Pro tip</h3>
+          <p class="mt-1 text-sm text-muted-foreground">
+            Prepare all documents digitally (scanned/photographed) before the application period starts. 
+            Keep originals safe for submission at your assigned school after acceptance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
