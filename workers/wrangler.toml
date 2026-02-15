@@ -1,0 +1,18 @@
+name = "stemgharbiya"
+compatibility_date = "2026-02-04"
+pages_build_output_dir = "public"
+
+[[kv_namespaces]]
+binding = "SUBMIT_RATE_LIMITER"
+id = "e64ec22f67a544f2966276af2d5e8beb"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "stemgharbiya-applications"
+database_id = "724cedac-bd4f-45ce-aa5f-2b925d6c87a2"
+
+[vars]
+RESEND_SENDER_EMAIL = "stemgharbiya@stem.a8k.dev"
+TEAM_NOTIFICATION_EMAIL = "team@stem.a8k.dev"
+DISABLE_EMAILS = false
+TURNSTILE_SITE_KEY = "0x4AAAAAACYCSDOBa1wv0RmS"

@@ -1,0 +1,13 @@
+{
+  "name": "stemgharbiya-join-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "STEM Gharbiya GitHub organization application portal",
+  "scripts": {
+    "dev": "wrangler pages dev ./public",
+    "deploy": "wrangler pages deploy ./public"
+  },
+  "devDependencies": {
+    "wrangler": "^4.62.0"
+  }
+}
