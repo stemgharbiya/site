@@ -42,7 +42,8 @@ const staffCollection = defineCollection({
         role: z.string(),
         committee: z.string(),
         avatar: image(),
-        email: z.string()
+        email: z.string().optional(),
+        bio: z.string().optional()
     })
 });
 

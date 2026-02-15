@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+import StaffCard from "./StaffCard.astro";
+import StaffModal from "./StaffModal.astro";
+
+const staffCollection = await getCollection("staffCollection");
+
+// Group staff by committee
+const staffByCommittee = new Map<string, typeof staffCollection>();
+
+for (const member of staffCollection) {
+  const committee = member.data.committee || "General Staff";
+  if (!staffByCommittee.has(committee)) {
+    staffByCommittee.set(committee, []);
+  }
+  staffByCommittee.get(committee)!.push(member);
+}
+
+// Sort committees (you can customize this order)
+const committeeOrder = ["Management Committee", "Curriculum Committee", "Activities Committee", "Social Committee", "Laboratory Committee", "General Staff"];
+const sortedCommittees = Array.from(staffByCommittee.keys()).sort((a, b) => {
+  const aIndex = committeeOrder.indexOf(a);
+  const bIndex = committeeOrder.indexOf(b);
+  if (aIndex === -1 && bIndex === -1) return a.localeCompare(b);
+  if (aIndex === -1) return 1;
+  if (bIndex === -1) return -1;
+  return aIndex - bIndex;
+});
+
+// Prepare staff data for modal
+const allStaff = staffCollection.map(member => ({
+  id: member.data.id,
+  name: member.data.name,
+  role: member.data.role,
+  committee: member.data.committee,
+  avatar: member.data.avatar.src,
+  email: member.data.email,
+  bio: member.data.bio,
+}));
+---
+
+<section class="section">
+  <div class="section-inner">
+    {sortedCommittees.map((committee) => {
+      const members = staffByCommittee.get(committee) || [];
+      
+      return (
+        <div class="mb-16 last:mb-0">
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-foreground md:text-3xl">
+              {committee}
+            </h2>
+            <div class="mt-2 h-1 w-20 rounded-full bg-primary"></div>
+          </div>
+
+          <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {members.map((member) => (
+              <StaffCard
+                id={member.data.id}
+                name={member.data.name}
+                role={member.data.role}
+                avatar={member.data.avatar}
+                email={member.data.email}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<StaffModal staff={allStaff} />

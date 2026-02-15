@@ -1,0 +1,179 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  staff: Array<{
+    id: string;
+    name: string;
+    role: string;
+    committee?: string;
+    avatar: any;
+    email?: string;
+    bio?: string;
+  }>;
+}
+
+const { staff } = Astro.props;
+---
+
+<dialog id="staff-modal" class="staffModal max-w-2xl w-full rounded-2xl border border-border bg-card p-0 shadow-2xl">
+  <div class="relative max-h-[90vh] overflow-y-auto">
+    <button
+      type="button"
+      id="close-modal"
+      class="sticky top-4 right-4 float-right z-10 rounded-full bg-secondary p-2 text-foreground hover:bg-secondary/80 transition-colors"
+      aria-label="Close"
+    >
+      <Icon name="mdi:close" class="h-6 w-6" />
+    </button>
+
+    <div id="modal-content" class="p-6 md:p-8">
+      <!-- Content will be dynamically populated -->
+    </div>
+  </div>
+</dialog>
+
+<style>
+  :global(dialog.staffModal::backdrop) {
+    background-color: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  dialog.staffModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    max-height: 90vh;
+  }
+
+  dialog.staffModal[open] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
+
+<script define:vars={{ staff }}>
+  const modal = document.getElementById('staff-modal');
+  const closeButton = document.getElementById('close-modal');
+  const modalContent = document.getElementById('modal-content');
+  const staffCards = document.querySelectorAll('[data-staff-id]');
+
+  // Staff data map
+  const staffMap = new Map(staff.map(s => [s.id, s]));
+
+  // Convert markdown to HTML (basic implementation)
+  function markdownToHtml(md) {
+    if (!md) return '';
+    
+    let html = md
+      // Headers
+      .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-foreground mt-4 mb-2">$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold text-foreground mt-6 mb-3">$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-semibold text-foreground mt-6 mb-4">$1</h1>')
+      // Bold
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
+      // Italic
+      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+      // Lists
+      .replace(/^\- (.*$)/gim, '<li class="ml-4 text-muted-foreground">$1</li>')
+      // Paragraphs
+      .replace(/\n\n/g, '</p><p class="text-muted-foreground mt-2">');
+    
+    // Wrap in paragraph if doesn't start with heading
+    if (!html.startsWith('<h')) {
+      html = '<p class="text-muted-foreground mt-2">' + html + '</p>';
+    }
+    
+    return html;
+  }
+
+  // Open modal
+  staffCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const staffId = card.getAttribute('data-staff-id');
+      const member = staffMap.get(staffId);
+      
+      if (member && modal && modalContent) {
+        // Build modal content
+        const content = `
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="md:w-1/3">
+              <div class="aspect-square overflow-hidden rounded-2xl border border-border">
+                <img 
+                  src="${member.avatar}" 
+                  alt="${member.name}"
+                  class="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+            <div class="md:w-2/3">
+              <h2 class="text-3xl font-semibold text-foreground">${member.name}</h2>
+              ${member.role ? `<p class="mt-2 text-lg text-primary font-medium">${member.role}</p>` : ''}
+              ${member.committee ? `<p class="mt-1 text-sm text-muted-foreground">Committee: ${member.committee}</p>` : ''}
+              ${member.email ? `
+                <a href="mailto:${member.email}" class="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  ${member.email}
+                </a>
+              ` : ''}
+            </div>
+          </div>
+          ${member.bio ? `
+            <div class="mt-6 prose prose-sm max-w-none border-t border-border pt-6">
+              ${markdownToHtml(member.bio)}
+            </div>
+          ` : ''}
+        `;
+        
+        modalContent.innerHTML = content;
+        modal.showModal();
+      }
+    });
+  });
+
+  // Close modal
+  if (closeButton && modal) {
+    closeButton.addEventListener('click', () => {
+      modal.close();
+    });
+  }
+
+  // Close on backdrop click
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      const rect = modal.getBoundingClientRect();
+      if (
+        e.clientX < rect.left ||
+        e.clientX > rect.right ||
+        e.clientY < rect.top ||
+        e.clientY > rect.bottom
+      ) {
+        modal.close();
+      }
+    });
+  }
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal) {
+      modal.close();
+    }
+  });
+</script>

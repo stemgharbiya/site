@@ -2,313 +2,352 @@
   {
     "id": "ahmed-emara",
     "name": "Ahmed Emara",
-    "role": "",
-    "committee": "",
+    "role": "School Principal",
+    "committee": "Management Committee",
     "avatar": "../assets/images/staff/ahmed-emara.jpg",
-    "email": ""
+    "email": "ahmed.emaraabdelhamid@stemgharbiya.moe.edu.eg",
+    "bio": "## About Ahmed\n\nExperienced educator with a passion for **STEM education**. \n\n### Expertise\n- English\n- Curriculum Development\n- Student Mentoring"
   },
   {
     "id": "barthenous-edwar",
     "name": "Barthenous Edwar",
-    "role": "",
-    "committee": "",
+    "role": "Economics Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/barthenous-edwar.jpg",
-    "email": ""
+    "email": "barthenos.gigis@stemgharbiya.moe.edu.eg",
+    "bio": "## About Barthenous\n\nDedicated professional in *science education* with expertise in laboratory management.\n\n### Strengths\n- Lab Equipment Management\n- Practical Experiments\n- Safety Training"
   },
   {
     "id": "dr-abdelaziz",
-    "name": "Dr. Abdelaziz",
-    "role": "",
-    "committee": "",
+    "name": "Abdelaziz Elgammal",
+    "role": "Arabic Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/dr-abdelaziz.jpg",
-    "email": ""
+    "email": "abdelaziz.elgammal@stemgharbiya.moe.edu.eg",
+    "bio": "## Abdelaziz Elgammal\n\nDedicated Arabic teacher with expertise in **language education** and cultural studies.\n\n### Specializations\n- Arabic Language Instruction\n- Literature and Cultural Studies\n- Student Engagement"
   },
   {
     "id": "emad-talha",
     "name": "Emad Talha",
-    "role": "",
-    "committee": "",
+    "role": "Theater Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/emad-talha.jpg",
-    "email": ""
+    "email": "emad.ahmed@stemgharbiya.moe.edu.eg",
+    "bio": "## About Emad\n\nSpecialist in *technical education* and hands-on learning approaches.\n\n### Contributions\n- Technical Skills Development\n- Workshop Design\n- Student Projects"
   },
   {
     "id": "enas-boshra",
     "name": "Enas Boshra",
-    "role": "",
-    "committee": "",
+    "role": "Library Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/enas-boshra.jpg",
-    "email": ""
+    "email": "enas.boshra@stemgharbiya.moe.edu.eg",
+    "bio": "## About Enas\n\nEducator passionate about **inclusive education** and student development.\n\n### Specializations\n- Student Support Services\n- Inclusive Teaching Methods\n- Career Guidance"
   },
   {
     "id": "enas-eldeeb",
     "name": "Enas Eldeeb",
-    "role": "",
-    "committee": "",
+    "role": "Student Affairs Manager",
+    "committee": "Management Committee",
     "avatar": "../assets/images/staff/enas-eldeeb.jpg",
-    "email": ""
+    "email": "enas.eldeeb@stemgharbiya.moe.edu.eg",
+    "bio": "## About Enas\n\nExploring innovative approaches to *STEM learning* and student engagement.\n\n### Key Areas\n- Innovation in Education\n- Student Engagement\n- Digital Learning Tools"
   },
   {
     "id": "ereny",
-    "name": "Ereny",
-    "role": "",
-    "committee": "",
+    "name": "Ereny Shehata",
+    "role": "Computer Science Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/ereny.jpg",
-    "email": ""
+    "email": "ereny.awad@stemgharbiya.moe.edu.eg",
+    "bio": "## About Ereny\n\nCommitted educator with focus on **science outreach** and community engagement.\n\n### Initiatives\n- Community Programs\n- Science Communication\n- Student Activities"
   },
   {
     "id": "fayka-yosef",
     "name": "Fayka Yosef",
-    "role": "",
-    "committee": "",
+    "role": "Art Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/fayka-yosef.jpg",
-    "email": ""
+    "email": "fayka.beshara@stemgharbiya.moe.edu.eg",
+    "bio": "## About Fayka\n\nProfessional educator with expertise in *mathematics education* and teaching pedagogy.\n\n### Specialties\n- Mathematics Curriculum\n- Teaching Strategies\n- Student Assessment"
   },
   {
     "id": "ghada-naim",
     "name": "Ghada Naim",
-    "role": "",
-    "committee": "",
+    "role": "PE Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/ghada-naim.jpg",
-    "email": ""
+    "email": "ghada.naiem@stemgharbiya.moe.edu.eg",
+    "bio": "## About Ghada\n\nExperienced educator focused on **quality education** and academic standards.\n\n### Expertise\n- Academic Planning\n- Quality Assurance\n- Curriculum Design"
   },
   {
     "id": "ghada-tag-elmolok",
     "name": "Ghada Tag Elmolok",
-    "role": "",
-    "committee": "",
+    "role": "English Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/ghada-tag-elmolok.jpg",
-    "email": ""
+    "email": "ghada.ElAgeezy@stemgharbiya.moe.edu.eg",
+    "bio": "## About Ghada\n\nEducator with strong background in *collaborative learning* and team development.\n\n### Areas of Focus\n- Team Building\n- Collaborative Projects\n- Leadership Development"
   },
   {
     "id": "hala-hassan",
     "name": "Hala Hassan",
-    "role": "",
-    "committee": "",
+    "role": "Physics Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/hala-hassan.jpg",
-    "email": ""
+    "email": "hala.hassan@stemgharbiya.moe.edu.eg",
+    "bio": "## About Hala\n\nDedicated professional in **science education** with practical laboratory experience.\n\n### Expertise\n- Laboratory Management\n- Scientific Experimentation\n- Hands-on Learning"
   },
   {
     "id": "hala-naim",
     "name": "Hala Naim",
-    "role": "",
-    "committee": "",
+    "role": "Chemistry Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/hala-naim.jpg",
-    "email": ""
+    "email": "hala.naiem@stemgharbiya.moe.edu.eg",
+    "bio": "## About Hala\n\nEducator focused on *student development* and personal growth initiatives.\n\n### Specializations\n- Student Support\n- Character Education\n- Mentoring Programs"
   },
   {
     "id": "hassan-elnassag",
     "name": "Hassan Elnassag",
-    "role": "",
-    "committee": "",
+    "role": "Arabic Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/hassan-elnassag.jpg",
-    "email": ""
+    "email": "hassan.elnasag@stemgharbiya.moe.edu.eg",
+    "bio": "## About Hassan\n\nEducator with commitment to **technological advancement** in education.\n\n### Focus Areas\n- Technology Integration\n- Digital Resources\n- Online Learning"
   },
   {
     "id": "hatem-mansour",
     "name": "Hatem Mansour",
-    "role": "",
-    "committee": "",
+    "role": "Biology Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/hatem-mansour.jpg",
-    "email": ""
+    "email": "hatem.mansour@stemgharbiya.moe.edu.eg",
+    "bio": "## About Hatem\n\nProfessional educator with expertise in *program management* and implementation.\n\n### Strengths\n- Program Development\n- Project Management\n- Strategic Planning"
   },
   {
     "id": "ibrahim-said",
     "name": "Ibrahim Said",
-    "role": "",
-    "committee": "",
+    "role": "Mathematics Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/ibrahim-said.jpg",
-    "email": ""
+    "email": "ibrahim.sayed@stemgharbiya.moe.edu.eg",
+    "bio": "## About Ibrahim\n\nEducator passionate about **student success** and academic achievement.\n\n### Key Responsibilities\n- Academic Guidance\n- Performance Monitoring\n- Student Development"
   },
   {
     "id": "manal-ramia",
     "name": "Manal Ramia",
-    "role": "",
-    "committee": "",
+    "role": "Geology Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/manal-ramia.jpg",
-    "email": ""
+    "email": "manal.ramia@stemgharbiya.moe.edu.eg",
+    "bio": "## About Manal\n\nExperienced educator with focus on *professional development* and training.\n\n### Expertise\n- Staff Training\n- Curriculum Innovation\n- Educational Research"
   },
   {
     "id": "mervat-ibrahim",
     "name": "Mervat Ibrahim",
-    "role": "",
-    "committee": "",
+    "role": "Physics Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mervat-ibrahim.jpg",
-    "email": ""
+    "email": "mervat.kamel@stemgharbiya.moe.edu.eg",
+    "bio": "## About Mervat\n\nEducator dedicated to **excellence in teaching** and continuous improvement.\n\n### Specialties\n- Teaching Excellence\n- Professional Growth\n- Quality Education"
   },
   {
     "id": "mohamed-abdelkhalek",
     "name": "Mohamed Abdelkhalek",
-    "role": "",
-    "committee": "",
+    "role": "Psychology Teacher",
+    "committee": "Social Committee",
     "avatar": "../assets/images/staff/mohamed-abdelkhalek.jpg",
-    "email": ""
+    "email": "mohamed.abdelkhalek@stemgharbiya.moe.edu.eg",
+    "bio": "## About Mohamed\n\nSpecialist in *mathematics* with strong commitment to student achievement.\n\n### Focus Areas\n- Mathematics Education\n- Problem Solving\n- Student Success"
   },
   {
     "id": "mohamed-elhawo",
-    "name": "Mohamed Elhawo",
-    "role": "",
-    "committee": "",
+    "name": "Mohamed Elhaw",
+    "role": "English Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mohamed-elhawo.jpg",
-    "email": ""
+    "email": "mohamed.elhaw@stemgharbiya.moe.edu.eg",
+    "bio": "## About Mohamed\n\nEducator with expertise in **engineering education** and technical training.\n\n### Specializations\n- Engineering Concepts\n- Technical Skills\n- Design Thinking"
   },
   {
     "id": "mohamed-zahran",
     "name": "Mohamed Zahran",
-    "role": "",
-    "committee": "",
+    "role": "IT Lead",
+    "committee": "Management Committee",
     "avatar": "../assets/images/staff/mohamed-zahran.jpg",
-    "email": ""
+    "email": "gharbit@stemgharbiya.moe.edu.eg",
+    "bio": "## About Mohamed\n\nProfessional focused on *innovation* and modern educational approaches.\n\n### Key Areas\n- Educational Innovation\n- Modern Teaching Methods\n- Future Skills Development"
   },
   {
     "id": "mohamed-abdeltawab",
     "name": "Mohamed Abdeltawab",
-    "role": "",
-    "committee": "",
+    "role": "Advisory Teacher",
+    "committee": "Social Committee",
     "avatar": "../assets/images/staff/mohamed-abdeltawab.jpg",
-    "email": ""
+    "email": "mohamed.atia@stemgharbiya.moe.edu.eg",
+    "bio": "## About Mohamed\n\nExperienced educator dedicated to **student mentoring** and guidance.\n\n### Responsibilities\n- Student Mentoring\n- Career Counseling\n- Personal Development"
   },
   {
     "id": "mr-ahmed-ghazi",
-    "name": "Mr. Ahmed Ghazi",
-    "role": "",
-    "committee": "",
+    "name": "Ahmed Ghazi",
+    "role": "Teacher Affairs Manager",
+    "committee": "Management Committee",
     "avatar": "../assets/images/staff/mr-ahmed-ghazi.jpg",
-    "email": ""
+    "email": "ahmed.ghazi@stemgharbiya.moe.edu.eg",
+    "bio": "## Ahmed Ghazi\n\nExperienced administrator responsible for **teacher affairs and professional development**.\n\n### Key Responsibilities\n- Staff Management and Development\n- Professional Growth Programs\n- HR Coordination"
   },
   {
     "id": "mr-ahmed-refaat",
-    "name": "Mr. Ahmed Refaat",
-    "role": "",
-    "committee": "",
+    "name": "Ahmed Refaat",
+    "role": "Arabic Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mr-ahmed-refaat.jpg",
-    "email": ""
+    "email": "ahmed.refaat@stemgharbiya.moe.edu.eg",
+    "bio": "## Ahmed Refaat\n\nPassionate Arabic teacher dedicated to **quality instruction** and linguistic excellence.\n\n### Specialties\n- Interactive Language Teaching\n- Student Engagement\n- Cultural Communication"
   },
   {
     "id": "mr-fady-samir",
-    "name": "Mr. Fady Samir",
-    "role": "",
-    "committee": "",
+    "name": "Fady Samir",
+    "role": "Social Studies Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mr-fady-samir.jpg",
-    "email": ""
+    "email": "fady.kamel@stemgharbiya.moe.edu.eg",
+    "bio": "## Fady Samir\n\nExperienced social studies educator focused on **global awareness** and citizenship development.\n\n### Expertise\n- History and Geography\n- Civic Education\n- Critical Thinking"
   },
   {
     "id": "mr-mahmoud",
-    "name": "Mr. Mahmoud",
-    "role": "",
-    "committee": "",
+    "name": "Mahmoud Elsawah",
+    "role": "Physics Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mr-mahmoud.jpg",
-    "email": ""
+    "email": "mahmoud.elshal@stemgharbiya.moe.edu.eg",
+    "bio": "## Mahmoud Elsawah\n\nExperienced physics educator passionate about **scientific inquiry** and experimental learning.\n\n### Expertise\n- Physics Education\n- Laboratory Experiments\n- Research Skills"
   },
   {
     "id": "mr-mina-sobhy",
-    "name": "Mr. Mina Sobhy",
-    "role": "",
-    "committee": "",
+    "name": "Mina Sobhy",
+    "role": "Theater Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/mr-mina-sobhy.jpg",
-    "email": ""
+    "email": "mena.hanna@stemgharbiya.moe.edu.eg",
+    "bio": "## Mina Sobhy\n\nCreative theater educator committed to **performing arts** and student expression.\n\n### Specializations\n- Theater and Drama Education\n- Performance Arts\n- Creative Development"
   },
   {
     "id": "mr-talaat",
-    "name": "Mr. Talaat",
-    "role": "",
-    "committee": "",
+    "name": "Mohamed Talaat",
+    "role": "Mathematics Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mr-talaat.jpg",
-    "email": ""
+    "email": "mohamed.talaat@stemgharbiya.moe.edu.eg",
+    "bio": "## Mohamed Talaat\n\nExperienced mathematics educator dedicated to **student success** and analytical thinking.\n\n### Expertise\n- Mathematics Education\n- Problem-Solving Methods\n- Student Assessment"
   },
   {
     "id": "mr-tarek",
-    "name": "Mr. Tarek",
-    "role": "",
-    "committee": "",
+    "name": "Tarek Elheila",
+    "role": "Mathematics Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mr-tarek.jpg",
-    "email": ""
+    "email": "tarek.elheila@stemgharbiya.moe.edu.eg",
+    "bio": "## Tarek Elheila\n\nDynamic mathematics educator focused on **innovative teaching** and student engagement.\n\n### Specialties\n- Advanced Mathematics\n- Technology-Enhanced Learning\n- Problem Solving"
   },
   {
     "id": "mr-waleed",
-    "name": "Mr. Waleed",
-    "role": "",
-    "committee": "",
+    "name": "Waleed",
+    "role": "Music Teacher",
+    "committee": "Activities Committee",
     "avatar": "../assets/images/staff/mr-waleed.jpg",
-    "email": ""
+    "email": "waleed.mohamed@stemgharbiya.moe.edu.eg",
+    "bio": "## Waleed\n\nTalented music educator dedicated to **music education** and artistic expression.\n\n### Expertise\n- Music Theory and Practice\n- Student Expression\n- Cultural Enrichment"
   },
   {
     "id": "mrs-azza",
-    "name": "Mrs. Azza",
-    "role": "",
-    "committee": "",
+    "name": "Azza Ramadan",
+    "role": "English Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/mrs-azza.jpg",
-    "email": ""
+    "email": "azza.ramadan@stemgharbiya.moe.edu.eg",
+    "bio": "## Azza Ramadan\n\nExperienced English educator focused on **language development** and communication skills.\n\n### Expertise\n- English Language Instruction\n- Writing and Literature\n- Communication Skills"
   },
   {
     "id": "mrs-eman",
-    "name": "Mrs. Eman",
-    "role": "",
-    "committee": "",
+    "name": "Eman Mansour",
+    "role": "Deputy Principal",
+    "committee": "Management Committee",
     "avatar": "../assets/images/staff/mrs-eman.jpg",
-    "email": ""
+    "email": "eman.mansour@stemgharbiya.moe.edu.eg",
+    "bio": "## Eman Mansour\n\nSenior administrator and **Deputy Principal** responsible for daily school operations.\n\n### Key Responsibilities\n- Academic Supervision\n- Staff Coordination\n- Student Support"
   },
   {
     "id": "mrs-ghada-allam",
-    "name": "Mrs. Ghada Allam",
-    "role": "",
-    "committee": "",
+    "name": "Ghada Allam",
+    "role": "Psychology Teacher",
+    "committee": "Social Committee",
     "avatar": "../assets/images/staff/mrs-ghada-allam.jpg",
-    "email": ""
+    "email": "ghada.allam@stemgharbiya.moe.edu.eg",
+    "bio": "## Ghada Allam\n\nDedicated psychology educator committed to **student mental health** and wellbeing.\n\n### Expertise\n- Psychology Education\n- Student Counseling\n- Wellbeing Programs"
   },
   {
     "id": "mrs-soha-hamoda",
-    "name": "Mrs. Soha Hamoda",
-    "role": "",
-    "committee": "",
+    "name": "Soha Hamoda",
+    "role": "Physics Lab Specialist",
+    "committee": "Laboratory Committee",
     "avatar": "../assets/images/staff/mrs-soha-hamoda.jpg",
-    "email": ""
+    "email": "soha.hamoda@stemgharbiya.moe.edu.eg",
+    "bio": "## Soha Hamoda\n\nSpecialized physics laboratory expert dedicated to **hands-on science education**.\n\n### Expertise\n- Laboratory Management\n- Experimental Design\n- Safety and Protocols"
   },
   {
     "id": "nany-ali",
     "name": "Nany Ali",
-    "role": "",
-    "committee": "",
+    "role": "Citizenship Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/nany-ali.jpg",
-    "email": ""
+    "email": "nani.ali@stemgharbiya.moe.edu.eg",
+    "bio": "## About Nany\n\nEducator with expertise in *science communication* and public engagement.\n\n### Specialties\n- Science Outreach\n- Communication Skills\n- Community Involvement"
   },
   {
     "id": "nardine-fayke",
     "name": "Nardine Fayke",
-    "role": "",
-    "committee": "",
+    "role": "Biology Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/nardine-fayke.jpg",
-    "email": ""
+    "email": "nardine.fayke@stemgharbiya.moe.edu.eg",
+    "bio": "## About Nardine\n\nEducator focused on **advanced learning** and gifted student support.\n\n### Expertise\n- Gifted Education\n- Advanced Curriculum\n- Student Enrichment"
   },
   {
     "id": "olfat-boles",
     "name": "Olfat Boles",
-    "role": "",
-    "committee": "",
+    "role": "Chemistry Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/olfat-boles.jpg",
-    "email": ""
+    "email": "o.boles@stemgharbiya.moe.edu.eg",
+    "bio": "## About Olfat\n\nEducator with commitment to *interdisciplinary* teaching approaches.\n\n### Areas of Focus\n- Interdisciplinary Learning\n- Cross-Subject Integration\n- Holistic Curriculum"
   },
   {
     "id": "salam-abo-zeid",
-    "name": "Salam Abo Zeid",
-    "role": "",
-    "committee": "",
+    "name": "Salama Abo Zeid",
+    "role": "Financial Manager",
+    "committee": "Management Committee",
     "avatar": "../assets/images/staff/salam-abo-zeid.jpg",
-    "email": ""
+    "email": "salama.abo.zeid@stemgharbiya.moe.edu.eg",
+    "bio": "## About Salam\n\nEducator dedicated to **social responsibility** and community impact.\n\n### Expertise\n- Community Programs\n- Social Impact\n- Student Activism"
   },
   {
     "id": "tarek-qasem",
     "name": "Tarek Qasem",
-    "role": "",
-    "committee": "",
+    "role": "Arabic Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/tarek-qasem.jpg",
-    "email": ""
+    "email": "tarek.qasem@stemgharbiya.moe.edu.eg",
+    "bio": "## About Tarek\n\nEducator passionate about *mentorship* and career development.\n\n### Specialties\n- Mentoring Programs\n- Career Guidance\n- Leadership Training"
   },
   {
     "id": "zein-elabdeen",
     "name": "Zein Elabdeen",
-    "role": "",
-    "committee": "",
+    "role": "French Teacher",
+    "committee": "Curriculum Committee",
     "avatar": "../assets/images/staff/zein-elabdeen.jpg",
-    "email": ""
+    "email": "zeinelabdin.abdin@stemgharbiya.moe.edu.eg",
+    "bio": "## About Zein\n\nEducator focused on **research-based teaching** and evidence-driven instruction.\n\n### Areas of Work\n- Educational Research\n- Evidence-Based Methods\n- Continuous Improvement"
   }
 ]
