@@ -34,4 +34,16 @@ const alumniCollection = defineCollection({
     })
 });
 
-export const collections = { alumniCollection };
+const staffCollection = defineCollection({
+    loader: file('./src/data/staff.json'),
+    schema: ({ image }) => z.object({
+        id: z.string(),
+        name: z.string(),
+        role: z.string(),
+        committee: z.string(),
+        avatar: image(),
+        email: z.string()
+    })
+});
+
+export const collections = { alumniCollection, staffCollection };

@@ -1,0 +1,314 @@
+[
+  {
+    "id": "ahmed-emara",
+    "name": "Ahmed Emara",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/ahmed-emara.jpg",
+    "email": ""
+  },
+  {
+    "id": "barthenous-edwar",
+    "name": "Barthenous Edwar",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/barthenous-edwar.jpg",
+    "email": ""
+  },
+  {
+    "id": "dr-abdelaziz",
+    "name": "Dr. Abdelaziz",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/dr-abdelaziz.jpg",
+    "email": ""
+  },
+  {
+    "id": "emad-talha",
+    "name": "Emad Talha",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/emad-talha.jpg",
+    "email": ""
+  },
+  {
+    "id": "enas-boshra",
+    "name": "Enas Boshra",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/enas-boshra.jpg",
+    "email": ""
+  },
+  {
+    "id": "enas-eldeeb",
+    "name": "Enas Eldeeb",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/enas-eldeeb.jpg",
+    "email": ""
+  },
+  {
+    "id": "ereny",
+    "name": "Ereny",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/ereny.jpg",
+    "email": ""
+  },
+  {
+    "id": "fayka-yosef",
+    "name": "Fayka Yosef",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/fayka-yosef.jpg",
+    "email": ""
+  },
+  {
+    "id": "ghada-naim",
+    "name": "Ghada Naim",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/ghada-naim.jpg",
+    "email": ""
+  },
+  {
+    "id": "ghada-tag-elmolok",
+    "name": "Ghada Tag Elmolok",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/ghada-tag-elmolok.jpg",
+    "email": ""
+  },
+  {
+    "id": "hala-hassan",
+    "name": "Hala Hassan",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/hala-hassan.jpg",
+    "email": ""
+  },
+  {
+    "id": "hala-naim",
+    "name": "Hala Naim",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/hala-naim.jpg",
+    "email": ""
+  },
+  {
+    "id": "hassan-elnassag",
+    "name": "Hassan Elnassag",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/hassan-elnassag.jpg",
+    "email": ""
+  },
+  {
+    "id": "hatem-mansour",
+    "name": "Hatem Mansour",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/hatem-mansour.jpg",
+    "email": ""
+  },
+  {
+    "id": "ibrahim-said",
+    "name": "Ibrahim Said",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/ibrahim-said.jpg",
+    "email": ""
+  },
+  {
+    "id": "manal-ramia",
+    "name": "Manal Ramia",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/manal-ramia.jpg",
+    "email": ""
+  },
+  {
+    "id": "mervat-ibrahim",
+    "name": "Mervat Ibrahim",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mervat-ibrahim.jpg",
+    "email": ""
+  },
+  {
+    "id": "mohamed-abdelkhalek",
+    "name": "Mohamed Abdelkhalek",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mohamed-abdelkhalek.jpg",
+    "email": ""
+  },
+  {
+    "id": "mohamed-elhawo",
+    "name": "Mohamed Elhawo",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mohamed-elhawo.jpg",
+    "email": ""
+  },
+  {
+    "id": "mohamed-zahran",
+    "name": "Mohamed Zahran",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mohamed-zahran.jpg",
+    "email": ""
+  },
+  {
+    "id": "mohamed-abdeltawab",
+    "name": "Mohamed Abdeltawab",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mohamed-abdeltawab.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-ahmed-ghazi",
+    "name": "Mr. Ahmed Ghazi",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-ahmed-ghazi.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-ahmed-refaat",
+    "name": "Mr. Ahmed Refaat",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-ahmed-refaat.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-fady-samir",
+    "name": "Mr. Fady Samir",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-fady-samir.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-mahmoud",
+    "name": "Mr. Mahmoud",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-mahmoud.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-mina-sobhy",
+    "name": "Mr. Mina Sobhy",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-mina-sobhy.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-talaat",
+    "name": "Mr. Talaat",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-talaat.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-tarek",
+    "name": "Mr. Tarek",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-tarek.jpg",
+    "email": ""
+  },
+  {
+    "id": "mr-waleed",
+    "name": "Mr. Waleed",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mr-waleed.jpg",
+    "email": ""
+  },
+  {
+    "id": "mrs-azza",
+    "name": "Mrs. Azza",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mrs-azza.jpg",
+    "email": ""
+  },
+  {
+    "id": "mrs-eman",
+    "name": "Mrs. Eman",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mrs-eman.jpg",
+    "email": ""
+  },
+  {
+    "id": "mrs-ghada-allam",
+    "name": "Mrs. Ghada Allam",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mrs-ghada-allam.jpg",
+    "email": ""
+  },
+  {
+    "id": "mrs-soha-hamoda",
+    "name": "Mrs. Soha Hamoda",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/mrs-soha-hamoda.jpg",
+    "email": ""
+  },
+  {
+    "id": "nany-ali",
+    "name": "Nany Ali",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/nany-ali.jpg",
+    "email": ""
+  },
+  {
+    "id": "nardine-fayke",
+    "name": "Nardine Fayke",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/nardine-fayke.jpg",
+    "email": ""
+  },
+  {
+    "id": "olfat-boles",
+    "name": "Olfat Boles",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/olfat-boles.jpg",
+    "email": ""
+  },
+  {
+    "id": "salam-abo-zeid",
+    "name": "Salam Abo Zeid",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/salam-abo-zeid.jpg",
+    "email": ""
+  },
+  {
+    "id": "tarek-qasem",
+    "name": "Tarek Qasem",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/tarek-qasem.jpg",
+    "email": ""
+  },
+  {
+    "id": "zein-elabdeen",
+    "name": "Zein Elabdeen",
+    "role": "",
+    "committee": "",
+    "avatar": "../assets/images/staff/zein-elabdeen.jpg",
+    "email": ""
+  }
+]
