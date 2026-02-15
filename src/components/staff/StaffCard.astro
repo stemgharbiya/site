@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  id: string;
+  name: string;
+  role: string;
+  avatar: ImageMetadata;
+  email?: string;
+}
+
+const { id, name, role, avatar, email } = Astro.props;
+---
+
+<button
+  type="button"
+  data-staff-id={id}
+  class="staff-card surface group cursor-pointer overflow-hidden text-left transition-all hover:scale-[1.02] hover:shadow-lg"
+>
+  <div class="aspect-square w-full overflow-hidden bg-secondary">
+    <Image
+      src={avatar}
+      alt={name}
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      width={400}
+      height={400}
+    />
+  </div>
+  <div class="p-4">
+    <h3 class="font-semibold text-foreground group-hover:text-primary transition-colors">
+      {name}
+    </h3>
+    {role && (
+      <p class="mt-1 text-sm text-muted-foreground">
+        {role}
+      </p>
+    )}
+    {email && (
+      <p class="mt-1 text-xs text-muted-foreground">
+        {email}
+      </p>
+    )}
+  </div>
+</button>
