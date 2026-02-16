@@ -40,7 +40,7 @@ const staffCollection = defineCollection({
         id: z.string(),
         name: z.string(),
         role: z.string(),
-        committee: z.string(),
+        committee: z.string().optional(),
         avatar: image(),
         email: z.string().optional(),
         bio: z.string().optional()
