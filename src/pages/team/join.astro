@@ -1,6 +1,5 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-
+import FormLayout from "../../layouts/FormLayout.astro";
 import { ALLOWED_INTERESTS } from "../../data/forms";
 
 const linksInHead = [
@@ -11,247 +10,232 @@ const linksInHead = [
 const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
 ---
 
-<Layout
+<FormLayout
   title="Join Dev Team"
   description="Apply to join our dev team and collaborate on projects."
   linksInHead={linksInHead}
+  sidebarEyebrow="Dev team applications"
+  sidebarTitle="Join STEM Gharbiya Dev Team"
+  sidebarDescription="Apply to join our dev team to collaborate on open-source projects, learn industry workflows, and build real impact for students."
+  formEyebrow="Apply now"
+  formTitle="Quick application"
+  formDescription="Complete the form below — submissions are reviewed within 2–3 business days."
 >
-  <section class="section">
-    <div class="section-inner">
-      <div class="mx-auto max-w-7xl">
-        <div class="grid gap-8 md:grid-cols-2 md:items-start">
-          <aside class="px-4 md:px-0">
-            <div class="rounded-2xl bg-secondary/50 p-6 md:p-8">
-              <p class="eyebrow">Dev team applications</p>
-              <h1 class="section-title mt-3">Join STEM Gharbiya Dev Team</h1>
-              <p class="section-lead mt-4">
-                Apply to join our dev team to collaborate on open-source projects,
-                learn industry workflows, and build real impact for students.
-              </p>
+  <Fragment slot="sidebarContent">
+    <ul class="mt-6 space-y-3 text-sm">
+      <li class="flex gap-3 items-start">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
+          <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span><strong>Mentorship</strong> from experienced contributors.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
+          <path d="M12 20l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span><strong>Hands-on</strong> work on real projects.</span>
+      </li>
+      <li class="flex gap-3 items-start">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
+          <path d="M12 2v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span><strong>Community</strong> & networking with peers.</span>
+      </li>
+    </ul>
 
-              <ul class="mt-6 space-y-3 text-sm">
-                <li class="flex gap-3 items-start">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-                    <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span><strong>Mentorship</strong> from experienced contributors.</span>
-                </li>
-                <li class="flex gap-3 items-start">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-                    <path d="M12 20l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span><strong>Hands-on</strong> work on real projects.</span>
-                </li>
-                <li class="flex gap-3 items-start">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-                    <path d="M12 2v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span><strong>Community</strong> & networking with peers.</span>
-                </li>
-              </ul>
+    <p class="mt-6 text-xs text-muted-foreground">Tip: Have your GitHub profile ready and use your school email.</p>
+  </Fragment>
 
-              <p class="mt-6 text-xs text-muted-foreground">Tip: Have your GitHub profile ready and use your school email.</p>
-            </div>
-          </aside>
+  <div id="alertsContainer" class="mt-4"></div>
 
-          <div class="px-4 md:px-0">
-            <div class="surface p-6 md:p-8">
-              <div class="text-left md:text-left">
-                <p class="eyebrow">Apply now</p>
-                <h2 class="text-2xl font-semibold mt-2">Quick application</h2>
-                <p class="text-sm text-muted-foreground mt-2">Complete the form below — submissions are reviewed within 2–3 business days.</p>
-              </div>
-
-              <div id="alertsContainer" class="mt-4"></div>
-
-              <form id="applicationForm" class="mt-6 grid gap-3">
-            <div class="space-y-2">
-              <label for="fullName" class="text-sm font-medium text-foreground">
-                Full Name <span class="text-destructive">*</span>
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                required
-                class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-              />
-              <div class="error hidden text-xs text-destructive" id="nameError"></div>
-            </div>
-
-            <div class="space-y-2">
-              <label for="schoolEmail" class="text-sm font-medium text-foreground">
-                School Email <span class="text-destructive">*</span>
-              </label>
-              <input
-                type="email"
-                id="schoolEmail"
-                name="schoolEmail"
-                required
-                class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-              />
-              <span class="text-xs text-muted-foreground">
-                Must end with @stemgharbiya.moe.edu.eg
-              </span>
-              <div class="error hidden text-xs text-destructive" id="emailError"></div>
-            </div>
-
-            <div class="space-y-2">
-              <label for="githubUsername" class="text-sm font-medium text-foreground">
-                GitHub Username <span class="text-destructive">*</span>
-              </label>
-              <input
-                type="text"
-                id="githubUsername"
-                name="githubUsername"
-                required
-                class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-              />
-              <div class="error hidden text-xs text-destructive" id="githubError"></div>
-            </div>
-
-            <div class="space-y-2">
-              <label for="seniorYear" class="text-sm font-medium text-foreground">
-                Senior Year <span class="text-destructive">*</span>
-              </label>
-              <input
-                type="text"
-                id="seniorYear"
-                name="seniorYear"
-                pattern="^[Ss](2[5-9]|30)$"
-                title="Format: S25, S26, S27, S28, S29, or S30 only"
-                placeholder="S25, S26, S27, etc."
-                required
-                class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-              />
-              <span class="text-xs text-muted-foreground">
-                Format: S followed by graduation year (S25-S30 only)
-              </span>
-              <div class="error hidden text-xs text-destructive" id="seniorYearError"></div>
-            </div>
-
-            <div class="space-y-3">
-              <label class="text-sm font-medium text-foreground">
-                Interests <span class="text-destructive">*</span>
-              </label>
-              <div class="grid gap-3 sm:grid-cols-2" id="interestsContainer">
-                {ALLOWED_INTERESTS.map((interest) => (
-                  <div class="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 px-3 py-3 text-sm text-foreground">
-                    <input
-                      type="checkbox"
-                      name="interests"
-                      value={interest}
-                      id={`interest-${interest}`}
-                      class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
-                    />
-                    <label for={`interest-${interest}`} class="leading-5">{interest}</label>
-                  </div>
-                ))}
-              </div>
-              <div class="error hidden text-xs text-destructive" id="interestsError"></div>
-            </div>
-
-            <div class="space-y-2">
-              <label for="motivation" class="text-sm font-medium text-foreground">
-                Motivation <span class="text-destructive">*</span>
-              </label>
-              <textarea
-                id="motivation"
-                name="motivation"
-                rows="4"
-                required
-                class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-              ></textarea>
-              <span class="text-xs text-muted-foreground">
-                Why do you want to join? (10-500 characters)
-              </span>
-              <div class="error hidden text-xs text-destructive" id="motivationError"></div>
-            </div>
-
-            <div class="space-y-3">
-              <label class="text-sm font-medium text-foreground">
-                Code of Conduct Agreement <span class="text-destructive">*</span>
-              </label>
-              <div class="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 px-3 py-3 text-sm text-foreground">
-                <input
-                  type="checkbox"
-                  id="agreement"
-                  name="agreement"
-                  required
-                  class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
-                />
-                <label for="agreement" class="leading-5">
-                  I agree to follow the organization's
-                  <a
-                    href="https://github.com/stemgharbiya/.github/blob/main/CODE_OF_CONDUCT.md"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-primary underline underline-offset-4 transition hover:text-primary/80"
-                  >Code of Conduct</a>
-                </label>
-              </div>
-              <div class="error hidden text-xs text-destructive" id="agreementError"></div>
-            </div>
-              <div
-                class="cf-turnstile mt-2"
-                data-sitekey={TURNSTILE_SITE_KEY}
-                data-theme="auto"
-                data-callback="onTurnstileSuccess"
-                data-error-callback="onTurnstileError"
-                data-expired-callback="onTurnstileExpired"
-              ></div>
-
-              <button type="submit" class="btn-primary w-full justify-center mt-4" id="submitBtn" disabled>
-                <span id="submitText">Submit Application</span>
-              </button>
-          </form>
-
-          <div class="mt-8 md:mt-6 border-t border-border pt-6 text-center text-sm text-muted-foreground">
-            <p>
-              <a
-                href="https://github.com/stemgharbiya/site/issues/new"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary underline underline-offset-4 transition hover:text-primary/80"
-              >Have a problem?</a>
-            </p>
-            <p class="mt-4 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-xs">
-              To prevent spam, you can only submit one application per minute per
-              school email. If you get a "Too many requests" message, please wait
-              a minute before trying again.
-            </p>
-          </div>
-        </div>
-      </div>
+  <form id="applicationForm" class="mt-6 grid gap-3">
+    <div class="space-y-2">
+      <label for="fullName" class="text-sm font-medium text-foreground">
+        Full Name <span class="text-destructive">*</span>
+      </label>
+      <input
+        type="text"
+        id="fullName"
+        name="fullName"
+        required
+        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+      />
+      <div class="error hidden text-xs text-destructive" id="nameError"></div>
     </div>
-  </section>
 
-  <script src="../../scripts/join.ts"/>
-  <script is:inline>
-    function onTurnstileSuccess(token) {
-      if (token && typeof token === "string" && token.trim().length > 0) {
-        document.getElementById("submitBtn").disabled = false;
-      } else {
-        document.getElementById("submitBtn").disabled = true;
+    <div class="space-y-2">
+      <label for="schoolEmail" class="text-sm font-medium text-foreground">
+        School Email <span class="text-destructive">*</span>
+      </label>
+      <input
+        type="email"
+        id="schoolEmail"
+        name="schoolEmail"
+        required
+        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+      />
+      <span class="text-xs text-muted-foreground">
+        Must end with @stemgharbiya.moe.edu.eg
+      </span>
+      <div class="error hidden text-xs text-destructive" id="emailError"></div>
+    </div>
+
+    <div class="space-y-2">
+      <label for="githubUsername" class="text-sm font-medium text-foreground">
+        GitHub Username <span class="text-destructive">*</span>
+      </label>
+      <input
+        type="text"
+        id="githubUsername"
+        name="githubUsername"
+        required
+        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+      />
+      <div class="error hidden text-xs text-destructive" id="githubError"></div>
+    </div>
+
+    <div class="space-y-2">
+      <label for="seniorYear" class="text-sm font-medium text-foreground">
+        Senior Year <span class="text-destructive">*</span>
+      </label>
+      <input
+        type="text"
+        id="seniorYear"
+        name="seniorYear"
+        pattern="^[Ss](2[5-9]|30)$"
+        title="Format: S25, S26, S27, S28, S29, or S30 only"
+        placeholder="S25, S26, S27, etc."
+        required
+        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+      />
+      <span class="text-xs text-muted-foreground">
+        Format: S followed by graduation year (S25-S30 only)
+      </span>
+      <div class="error hidden text-xs text-destructive" id="seniorYearError"></div>
+    </div>
+
+    <div class="space-y-3">
+      <label class="text-sm font-medium text-foreground">
+        Interests <span class="text-destructive">*</span>
+      </label>
+      <div class="grid gap-3 sm:grid-cols-2" id="interestsContainer">
+        {ALLOWED_INTERESTS.map((interest) => (
+          <div class="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 px-3 py-3 text-sm text-foreground">
+            <input
+              type="checkbox"
+              name="interests"
+              value={interest}
+              id={`interest-${interest}`}
+              class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
+            />
+            <label for={`interest-${interest}`} class="leading-5">{interest}</label>
+          </div>
+        ))}
+      </div>
+      <div class="error hidden text-xs text-destructive" id="interestsError"></div>
+    </div>
+
+    <div class="space-y-2">
+      <label for="motivation" class="text-sm font-medium text-foreground">
+        Motivation <span class="text-destructive">*</span>
+      </label>
+      <textarea
+        id="motivation"
+        name="motivation"
+        rows="4"
+        required
+        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+      ></textarea>
+      <span class="text-xs text-muted-foreground">
+        Why do you want to join? (10-500 characters)
+      </span>
+      <div class="error hidden text-xs text-destructive" id="motivationError"></div>
+    </div>
+
+    <div class="space-y-3">
+      <label class="text-sm font-medium text-foreground">
+        Code of Conduct Agreement <span class="text-destructive">*</span>
+      </label>
+      <div class="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 px-3 py-3 text-sm text-foreground">
+        <input
+          type="checkbox"
+          id="agreement"
+          name="agreement"
+          required
+          class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
+        />
+        <label for="agreement" class="leading-5">
+          I agree to follow the organization's
+          <a
+            href="https://github.com/stemgharbiya/.github/blob/main/CODE_OF_CONDUCT.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary underline underline-offset-4 transition hover:text-primary/80"
+          >Code of Conduct</a>
+        </label>
+      </div>
+      <div class="error hidden text-xs text-destructive" id="agreementError"></div>
+    </div>
+    <div
+      class="cf-turnstile mt-2"
+      data-sitekey={TURNSTILE_SITE_KEY}
+      data-theme="auto"
+      data-callback="onTurnstileSuccess"
+      data-error-callback="onTurnstileError"
+      data-expired-callback="onTurnstileExpired"
+    ></div>
+
+    <button type="submit" class="btn-primary w-full justify-center mt-4" id="submitBtn" disabled>
+      <span id="submitText">Submit Application</span>
+    </button>
+  </form>
+
+  <Fragment slot="formFooter">
+    <div class="mt-8 md:mt-6 border-t border-border pt-6 text-center text-sm text-muted-foreground">
+      <p>
+        <a
+          href="https://github.com/stemgharbiya/site/issues/new"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary underline underline-offset-4 transition hover:text-primary/80"
+        >Have a problem?</a>
+      </p>
+      <p class="mt-4 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-xs">
+        To prevent spam, you can only submit one application per minute per
+        school email. If you get a "Too many requests" message, please wait
+        a minute before trying again.
+      </p>
+    </div>
+  </Fragment>
+
+  <Fragment slot="scripts">
+    <script src="../../scripts/join.ts" />
+    <script is:inline>
+      function onTurnstileSuccess(token) {
+        if (token && typeof token === "string" && token.trim().length > 0) {
+          document.getElementById("submitBtn").disabled = false;
+        } else {
+          document.getElementById("submitBtn").disabled = true;
+        }
       }
-    }
-    function onTurnstileError(errorCode) {
-      console.error("Turnstile error:", errorCode);
-      document.getElementById("submitBtn").disabled = true;
-      showAlert(
-        "error",
-        "Verification Failed",
-        "Please complete the security check again."
-      );
-    }
-    function onTurnstileExpired() {
-      document.getElementById("submitBtn").disabled = true;
-      showAlert(
-        "warning",
-        "Verification Expired",
-        "Please complete the security check again."
-      );
-    }
-  </script>
-</Layout>
+      function onTurnstileError(errorCode) {
+        console.error("Turnstile error:", errorCode);
+        document.getElementById("submitBtn").disabled = true;
+        showAlert(
+          "error",
+          "Verification Failed",
+          "Please complete the security check again."
+        );
+      }
+      function onTurnstileExpired() {
+        document.getElementById("submitBtn").disabled = true;
+        showAlert(
+          "warning",
+          "Verification Expired",
+          "Please complete the security check again."
+        );
+      }
+    </script>
+  </Fragment>
+</FormLayout>

@@ -1,0 +1,61 @@
+---
+import Layout from "./Layout.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  linksInHead?: string[];
+  sidebarEyebrow: string;
+  sidebarTitle: string;
+  sidebarDescription: string;
+  formEyebrow: string;
+  formTitle: string;
+  formDescription: string;
+}
+
+const {
+  title,
+  description,
+  linksInHead = [],
+  sidebarEyebrow,
+  sidebarTitle,
+  sidebarDescription,
+  formEyebrow,
+  formTitle,
+  formDescription,
+} = Astro.props;
+---
+
+<Layout title={title} description={description} linksInHead={linksInHead}>
+  <section class="section">
+    <div class="section-inner">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-8 md:grid-cols-2 md:items-start">
+          <aside class="px-4 md:px-0">
+            <div class="rounded-2xl bg-secondary/50 p-6 md:p-8">
+              <p class="eyebrow">{sidebarEyebrow}</p>
+              <h1 class="section-title mt-3">{sidebarTitle}</h1>
+              <p class="section-lead mt-4">{sidebarDescription}</p>
+              <slot name="sidebarContent" />
+            </div>
+          </aside>
+
+          <div class="px-4 md:px-0">
+            <div class="surface p-6 md:p-8">
+              <div class="text-left md:text-left">
+                <p class="eyebrow">{formEyebrow}</p>
+                <h2 class="text-2xl font-semibold mt-2">{formTitle}</h2>
+                <p class="text-sm text-muted-foreground mt-2">{formDescription}</p>
+              </div>
+
+              <slot />
+              <slot name="formFooter" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <slot name="scripts" />
+</Layout>
