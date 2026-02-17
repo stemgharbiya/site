@@ -15,10 +15,14 @@ This directory contains the **server-side Workers application** that powers part
   - Validates input
   - Stores submissions in D1
   - Sends notification and confirmation emails
+- **Contact Form Worker**
+  - Accepts contact messages
+  - Validates input
+  - Stores submissions in D1
+  - Sends notification and acknowledgement emails
 
 ### Planned
 
-- Contact form worker
 - Newsletter subscription worker
 
 ---
@@ -42,7 +46,7 @@ This directory contains the **server-side Workers application** that powers part
 
 - Configurable rate limiting (Cloudflare binding)
 - Turnstile CAPTCHA verification
-- Duplicate submission prevention (email + GitHub username)
+- Duplicate submission prevention for join applications (email + GitHub username)
 - Strict server-side validation
 - Parameterized queries (SQL injection protection)
 
@@ -54,8 +58,9 @@ This directory contains the **server-side Workers application** that powers part
 
 ### Email Automation
 
-- Confirmation email to applicant
-- Internal notification to team
+- Join application confirmation email to applicant
+- Contact message acknowledgement email to sender
+- Internal notification emails to team
 - Optional email disabling for development
 
 ### Developer Experience
@@ -101,7 +106,7 @@ pnpm install
 npx wrangler d1 create stemgharbiya-site
 ```
 
-Create the applications table:
+Create the required tables:
 
 ```bash
 npx wrangler d1 execute stemgharbiya-site --command="
@@ -113,6 +118,15 @@ CREATE TABLE applications (
   seniorYear TEXT NOT NULL,
   interests TEXT NOT NULL,
   motivation TEXT NOT NULL,
+  timestamp TEXT NOT NULL
+);
+
+CREATE TABLE contacts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL,
   timestamp TEXT NOT NULL
 );"
 ```
@@ -141,6 +155,7 @@ RESEND_API_KEY=your_resend_api_key
 RESEND_SENDER_EMAIL=your-verified-email@resend.dev
 TEAM_NOTIFICATION_EMAIL=team@example.com
 TURNSTILE_SECRET_KEY=your_turnstile_secret_key
+TURNSTILE_SITE_KEY=your_turnstile_site_key
 DISABLE_EMAILS=false
   # Optional: set application environment. Use "production" in production.
   APP_ENV=development
@@ -180,12 +195,11 @@ npx wrangler pages deploy .
 
 ## 3. Set Production Secrets
 
+Only set sensitive values as secrets. Non-sensitive values should be configured in `wrangler.jsonc` under `vars`.
+
 ```bash
 npx wrangler secret put RESEND_API_KEY
-npx wrangler secret put RESEND_SENDER_EMAIL
-npx wrangler secret put TEAM_NOTIFICATION_EMAIL
 npx wrangler secret put TURNSTILE_SECRET_KEY
-npx wrangler secret put DISABLE_EMAILS
 ```
 
 ---
@@ -208,6 +222,30 @@ Handles:
 - Database insertion
 - Email dispatch
 
+### `POST /contact`
+
+Accepts a JSON payload validated against the Zod schema in:
+
+```
+src/schemas/contact.ts
+```
+
+Required fields:
+
+- `email`
+- `name`
+- `subject`
+- `message`
+- `cf-turnstile-response`
+
+Handles:
+
+- Validation
+- Rate limiting
+- Turnstile verification
+- Database insertion
+- Email dispatch
+
 Set:
 
 ```
@@ -220,11 +258,21 @@ to disable email sending during testing.
 
 # Validation Rules
 
+## Join (`POST /join`)
+
 - **Email domain:** `@stemgharbiya.moe.edu.eg`
 - **Senior Year:** S25–S30 only
 - **Interests:** At least one required
 - **Motivation:** 10–500 characters
 - **Duplicates:** Same email + GitHub username blocked
+
+## Contact (`POST /contact`)
+
+- **Email:** Valid email format
+- **Name:** 1–100 characters
+- **Subject:** 1–150 characters
+- **Message:** 10–4000 characters
+- **Turnstile:** Required
 
 ---
 
@@ -234,12 +282,14 @@ to disable email sending during testing.
 
 ```bash
 npx wrangler d1 execute stemgharbiya-site --command="SELECT * FROM applications;"
+npx wrangler d1 execute stemgharbiya-site --command="SELECT * FROM contacts;"
 ```
 
 ### View Submissions (Production)
 
 ```bash
 npx wrangler d1 execute stemgharbiya-site --remote --command="SELECT * FROM applications;"
+npx wrangler d1 execute stemgharbiya-site --remote --command="SELECT * FROM contacts;"
 ```
 
 ### Backup
