@@ -2,8 +2,10 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { siteConfig } from "../../src/data/constants";
 import { handleJoinRequests } from "./services/join";
+import { handleContactRequests } from "./services/contact";
 import { zValidator } from "@hono/zod-validator";
 import { joinSchema } from "./schemas/join";
+import { contactSchema } from "./schemas/contact";
 import { env } from "cloudflare:workers";
 
 function validateEnvVars() {
@@ -53,6 +55,22 @@ async function ensureDatabase(envParam: Env) {
     `,
       )
       .run();
+
+    await db
+      .prepare(
+        `
+      CREATE TABLE IF NOT EXISTS contacts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        message TEXT NOT NULL,
+        timestamp TEXT NOT NULL
+      );
+    `,
+      )
+      .run();
+
     console.log("✓ D1 database initialized");
   } catch (err) {
     console.error("Failed to initialize D1 database", err);
@@ -89,6 +107,10 @@ app.use("*", async (c, next) => {
 
 app.post("/join", zValidator("json", joinSchema), async (c) => {
   return await handleJoinRequests(c);
+});
+
+app.post("/contact", zValidator("json", contactSchema), async (c) => {
+  return await handleContactRequests(c);
 });
 
 app.get("/", (c) => {
