@@ -1,17 +1,28 @@
 import { z } from "zod";
 import { MAX_FIELD_LENGTHS, ALLOWED_INTERESTS } from "../../../src/data/forms";
+import {
+  validateGitHubUsername,
+  validateStudentSchoolEmail,
+} from "../../../src/lib/utils";
 
 export const joinSchema = z
   .object({
     fullName: z.string().min(1).max(MAX_FIELD_LENGTHS.fullName),
     schoolEmail: z
       .string()
+      .trim()
+      .toLowerCase()
       .email()
-      .refine((s) => s.endsWith("@stemgharbiya.moe.edu.eg")),
+      .refine(validateStudentSchoolEmail, {
+        message:
+          "Use your student school email in this format: name.19YYXXX@stemgharbiya.moe.edu.eg",
+      }),
     githubUsername: z
       .string()
       .max(MAX_FIELD_LENGTHS.githubUsername)
-      .regex(/^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/),
+      .refine(validateGitHubUsername, {
+        message: "Invalid GitHub username format",
+      }),
     seniorYear: z.string().regex(/^[Ss](2[5-9]|30)$/),
     interests: z
       .union([z.string(), z.array(z.string())])
@@ -32,11 +43,9 @@ export const joinSchema = z
         if (typeof v === "string") return v.length > 0;
         return v;
       },
-      z
-        .boolean()
-        .refine((b) => b === true, {
-          message: "You must agree to the Code of Conduct",
-        }),
+      z.boolean().refine((b) => b === true, {
+        message: "You must agree to the Code of Conduct",
+      }),
     ),
   })
   .strict();

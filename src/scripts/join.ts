@@ -1,5 +1,11 @@
 export {};
 
+import {
+  validateGitHubUsername,
+  validateSeniorYear,
+  validateStudentSchoolEmail,
+} from "../lib/utils";
+
 const apiBase = import.meta.env.API_BASE_URL || "http://localhost:8787";
 
 type AlertType = "success" | "error" | "warning" | "info";
@@ -27,6 +33,16 @@ const errorClasses = [
   "focus:border-destructive",
   "focus:ring-destructive/20",
 ];
+
+const fieldErrorIdMap: Record<string, string> = {
+  fullName: "nameError",
+  schoolEmail: "emailError",
+  githubUsername: "githubError",
+};
+
+const fieldElementIdMap: Record<string, string> = {
+  interests: "interestsContainer",
+};
 
 const alertStyles: Record<AlertType, string> = {
   success: "border-emerald-200 bg-emerald-50 text-emerald-700",
@@ -82,12 +98,40 @@ const showAlert: AlertFn = (
 };
 
 function showFieldError(fieldId: string, message: string) {
-  const field = document.getElementById(fieldId);
-  const errorElement = document.getElementById(fieldId + "Error");
-  if (field) field.classList.add(...errorClasses);
+  const field =
+    document.getElementById(fieldId) ||
+    (fieldElementIdMap[fieldId]
+      ? document.getElementById(fieldElementIdMap[fieldId])
+      : null);
+  const errorElement = document.getElementById(
+    fieldErrorIdMap[fieldId] || fieldId + "Error",
+  );
+  if (field) {
+    field.classList.add(...errorClasses);
+    field.setAttribute("aria-invalid", "true");
+  }
   if (errorElement) {
     errorElement.textContent = message;
     errorElement.classList.remove("hidden");
+  }
+}
+
+function hideFieldError(fieldId: string) {
+  const field =
+    document.getElementById(fieldId) ||
+    (fieldElementIdMap[fieldId]
+      ? document.getElementById(fieldElementIdMap[fieldId])
+      : null);
+  const errorElement = document.getElementById(
+    fieldErrorIdMap[fieldId] || fieldId + "Error",
+  );
+  if (field) {
+    field.classList.remove(...errorClasses);
+    field.removeAttribute("aria-invalid");
+  }
+  if (errorElement) {
+    errorElement.classList.add("hidden");
+    errorElement.textContent = "";
   }
 }
 
@@ -99,21 +143,23 @@ function clearErrors() {
   });
   document
     .querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea")
-    .forEach((el) => el.classList.remove(...errorClasses));
+    .forEach((el) => {
+      el.classList.remove(...errorClasses);
+      el.removeAttribute("aria-invalid");
+    });
+  Object.values(fieldElementIdMap).forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.remove(...errorClasses);
+      el.removeAttribute("aria-invalid");
+    }
+  });
   const container = document.getElementById("alertsContainer");
   if (container) container.innerHTML = "";
 }
 
 function validateEmail(email: string) {
-  return email.endsWith("@stemgharbiya.moe.edu.eg");
-}
-
-function validateSeniorYear(year: string) {
-  if (!year) return false;
-  const match = year.match(/^[Ss](\d+)$/);
-  if (!match) return false;
-  const yearNum = parseInt(match[1], 10);
-  return yearNum >= 25 && yearNum <= 30;
+  return validateStudentSchoolEmail(email);
 }
 
 function saveFormData() {
@@ -346,7 +392,7 @@ function bindFormHandlers() {
     if (!validateEmail(email)) {
       showFieldError(
         "schoolEmail",
-        "Must be a STEM Gharbiya school email (@stemgharbiya.moe.edu.eg)",
+        "Use student email format: name.19YYXXX@stemgharbiya.moe.edu.eg",
       );
       hasErrors = true;
     }
@@ -370,6 +416,14 @@ function bindFormHandlers() {
         hasErrors = true;
       }
     });
+    const githubUsername = String(formData.get("githubUsername") || "").trim();
+    if (githubUsername && !validateGitHubUsername(githubUsername)) {
+      showFieldError(
+        "githubUsername",
+        "Invalid GitHub username format",
+      );
+      hasErrors = true;
+    }
     if (!formData.get("agreement")) {
       showFieldError("agreement", "You must agree to the Code of Conduct");
       hasErrors = true;
@@ -396,30 +450,89 @@ function bindFormHandlers() {
   (
     document.getElementById("schoolEmail") as HTMLInputElement | null
   )?.addEventListener("blur", function (this: HTMLInputElement) {
-    if (this.value && !validateEmail(this.value))
+    if (this.value && !validateEmail(this.value)) {
       showFieldError(
         "schoolEmail",
-        "Must be a STEM Gharbiya school email (@stemgharbiya.moe.edu.eg)",
+        "Use student email format: name.19YYXXX@stemgharbiya.moe.edu.eg",
       );
+      return;
+    }
+    hideFieldError("schoolEmail");
+  });
+
+  (
+    document.getElementById("fullName") as HTMLInputElement | null
+  )?.addEventListener("blur", function (this: HTMLInputElement) {
+    if (!this.value.trim()) {
+      showFieldError("fullName", "This field is required");
+      return;
+    }
+    hideFieldError("fullName");
+  });
+
+  (
+    document.getElementById("githubUsername") as HTMLInputElement | null
+  )?.addEventListener("blur", function (this: HTMLInputElement) {
+    const value = this.value.trim();
+    if (!value) {
+      showFieldError("githubUsername", "This field is required");
+      return;
+    }
+    if (!validateGitHubUsername(value)) {
+      showFieldError("githubUsername", "Invalid GitHub username format");
+      return;
+    }
+    hideFieldError("githubUsername");
   });
 
   (
     document.getElementById("seniorYear") as HTMLInputElement | null
   )?.addEventListener("blur", function (this: HTMLInputElement) {
-    if (this.value && !validateSeniorYear(this.value))
+    if (this.value && !validateSeniorYear(this.value)) {
       showFieldError(
         "seniorYear",
         "Senior Year must be S25 through S30 only (e.g., S25, S26, S27)",
       );
+      return;
+    }
+    hideFieldError("seniorYear");
   });
 
   (
     document.getElementById("motivation") as HTMLTextAreaElement | null
   )?.addEventListener("input", function (this: HTMLTextAreaElement) {
     const text = this.value;
-    if (text && (text.length < 10 || text.length > 500))
+    if (text && (text.length < 10 || text.length > 500)) {
       showFieldError("motivation", `Characters: ${text.length}/500 (min 10)`);
+      return;
+    }
+    hideFieldError("motivation");
   });
+
+  (
+    document.getElementById("agreement") as HTMLInputElement | null
+  )?.addEventListener("change", function (this: HTMLInputElement) {
+    if (!this.checked) {
+      showFieldError("agreement", "You must agree to the Code of Conduct");
+      return;
+    }
+    hideFieldError("agreement");
+  });
+
+  document
+    .querySelectorAll<HTMLInputElement>('input[name="interests"]')
+    .forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
+        const selected = document.querySelectorAll<HTMLInputElement>(
+          'input[name="interests"]:checked',
+        ).length;
+        if (selected === 0) {
+          showFieldError("interests", "Select at least one interest");
+          return;
+        }
+        hideFieldError("interests");
+      });
+    });
 
   document
     .querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea")
@@ -427,9 +540,7 @@ function bindFormHandlers() {
       field.addEventListener(
         "input",
         function (this: HTMLInputElement | HTMLTextAreaElement) {
-          this.classList.remove(...errorClasses);
-          const errorElement = document.getElementById(this.id + "Error");
-          if (errorElement) errorElement.classList.add("hidden");
+          hideFieldError(this.id);
         },
       );
     });

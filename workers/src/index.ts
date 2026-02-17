@@ -105,13 +105,51 @@ app.use("*", async (c, next) => {
   return corsMiddlewareHandler(c, next);
 });
 
-app.post("/join", zValidator("json", joinSchema), async (c) => {
-  return await handleJoinRequests(c);
-});
+app.post(
+  "/join",
+  zValidator("json", joinSchema, (result, c) => {
+    if (!result.success) {
+      const firstIssue = result.error.issues[0];
+      const field =
+        firstIssue?.path && firstIssue.path.length > 0
+          ? String(firstIssue.path[0])
+          : null;
+      return c.json(
+        {
+          error: firstIssue?.message || "Validation failed",
+          field,
+        },
+        400,
+      );
+    }
+  }),
+  async (c) => {
+    return await handleJoinRequests(c);
+  },
+);
 
-app.post("/contact", zValidator("json", contactSchema), async (c) => {
-  return await handleContactRequests(c);
-});
+app.post(
+  "/contact",
+  zValidator("json", contactSchema, (result, c) => {
+    if (!result.success) {
+      const firstIssue = result.error.issues[0];
+      const field =
+        firstIssue?.path && firstIssue.path.length > 0
+          ? String(firstIssue.path[0])
+          : null;
+      return c.json(
+        {
+          error: firstIssue?.message || "Validation failed",
+          field,
+        },
+        400,
+      );
+    }
+  }),
+  async (c) => {
+    return await handleContactRequests(c);
+  },
+);
 
 app.get("/", (c) => {
   return c.text(`Welcome to the ${siteConfig.name} Site Workers API!`);

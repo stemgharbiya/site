@@ -1,5 +1,7 @@
 export {};
 
+import { validateEmail } from "../lib/utils";
+
 const apiBase = import.meta.env.API_BASE_URL || "http://localhost:8787";
 
 type AlertType = "success" | "error" | "warning" | "info";
@@ -102,10 +104,6 @@ function clearErrors() {
     .forEach((el) => el.classList.remove(...errorClasses));
   const container = document.getElementById("alertsContainer");
   if (container) container.innerHTML = "";
-}
-
-function validateEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function saveFormData() {

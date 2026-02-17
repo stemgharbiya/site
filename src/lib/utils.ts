@@ -19,3 +19,16 @@ export function validateSeniorYear(year: string) {
 export function validateGitHubUsername(username: string) {
   return /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/.test(username);
 }
+
+export function validateEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+}
+
+export function validateStudentSchoolEmail(email: string) {
+  const normalizedEmail = String(email || "")
+    .trim()
+    .toLowerCase();
+  return /^[a-z0-9]+(?:[._-][a-z0-9]+)*\.19\d{5}@stemgharbiya\.moe\.edu\.eg$/.test(
+    normalizedEmail,
+  );
+}
