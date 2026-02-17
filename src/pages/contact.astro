@@ -1,0 +1,185 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const linksInHead = [
+	'<link rel="preconnect" href="https://challenges.cloudflare.com" />',
+	'<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer async></script>',
+];
+
+const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
+---
+
+<Layout
+	title="Contact Us"
+	description="Send us a message and we will get back to you soon."
+	linksInHead={linksInHead}
+>
+	<section class="section">
+		<div class="section-inner">
+			<div class="mx-auto max-w-7xl">
+				<div class="grid gap-8 md:grid-cols-2 md:items-start">
+					<aside class="px-4 md:px-0">
+						<div class="rounded-2xl bg-secondary/50 p-6 md:p-8">
+							<p class="eyebrow">Contact STEM Gharbiya</p>
+							<h1 class="section-title mt-3">Send us a message</h1>
+							<p class="section-lead mt-4">
+								Have a question about admissions, activities, or collaboration?
+								Fill out the form and our team will reply as soon as possible.
+							</p>
+
+							<ul class="mt-6 space-y-3 text-sm">
+								<li class="flex gap-3 items-start">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
+										<path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+									<span><strong>Quick responses</strong> during school working days.</span>
+								</li>
+								<li class="flex gap-3 items-start">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
+										<path d="M12 20l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+									<span><strong>Direct support</strong> for students and families.</span>
+								</li>
+								<li class="flex gap-3 items-start">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
+										<path d="M12 2v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+									</svg>
+									<span><strong>Secure form</strong> protected by Turnstile verification.</span>
+								</li>
+							</ul>
+						</div>
+					</aside>
+
+					<div class="px-4 md:px-0">
+						<div class="surface p-6 md:p-8">
+							<div class="text-left md:text-left">
+								<p class="eyebrow">Get in touch</p>
+								<h2 class="text-2xl font-semibold mt-2">Contact form</h2>
+								<p class="text-sm text-muted-foreground mt-2">Share your question and our team will follow up by email.</p>
+							</div>
+
+							<div id="alertsContainer" class="mt-4"></div>
+
+							<form id="contactForm" class="mt-6 grid gap-3">
+								<div class="space-y-2">
+									<label for="name" class="text-sm font-medium text-foreground">
+										Name <span class="text-destructive">*</span>
+									</label>
+									<input
+										type="text"
+										id="name"
+										name="name"
+										required
+										class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+									/>
+									<div class="error hidden text-xs text-destructive" id="nameError"></div>
+								</div>
+
+								<div class="space-y-2">
+									<label for="email" class="text-sm font-medium text-foreground">
+										Email <span class="text-destructive">*</span>
+									</label>
+									<input
+										type="email"
+										id="email"
+										name="email"
+										required
+										class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+									/>
+									<div class="error hidden text-xs text-destructive" id="emailError"></div>
+								</div>
+
+								<div class="space-y-2">
+									<label for="subject" class="text-sm font-medium text-foreground">
+										Subject <span class="text-destructive">*</span>
+									</label>
+									<input
+										type="text"
+										id="subject"
+										name="subject"
+										required
+										class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+									/>
+									<div class="error hidden text-xs text-destructive" id="subjectError"></div>
+								</div>
+
+								<div class="space-y-2">
+									<label for="message" class="text-sm font-medium text-foreground">
+										Message <span class="text-destructive">*</span>
+									</label>
+									<textarea
+										id="message"
+										name="message"
+										rows="5"
+										required
+										class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+									></textarea>
+									<span class="text-xs text-muted-foreground">
+										10-4000 characters
+									</span>
+									<div class="error hidden text-xs text-destructive" id="messageError"></div>
+								</div>
+
+								<div
+									class="cf-turnstile mt-2"
+									data-sitekey={TURNSTILE_SITE_KEY}
+									data-theme="auto"
+									data-callback="onTurnstileSuccess"
+									data-error-callback="onTurnstileError"
+									data-expired-callback="onTurnstileExpired"
+								></div>
+
+								<button type="submit" class="btn-primary w-full justify-center mt-4" id="submitBtn" disabled>
+									<span id="submitText">Send Message</span>
+								</button>
+							</form>
+
+							<div class="mt-8 md:mt-6 border-t border-border pt-6 text-center text-sm text-muted-foreground">
+								<p>
+									You can also email us directly at
+									<a
+										href="mailto:team@stemgharbiya.app"
+										class="text-primary underline underline-offset-4 transition hover:text-primary/80"
+									>team@stemgharbiya.app</a>
+								</p>
+								<p class="mt-4 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-xs">
+									To prevent spam, repeated submissions are rate-limited. If you get a
+									"Too many requests" message, please wait a minute and try again.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="../scripts/contact.ts" />
+	<script is:inline>
+		function onTurnstileSuccess(token) {
+			if (token && typeof token === "string" && token.trim().length > 0) {
+				document.getElementById("submitBtn").disabled = false;
+			} else {
+				document.getElementById("submitBtn").disabled = true;
+			}
+		}
+		function onTurnstileError(errorCode) {
+			console.error("Turnstile error:", errorCode);
+			document.getElementById("submitBtn").disabled = true;
+			showAlert(
+				"error",
+				"Verification Failed",
+				"Please complete the security check again."
+			);
+		}
+		function onTurnstileExpired() {
+			document.getElementById("submitBtn").disabled = true;
+			showAlert(
+				"warning",
+				"Verification Expired",
+				"Please complete the security check again."
+			);
+		}
+	</script>
+</Layout>
