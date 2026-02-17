@@ -1,6 +1,6 @@
 import { rateLimit } from "../lib/ratelimit";
 import { sendResendEmail } from "../lib/email";
-import { escapeHtml } from "../lib/utils";
+import { escapeHtml } from "../../../src/lib/utils";
 import { verifyTurnstile } from "../lib/turnstile";
 import {
   securityHeaders,
