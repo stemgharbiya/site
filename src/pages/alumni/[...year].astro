@@ -1,0 +1,143 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import AlumniCard from "../../components/alumni/AlumniCard.astro";
+
+type AlumniBatch = CollectionEntry<"alumniCollection">;
+
+export async function getStaticPaths() {
+  const alumni = await getCollection("alumniCollection");
+  const years = alumni
+    .map((batch) => batch.data.year)
+    .sort((first, second) => second - first);
+
+  return [
+    { params: { year: undefined } },
+    ...years.map((year) => ({ params: { year: String(year) } })),
+  ];
+}
+
+const alumni = await getCollection("alumniCollection");
+const requestedSegments = Astro.params.year;
+const requestedYear = Array.isArray(requestedSegments) ? requestedSegments[0] : requestedSegments;
+const hasExtraSegments = Array.isArray(requestedSegments) && requestedSegments.length > 1;
+const selectedYear = requestedYear ? Number(requestedYear) : undefined;
+
+const batches = [...alumni].sort((first, second) => second.data.year - first.data.year);
+
+const hasSelectedYear = typeof selectedYear === "number" && Number.isFinite(selectedYear);
+const visibleBatches = hasSelectedYear
+  ? batches.filter((batch) => batch.data.year === selectedYear)
+  : batches;
+
+const allYears = batches.map((batch) => batch.data.year);
+const visibleStudents = visibleBatches.flatMap((batch) =>
+  batch.data.students.map((student) => ({
+    student,
+    year: batch.data.year,
+  }))
+);
+
+const pageTitle = hasSelectedYear ? `Alumni ${selectedYear}` : "Alumni";
+const pageDescription = hasSelectedYear
+  ? `Meet STEM Gharbiya alumni from the class of ${selectedYear}.`
+  : "Meet STEM Gharbiya alumni and explore their university placements and achievements.";
+
+const invalidYear = Boolean(requestedYear) && (hasExtraSegments || !hasSelectedYear || visibleBatches.length === 0);
+
+if (invalidYear) {
+  Astro.response.status = 404;
+}
+---
+
+<Layout title={invalidYear ? "Alumni Not Found" : pageTitle} description={pageDescription}>
+  <section class="relative overflow-hidden bg-gradient-to-b from-secondary/70 via-background to-background py-16 md:py-20">
+    <div class="absolute -top-24 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute -bottom-24 left-0 h-72 w-72 rounded-full bg-secondary/80 blur-3xl" aria-hidden="true"></div>
+
+    <div class="section-inner relative">
+      <p class="eyebrow">Alumni</p>
+      <h1 class="section-title mt-3">{invalidYear ? "Year not found" : "Our alumni network"}</h1>
+      <p class="section-lead max-w-3xl">
+        {invalidYear
+          ? "This graduation year is not available yet. Explore all alumni or choose one of the available years."
+          : "From local universities to global institutions, our graduates continue their STEM journey with excellence."}
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-2">
+        <a
+          href="/alumni"
+          class={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+            hasSelectedYear
+              ? "border-border bg-background text-foreground hover:bg-secondary"
+              : "border-primary bg-primary text-primary-foreground"
+          }`}
+        >
+          All years
+        </a>
+        {allYears.map((year) => (
+          <a
+            href={`/alumni/${year}`}
+            class={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+              selectedYear === year
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-background text-foreground hover:bg-secondary"
+            }`}
+          >
+            {year}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 md:py-12">
+    <div class="section-inner">
+      {!invalidYear && (
+        <div class="mb-6 flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold text-foreground">
+            {hasSelectedYear ? `Class of ${selectedYear}` : "All alumni"}
+          </h2>
+          <p class="text-sm text-muted-foreground">{visibleStudents.length} alumni</p>
+        </div>
+      )}
+
+      {!invalidYear && visibleStudents.length > 0 && (
+        hasSelectedYear ? (
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {visibleStudents.map((item) => (
+              <AlumniCard student={item.student} />
+            ))}
+          </div>
+        ) : (
+          <div class="space-y-10">
+            {batches.map((batch) => (
+              <div class="space-y-4">
+                <h2 class="text-2xl font-semibold text-foreground">Class of {batch.data.year}</h2>
+                <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {batch.data.students.map((student) => (
+                    <AlumniCard student={student} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )
+      )}
+
+      {!invalidYear && visibleStudents.length === 0 && (
+        <div class="surface p-8 text-center">
+          <p class="text-lg font-semibold text-foreground">No alumni found</p>
+          <p class="mt-2 text-sm text-muted-foreground">Check back later for updates on this cohort.</p>
+        </div>
+      )}
+
+      {invalidYear && (
+        <div class="surface p-8 text-center">
+          <p class="text-lg font-semibold text-foreground">No alumni found for {requestedYear}</p>
+          <p class="mt-2 text-sm text-muted-foreground">Choose one of the available years above or browse all years.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
