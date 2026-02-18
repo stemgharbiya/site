@@ -23,6 +23,7 @@ type SiteConfig = {
   title: string;
   description: string;
   url: string;
+  email: string;
   locale: string;
   nav: {
     primary: NavItem[];
@@ -44,6 +45,7 @@ export const siteConfig: SiteConfig = {
   description:
     "STEM Gharbiya is a public STEM high school in Egypt focused on project-based learning, innovation, and research-driven education.",
   url: "https://stemgharbiya.app",
+  email: "team@stemgharbiya.app",
   locale: "en",
   nav: {
     primary: [
