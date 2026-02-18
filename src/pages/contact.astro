@@ -1,5 +1,7 @@
 ---
 import FormLayout from "../layouts/FormLayout.astro";
+import { siteConfig } from "../data/constants";
+const { email } = siteConfig;
 
 const linksInHead = [
   '<link rel="preconnect" href="https://challenges.cloudflare.com" />',
@@ -125,9 +127,9 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
       <p>
         You can also email us directly at
         <a
-          href="mailto:team@stemgharbiya.app"
+          href={`mailto:${email}`}
           class="text-primary underline underline-offset-4 transition hover:text-primary/80"
-        >team@stemgharbiya.app</a>
+        >{email}</a>
       </p>
       <p class="mt-4 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-xs">
         To prevent spam, repeated submissions are rate-limited. If you get a

@@ -1,8 +1,10 @@
 ---
+import { Icon } from "astro-icon/components";
 import Logo from "./Logo.astro";
 import { siteConfig } from "../data/constants";
+import { ICONS } from "../data/icons";
 
-const { footer } = siteConfig;
+const { footer, social } = siteConfig;
 ---
 
 <footer class="relative border-t border-border bg-background/95 text-foreground">
@@ -86,9 +88,9 @@ const { footer } = siteConfig;
 			<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
 				<p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
 				<div class="flex items-center gap-4">
-					{footer.legal.map((item) => (
-						<a href={item.href} class="footer-link">
-							{item.label}
+					{social.map((item) => (
+						<a href={item.href} target="_blank" rel="noopener noreferrer" class="footer-link" aria-label={item.label}>
+							<Icon name={ICONS[item.icon]} class="h-5 w-5" aria-hidden="true" />
 						</a>
 					))}
 				</div>

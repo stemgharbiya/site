@@ -12,11 +12,18 @@ type FooterLink = {
   href: string;
 };
 
+type SocialLink = {
+  label: string;
+  href: string;
+  icon: IconKey;
+};
+
 type SiteConfig = {
   name: string;
   title: string;
   description: string;
   url: string;
+  email: string;
   locale: string;
   nav: {
     primary: NavItem[];
@@ -25,15 +32,10 @@ type SiteConfig = {
     explore: FooterLink[];
     admissions: FooterLink[];
     quickLinks: FooterLink[];
-    legal: FooterLink[];
     address: string;
     mapUrl: string;
   };
-  social: {
-    github: string;
-    linkedin: string;
-    facebook: string;
-  };
+  social: SocialLink[];
   keywords: string[];
 };
 
@@ -43,6 +45,7 @@ export const siteConfig: SiteConfig = {
   description:
     "STEM Gharbiya is a public STEM high school in Egypt focused on project-based learning, innovation, and research-driven education.",
   url: "https://stemgharbiya.app",
+  email: "team@stemgharbiya.app",
   locale: "en",
   nav: {
     primary: [
@@ -101,18 +104,26 @@ export const siteConfig: SiteConfig = {
       { label: "Portal", href: "https://portal.stemgharbiya.app" },
       { label: "Learn how to join", href: "/about/admission" },
     ],
-    legal: [
-      { label: "Privacy", href: "/privacy" },
-      { label: "Terms", href: "/terms" },
-    ],
     address: "Galaa St., Tanta, Gharbiya, Egypt",
     mapUrl: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
   },
-  social: {
-    github: "https://github.com/stemgharbiya",
-    linkedin: "https://linkedin.com/school/gharbiya-stem-high-school/",
-    facebook: "https://www.facebook.com/groups/1791197197762388/",
-  },
+  social: [
+    {
+      label: "GitHub",
+      href: "https://github.com/stemgharbiya",
+      icon: "github",
+    },
+    {
+      label: "LinkedIn",
+      href: "https://linkedin.com/school/gharbiya-stem-high-school/",
+      icon: "linkedin",
+    },
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/groups/1791197197762388/",
+      icon: "facebook",
+    },
+  ],
   keywords: [
     "STEM Gharbiya",
     "STEM school",
