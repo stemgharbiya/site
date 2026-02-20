@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import AcademicsHero from '../../../components/academics/AcademicsHero.astro';
+import SkillsSection from '../../../components/academics/SkillsSection.astro';
+import CapstoneProjects from '../../../components/academics/CapstoneProjects.astro';
+import CoursesTable from '../../../components/academics/CoursesTable.astro';
+import GradingSystem from '../../../components/academics/GradingSystem.astro';
+import AcademicsFAQ from '../../../components/academics/AcademicsFAQ.astro';
+
+const [academicsData] = await getCollection('academicsCollection');
+---
+
+<Layout 
+	title="Academics at STEM Gharbiya" 
+	description="Research-driven curriculum, honors courses, capstone projects, and comprehensive grading system at STEM Gharbiya High School"
+>
+	<AcademicsHero />
+	<SkillsSection skills={academicsData.data.skills} />
+	<CapstoneProjects projects={academicsData.data.capstoneProjects} />
+	<CoursesTable courses={academicsData.data.courses} />
+	<GradingSystem grades={academicsData.data.gradingSystem} />
+	<AcademicsFAQ items={academicsData.data.faq} />
+</Layout>

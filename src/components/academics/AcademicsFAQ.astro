@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="section">
+  <div class="section-inner">
+    <div class="max-w-3xl">
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title mt-3">Frequently asked.</h2>
+      <p class="section-lead">
+        Common questions about our academic system, course offerings, and educational approach.
+      </p>
+    </div>
+
+    <div class="mt-12 max-w-3xl space-y-4">
+      {items.map((item, index) => (
+        <details class="surface group" open={index === 0}>
+          <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold text-foreground hover:bg-muted/50 transition">
+            <span>{item.question}</span>
+            <Icon 
+              name={ICONS.menu} 
+              class="h-5 w-5 flex-shrink-0 transition group-open:rotate-180" 
+              aria-hidden="true" 
+            />
+          </summary>
+          <div class="border-t border-border px-6 py-4">
+            <p class="text-sm text-muted-foreground leading-relaxed">
+              {item.answer}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

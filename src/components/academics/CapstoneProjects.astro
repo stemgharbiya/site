@@ -1,0 +1,60 @@
+---
+interface CapstoneProject {
+  title: string;
+  description: string;
+  outcomes: string[];
+  year: string;
+}
+
+interface Props {
+  projects: CapstoneProject[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section class="section" id="capstone">
+  <div class="section-inner">
+    <div class="max-w-3xl">
+      <p class="eyebrow">Student Research</p>
+      <h2 class="section-title mt-3">Capstone Projects.</h2>
+      <p class="section-lead">
+        Every student completes an independent or collaborative capstone project, 
+        resulting in publishable research, patent filings, or real-world applications.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      {projects.map((project) => (
+        <div class="surface p-8 flex flex-col h-full">
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-foreground">{project.title}</h3>
+              <p class="mt-1 text-xs uppercase tracking-[0.1em] text-muted-foreground">
+                Class of {project.year}
+              </p>
+            </div>
+          </div>
+
+          <p class="text-sm text-muted-foreground mb-4 flex-grow">
+            {project.description}
+          </p>
+
+          <div>
+            <p class="text-xs uppercase tracking-[0.1em] text-muted-foreground mb-3">
+              Outcomes
+            </p>
+            <ul class="space-y-2">
+              {project.outcomes.map((outcome) => (
+                <li class="flex items-center gap-2 text-sm text-foreground">
+                  <span class="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></span>
+                  {outcome}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
