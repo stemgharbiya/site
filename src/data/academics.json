@@ -1,0 +1,251 @@
+[
+  {
+    "id": "default",
+    "skills": [
+    {
+      "title": "Problem-Solving",
+      "description": "Apply analytical thinking to complex real-world challenges",
+      "icon": "research"
+    },
+    {
+      "title": "Research & Inquiry",
+      "description": "Design and conduct independent scientific investigations",
+      "icon": "research"
+    },
+    {
+      "title": "Collaboration",
+      "description": "Work effectively in interdisciplinary teams and projects",
+      "icon": "community"
+    },
+    {
+      "title": "Innovation",
+      "description": "Transform ideas into prototypes and tangible solutions",
+      "icon": "labs"
+    },
+    {
+      "title": "Communication",
+      "description": "Present findings clearly to academic and general audiences",
+      "icon": "talks"
+    },
+    {
+      "title": "Leadership",
+      "description": "Guide peers and take ownership of project outcomes",
+      "icon": "leadership"
+    }
+  ],
+  "courses": [
+    {
+      "name": "Arabic",
+      "level": "Regular",
+      "credits": 3,
+      "subject": "Languages"
+    },
+    {
+      "name": "Second Language",
+      "level": "Regular",
+      "credits": 3,
+      "subject": "Languages"
+    },
+    {
+      "name": "English",
+      "level": "Honors",
+      "credits": 2,
+      "subject": "Languages"
+    },
+    {
+      "name": "Mathematics",
+      "level": "Honors",
+      "credits": 3,
+      "subject": "Mathematics"
+    },
+    {
+      "name": "Physics",
+      "level": "Honors",
+      "credits": 4,
+      "subject": "Sciences"
+    },
+    {
+      "name": "Chemistry",
+      "level": "Honors",
+      "credits": 4,
+      "subject": "Sciences"
+    },
+    {
+      "name": "Biology",
+      "level": "Honors",
+      "credits": 4,
+      "subject": "Sciences"
+    },
+    {
+      "name": "Geology",
+      "level": "Honors",
+      "credits": 4,
+      "subject": "Sciences"
+    },
+    {
+      "name": "Mechanics",
+      "level": "Honors",
+      "credits": 3,
+      "subject": "Engineering"
+    },
+    {
+      "name": "Technology",
+      "level": "Regular",
+      "credits": 2,
+      "subject": "Engineering"
+    },
+    {
+      "name": "Social Studies",
+      "level": "Regular",
+      "credits": 3,
+      "subject": "Humanities"
+    },
+    {
+      "name": "Civics",
+      "level": "Regular",
+      "credits": 3,
+      "subject": "Humanities"
+    },
+    {
+      "name": "Religion",
+      "level": "Regular",
+      "credits": 2,
+      "subject": "Humanities"
+    }
+  ],
+  "capstoneProjects": [
+    {
+      "title": "Solar Energy Optimization System",
+      "description": "Design and implement an AI-driven system to maximize solar panel efficiency based on environmental data",
+      "outcomes": [
+        "Published research paper",
+        "Patent filing",
+        "Industry mentorship"
+      ],
+      "year": "2025"
+    },
+    {
+      "title": "Water Purification Innovation",
+      "description": "Develop low-cost water filtration technology for rural communities using locally available materials",
+      "outcomes": [
+        "Community implementation",
+        "NGO partnership",
+        "Award recognition"
+      ],
+      "year": "2025"
+    },
+    {
+      "title": "Biodiversity Monitoring App",
+      "description": "Create a mobile platform for citizen scientists to track and report wildlife populations",
+      "outcomes": [
+        "App deployment",
+        "University dataset",
+        "Conservation partnership"
+      ],
+      "year": "2024"
+    },
+    {
+      "title": "Robotics Competition Entry",
+      "description": "Engineer an autonomous robot competing in international STEM competitions",
+      "outcomes": [
+        "Regional championship",
+        "Engineering showcase",
+        "Scholarship offers"
+      ],
+      "year": "2024"
+    },
+    {
+      "title": "Machine Learning for Diagnosis",
+      "description": "Train ML models to assist in early disease detection from medical imaging",
+      "outcomes": [
+        "Research presentation",
+        "Healthcare partnership",
+        "Conference publication"
+      ],
+      "year": "2023"
+    },
+    {
+      "title": "Climate Data Analysis",
+      "description": "Analyze decades of climate data to predict regional weather patterns and environmental trends",
+      "outcomes": [
+        "Peer-reviewed article",
+        "Government consultation",
+        "Educational resource"
+      ],
+      "year": "2023"
+    }
+  ],
+  "gradingSystem": [
+    {
+      "grade": "A+",
+      "percentage": "95% - 100%"
+    },
+    {
+      "grade": "A",
+      "percentage": "90% - 95%"
+    },
+    {
+      "grade": "B+",
+      "percentage": "85% - 90%"
+    },
+    {
+      "grade": "B",
+      "percentage": "80% - 85%"
+    },
+    {
+      "grade": "C+",
+      "percentage": "75% - 80%"
+    },
+    {
+      "grade": "C",
+      "percentage": "70% - 75%"
+    },
+    {
+      "grade": "D+",
+      "percentage": "65% - 70%"
+    },
+    {
+      "grade": "D",
+      "percentage": "60% - 65%"
+    },
+    {
+      "grade": "F",
+      "percentage": "< 60%"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What makes STEM Gharbiya academics different?",
+      "answer": "Our curriculum centers on student-driven learning with hands-on research, collaborative projects, and real-world problem-solving. We combine rigorous academics with mentorship and innovation labs to develop researchers and leaders, not just test-takers."
+    },
+    {
+      "question": "Are courses honors or AP?",
+      "answer": "Most STEM-core courses are taught at the honors level. We focus on deep conceptual understanding and research skills rather than AP test preparation. Honors courses are more rigorous and project-intensive than regular courses."
+    },
+    {
+      "question": "How are capstone projects graded?",
+      "answer": "Capstone projects count toward 40% of final grades in STEM core courses. Grading is based on research quality, innovation, collaboration, presentation, and real-world impact. Projects are evaluated by faculty mentors and sometimes external experts."
+    },
+    {
+      "question": "What is the student-teacher ratio for lab courses?",
+      "answer": "Our science and engineering labs maintain a 1:15 ratio to ensure hands-on support. Each student works directly with faculty and lab technicians on experiments and builds."
+    },
+    {
+      "question": "How does the grading system work?",
+      "answer": "We use a letter grading system from A+ to F. Grades reflect mastery of content, research contribution, and presentation skills. Mid-term and final projects are weighted more heavily than traditional exams."
+    },
+    {
+      "question": "Can I choose between math and science tracks?",
+      "answer": "Yes. All students take a core set of subjects, but you can choose either a Mathematics-focused or Sciences-focused track starting in 11th grade. Both tracks include engineering and innovation modules."
+    },
+    {
+      "question": "What support is available for struggling students?",
+      "answer": "We offer peer tutoring, faculty office hours, study groups, and academic counseling. Students who fall behind in STEM courses receive additional mentoring and can access recorded lectures and resources."
+    },
+    {
+      "question": "How do universities view our academics?",
+      "answer": "Top universities recognize our rigorous curriculum and research outcomes. Our graduates have earned scholarships and admissions to leading STEM programs globally. Our capstone projects and research experience give students a significant advantage."
+    }
+  ]
+  }
+]

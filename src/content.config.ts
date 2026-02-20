@@ -47,4 +47,46 @@ const staffCollection = defineCollection({
     })
 });
 
-export const collections = { alumniCollection, staffCollection };
+const academicsCollection = defineCollection({
+    loader: file('./src/data/academics.json'),
+    schema: z.object({
+        id: z.string(),
+        skills: z.array(
+            z.object({
+                title: z.string(),
+                description: z.string(),
+                icon: z.string()
+            })
+        ),
+        courses: z.array(
+            z.object({
+                name: z.string(),
+                level: z.string(),
+                credits: z.number(),
+                subject: z.string()
+            })
+        ),
+        capstoneProjects: z.array(
+            z.object({
+                title: z.string(),
+                description: z.string(),
+                outcomes: z.array(z.string()),
+                year: z.string()
+            })
+        ),
+        gradingSystem: z.array(
+            z.object({
+                grade: z.string(),
+                percentage: z.string()
+            })
+        ),
+        faq: z.array(
+            z.object({
+                question: z.string(),
+                answer: z.string()
+            })
+        )
+    })
+});
+
+export const collections = { alumniCollection, staffCollection, academicsCollection };

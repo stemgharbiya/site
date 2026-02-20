@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon/components";
+import { ICONS, type IconKey } from "../../data/icons";
+
+interface Skill {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface Props {
+  skills: Skill[];
+}
+
+const { skills } = Astro.props;
+---
+
+<section class="section">
+  <div class="section-inner">
+    <div class="max-w-3xl">
+      <p class="eyebrow">Core Competencies</p>
+      <h2 class="section-title mt-3">The skills you will develop.</h2>
+      <p class="section-lead">
+        Beyond traditional classroom learning, our curriculum builds critical thinking, 
+        research capabilities, and leadership skills essential for success in STEM fields.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {skills.map((skill, index) => (
+        <div class="surface p-6">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-foreground">{skill.title}</h3>
+              <p class="mt-2 text-sm text-muted-foreground">{skill.description}</p>
+            </div>
+            <Icon 
+              name={ICONS[skill.icon as IconKey]} 
+              class="h-6 w-6 flex-shrink-0 text-primary" 
+              aria-hidden="true" 
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
