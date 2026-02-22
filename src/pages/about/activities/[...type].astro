@@ -34,14 +34,30 @@ const visibleItems: ClubEntry[] = hasSelectedType
 
 const invalidType = Boolean(requestedType) && (hasExtraSegments || !hasSelectedType);
 
+const pageTitle = invalidType
+  ? "Activities Not Found | About"
+  : selectedType === "teams"
+    ? "Teams | About"
+    : selectedType === "clubs"
+      ? "Clubs | About"
+      : "Activities | About";
+
+const pageDescription = invalidType
+  ? "The requested activities category is unavailable. Browse all clubs and teams at STEM Gharbiya."
+  : selectedType === "teams"
+    ? "Explore STEM Gharbiya student teams, including leadership, focus areas, and contact details."
+    : selectedType === "clubs"
+      ? "Explore STEM Gharbiya student clubs, including leadership, focus areas, and contact details."
+      : "Explore all STEM Gharbiya clubs and teams, grouped by category with contact and leadership details.";
+
 if (invalidType) {
   Astro.response.status = 404;
 }
 ---
 
 <Layout
-  title={invalidType ? "Clubs Not Found" : "Clubs & Teams"}
-  description="Explore all STEM Gharbiya clubs and teams, grouped by category with contact and leadership details."
+  title={pageTitle}
+  description={pageDescription}
 >
   <section class="relative overflow-hidden bg-linear-to-b from-primary/10 via-background to-background py-16 md:py-20">
     <div class="absolute -top-24 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>

@@ -7,7 +7,10 @@ import TeamGrid from "../../components/team/TeamGrid.astro";
 const team = await getCollection("teamCollection");
 ---
 
-<Layout title="Development Team" description="Meet the developers and contributors behind STEM Gharbiya’s website and digital platform.">
+<Layout
+  title="Development Team"
+  description="Meet the STEM Gharbiya development team building and maintaining the school’s website, tools, and digital experiences."
+>
   <TeamHero />
   <TeamGrid members={team} />
 </Layout>

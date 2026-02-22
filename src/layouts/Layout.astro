@@ -17,7 +17,10 @@ const {
 	linksInHead = [],
 } = Astro.props;
 
-const metaTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
+const normalizedTitle = title
+	? title.replace(new RegExp(`\\s*\\|\\s*${siteConfig.name}\\s*$`, "i"), "").trim()
+	: undefined;
+const metaTitle = normalizedTitle ? `${normalizedTitle} | ${siteConfig.name}` : siteConfig.title;
 const metaDescription = description || siteConfig.description;
 ---
 
