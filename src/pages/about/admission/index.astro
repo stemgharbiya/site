@@ -1,18 +1,74 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import AboutLayout from '../../../layouts/AboutLayout.astro';
 import AdmissionHero from '../../../components/admission/AdmissionHero.astro';
 import EligibilityCriteria from '../../../components/admission/EligibilityCriteria.astro';
 import AdmissionProcess from '../../../components/admission/AdmissionProcess.astro';
 import RequiredDocuments from '../../../components/admission/RequiredDocuments.astro';
 import AdmissionFAQ from '../../../components/admission/AdmissionFAQ.astro';
 import AdmissionContact from '../../../components/admission/AdmissionContact.astro';
+
+const admissionFaq = [
+	{
+		question: "What's the difference between the two eligibility cases?",
+		answer:
+			"Case 1: A Grade 9 average of 98% or higher gives automatic eligibility. Case 2: A Grade 9 average between 95% and 98% also qualifies if the student scored 100% in at least one of Mathematics, Science, or English.",
+	},
+	{
+		question: "When do applications open and close?",
+		answer:
+			"Applications typically open in mid to late July each year, with exact dates announced by the Ministry of Education.",
+	},
+	{
+		question: "How competitive is the admission process?",
+		answer:
+			"Admission is highly competitive, with applicants ranked by entrance exam performance and only top-performing students accepted.",
+	},
+	{
+		question: "Can I apply to multiple STEM schools?",
+		answer:
+			"Yes, students rank STEM schools by preference during application. Final placement depends on ranking, exam score, and national competition.",
+	},
+	{
+		question: "What's the application fee?",
+		answer:
+			"The application fee is 150 Egyptian Pounds and is paid through official Ministry of Education channels.",
+	},
+	{
+		question: "How are results determined?",
+		answer:
+			"Final ranking is based on entrance exam score across Mathematics, English, Science, and IQ sections.",
+	},
+	{
+		question: "What if I don't get accepted?",
+		answer:
+			"STEM schools currently do not maintain waitlists, and acceptance decisions are final for that cycle.",
+	},
+];
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: admissionFaq.map((item) => ({
+		"@type": "Question",
+		name: item.question,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: item.answer,
+		},
+	})),
+};
 ---
 
-<Layout title='Admission at STEM schools' description='How to join Egyptian STEM schools | Gharbiya STEM High School'>
+<AboutLayout
+	sectionTitle="Admission"
+	sectionPath="/about/admission"
+	description="Learn how to apply to STEM Gharbiya, including eligibility criteria, required documents, admission steps, and frequently asked questions."
+	structuredData={structuredData}
+>
 	<AdmissionHero />
 	<EligibilityCriteria />
 	<AdmissionProcess />
 	<RequiredDocuments />
 	<AdmissionFAQ />
 	<AdmissionContact />
-</Layout>
+</AboutLayout>

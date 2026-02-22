@@ -5,6 +5,7 @@ interface Props {
   title?: string;
   description?: string;
   linksInHead?: string[];
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
   sidebarEyebrow: string;
   sidebarTitle: string;
   sidebarDescription: string;
@@ -17,6 +18,7 @@ const {
   title,
   description,
   linksInHead = [],
+  structuredData,
   sidebarEyebrow,
   sidebarTitle,
   sidebarDescription,
@@ -26,7 +28,7 @@ const {
 } = Astro.props;
 ---
 
-<Layout title={title} description={description} linksInHead={linksInHead}>
+<Layout title={title} description={description} linksInHead={linksInHead} structuredData={structuredData}>
   <section class="section">
     <div class="section-inner">
       <div class="mx-auto max-w-7xl">

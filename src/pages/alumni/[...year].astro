@@ -38,9 +38,9 @@ const visibleStudents = visibleBatches.flatMap((batch) =>
   }))
 );
 
-const pageTitle = hasSelectedYear ? `Alumni ${selectedYear}` : "Alumni";
+const pageTitle = hasSelectedYear ? `Alumni | Class of ${selectedYear}` : "Alumni";
 const pageDescription = hasSelectedYear
-  ? `Meet STEM Gharbiya alumni from the class of ${selectedYear}.`
+  ? `Meet STEM Gharbiya alumni from the class of ${selectedYear} and explore their next academic paths.`
   : "Meet STEM Gharbiya alumni and explore their university placements and achievements.";
 
 const invalidYear = Boolean(requestedYear) && (hasExtraSegments || !hasSelectedYear || visibleBatches.length === 0);
@@ -48,9 +48,14 @@ const invalidYear = Boolean(requestedYear) && (hasExtraSegments || !hasSelectedY
 if (invalidYear) {
   Astro.response.status = 404;
 }
+
+const finalTitle = invalidYear ? "Alumni Not Found" : pageTitle;
+const finalDescription = invalidYear
+  ? "The requested alumni graduation year is unavailable. Browse all STEM Gharbiya alumni batches."
+  : pageDescription;
 ---
 
-<Layout title={invalidYear ? "Alumni Not Found" : pageTitle} description={pageDescription}>
+<Layout title={finalTitle} description={finalDescription}>
   <section class="relative overflow-hidden bg-gradient-to-b from-secondary/70 via-background to-background py-16 md:py-20">
     <div class="absolute -top-24 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
     <div class="absolute -bottom-24 left-0 h-72 w-72 rounded-full bg-secondary/80 blur-3xl" aria-hidden="true"></div>
