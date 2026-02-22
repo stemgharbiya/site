@@ -82,22 +82,37 @@ export const siteConfig: SiteConfig = {
   },
   footer: {
     explore: [
-      { label: "About the school", href: "/about/school" },
+      { label: "Home", href: "/" },
       { label: "Academics", href: "/about/academics" },
-      { label: "Facilities", href: "/about/facilities" },
-      { label: "Dorm life", href: "/about/dorm" },
+      { label: "Faculty & Staff", href: "/about/faculty-staff" },
+      { label: "Alumni", href: "/alumni" },
     ],
     admissions: [
-      { label: "Eligibility", href: "/about/admission" },
-      { label: "How to join", href: "/about/admission" },
-      { label: "Entrance exam", href: "/about/admission" },
-      { label: "Have a question?", href: "/contact" },
+      {
+        label: "Eligibility Criteria",
+        href: "/about/admission#eligibility-criteria",
+      },
+      {
+        label: "Admission Process",
+        href: "/about/admission#admission-process",
+      },
+      {
+        label: "Required Documents",
+        href: "/about/admission#required-documents",
+      },
+      { label: "Admission FAQ", href: "/about/admission#admission-faq" },
     ],
     quickLinks: [
-      { label: "Contact us", href: "/contact" },
-      { label: "Developers", href: "/about/developers" },
-      { label: "Portal", href: "https://portal.stemgharbiya.app" },
-      { label: "Learn how to join", href: "/about/admission" },
+      { label: "Contact Us", href: "/contact" },
+      {
+        label: "Admissions Contact",
+        href: "/about/admission#contact-admissions",
+      },
+      {
+        label: "Campus Location",
+        href: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
+      },
+      { label: "Student Portal", href: "https://portal.stemgharbiya.app" },
     ],
     address: "Galaa St., Tanta, Gharbiya, Egypt",
     mapUrl: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
