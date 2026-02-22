@@ -1,0 +1,52 @@
+---
+import { Image } from "astro:assets";
+import studyImage from "../../assets/images/dorm/studying hall.jpg";
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+
+const features = [
+  "Quiet study zones for focused learning",
+  "Group study areas for collaborative work",
+  "High-speed WiFi throughout",
+  "Comfortable seating and adequate lighting",
+  "Multiple study tables and chairs",
+];
+---
+
+<section class="section">
+  <div class="section-inner">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div class="relative lg:order-2">
+        <div class="surface p-2">
+          <Image 
+            src={studyImage} 
+            alt="Studying hall with desks and study areas" 
+            class="h-full w-full rounded-2xl object-cover" 
+          />
+        </div>
+      </div>
+
+      <div class="lg:order-1">
+        <p class="eyebrow">Study Environment</p>
+        <h2 class="section-title mt-3">Studying & Learning Halls</h2>
+        <p class="section-lead">
+          Dedicated study spaces designed to support both individual focus and collaborative learning. 
+          Our modern facilities provide the ideal environment for academic excellence.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          {features.map((feature) => (
+            <div class="flex items-start gap-3">
+              <Icon 
+                name={ICONS.checkCircle}
+                class="h-5 w-5 flex-shrink-0 text-primary mt-0.5"
+                aria-hidden="true"
+              />
+              <p class="text-foreground">{feature}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
