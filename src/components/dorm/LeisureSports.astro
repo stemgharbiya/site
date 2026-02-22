@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import basketballImage from "../../assets/images/dorm/basketball field.jpg";
+import soccerImage from "../../assets/images/dorm/soccer field.jpg";
+
+const sportsFacilities = [
+  {
+    title: "Basketball Court",
+    image: basketballImage,
+    alt: "Basketball field during play",
+    description: "Professional basketball court available for matches, practice sessions, and recreational play.",
+  },
+  {
+    title: "Soccer Field",
+    image: soccerImage,
+    alt: "Soccer field for matches and training",
+    description: "Full-sized soccer field for training sessions, PE classes, and competitive tournaments.",
+  },
+];
+
+const accessibility = [
+  "Available during all student breaks",
+  "Open during scheduled PE sessions",
+  "Extended access after school until midnight",
+  "Tournament preparation facilities",
+  "Team training support and coaching",
+];
+---
+
+<section class="section">
+  <div class="section-inner">
+    <div class="max-w-3xl mb-12">
+      <p class="eyebrow">Recreation</p>
+      <h2 class="section-title mt-3">Leisure & Sports Facilities</h2>
+      <p class="section-lead">
+        Our recreational facilities support both casual recreation and competitive sports, 
+        promoting physical wellness and team building.
+      </p>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2">
+      {sportsFacilities.map((facility) => (
+        <div>
+          <div class="surface p-2 mb-4">
+            <Image 
+              src={facility.image} 
+              alt={facility.alt}
+              class="h-64 w-full rounded-2xl object-cover"
+            />
+          </div>
+          <h3 class="text-xl font-semibold text-foreground">{facility.title}</h3>
+          <p class="mt-2 text-muted-foreground">{facility.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-2">
+      <div>
+        <h3 class="text-lg font-semibold text-foreground mb-4">Availability & Access</h3>
+        <ul class="space-y-3">
+          {accessibility.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="inline-block h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></span>
+              <span class="text-foreground">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div class="surface p-6">
+          <h3 class="text-lg font-semibold text-foreground mb-3">Sports Culture</h3>
+          <p class="text-muted-foreground">
+            Our sports facilities foster a culture of physical activity and teamwork. 
+            Whether you're interested in competitive sports or recreational activities, 
+            these facilities support student wellness and community engagement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
