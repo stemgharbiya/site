@@ -3,7 +3,13 @@
     "id": "amr-loksha",
     "name": "Amr Loksha",
     "role": "Team Leader",
-    "avatar": "../assets/images/team/amr-loksha.jpeg"
+    "avatar": "../assets/images/team/amr-loksha.jpeg",
+    "social": {
+      "email": "mailto:amrloksha151@proton.me",
+      "website": "https://amrloksha151.top",
+      "github": "https://github.com/Amrloksha151",
+      "linkedin": "https://www.linkedin.com/in/amr-loksha-ab0182301/"
+    }
   },
   {
     "id": "saif-abdelrazek",
