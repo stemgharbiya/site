@@ -1,0 +1,80 @@
+[
+  {
+    "id": "amr-loksha",
+    "name": "Amr Loksha",
+    "role": "Team Leader",
+    "avatar": "../assets/images/team/amr-loksha.jpeg"
+  },
+  {
+    "id": "saif-abdelrazek",
+    "name": "Saif Abdelrazek",
+    "role": "Full Stack Developer & Codebase Maintainer",
+    "avatar": "../assets/images/team/saif-abdelrazek.jpg",
+    "social": {
+      "email": "mailto:saif@saifabdelrazek.com",
+      "website": "https://saifabdelrazek.com",
+      "github": "https://github.com/saif-abdelrazek",
+      "linkedin": "https://www.linkedin.com/in/saifabdelrazek/"
+    }
+  },
+  {
+    "id": "abdelraham-abomousa",
+    "name": "Abdelrahman Aboueissa",
+    "role": "UI/UX Lead",
+    "avatar": "../assets/images/team/abdelraham-abomousa.jpeg"
+  },
+  {
+    "id": "amjad-mounir",
+    "name": "Amjad Mounir",
+    "role": "Frontend Lead",
+    "avatar": "../assets/images/team/amjad-mounir.jpeg"
+  },
+  {
+    "id": "mohammed-ebrahim",
+    "name": "Mohamed Ebrahim",
+    "role": "Frontend Developer",
+    "avatar": "../assets/images/team/mohammed-ebrahim.jpeg"
+  },
+  {
+    "id": "ahmed-tamer",
+    "name": "Ahmed Tamer",
+    "role": "Full Stack Developer",
+    "avatar": "../assets/images/team/ahmed-tamer.jpg"
+  },
+  {
+    "id": "mohamed-ismail",
+    "name": "Mohamed Ismail",
+    "role": "Full Stack Developer",
+    "avatar": "../assets/images/team/mohamed-ismail.jpeg"
+  },
+  {
+    "id": "marwan-algharably",
+    "name": "Marwan Algharably",
+    "role": "Consultant",
+    "avatar": "../assets/images/team/marwan-algharably.jpeg"
+  },
+  {
+    "id": "ahmed-emad",
+    "name": "Ahmed Emad",
+    "role": "Consultant",
+    "avatar": "../assets/images/team/ahmed-emad.jpg"
+  },
+  {
+    "id": "hala-elamory",
+    "name": "Hala Hany",
+    "role": "Public Relations Lead",
+    "avatar": "../assets/images/team/hala-elamory.jpeg"
+  },
+  {
+    "id": "linah-elshorbagy",
+    "name": "Linah Mohamed",
+    "role": "Public Relations",
+    "avatar": "../assets/images/team/linah-elshorbagy.jpeg"
+  },
+  {
+    "id": "jana-elhebishy",
+    "name": "Jana Elhebishy",
+    "role": "Full Stack Developer",
+    "avatar": "../assets/images/team/jana-elhebishy.jpeg"
+  }
+]
