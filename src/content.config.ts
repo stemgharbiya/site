@@ -65,6 +65,23 @@ const teamCollection = defineCollection({
     }),
 });
 
+const clubsCollection = defineCollection({
+  loader: file("./src/data/clubs.json"),
+  schema: ({ image }) =>
+    z.object({
+      id: z.string(),
+      title: z.string(),
+      image: image(),
+      short: z.string().optional(),
+      description: z.string().optional(),
+      website: z.string().optional(),
+      social: z.record(z.string(), z.string()).optional(),
+      supervisor: z.string().optional(),
+      president: z.string().optional(),
+      type: z.string().optional(),
+    }),
+});
+
 const academicsCollection = defineCollection({
   loader: file("./src/data/academics.json"),
   schema: z.object({
@@ -110,6 +127,7 @@ const academicsCollection = defineCollection({
 export const collections = {
   alumniCollection,
   staffCollection,
+  clubsCollection,
   academicsCollection,
   teamCollection,
 };
