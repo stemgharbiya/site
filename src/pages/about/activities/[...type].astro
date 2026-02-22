@@ -1,0 +1,150 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import ClubCard from "../../../components/clubs/ClubCard.astro";
+
+type ClubEntry = CollectionEntry<"clubsCollection">;
+
+export async function getStaticPaths() {
+  return [
+    { params: { type: undefined } },
+    { params: { type: "clubs" } },
+    { params: { type: "teams" } },
+  ];
+}
+
+const clubs = await getCollection("clubsCollection");
+const requestedSegments = Astro.params.type;
+const requestedType = Array.isArray(requestedSegments) ? requestedSegments[0] : requestedSegments;
+const hasExtraSegments = Array.isArray(requestedSegments) && requestedSegments.length > 1;
+const selectedType = requestedType?.toLowerCase();
+
+const normalized = [...clubs].sort((first, second) => first.data.title.localeCompare(second.data.title));
+
+const clubItems = normalized.filter((item) => item.data.type?.toLowerCase() !== "team");
+const teamItems = normalized.filter((item) => item.data.type?.toLowerCase() === "team");
+
+const hasSelectedType = selectedType === "clubs" || selectedType === "teams";
+
+const visibleItems: ClubEntry[] = hasSelectedType
+  ? selectedType === "teams"
+    ? teamItems
+    : clubItems
+  : normalized;
+
+const invalidType = Boolean(requestedType) && (hasExtraSegments || !hasSelectedType);
+
+if (invalidType) {
+  Astro.response.status = 404;
+}
+---
+
+<Layout
+  title={invalidType ? "Clubs Not Found" : "Clubs & Teams"}
+  description="Explore all STEM Gharbiya clubs and teams, grouped by category with contact and leadership details."
+>
+  <section class="relative overflow-hidden bg-linear-to-b from-primary/10 via-background to-background py-16 md:py-20">
+    <div class="absolute -top-24 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute -bottom-24 left-0 h-72 w-72 rounded-full bg-secondary/80 blur-3xl" aria-hidden="true"></div>
+
+    <div class="section-inner relative">
+      <p class="eyebrow">Student Life</p>
+      <h1 class="section-title mt-3">{invalidType ? "Category not found" : "Clubs and teams powering student innovation."}</h1>
+      <p class="section-lead max-w-3xl">
+        {invalidType
+          ? "This clubs category is not available. Explore all groups or select one of the available categories."
+          : "Discover all STEM Gharbiya clubs and teams—from science and robotics to diplomacy and maker spaces. Explore each group’s focus, leadership, and social links."}
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-2">
+        <a
+          href="/about/activities"
+          class={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+            !hasSelectedType
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border bg-background text-foreground hover:bg-secondary"
+          }`}
+        >
+          All ({normalized.length})
+        </a>
+        <a
+          href="/about/activities/clubs"
+          class={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+            selectedType === "clubs"
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border bg-background text-foreground hover:bg-secondary"
+          }`}
+        >
+          Clubs ({clubItems.length})
+        </a>
+        <a
+          href="/about/activities/teams"
+          class={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+            selectedType === "teams"
+              ? "border-primary bg-primary text-primary-foreground"
+              : "border-border bg-background text-foreground hover:bg-secondary"
+          }`}
+        >
+          Teams ({teamItems.length})
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 md:py-12">
+    <div class="section-inner">
+      {!invalidType && (
+        <div class="mb-6 flex items-center justify-between gap-4">
+          <h2 class="text-2xl font-semibold text-foreground">
+            {hasSelectedType ? (selectedType === "teams" ? "All teams" : "All clubs") : "All clubs and teams"}
+          </h2>
+          <p class="text-sm text-muted-foreground">{visibleItems.length} groups</p>
+        </div>
+      )}
+
+      {!invalidType && (
+        hasSelectedType ? (
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {visibleItems.map((item) => (
+              <ClubCard club={item} />
+            ))}
+          </div>
+        ) : (
+          <div class="space-y-12">
+            <div class="space-y-4" id="clubs">
+              <h3 class="text-xl font-semibold text-foreground">Clubs</h3>
+              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {clubItems.map((item) => (
+                  <ClubCard club={item} />
+                ))}
+              </div>
+            </div>
+
+            <div class="space-y-4" id="teams">
+              <h3 class="text-xl font-semibold text-foreground">Teams</h3>
+              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                {teamItems.map((item) => (
+                  <ClubCard club={item} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )
+      )}
+
+      {!invalidType && visibleItems.length === 0 && (
+        <div class="surface p-8 text-center">
+          <p class="text-lg font-semibold text-foreground">No groups found</p>
+          <p class="mt-2 text-sm text-muted-foreground">Check back later for updates.</p>
+        </div>
+      )}
+
+      {invalidType && (
+        <div class="surface p-8 text-center">
+          <p class="text-lg font-semibold text-foreground">No groups found for {requestedType}</p>
+          <p class="mt-2 text-sm text-muted-foreground">Choose one of the available categories above or browse all groups.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
