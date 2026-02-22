@@ -1,0 +1,154 @@
+[
+  {
+    "id": "biology-club",
+    "title": "Biology Club",
+    "image": "../assets/images/clubs/biology-club.jpg",
+    "short": "Lab-based biology experiments and research clubs.",
+    "website": "https://gh-biology-club.my.canva.site/home-page",
+    "social": {
+      "facebook": "https://www.facebook.com/BioclubGharbiyaSTEM/",
+      "instagram": "https://www.instagram.com/gh_bio_club/",
+      "youtube": "https://www.youtube.com/@stemgharbiyabiologyclub3867"
+    },
+    "description": "Hands-on experiments and biology research projects led by faculty supervisors. Hands-on biology experiments, laboratory research projects and faculty-guided investigations; students develop lab techniques, research literacy, and present findings at school events."
+  },
+  {
+    "id": "english-club",
+    "title": "English Club",
+    "image": "../assets/images/clubs/english-club.jpeg",
+    "short": "Practice and improve English language skills through activities and presentations.",
+    "social": {
+      "facebook": "https://www.facebook.com/groups/231405149431462/",
+      "instagram": "https://www.instagram.com/gharbiya_english_club//"
+    },
+    "description": "A student-led club focusing on English conversation, debates, and presentations. Members practice real-world communication and public speaking. Student-led club for English conversation, debates, presentations, and public speaking; develops communication and presentation skills through workshops, debates, and performance activities."
+  },
+  {
+    "id": "es-club",
+    "title": "Environmental Science Club",
+    "image": "../assets/images/clubs/es-club.jpg",
+    "short": "Environmental projects, fieldwork and sustainability initiatives.",
+    "social": {
+      "facebook": "https://www.facebook.com/profile.php?id=100090057626537",
+      "linkedin": "https://www.linkedin.com/company/gharbiya-stem-geology-club/"
+    },
+    "supervisor": "Mrs. Manal Ramia",
+    "description": "Students work on sustainability projects, environmental monitoring and community outreach. Environmental Science Club leads sustainability projects, field monitoring, and community outreach to promote environmental stewardship and practical conservation skills."
+  },
+  {
+    "id": "hack-club",
+    "title": "Hack Club — Gharbiya Chapter",
+    "image": "../assets/images/clubs/hack-club.png",
+    "short": "Hands-on web & app development, competitive programming, and project work.",
+    "website": "https://gharbiya.hackclub.com",
+    "social": {
+      "github": "https://github.com/stemgharbiya/hackclub",
+      "linkedin": "https://www.linkedin.com/company/gh-hack-club/",
+      "instagram": "https://www.instagram.com/gh_hackclub/",
+      "facebook": "https://www.facebook.com/GharbiaHackClub/"
+    },
+    "supervisor": "Mrs. Ereny Shehatah",
+    "president": "Amr Loksha",
+    "description": "The Gharbiya Hack Club provides students with practical, mentor-led coding projects focused on web development, competitive programming, and app development. Located at the Gharbiya STEM School campus, the Gharbiya Hack Club provides a way for high school students to learn programming and build practical projects. The club focuses on web development and includes departments for competitive programming and app development. Self-learning supported by mentors who assign tasks, quizzes and provide individual feedback."
+  },
+  {
+    "id": "iyna",
+    "title": "IYNA — Gharbiya Chapter",
+    "image": "../assets/images/clubs/iyna-club.jpg",
+    "short": "International Young Naturalists activities and chapter events.",
+    "social": {
+      "facebook": "https://www.facebook.com/IYNAGharbiyachapter/",
+      "linkedin": "https://www.linkedin.com/company/iyna-gharbiya-chapter",
+      "youtube": "https://www.youtube.com/@IYNAGharbiyachapter",
+      "instagram": "https://www.instagram.com/iyna_gharbiya_chapter/"
+    },
+    "website": "https://iyna.unaux.com/",
+    "description": "IYNA - Gharbiya Chapter organizes nature-based projects, outdoor learning and community science initiatives. IYNA Gharbiya Chapter runs nature-based projects, outdoor learning, and community science initiatives, engaging students in fieldwork, conservation, and citizen-science projects."
+  },
+  {
+    "id": "math-club",
+    "title": "Mathematics Club",
+    "image": "../assets/images/clubs/math-club.jpeg",
+    "short": "Problem solving, math circles and contest preparation.",
+    "president": "Yousef Amir",
+    "description": "Weekly sessions focused on olympiad-style problems, proof techniques, and collaborative problem solving. Weekly math sessions focusing on problem-solving, olympiad-style challenges, proof techniques, and collaborative problem circles to improve reasoning and competition preparation."
+  },
+  {
+    "id": "physics-club",
+    "title": "Physics Club",
+    "image": "../assets/images/clubs/physics-club.png",
+    "short": "Explore physics experiments and competitions.",
+    "social": {
+      "facebook": "https://www.facebook.com/physicsclubgharbiyastem/"
+    },
+    "supervisor": "Mrs. Hala Hassan",
+    "president": "Omar Rabia",
+    "description": "Physics demonstrations, experiments, and preparation for physics competitions. Physics Club hosts demonstrations, hands-on experiments, and training for physics competitions; members explore concepts through practical activities and problem-solving sessions."
+  },
+  {
+    "id": "robotics-club",
+    "title": "Robotics Club",
+    "image": "../assets/images/clubs/robotics-club.png",
+    "short": "Robotics design, builds and competitions.",
+    "social": {
+      "linkedin": "https://www.linkedin.com/company/gharbiya-robo-club"
+    },
+    "president": "Mohamed Galal",
+    "description": "Design and build robots, learn electronics and control systems, and participate in competitions. Designs and builds robots, learns electronics, programming, and control systems; prepares teams for robotics competitions and showcases through iterative prototyping."
+  },
+  {
+    "id": "counseling-club",
+    "title": "U.S. Counseling Club",
+    "image": "../assets/images/clubs/counseling-club.png",
+    "short": "Guidance and counseling activities for students.",
+    "supervisor": "Mrs. Ereny Shehatah",
+    "description": "Offers peer counseling, workshops and college/career guidance sessions. Offers peer counseling, workshops, and college/career guidance sessions; supports student wellbeing, study skills, and transition planning through structured meetings and resources."
+  },
+  {
+    "id": "fablab-team",
+    "title": "Fab Lab Team",
+    "image": "../assets/images/clubs/fablab-team.png",
+    "short": "Fabrication lab team working on maker projects.",
+    "website": "https://stemgharbiya.github.io/fablab/",
+    "type": "team",
+    "supervisor": "Mr. Erafan Zahra",
+    "description": "Fab Lab supports prototyping, 3D printing, and hands-on manufacturing projects for student teams. Fab Lab manages campus prototyping and digital fabrication—3D printing, laser cutting, CNC and electronics workshops—supporting student prototypes and maker projects."
+  },
+  {
+    "id": "meilleurs-team",
+    "title": "Meilleurs Team",
+    "image": "../assets/images/clubs/meilleurs-team.png",
+    "short": "Competitive programming & open projects team.",
+    "social": {
+      "github": "https://www.facebook.com/p/Meilleurs-team-100089727011492/",
+      "linkedin": "https://www.linkedin.com/company/meilleurs-team"
+    },
+    "type": "team",
+    "description": "Meilleurs is a student team focused on competitive programming, algorithmic thinking, and collaborative engineering projects. Student competitive programming team focusing on algorithms, contest training, and collaborative engineering projects to develop problem-solving and coding proficiency."
+  },
+  {
+    "id": "mun-team",
+    "title": "MUN Team",
+    "image": "../assets/images/clubs/mun-team.jpg",
+    "short": "Model United Nations team focused on debate and diplomacy.",
+    "social": {
+      "facebook": "https://www.facebook.com/people/Gharbiya-STEM-MUN/100094368804650/",
+      "instagram": "https://www.instagram.com/gharbiyastemmun/"
+    },
+    "type": "team",
+    "description": "MUN represents students in simulation conferences to build diplomacy, research and public-speaking skills. Model United Nations team that prepares students for simulation conferences focusing on diplomacy, research, policy writing, and public speaking skills."
+  },
+  {
+    "id": "tedx-team",
+    "title": "TEDx Team",
+    "image": "../assets/images/clubs/tedx-team.jpg",
+    "short": "Organizes TEDx-style talks and speaker events.",
+    "social": {
+      "facebook": "https://www.facebook.com/TEDxYouthGharbiyaSTEM/"
+    },
+    "supervisor": "Mrs. Manal Ramia",
+    "president": "Moaaz Ahmed",
+    "type": "team",
+    "description": "The TEDx team curates speaker events, workshops and community talks to share ideas worth spreading. Organizes TEDx-style talks, speaker coaching, and community events to showcase student and local speakers, storytelling, and public-speaking development."
+  }
+]
