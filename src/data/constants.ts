@@ -69,6 +69,7 @@ export const siteConfig: SiteConfig = {
           { label: "Dorm", href: "/about/dorm", icon: "dorm" },
           { label: "Academics", href: "/about/academics", icon: "academics" },
           { label: "Admission", href: "/about/admission", icon: "admission" },
+          { label: "Activities", href: "/about/activities", icon: "clubs" },
         ],
       },
       { label: "Alumni", href: "/alumni", icon: "graduates" },
@@ -84,6 +85,7 @@ export const siteConfig: SiteConfig = {
     explore: [
       { label: "Home", href: "/" },
       { label: "Academics", href: "/about/academics" },
+      { label: "Activities", href: "/about/activities" },
       { label: "Faculty & Staff", href: "/about/faculty-staff" },
       { label: "Alumni", href: "/alumni" },
     ],

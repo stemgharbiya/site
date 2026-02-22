@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+import type { IconKey } from "../../data/icons";
+import { buildSocialLinks } from "../../lib/cards";
+
+interface Props {
+  club: CollectionEntry<"clubsCollection">;
+}
+
+const { club } = Astro.props;
+const social = club.data.social;
+const isTeam = club.data.type?.toLowerCase() === "team";
+
+const socialIconByKey: Partial<Record<string, IconKey>> = {
+  email: "contact",
+  website: "global",
+  github: "github",
+  linkedin: "linkedin",
+  facebook: "facebook",
+  youtube: "youtube",
+  instagram: "instagram",
+};
+
+const socialLinks = buildSocialLinks(social, socialIconByKey);
+---
+
+<article class="group surface h-full overflow-hidden border-border transition-colors duration-300 hover:border-primary/70">
+  <div class="relative aspect-16/10 overflow-hidden bg-secondary/40">
+    <Image
+      src={club.data.image}
+      alt={club.data.title}
+      class="h-full w-full object-cover"
+      width={960}
+      height={600}
+    />
+    <span class="absolute left-3 top-3 rounded-full border border-border bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
+      {isTeam ? "Team" : "Club"}
+    </span>
+  </div>
+
+  <div class="p-5">
+    <h3 class="text-lg font-semibold text-foreground">{club.data.title}</h3>
+    {club.data.short && <p class="mt-2 text-sm text-muted-foreground">{club.data.short}</p>}
+
+    {(club.data.supervisor || club.data.president) && (
+      <div class="mt-4 grid gap-2 text-xs text-muted-foreground">
+        {club.data.supervisor && <p>Supervisor: {club.data.supervisor}</p>}
+        {club.data.president && <p>President: {club.data.president}</p>}
+      </div>
+    )}
+
+    <div class="mt-4 flex flex-wrap gap-2">
+      {club.data.website && (
+        <a
+          href={club.data.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+          aria-label={`${club.data.title} website`}
+        >
+          <Icon name={ICONS.global} class="h-4 w-4" aria-hidden="true" />
+          Website
+        </a>
+      )}
+
+      {socialLinks.map((link) => (
+        <a
+          href={link.href}
+          target={link.isExternal ? "_blank" : undefined}
+          rel={link.isExternal ? "noopener noreferrer" : undefined}
+          class="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+          aria-label={`${club.data.title} ${link.label}`}
+        >
+          <Icon name={link.icon} class="h-4 w-4" aria-hidden="true" />
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</article>
