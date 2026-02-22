@@ -68,11 +68,6 @@ export const siteConfig: SiteConfig = {
           },
           { label: "Dorm", href: "/about/dorm", icon: "dorm" },
           { label: "Academics", href: "/about/academics", icon: "academics" },
-          {
-            label: "Developers",
-            href: "/about/developers",
-            icon: "developers",
-          },
           { label: "Admission", href: "/about/admission", icon: "admission" },
         ],
       },
