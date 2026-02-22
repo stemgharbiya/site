@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import cafeImage from "../../assets/images/dorm/cafe.jpg";
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+
+const meals = [
+  { time: "Breakfast", start: "7:00 AM" },
+  { time: "Lunch", start: "3:00 PM" },
+  { time: "Dinner", start: "8:00 PM" },
+];
+---
+
+<section class="section bg-secondary/30">
+  <div class="section-inner">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Dining Facilities</p>
+        <h2 class="section-title mt-3">Central Cafeteria</h2>
+        <p class="section-lead">
+          Our modern cafeteria connects both residential sections, serving nutritious and balanced meals 
+          three times daily. We prioritize quality nutrition to support student health and academic performance.
+        </p>
+
+        <div class="mt-8">
+          <h3 class="font-semibold text-foreground mb-4">Daily Meal Schedule</h3>
+          <div class="space-y-3">
+            {meals.map((meal) => (
+              <div class="flex items-center justify-between surface p-4">
+                <span class="text-foreground font-medium">{meal.time}</span>
+                <span class="text-muted-foreground">{meal.start}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p class="mt-8 text-sm text-muted-foreground">
+          <strong>Nutrition Focus:</strong> Our meal planning emphasizes balanced nutrition with diverse menu options. 
+          Special dietary requirements and allergies are accommodated upon request.
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="surface p-2">
+          <Image 
+            src={cafeImage} 
+            alt="Central cafeteria dining area" 
+            class="h-full w-full rounded-2xl object-cover" 
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

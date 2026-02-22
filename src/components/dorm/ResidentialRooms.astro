@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import roomImage from "../../assets/images/dorm/resident room.jpg";
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+
+const amenities = [
+  "Individual bed with mattress",
+  "Personal drawers and cupboards",
+  "Ceiling fan for ventilation",
+  "Multiple power outlets",
+  "2 ceiling lamps per bed",
+];
+---
+
+<section id="amenities" class="section bg-secondary/30">
+  <div class="section-inner">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Living Spaces</p>
+        <h2 class="section-title mt-3">Residential Rooms</h2>
+        <p class="section-lead">
+          Each room is designed for comfort and functionality, housing 4 students per room. 
+          Our random roommate assignment policy promotes diversity and new friendships.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          {amenities.map((amenity) => (
+            <div class="flex items-start gap-3">
+              <Icon 
+                name={ICONS.checkCircle}
+                class="h-5 w-5 flex-shrink-0 text-primary mt-0.5"
+                aria-hidden="true"
+              />
+              <p class="text-foreground">{amenity}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-8 text-sm text-muted-foreground">
+          <strong>Roommate Assignment:</strong> Students are randomly assigned roommates 
+          to foster diverse relationships and community building across the school.
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="surface p-2">
+          <Image 
+            src={roomImage} 
+            alt="Residential room with beds and storage" 
+            class="h-full w-full rounded-2xl object-cover" 
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
