@@ -1,0 +1,58 @@
+---
+import Layout from "./Layout.astro";
+import { siteConfig } from "../data/constants";
+
+interface Props {
+  sectionTitle: string;
+  sectionPath: string;
+  description?: string;
+  linksInHead?: string[];
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  sectionTitle,
+  sectionPath,
+  description,
+  linksInHead = [],
+  structuredData,
+} = Astro.props;
+
+const normalizedSectionPath = sectionPath.startsWith("/") ? sectionPath : `/${sectionPath}`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "About",
+      item: `${siteConfig.url}${normalizedSectionPath}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: sectionTitle,
+      item: `${siteConfig.url}${normalizedSectionPath}`,
+    },
+  ],
+};
+
+const additionalStructuredData = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
+
+const pageStructuredData = [breadcrumbSchema, ...additionalStructuredData];
+---
+
+<Layout
+  title={`${sectionTitle} | About`}
+  description={description}
+  linksInHead={linksInHead}
+  structuredData={pageStructuredData}
+>
+  <slot />
+</Layout>

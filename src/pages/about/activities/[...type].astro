@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "../../../layouts/Layout.astro";
+import AboutLayout from "../../../layouts/AboutLayout.astro";
 import ClubCard from "../../../components/clubs/ClubCard.astro";
 
 type ClubEntry = CollectionEntry<"clubsCollection">;
@@ -34,13 +34,13 @@ const visibleItems: ClubEntry[] = hasSelectedType
 
 const invalidType = Boolean(requestedType) && (hasExtraSegments || !hasSelectedType);
 
-const pageTitle = invalidType
-  ? "Activities Not Found | About"
+const sectionTitle = invalidType
+  ? "Activities Not Found"
   : selectedType === "teams"
-    ? "Teams | About"
+    ? "Teams"
     : selectedType === "clubs"
-      ? "Clubs | About"
-      : "Activities | About";
+      ? "Clubs"
+      : "Activities";
 
 const pageDescription = invalidType
   ? "The requested activities category is unavailable. Browse all clubs and teams at STEM Gharbiya."
@@ -50,13 +50,22 @@ const pageDescription = invalidType
       ? "Explore STEM Gharbiya student clubs, including leadership, focus areas, and contact details."
       : "Explore all STEM Gharbiya clubs and teams, grouped by category with contact and leadership details.";
 
+const sectionPath = invalidType
+  ? "/about/activities"
+  : selectedType === "teams"
+    ? "/about/activities/teams"
+    : selectedType === "clubs"
+      ? "/about/activities/clubs"
+      : "/about/activities";
+
 if (invalidType) {
   Astro.response.status = 404;
 }
 ---
 
-<Layout
-  title={pageTitle}
+<AboutLayout
+  sectionTitle={sectionTitle}
+  sectionPath={sectionPath}
   description={pageDescription}
 >
   <section class="relative overflow-hidden bg-linear-to-b from-primary/10 via-background to-background py-16 md:py-20">
@@ -163,4 +172,4 @@ if (invalidType) {
       )}
     </div>
   </section>
-</Layout>
+</AboutLayout>

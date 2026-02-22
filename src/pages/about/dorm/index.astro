@@ -1,5 +1,5 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
+import AboutLayout from "../../../layouts/AboutLayout.astro";
 import DormHero from "../../../components/dorm/DormHero.astro";
 import DormBuilding from "../../../components/dorm/DormBuilding.astro";
 import ResidentialRooms from "../../../components/dorm/ResidentialRooms.astro";
@@ -8,8 +8,9 @@ import Cafeteria from "../../../components/dorm/Cafeteria.astro";
 import LeisureSports from "../../../components/dorm/LeisureSports.astro";
 ---
 
-<Layout
-  title="Dorm & Campus Life | About"
+<AboutLayout
+  sectionTitle="Dorm & Campus Life"
+  sectionPath="/about/dorm"
   description="Explore dormitory life at STEM Gharbiya, including residential rooms, study halls, cafeteria services, and student recreation spaces."
 >
   <DormHero />
@@ -18,4 +19,4 @@ import LeisureSports from "../../../components/dorm/LeisureSports.astro";
   <StudyingHalls />
   <Cafeteria />
   <LeisureSports />
-</Layout>
+</AboutLayout>

@@ -9,12 +9,34 @@ const linksInHead = [
 ];
 
 const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Us",
+  description: "Contact STEM Gharbiya for admissions, academics, activities, or partnerships.",
+  url: `${siteConfig.url}/contact`,
+  mainEntity: {
+    "@type": "HighSchool",
+    name: siteConfig.name,
+    email,
+    url: siteConfig.url,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.footer.address,
+      addressLocality: "Tanta",
+      addressRegion: "Gharbiya",
+      addressCountry: "EG",
+    },
+  },
+};
 ---
 
 <FormLayout
   title="Contact Us"
   description="Contact STEM Gharbiya for admissions, academics, activities, or partnerships, and receive support from the school team."
   linksInHead={linksInHead}
+  structuredData={structuredData}
   sidebarEyebrow="Contact STEM Gharbiya"
   sidebarTitle="Send us a message"
   sidebarDescription="Have a question about admissions, activities, or collaboration? Fill out the form and our team will reply as soon as possible."

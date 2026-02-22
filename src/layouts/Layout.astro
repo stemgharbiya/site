@@ -9,12 +9,14 @@ interface Props {
 	title?: string;
 	description?: string;
 	linksInHead?: string[];
+	structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
 	title,
 	description = siteConfig.description,
 	linksInHead = [],
+	structuredData,
 } = Astro.props;
 
 const normalizedTitle = title
@@ -22,6 +24,53 @@ const normalizedTitle = title
 	: undefined;
 const metaTitle = normalizedTitle ? `${normalizedTitle} | ${siteConfig.name}` : siteConfig.title;
 const metaDescription = description || siteConfig.description;
+const currentUrl = Astro.url?.href ?? siteConfig.url;
+
+const baseStructuredData: Record<string, unknown>[] = [
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		name: siteConfig.name,
+		url: siteConfig.url,
+		description: siteConfig.description,
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "HighSchool",
+		name: siteConfig.name,
+		url: siteConfig.url,
+		description: siteConfig.description,
+		email: siteConfig.email,
+		address: {
+			"@type": "PostalAddress",
+			streetAddress: siteConfig.footer.address,
+			addressLocality: "Tanta",
+			addressRegion: "Gharbiya",
+			addressCountry: "EG",
+		},
+		sameAs: siteConfig.social.map((social) => social.href),
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "WebPage",
+		name: metaTitle,
+		description: metaDescription,
+		url: currentUrl,
+		isPartOf: {
+			"@type": "WebSite",
+			name: siteConfig.name,
+			url: siteConfig.url,
+		},
+	},
+];
+
+const normalizedStructuredData = structuredData
+	? Array.isArray(structuredData)
+		? structuredData
+		: [structuredData]
+	: [];
+
+const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 ---
 
 <!doctype html>
@@ -34,7 +83,7 @@ const metaDescription = description || siteConfig.description;
 		<title>{metaTitle}</title>
 		<meta name="description" content={metaDescription} />
 		<meta name="keywords" content={siteConfig.keywords.join(", ")} />
-		<link rel="canonical" href={siteConfig.url} />
+		<link rel="canonical" href={currentUrl} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={siteConfig.title} />
@@ -44,6 +93,9 @@ const metaDescription = description || siteConfig.description;
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={metaTitle} />
 		<meta name="twitter:description" content={metaDescription} />
+		{pageStructuredData.map((schema) => (
+			<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		))}
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
 		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 		<script is:inline>
