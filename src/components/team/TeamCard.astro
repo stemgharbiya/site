@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { ICONS } from "../../data/icons";
+import type { IconKey } from "../../data/icons";
+
+interface Props {
+  member: CollectionEntry<"teamCollection">;
+}
+
+const { member } = Astro.props;
+const social = member.data.social;
+
+const socialIconByKey: Partial<Record<string, IconKey>> = {
+  email: "contact",
+  website: "global",
+  github: "github",
+  linkedin: "linkedin",
+  facebook: "facebook",
+};
+
+const toLabel = (key: string) =>
+  key
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+
+const normalizeHref = (key: string, value: string) => {
+  if (key.toLowerCase() === "email" && !value.startsWith("mailto:")) {
+    return `mailto:${value}`;
+  }
+  return value;
+};
+
+const socialLinks = Object.entries(social ?? {})
+  .filter(([, value]) => Boolean(value?.trim()))
+  .map(([key, value]) => {
+  const href = normalizeHref(key, value);
+  const iconKey = socialIconByKey[key.toLowerCase()] ?? "chat";
+
+  return {
+    href,
+    label: toLabel(key),
+    icon: ICONS[iconKey],
+    isExternal: !href.startsWith("mailto:"),
+  };
+  });
+--- 
+
+<article class="group surface h-full overflow-hidden transition-colors hover:border-primary/50  border-2">
+  <div class="aspect-square overflow-hidden bg-secondary/40">
+    <Image
+      src={member.data.avatar}
+      alt={member.data.name}
+      class="h-full w-full object-cover"
+      width={640}
+      height={640}
+    />
+  </div>
+
+  <div class="p-5">
+    <h3 class="text-lg font-semibold text-foreground">{member.data.name}</h3>
+    <p class="mt-1 text-sm text-muted-foreground">{member.data.role}</p>
+
+    {socialLinks.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        {socialLinks.map((link) =>
+          link && (
+            <a
+              href={link.href}
+              target={link.isExternal ? "_blank" : undefined}
+              rel={link.isExternal ? "noopener noreferrer" : undefined}
+              class="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+              aria-label={`${member.data.name} ${link.label}`}
+            >
+              <Icon name={link.icon} class="h-4 w-4" aria-hidden="true" />
+              {link.label}
+            </a>
+          ),
+        )}
+      </div>
+    )}
+  </div>
+</article>

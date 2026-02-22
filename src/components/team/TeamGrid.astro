@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+import TeamCard from "./TeamCard.astro";
+
+interface Props {
+  members: CollectionEntry<"teamCollection">[];
+}
+
+const { members } = Astro.props;
+---
+
+<section class="section pt-4">
+  <div class="section-inner">
+    <div class="mb-8 max-w-2xl md:max-w-none">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="eyebrow">Contributors</p>
+          <h2 class="section-title mt-3 text-3xl md:text-4xl">A modern student-led development team.</h2>
+        </div>
+        <a href="/team/join" class="btn-secondary">Want to join?</a>
+      </div>
+      <p class="section-lead">
+        We combine product thinking, design, and engineering to deliver useful tools for students,
+        staff, and families.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {members.map((member) => <TeamCard member={member} />)}
+    </div>
+  </div>
+</section>
