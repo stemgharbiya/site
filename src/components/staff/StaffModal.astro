@@ -15,6 +15,30 @@ interface Props {
 }
 
 const { staff } = Astro.props;
+
+function markdownToHtml(md: string | undefined) {
+  if (!md) return "";
+
+  let html = md
+    .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-foreground mt-4 mb-2">$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold text-foreground mt-6 mb-3">$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-semibold text-foreground mt-6 mb-4">$1</h1>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+    .replace(/^\- (.*$)/gim, '<li class="ml-4 text-muted-foreground">$1</li>')
+    .replace(/\n\n/g, '</p><p class="text-muted-foreground mt-2">');
+
+  if (!html.startsWith("<h")) {
+    html = '<p class="text-muted-foreground mt-2">' + html + "</p>";
+  }
+
+  return html;
+}
+
+const staffWithHtml = staff.map((member) => ({
+  ...member,
+  bioHtml: markdownToHtml(member.bio),
+}));
 ---
 
 <dialog id="staff-modal" class="staffModal max-w-2xl w-full rounded-2xl border border-border bg-card p-0 shadow-2xl">
@@ -67,113 +91,115 @@ const { staff } = Astro.props;
   }
 </style>
 
-<script define:vars={{ staff }}>
-  const modal = document.getElementById('staff-modal');
-  const closeButton = document.getElementById('close-modal');
-  const modalContent = document.getElementById('modal-content');
-  const staffCards = document.querySelectorAll('[data-staff-id]');
-
+<script define:vars={{ staff: staffWithHtml }}>
   // Staff data map
   const staffMap = new Map(staff.map(s => [s.id, s]));
 
-  // Convert markdown to HTML (basic implementation)
-  function markdownToHtml(md) {
-    if (!md) return '';
-    
-    let html = md
-      // Headers
-      .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-foreground mt-4 mb-2">$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold text-foreground mt-6 mb-3">$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-semibold text-foreground mt-6 mb-4">$1</h1>')
-      // Bold
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
-      // Italic
-      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-      // Lists
-      .replace(/^\- (.*$)/gim, '<li class="ml-4 text-muted-foreground">$1</li>')
-      // Paragraphs
-      .replace(/\n\n/g, '</p><p class="text-muted-foreground mt-2">');
-    
-    // Wrap in paragraph if doesn't start with heading
-    if (!html.startsWith('<h')) {
-      html = '<p class="text-muted-foreground mt-2">' + html + '</p>';
-    }
-    
-    return html;
-  }
+  const openStaffModal = (staffId, modal, modalContent) => {
+    const member = staffMap.get(staffId);
 
-  // Open modal
-  staffCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const staffId = card.getAttribute('data-staff-id');
-      const member = staffMap.get(staffId);
-      
-      if (member && modal && modalContent) {
-        // Build modal content
-        const content = `
-          <div class="flex flex-col md:flex-row gap-6">
-            <div class="md:w-1/3">
-              <div class="aspect-square overflow-hidden rounded-2xl border border-border">
-                <img 
-                  src="${member.avatar}" 
-                  alt="${member.name}"
-                  class="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-            <div class="md:w-2/3">
-              <h2 class="text-3xl font-semibold text-foreground">${member.name}</h2>
-              ${member.role ? `<p class="mt-2 text-lg text-primary font-medium">${member.role}</p>` : ''}
-              ${member.committee ? `<p class="mt-1 text-sm text-muted-foreground">Committee: ${member.committee}</p>` : ''}
-              ${member.email ? `
-                <a href="mailto:${member.email}" class="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                  </svg>
-                  ${member.email}
-                </a>
-              ` : ''}
-            </div>
+    if (!member || !modal || !modalContent) {
+      return;
+    }
+
+    const content = `
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="md:w-1/3">
+          <div class="aspect-square overflow-hidden rounded-2xl border border-border">
+            <img 
+              src="${member.avatar}" 
+              alt="${member.name}"
+              class="h-full w-full object-cover"
+            />
           </div>
-          ${member.bio ? `
-            <div class="mt-6 prose prose-sm max-w-none border-t border-border pt-6">
-              ${markdownToHtml(member.bio)}
-            </div>
+        </div>
+        <div class="md:w-2/3">
+          <h2 class="text-3xl font-semibold text-foreground">${member.name}</h2>
+          ${member.role ? `<p class="mt-2 text-lg text-primary font-medium">${member.role}</p>` : ''}
+          ${member.committee ? `<p class="mt-1 text-sm text-muted-foreground">Committee: ${member.committee}</p>` : ''}
+          ${member.email ? `
+            <a href="mailto:${member.email}" class="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              ${member.email}
+            </a>
           ` : ''}
-        `;
-        
-        modalContent.innerHTML = content;
-        modal.showModal();
+        </div>
+      </div>
+      ${member.bioHtml ? `
+        <div class="mt-6 prose prose-sm max-w-none border-t border-border pt-6">
+          ${member.bioHtml}
+        </div>
+      ` : ''}
+    `;
+
+    modalContent.innerHTML = content;
+    modal.showModal();
+  };
+
+  const initStaffModal = () => {
+    const modal = document.getElementById('staff-modal');
+    const closeButton = document.getElementById('close-modal');
+    const modalContent = document.getElementById('modal-content');
+    const staffCards = document.querySelectorAll('[data-staff-id]');
+
+    staffCards.forEach(card => {
+      if (!(card instanceof HTMLElement)) {
+        return;
       }
-    });
-  });
 
-  // Close modal
-  if (closeButton && modal) {
-    closeButton.addEventListener('click', () => {
-      modal.close();
-    });
-  }
+      const cardElement = card;
+      if (cardElement.dataset.modalBound === 'true') {
+        return;
+      }
 
-  // Close on backdrop click
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      const rect = modal.getBoundingClientRect();
-      if (
-        e.clientX < rect.left ||
-        e.clientX > rect.right ||
-        e.clientY < rect.top ||
-        e.clientY > rect.bottom
-      ) {
+      cardElement.dataset.modalBound = 'true';
+      cardElement.addEventListener('click', () => {
+        const staffId = cardElement.getAttribute('data-staff-id');
+        openStaffModal(staffId, modal, modalContent);
+      });
+    });
+
+    if (closeButton && modal && closeButton.getAttribute('data-modal-bound') !== 'true') {
+      closeButton.setAttribute('data-modal-bound', 'true');
+      closeButton.addEventListener('click', () => {
         modal.close();
-      }
-    });
-  }
-
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal) {
-      modal.close();
+      });
     }
-  });
+
+    if (modal && modal.getAttribute('data-backdrop-bound') !== 'true') {
+      modal.setAttribute('data-backdrop-bound', 'true');
+      modal.addEventListener('click', (e) => {
+        const rect = modal.getBoundingClientRect();
+        if (
+          e.clientX < rect.left ||
+          e.clientX > rect.right ||
+          e.clientY < rect.top ||
+          e.clientY > rect.bottom
+        ) {
+          modal.close();
+        }
+      });
+    }
+
+    if (modal && document.body.dataset.staffEscapeBound !== 'true') {
+      document.body.dataset.staffEscapeBound = 'true';
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const activeModal = document.getElementById('staff-modal');
+          if (activeModal && typeof activeModal.close === 'function') {
+            activeModal.close();
+          }
+        }
+      });
+    }
+  };
+
+  initStaffModal();
+
+  if (document.documentElement.dataset.staffModalLifecycleBound !== 'true') {
+    document.addEventListener('astro:page-load', initStaffModal);
+    document.documentElement.dataset.staffModalLifecycleBound = 'true';
+  }
 </script>

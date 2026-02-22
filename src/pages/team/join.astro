@@ -212,30 +212,41 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
   <Fragment slot="scripts">
     <script src="../../scripts/join.ts" />
     <script is:inline>
-      function onTurnstileSuccess(token) {
-        if (token && typeof token === "string" && token.trim().length > 0) {
-          document.getElementById("submitBtn").disabled = false;
-        } else {
-          document.getElementById("submitBtn").disabled = true;
+      const setJoinSubmitState = (enabled) => {
+        const submitBtn = document.getElementById("submitBtn");
+        if (submitBtn) {
+          submitBtn.disabled = !enabled;
         }
-      }
-      function onTurnstileError(errorCode) {
+      };
+
+      window.onTurnstileSuccess = function (token) {
+        setJoinSubmitState(
+          token && typeof token === "string" && token.trim().length > 0,
+        );
+      };
+
+      window.onTurnstileError = function (errorCode) {
         console.error("Turnstile error:", errorCode);
-        document.getElementById("submitBtn").disabled = true;
-        showAlert(
+        setJoinSubmitState(false);
+        window.showAlert?.(
           "error",
           "Verification Failed",
           "Please complete the security check again."
         );
-      }
-      function onTurnstileExpired() {
-        document.getElementById("submitBtn").disabled = true;
-        showAlert(
+      };
+
+      window.onTurnstileExpired = function () {
+        setJoinSubmitState(false);
+        window.showAlert?.(
           "warning",
           "Verification Expired",
           "Please complete the security check again."
         );
-      }
+      };
+
+      const initJoinTurnstileUi = () => setJoinSubmitState(false);
+      initJoinTurnstileUi();
+      document.addEventListener("astro:page-load", initJoinTurnstileUi);
     </script>
   </Fragment>
 </FormLayout>
