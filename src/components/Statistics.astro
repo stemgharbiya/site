@@ -65,6 +65,7 @@ const { title, lead, items } = Astro.props;
     const animateCounters = () => {
         document.querySelectorAll('.counter').forEach((el) => {
             const target = parseInt((el as HTMLElement).dataset.value || '0', 10) || 0;
+            el.textContent = '0';
             const duration = 2000;
             const start = Date.now();
 
@@ -79,4 +80,10 @@ const { title, lead, items } = Astro.props;
     };
 
     animateCounters();
+
+    const globalWindow = window as Window & { __statisticsLifecycleBound?: boolean };
+    if (!globalWindow.__statisticsLifecycleBound) {
+        document.addEventListener('astro:page-load', animateCounters);
+        globalWindow.__statisticsLifecycleBound = true;
+    }
 </script>

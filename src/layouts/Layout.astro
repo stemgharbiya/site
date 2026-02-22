@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { siteConfig } from "../data/constants";
 import { pwaInfo } from "virtual:pwa-info";
+import { ClientRouter } from "astro:transitions";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 
@@ -76,6 +77,7 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 <!doctype html>
 <html lang={siteConfig.locale}>
 	<head>
+		<ClientRouter />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/favicon.png" />
@@ -99,11 +101,22 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
 		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 		<script is:inline>
-			const savedTheme =
-				typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
-			if (savedTheme) {
-				document.documentElement.classList.toggle("dark", savedTheme === "dark");
-			}
+			const applySavedTheme = () => {
+				const savedTheme =
+					typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
+				if (savedTheme) {
+					document.documentElement.classList.toggle("dark", savedTheme === "dark");
+				}
+			};
+
+			applySavedTheme();
+			document.addEventListener("astro:before-swap", (ev) => {
+				const savedTheme =
+					typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
+				if (savedTheme === "dark") {
+					ev.newDocument.documentElement.classList.add("dark");
+				}
+			});
 		</script>
 	</head>
 	<body>

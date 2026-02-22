@@ -20,6 +20,10 @@ declare global {
     turnstile?: {
       getResponse: () => string;
       reset?: () => void;
+      render?: (
+        container: string | HTMLElement,
+        params?: Record<string, unknown>,
+      ) => string;
     };
   }
 }
@@ -269,6 +273,9 @@ async function submitForm(formData: FormData) {
 function bindFormHandlers() {
   const form = document.getElementById("contactForm") as HTMLFormElement | null;
   if (!form) return;
+  if (form.dataset.bound === "true") return;
+
+  form.dataset.bound = "true";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -342,13 +349,54 @@ function bindFormHandlers() {
     });
 }
 
+function bindPersistenceHandlers() {
+  document
+    .querySelectorAll<
+      HTMLInputElement | HTMLTextAreaElement
+    >('input[type="text"], input[type="email"], textarea')
+    .forEach((field) => {
+      if (field.dataset.persistBound === "true") return;
+      field.dataset.persistBound = "true";
+      field.addEventListener("input", saveFormData);
+    });
+}
+
+function ensureTurnstileWidget() {
+  const widget = document.querySelector(".cf-turnstile") as HTMLElement | null;
+  if (!widget) return;
+  if (widget.querySelector("iframe")) return;
+
+  const sitekey = widget.getAttribute("data-sitekey");
+  if (!sitekey || !window.turnstile?.render) return;
+
+  widget.innerHTML = "";
+  window.turnstile.render(widget, {
+    sitekey,
+    theme: widget.getAttribute("data-theme") || "auto",
+    callback: (token: string) => (window as any).onTurnstileSuccess?.(token),
+    "error-callback": (code: string) =>
+      (window as any).onTurnstileError?.(code),
+    "expired-callback": () => (window as any).onTurnstileExpired?.(),
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById("contactForm") as HTMLFormElement | null;
+  if (!form) return;
+
+  loadFormData();
+  bindFormHandlers();
+  bindPersistenceHandlers();
+  ensureTurnstileWidget();
+}
+
 window.showAlert = showAlert;
+initContactForm();
 
-loadFormData();
-bindFormHandlers();
-
-document
-  .querySelectorAll<
-    HTMLInputElement | HTMLTextAreaElement
-  >('input[type="text"], input[type="email"], textarea')
-  .forEach((field) => field.addEventListener("input", saveFormData));
+const globalWindow = window as typeof window & {
+  __contactLifecycleBound?: boolean;
+};
+if (!globalWindow.__contactLifecycleBound) {
+  document.addEventListener("astro:page-load", initContactForm);
+  globalWindow.__contactLifecycleBound = true;
+}

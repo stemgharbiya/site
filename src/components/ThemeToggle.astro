@@ -4,30 +4,43 @@ import { ICONS } from "../data/icons";
 ---
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    const updateToggle = (toggle: HTMLElement | null, theme: string) => {
+        const isDark = theme === 'dark';
+        toggle?.setAttribute('data-theme', theme);
+        if (isDark) {
+            toggle?.classList.add('dark');
+        } else {
+            toggle?.classList.remove('dark');
+        }
+    };
+
+    const initThemeToggle = () => {
         const toggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
-        
+
         const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
-        updateToggle(currentTheme);
-        
-        toggle?.addEventListener('click', () => {
+        updateToggle(toggle, currentTheme);
+
+        if (!toggle || toggle.dataset.bound === 'true') {
+            return;
+        }
+
+        toggle.dataset.bound = 'true';
+        toggle.addEventListener('click', () => {
             const isDark = html.classList.toggle('dark');
             const newTheme = isDark ? 'dark' : 'light';
-            updateToggle(newTheme);
+            updateToggle(toggle, newTheme);
             localStorage.setItem('theme', newTheme);
         });
-        
-        function updateToggle(theme: string) {
-            const isDark = theme === 'dark';
-            toggle?.setAttribute('data-theme', theme);
-            if (isDark) {
-                toggle?.classList.add('dark');
-            } else {
-                toggle?.classList.remove('dark');
-            }
-        }
-    });
+    };
+
+    initThemeToggle();
+
+    const globalWindow = window as Window & { __themeToggleLifecycleBound?: boolean };
+    if (!globalWindow.__themeToggleLifecycleBound) {
+        document.addEventListener('astro:after-swap', initThemeToggle);
+        globalWindow.__themeToggleLifecycleBound = true;
+    }
 </script>
 
 <button
