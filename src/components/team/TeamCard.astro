@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
-import { ICONS } from "../../data/icons";
 import type { IconKey } from "../../data/icons";
+import { buildSocialLinks } from "../../lib/cards";
 
 interface Props {
   member: CollectionEntry<"teamCollection">;
@@ -20,31 +20,7 @@ const socialIconByKey: Partial<Record<string, IconKey>> = {
   facebook: "facebook",
 };
 
-const toLabel = (key: string) =>
-  key
-    .replace(/[-_]+/g, " ")
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-
-const normalizeHref = (key: string, value: string) => {
-  if (key.toLowerCase() === "email" && !value.startsWith("mailto:")) {
-    return `mailto:${value}`;
-  }
-  return value;
-};
-
-const socialLinks = Object.entries(social ?? {})
-  .filter(([, value]) => Boolean(value?.trim()))
-  .map(([key, value]) => {
-  const href = normalizeHref(key, value);
-  const iconKey = socialIconByKey[key.toLowerCase()] ?? "chat";
-
-  return {
-    href,
-    label: toLabel(key),
-    icon: ICONS[iconKey],
-    isExternal: !href.startsWith("mailto:"),
-  };
-  });
+const socialLinks = buildSocialLinks(social, socialIconByKey);
 --- 
 
 <article class="group surface h-full overflow-hidden transition-colors hover:border-primary/50  border-2">
