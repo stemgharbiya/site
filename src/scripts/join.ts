@@ -24,6 +24,10 @@ declare global {
     turnstile?: {
       getResponse: () => string;
       reset?: () => void;
+      render?: (
+        container: string | HTMLElement,
+        params?: Record<string, unknown>,
+      ) => string;
     };
   }
 }
@@ -372,6 +376,9 @@ function bindFormHandlers() {
     "applicationForm",
   ) as HTMLFormElement | null;
   if (!form) return;
+  if (form.dataset.bound === "true") return;
+
+  form.dataset.bound = "true";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -418,10 +425,7 @@ function bindFormHandlers() {
     });
     const githubUsername = String(formData.get("githubUsername") || "").trim();
     if (githubUsername && !validateGitHubUsername(githubUsername)) {
-      showFieldError(
-        "githubUsername",
-        "Invalid GitHub username format",
-      );
+      showFieldError("githubUsername", "Invalid GitHub username format");
       hasErrors = true;
     }
     if (!formData.get("agreement")) {
@@ -546,17 +550,64 @@ function bindFormHandlers() {
     });
 }
 
+function bindPersistenceHandlers() {
+  document
+    .querySelectorAll<
+      HTMLInputElement | HTMLTextAreaElement
+    >('input[type="text"], input[type="email"], textarea')
+    .forEach((field) => {
+      if (field.dataset.persistBound === "true") return;
+      field.dataset.persistBound = "true";
+      field.addEventListener("input", saveFormData);
+    });
+
+  document
+    .querySelectorAll<HTMLInputElement>('input[name="interests"]')
+    .forEach((checkbox) => {
+      if (checkbox.dataset.persistBound === "true") return;
+      checkbox.dataset.persistBound = "true";
+      checkbox.addEventListener("change", saveFormData);
+    });
+}
+
+function ensureTurnstileWidget() {
+  const widget = document.querySelector(".cf-turnstile") as HTMLElement | null;
+  if (!widget) return;
+  if (widget.querySelector("iframe")) return;
+
+  const sitekey = widget.getAttribute("data-sitekey");
+  if (!sitekey || !window.turnstile?.render) return;
+
+  widget.innerHTML = "";
+  window.turnstile.render(widget, {
+    sitekey,
+    theme: widget.getAttribute("data-theme") || "auto",
+    callback: (token: string) => (window as any).onTurnstileSuccess?.(token),
+    "error-callback": (code: string) =>
+      (window as any).onTurnstileError?.(code),
+    "expired-callback": () => (window as any).onTurnstileExpired?.(),
+  });
+}
+
+function initJoinForm() {
+  const form = document.getElementById(
+    "applicationForm",
+  ) as HTMLFormElement | null;
+  if (!form) return;
+
+  loadFormData();
+  bindFormHandlers();
+  bindPersistenceHandlers();
+  ensureTurnstileWidget();
+}
+
 window.showAlert = showAlert;
+initJoinForm();
 
-loadFormData();
-bindFormHandlers();
-
-document
-  .querySelectorAll<
-    HTMLInputElement | HTMLTextAreaElement
-  >('input[type="text"], input[type="email"], textarea')
-  .forEach((field) => field.addEventListener("input", saveFormData));
-
-document
-  .querySelectorAll<HTMLInputElement>('input[name="interests"]')
-  .forEach((checkbox) => checkbox.addEventListener("change", saveFormData));
+const globalWindow = window as typeof window & {
+  __joinLifecycleBound?: boolean;
+};
+if (!globalWindow.__joinLifecycleBound) {
+  document.addEventListener("astro:page-load", initJoinForm);
+  globalWindow.__joinLifecycleBound = true;
+}

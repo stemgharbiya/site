@@ -52,10 +52,10 @@ export const siteConfig: SiteConfig = {
       { label: "Home", href: "/", icon: "home" },
       {
         label: "About",
-        href: "/about/school",
+        href: "/about",
         icon: "info",
         children: [
-          { label: "School", href: "/about/school", icon: "school" },
+          { label: "School", href: "/about", icon: "school" },
           {
             label: "Faculty & Staff",
             href: "/about/faculty-staff",

@@ -1,10 +1,15 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import StaffHero from '../../../components/staff/StaffHero.astro';
+import AboutLayout from '../../../layouts/AboutLayout.astro';
 import StaffByCommittee from '../../../components/staff/StaffByCommittee.astro';
 ---
 
-<Layout title="Faculty & Staff" description="Meet the dedicated faculty and staff who are shaping the future of STEM education at Gharbiya STEM School.">
-  <StaffHero />
+<AboutLayout
+  sectionTitle="Faculty & Staff"
+  sectionPath="/about/faculty-staff"
+  description="Meet STEM Gharbiya faculty and staff, and explore the educators, mentors, and committees supporting student growth."
+  eyebrow="Faculty & Staff"
+  headline="Meet the educators shaping tomorrow's innovators."
+  lead="Our faculty and staff bring expertise, passion, and mentorship to build an exceptional STEM learning environment across every committee and role."
+>
   <StaffByCommittee />
-</Layout>
+</AboutLayout>

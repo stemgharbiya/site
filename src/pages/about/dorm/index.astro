@@ -1,21 +1,37 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import DormHero from "../../../components/dorm/DormHero.astro";
+import { Image } from "astro:assets";
+import AboutLayout from "../../../layouts/AboutLayout.astro";
 import DormBuilding from "../../../components/dorm/DormBuilding.astro";
 import ResidentialRooms from "../../../components/dorm/ResidentialRooms.astro";
 import StudyingHalls from "../../../components/dorm/StudyingHalls.astro";
 import Cafeteria from "../../../components/dorm/Cafeteria.astro";
 import LeisureSports from "../../../components/dorm/LeisureSports.astro";
+import dormImage from "../../../assets/images/dorm/dorm.jpg";
 ---
 
-<Layout
-  title="Dormitory & Campus Life | STEM Gharbiya"
-  description="Experience residential student life at STEM Gharbiya. Explore our dormitory facilities, rooms, study halls, cafeteria, and recreational sports facilities."
+<AboutLayout
+  sectionTitle="Dorm & Campus Life"
+  sectionPath="/about/dorm"
+  description="Explore dormitory life at STEM Gharbiya, including residential rooms, study halls, cafeteria services, and student recreation spaces."
+  eyebrow="Residential Life"
+  headline="Dormitory & Campus Life"
+  lead="Experience a vibrant residential community where students live, learn, and grow together through collaboration, personal development, and shared campus routines."
 >
-  <DormHero />
+  <section class="pb-8 md:pb-12">
+    <div class="section-inner">
+      <div class="surface overflow-hidden p-2">
+        <Image
+          src={dormImage}
+          alt="STEM Gharbiya dormitory building"
+          class="h-70 w-full rounded-xl object-cover md:h-105"
+        />
+      </div>
+    </div>
+  </section>
+
   <DormBuilding />
   <ResidentialRooms />
   <StudyingHalls />
   <Cafeteria />
   <LeisureSports />
-</Layout>
+</AboutLayout>

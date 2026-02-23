@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../../layouts/Layout.astro';
-import AcademicsHero from '../../../components/academics/AcademicsHero.astro';
+import AboutLayout from '../../../layouts/AboutLayout.astro';
 import SkillsSection from '../../../components/academics/SkillsSection.astro';
 import CapstoneProjects from '../../../components/academics/CapstoneProjects.astro';
 import CoursesTable from '../../../components/academics/CoursesTable.astro';
@@ -9,16 +8,33 @@ import GradingSystem from '../../../components/academics/GradingSystem.astro';
 import AcademicsFAQ from '../../../components/academics/AcademicsFAQ.astro';
 
 const [academicsData] = await getCollection('academicsCollection');
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: academicsData.data.faq.map((item) => ({
+		"@type": "Question",
+		name: item.question,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: item.answer,
+		},
+	})),
+};
 ---
 
-<Layout 
-	title="Academics at STEM Gharbiya" 
-	description="Research-driven curriculum, honors courses, capstone projects, and comprehensive grading system at STEM Gharbiya High School"
+<AboutLayout
+	sectionTitle="Academics"
+	sectionPath="/about/academics"
+	description="Discover STEM Gharbiya academics, including curriculum pathways, honors courses, capstone projects, grading, and graduation preparation."
+	eyebrow="STEM Academics"
+	headline="Rigorous, Research-Driven Learning"
+	lead="Our curriculum blends disciplined academics with collaborative, student-centered learning. Students conduct research, build practical solutions, and prepare for university-level STEM work."
+	structuredData={structuredData}
 >
-	<AcademicsHero />
 	<SkillsSection skills={academicsData.data.skills} />
 	<CapstoneProjects projects={academicsData.data.capstoneProjects} />
 	<CoursesTable courses={academicsData.data.courses} />
 	<GradingSystem grades={academicsData.data.gradingSystem} />
 	<AcademicsFAQ items={academicsData.data.faq} />
-</Layout>
+</AboutLayout>
