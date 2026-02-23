@@ -67,21 +67,15 @@ if (invalidType) {
   sectionTitle={sectionTitle}
   sectionPath={sectionPath}
   description={pageDescription}
+  eyebrow="Student Life"
+  headline={invalidType ? "Category not found" : "Clubs and teams powering student innovation."}
+  lead={invalidType
+    ? "This activities category is not available. Explore all groups or select one of the available categories."
+    : "Discover STEM Gharbiya clubs and teams—from science and robotics to diplomacy and maker spaces. Explore each group’s focus, leadership, and social links."}
 >
-  <section class="relative overflow-hidden bg-linear-to-b from-primary/10 via-background to-background py-16 md:py-20">
-    <div class="absolute -top-24 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
-    <div class="absolute -bottom-24 left-0 h-72 w-72 rounded-full bg-secondary/80 blur-3xl" aria-hidden="true"></div>
-
-    <div class="section-inner relative">
-      <p class="eyebrow">Student Life</p>
-      <h1 class="section-title mt-3">{invalidType ? "Category not found" : "Clubs and teams powering student innovation."}</h1>
-      <p class="section-lead max-w-3xl">
-        {invalidType
-          ? "This clubs category is not available. Explore all groups or select one of the available categories."
-          : "Discover all STEM Gharbiya clubs and teams—from science and robotics to diplomacy and maker spaces. Explore each group’s focus, leadership, and social links."}
-      </p>
-
-      <div class="mt-8 flex flex-wrap gap-2">
+  <section class="py-8 md:py-12">
+    <div class="section-inner">
+      <div class="mb-8 flex flex-wrap gap-2">
         <a
           href="/about/activities"
           class={`rounded-full border px-4 py-2 text-sm font-medium transition ${
@@ -113,11 +107,7 @@ if (invalidType) {
           Teams ({teamItems.length})
         </a>
       </div>
-    </div>
-  </section>
 
-  <section class="py-8 md:py-12">
-    <div class="section-inner">
       {!invalidType && (
         <div class="mb-6 flex items-center justify-between gap-4">
           <h2 class="text-2xl font-semibold text-foreground">
