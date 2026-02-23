@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import AboutLayout from '../../../layouts/AboutLayout.astro';
-import AcademicsHero from '../../../components/academics/AcademicsHero.astro';
 import SkillsSection from '../../../components/academics/SkillsSection.astro';
 import CapstoneProjects from '../../../components/academics/CapstoneProjects.astro';
 import CoursesTable from '../../../components/academics/CoursesTable.astro';
@@ -28,9 +27,11 @@ const structuredData = {
 	sectionTitle="Academics"
 	sectionPath="/about/academics"
 	description="Discover STEM Gharbiya academics, including curriculum pathways, honors courses, capstone projects, grading, and graduation preparation."
+	eyebrow="STEM Academics"
+	headline="Rigorous, Research-Driven Learning"
+	lead="Our curriculum blends disciplined academics with collaborative, student-centered learning. Students conduct research, build practical solutions, and prepare for university-level STEM work."
 	structuredData={structuredData}
 >
-	<AcademicsHero />
 	<SkillsSection skills={academicsData.data.skills} />
 	<CapstoneProjects projects={academicsData.data.capstoneProjects} />
 	<CoursesTable courses={academicsData.data.courses} />
