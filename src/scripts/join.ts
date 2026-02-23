@@ -5,38 +5,17 @@ import {
   validateSeniorYear,
   validateStudentSchoolEmail,
 } from "../lib/utils";
-
-const apiBase = import.meta.env.API_BASE_URL || "http://localhost:8787";
-
-type AlertType = "success" | "error" | "warning" | "info";
-
-type AlertFn = (
-  type: AlertType,
-  title: string,
-  message: string,
-  details?: string,
-  duration?: number,
-) => HTMLDivElement | null;
-
-declare global {
-  interface Window {
-    showAlert?: AlertFn;
-    turnstile?: {
-      getResponse: () => string;
-      reset?: () => void;
-      render?: (
-        container: string | HTMLElement,
-        params?: Record<string, unknown>,
-      ) => string;
-    };
-  }
-}
-
-const errorClasses = [
-  "border-destructive",
-  "focus:border-destructive",
-  "focus:ring-destructive/20",
-];
+import { postJoin } from "./apiClient";
+import {
+  clearErrors as clearErrorsBase,
+  extractValidationError,
+  hideFieldError as hideFieldErrorBase,
+  resetTurnstile,
+  safeParseResponse,
+  setLoading as setLoadingBase,
+  showAlert,
+  showFieldError as showFieldErrorBase,
+} from "./sharedForm";
 
 const fieldErrorIdMap: Record<string, string> = {
   fullName: "nameError",
@@ -48,118 +27,22 @@ const fieldElementIdMap: Record<string, string> = {
   interests: "interestsContainer",
 };
 
-const alertStyles: Record<AlertType, string> = {
-  success: "border-emerald-200 bg-emerald-50 text-emerald-700",
-  error: "border-rose-200 bg-rose-50 text-rose-700",
-  warning: "border-amber-200 bg-amber-50 text-amber-700",
-  info: "border-border bg-secondary/50 text-foreground",
-};
-
-const showAlert: AlertFn = (
-  type,
-  title,
-  message,
-  details = "",
-  duration = 5000,
-) => {
-  const container = document.getElementById("alertsContainer");
-  if (!container) return null;
-  container.innerHTML = "";
-  const alert = document.createElement("div");
-  alert.className = `rounded-2xl border px-4 py-3 text-sm shadow-sm ${alertStyles[type]}`;
-  const icon =
-    type === "success"
-      ? "✓"
-      : type === "error"
-        ? "✗"
-        : type === "warning"
-          ? "!"
-          : "i";
-  alert.innerHTML = `
-        <div class="flex items-center gap-2 text-sm font-semibold">
-            <span>${icon}</span>
-            <span>${title}</span>
-        </div>
-        <div class="mt-1 text-sm">${message}</div>
-        ${details ? `<div class="mt-1 text-xs opacity-90">${details}</div>` : ""}
-    `;
-  container.appendChild(alert);
-  alert.classList.remove("hidden");
-  if (duration > 0) {
-    setTimeout(() => {
-      if (alert.parentNode === container) {
-        alert.classList.add("opacity-0");
-        alert.classList.add("-translate-y-2");
-        setTimeout(() => {
-          if (alert.parentNode === container) {
-            container.removeChild(alert);
-          }
-        }, 300);
-      }
-    }, duration);
-  }
-  return alert;
+const fieldUiOptions = {
+  fieldErrorIdMap,
+  fieldElementIdMap,
+  setAriaInvalid: true,
 };
 
 function showFieldError(fieldId: string, message: string) {
-  const field =
-    document.getElementById(fieldId) ||
-    (fieldElementIdMap[fieldId]
-      ? document.getElementById(fieldElementIdMap[fieldId])
-      : null);
-  const errorElement = document.getElementById(
-    fieldErrorIdMap[fieldId] || fieldId + "Error",
-  );
-  if (field) {
-    field.classList.add(...errorClasses);
-    field.setAttribute("aria-invalid", "true");
-  }
-  if (errorElement) {
-    errorElement.textContent = message;
-    errorElement.classList.remove("hidden");
-  }
+  showFieldErrorBase(fieldId, message, fieldUiOptions);
 }
 
 function hideFieldError(fieldId: string) {
-  const field =
-    document.getElementById(fieldId) ||
-    (fieldElementIdMap[fieldId]
-      ? document.getElementById(fieldElementIdMap[fieldId])
-      : null);
-  const errorElement = document.getElementById(
-    fieldErrorIdMap[fieldId] || fieldId + "Error",
-  );
-  if (field) {
-    field.classList.remove(...errorClasses);
-    field.removeAttribute("aria-invalid");
-  }
-  if (errorElement) {
-    errorElement.classList.add("hidden");
-    errorElement.textContent = "";
-  }
+  hideFieldErrorBase(fieldId, fieldUiOptions);
 }
 
 function clearErrors() {
-  document.querySelectorAll(".error").forEach((el) => {
-    const node = el as HTMLElement;
-    node.classList.add("hidden");
-    node.textContent = "";
-  });
-  document
-    .querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea")
-    .forEach((el) => {
-      el.classList.remove(...errorClasses);
-      el.removeAttribute("aria-invalid");
-    });
-  Object.values(fieldElementIdMap).forEach((id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.classList.remove(...errorClasses);
-      el.removeAttribute("aria-invalid");
-    }
-  });
-  const container = document.getElementById("alertsContainer");
-  if (container) container.innerHTML = "";
+  clearErrorsBase(fieldUiOptions);
 }
 
 function validateEmail(email: string) {
@@ -230,62 +113,24 @@ function clearFormData() {
 }
 
 function setLoading(loading: boolean) {
-  const submitBtn = document.getElementById(
+  setLoadingBase(
+    loading,
     "submitBtn",
-  ) as HTMLButtonElement | null;
-  const submitText = document.getElementById("submitText");
-  if (!submitBtn || !submitText) return;
-  const existingSpinner = document.getElementById("submitSpinner");
-  if (loading) {
-    submitBtn.disabled = true;
-    submitText.textContent = "Submitting...";
-    if (!existingSpinner) {
-      const spinner = document.createElement("span");
-      spinner.id = "submitSpinner";
-      spinner.className =
-        "ml-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent";
-      submitText.after(spinner);
-    }
-  } else {
-    submitBtn.disabled = false;
-    submitText.textContent = "Submit Application";
-    existingSpinner?.remove();
-  }
+    "submitText",
+    "Submitting...",
+    "Submit Application",
+  );
 }
 
 async function submitForm(formData: FormData) {
   setLoading(true);
   clearErrors();
   try {
-    const response = await fetch(`${apiBase}/join`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(Object.fromEntries(formData)),
-    });
-    const result = await response.json();
+    const response = await postJoin(Object.fromEntries(formData));
+    const result = await safeParseResponse(response);
     if (!response.ok) {
       if (response.status === 400) {
-        let errMsg = "";
-        let detailsText = "";
-        if (result) {
-          if (typeof result.error === "string") errMsg = result.error;
-          else if (
-            result.error &&
-            typeof result.error === "object" &&
-            result.error.message
-          )
-            errMsg = result.error.message;
-          else if (result.message) errMsg = result.message;
-          else if (result.issues && Array.isArray(result.issues)) {
-            errMsg = "Validation failed";
-            detailsText = result.issues
-              .map((i: any) => i.message || JSON.stringify(i))
-              .join("; ");
-          } else errMsg = JSON.stringify(result);
-          if (!detailsText && result.details) detailsText = result.details;
-        } else {
-          errMsg = "Please check your form inputs";
-        }
+        const { errMsg, detailsText } = extractValidationError(result);
 
         showAlert(
           "error",
@@ -447,8 +292,11 @@ function bindFormHandlers() {
     }
     formData.set("cf-turnstile-response", turnstileToken);
     formData.set("interests", interests.join(","));
-    await submitForm(formData);
-    if (window.turnstile?.reset) window.turnstile.reset();
+    try {
+      await submitForm(formData);
+    } finally {
+      resetTurnstile();
+    }
   });
 
   (
@@ -579,7 +427,7 @@ function ensureTurnstileWidget() {
   if (!sitekey || !window.turnstile?.render) return;
 
   widget.innerHTML = "";
-  window.turnstile.render(widget, {
+  const widgetId = window.turnstile.render(widget, {
     sitekey,
     theme: widget.getAttribute("data-theme") || "auto",
     callback: (token: string) => (window as any).onTurnstileSuccess?.(token),
@@ -587,6 +435,10 @@ function ensureTurnstileWidget() {
       (window as any).onTurnstileError?.(code),
     "expired-callback": () => (window as any).onTurnstileExpired?.(),
   });
+
+  if (widgetId) {
+    widget.dataset.turnstileWidgetId = widgetId;
+  }
 }
 
 function initJoinForm() {
@@ -601,7 +453,6 @@ function initJoinForm() {
   ensureTurnstileWidget();
 }
 
-window.showAlert = showAlert;
 initJoinForm();
 
 const globalWindow = window as typeof window & {
