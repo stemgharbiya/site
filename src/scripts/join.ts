@@ -10,6 +10,7 @@ import {
   clearErrors as clearErrorsBase,
   extractValidationError,
   hideFieldError as hideFieldErrorBase,
+  resetTurnstile,
   safeParseResponse,
   setLoading as setLoadingBase,
   showAlert,
@@ -291,8 +292,11 @@ function bindFormHandlers() {
     }
     formData.set("cf-turnstile-response", turnstileToken);
     formData.set("interests", interests.join(","));
-    await submitForm(formData);
-    if (window.turnstile?.reset) window.turnstile.reset();
+    try {
+      await submitForm(formData);
+    } finally {
+      resetTurnstile();
+    }
   });
 
   (
@@ -423,7 +427,7 @@ function ensureTurnstileWidget() {
   if (!sitekey || !window.turnstile?.render) return;
 
   widget.innerHTML = "";
-  window.turnstile.render(widget, {
+  const widgetId = window.turnstile.render(widget, {
     sitekey,
     theme: widget.getAttribute("data-theme") || "auto",
     callback: (token: string) => (window as any).onTurnstileSuccess?.(token),
@@ -431,6 +435,10 @@ function ensureTurnstileWidget() {
       (window as any).onTurnstileError?.(code),
     "expired-callback": () => (window as any).onTurnstileExpired?.(),
   });
+
+  if (widgetId) {
+    widget.dataset.turnstileWidgetId = widgetId;
+  }
 }
 
 function initJoinForm() {

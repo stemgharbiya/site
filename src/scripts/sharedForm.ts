@@ -13,7 +13,7 @@ declare global {
     showAlert?: AlertFn;
     turnstile?: {
       getResponse: () => string;
-      reset?: () => void;
+      reset?: (widgetId?: string) => void;
       render?: (
         container: string | HTMLElement,
         params?: Record<string, unknown>,
@@ -238,6 +238,22 @@ export function extractValidationError(result: any) {
   }
 
   return { errMsg, detailsText };
+}
+
+export function resetTurnstile() {
+  const reset = window.turnstile?.reset;
+  if (!reset) return;
+
+  const widgets = document.querySelectorAll<HTMLElement>(".cf-turnstile");
+  if (widgets.length === 0) {
+    reset();
+    return;
+  }
+
+  widgets.forEach((widget) => {
+    const widgetId = widget.dataset.turnstileWidgetId;
+    reset(widgetId);
+  });
 }
 
 window.showAlert = showAlert;
