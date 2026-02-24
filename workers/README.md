@@ -32,7 +32,7 @@ This directory contains the **server-side Workers application** that powers part
 - **Runtime:** Cloudflare Workers (Edge/serverless)
 - **Framework:** Hono (TypeScript)
 - **Database:** Cloudflare D1 (SQLite)
-- **KV Store:** Cloudflare KV (Rate limiting)
+- **Rate limiting:** Cloudflare Rate Limiting (binding)
 - **Validation:** Zod
 - **Bot Protection:** Cloudflare Turnstile
 - **Email Delivery:** Resend
@@ -136,13 +136,11 @@ By default `wrangler.jsonc` sets `APP_ENV=production`. The app will only attempt
 
 ---
 
-## 4. Create KV Namespace (Rate Limiting)
+## 4. Configure Cloudflare Rate Limiting
 
-```bash
-npx wrangler kv:namespace create "SUBMIT_RATE_LIMITER"
-```
+This project uses Cloudflare's Rate Limiting via the `ratelimits` binding in `wrangler.jsonc`.
 
-Then update the generated namespace ID in `wrangler.jsonc`.
+Update the rate limit settings in `wrangler.jsonc` (the `ratelimits` section) or configure the limits in the Cloudflare dashboard as needed.
 
 ---
 
@@ -184,7 +182,6 @@ http://localhost:8788
 ## 1. Update `wrangler.jsonc`
 
 - Add your D1 database ID
-- Add your KV namespace ID
 - Configure production bindings
 
 ## 2. Deploy
