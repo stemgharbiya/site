@@ -172,7 +172,7 @@ npm run dev
 Visit:
 
 ```
-http://localhost:8788
+http://localhost:8787
 ```
 
 ---
