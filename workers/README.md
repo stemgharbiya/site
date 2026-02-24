@@ -155,10 +155,12 @@ TEAM_NOTIFICATION_EMAIL=team@example.com
 TURNSTILE_SECRET_KEY=your_turnstile_secret_key
 TURNSTILE_SITE_KEY=your_turnstile_site_key
 DISABLE_EMAILS=false
-  # Optional: set application environment. Use "production" in production.
-  APP_ENV=development
-  # Optional: allow automatic DB creation even in production (use with caution)
-  AUTO_CREATE_DB=false
+# Optional: set application environment. Use "production" in production.
+APP_ENV=development
+# Optional: allow automatic DB creation even in production (use with caution)
+AUTO_CREATE_DB=false
+# Optional: override allowed origins (comma-separated)
+CORS_ORIGIN=http://localhost:4321
 ```
 
 ---
@@ -187,7 +189,9 @@ http://localhost:8787
 ## 2. Deploy
 
 ```bash
-npx wrangler pages deploy .
+npm run deploy
+# or
+npx wrangler deploy --minify
 ```
 
 ## 3. Set Production Secrets
@@ -210,6 +214,17 @@ Accepts a JSON payload validated against the Zod schema in:
 ```
 src/schemas/join.ts
 ```
+
+Required fields:
+
+- `fullName`
+- `schoolEmail`
+- `githubUsername`
+- `seniorYear`
+- `interests`
+- `motivation`
+- `agreement`
+- `cf-turnstile-response`
 
 Handles:
 
@@ -259,8 +274,10 @@ to disable email sending during testing.
 
 - **Email domain:** `@stemgharbiya.moe.edu.eg`
 - **Senior Year:** S25–S30 only
-- **Interests:** At least one required
-- **Motivation:** 10–500 characters
+- **Interests:** 1 to 5 values, from the allowed interests list
+- **Motivation:** 10–2000 characters
+- **Code of Conduct:** `agreement` must be true
+- **Turnstile:** Required
 - **Duplicates:** Same email + GitHub username blocked
 
 ## Contact (`POST /contact`)
@@ -301,7 +318,6 @@ npx wrangler d1 backup create stemgharbiya-site --name backup-$(date +%Y%m%d)
 
 ```
 ├── .dev.vars
-├── .env.example
 ├── package.json
 ├── tsconfig.json
 ├── wrangler.jsonc
