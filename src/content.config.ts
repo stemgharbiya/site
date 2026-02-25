@@ -57,6 +57,7 @@ const teamCollection = defineCollection({
     z.object({
       id: z.string(),
       name: z.string(),
+      status: z.enum(["current", "former"]),
       role: z.string(),
       avatar: image(),
       email: z.string().optional(),

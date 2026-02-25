@@ -32,7 +32,7 @@ This directory contains the **server-side Workers application** that powers part
 - **Runtime:** Cloudflare Workers (Edge/serverless)
 - **Framework:** Hono (TypeScript)
 - **Database:** Cloudflare D1 (SQLite)
-- **KV Store:** Cloudflare KV (Rate limiting)
+- **Rate limiting:** Cloudflare Rate Limiting (binding)
 - **Validation:** Zod
 - **Bot Protection:** Cloudflare Turnstile
 - **Email Delivery:** Resend
@@ -136,13 +136,11 @@ By default `wrangler.jsonc` sets `APP_ENV=production`. The app will only attempt
 
 ---
 
-## 4. Create KV Namespace (Rate Limiting)
+## 4. Configure Cloudflare Rate Limiting
 
-```bash
-npx wrangler kv:namespace create "SUBMIT_RATE_LIMITER"
-```
+This project uses Cloudflare's Rate Limiting via the `ratelimits` binding in `wrangler.jsonc`.
 
-Then update the generated namespace ID in `wrangler.jsonc`.
+Update the rate limit settings in `wrangler.jsonc` (the `ratelimits` section) or configure the limits in the Cloudflare dashboard as needed.
 
 ---
 
@@ -157,10 +155,12 @@ TEAM_NOTIFICATION_EMAIL=team@example.com
 TURNSTILE_SECRET_KEY=your_turnstile_secret_key
 TURNSTILE_SITE_KEY=your_turnstile_site_key
 DISABLE_EMAILS=false
-  # Optional: set application environment. Use "production" in production.
-  APP_ENV=development
-  # Optional: allow automatic DB creation even in production (use with caution)
-  AUTO_CREATE_DB=false
+# Optional: set application environment. Use "production" in production.
+APP_ENV=development
+# Optional: allow automatic DB creation even in production (use with caution)
+AUTO_CREATE_DB=false
+# Optional: override allowed origins (comma-separated)
+CORS_ORIGIN=http://localhost:4321
 ```
 
 ---
@@ -174,7 +174,7 @@ npm run dev
 Visit:
 
 ```
-http://localhost:8788
+http://localhost:8787
 ```
 
 ---
@@ -184,13 +184,14 @@ http://localhost:8788
 ## 1. Update `wrangler.jsonc`
 
 - Add your D1 database ID
-- Add your KV namespace ID
 - Configure production bindings
 
 ## 2. Deploy
 
 ```bash
-npx wrangler pages deploy .
+npm run deploy
+# or
+npx wrangler deploy --minify
 ```
 
 ## 3. Set Production Secrets
@@ -213,6 +214,17 @@ Accepts a JSON payload validated against the Zod schema in:
 ```
 src/schemas/join.ts
 ```
+
+Required fields:
+
+- `fullName`
+- `schoolEmail`
+- `githubUsername`
+- `seniorYear`
+- `interests`
+- `motivation`
+- `agreement`
+- `cf-turnstile-response`
 
 Handles:
 
@@ -262,8 +274,10 @@ to disable email sending during testing.
 
 - **Email domain:** `@stemgharbiya.moe.edu.eg`
 - **Senior Year:** S25–S30 only
-- **Interests:** At least one required
-- **Motivation:** 10–500 characters
+- **Interests:** 1 to 5 values, from the allowed interests list
+- **Motivation:** 10–2000 characters
+- **Code of Conduct:** `agreement` must be true
+- **Turnstile:** Required
 - **Duplicates:** Same email + GitHub username blocked
 
 ## Contact (`POST /contact`)
@@ -304,7 +318,6 @@ npx wrangler d1 backup create stemgharbiya-site --name backup-$(date +%Y%m%d)
 
 ```
 ├── .dev.vars
-├── .env.example
 ├── package.json
 ├── tsconfig.json
 ├── wrangler.jsonc

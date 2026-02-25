@@ -155,4 +155,5 @@ app.get("/", (c) => {
   return c.text(`Welcome to the ${siteConfig.name} Site Workers API!`);
 });
 
+export type AppType = typeof app;
 export default app;
