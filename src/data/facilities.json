@@ -75,7 +75,8 @@
     "imageSlots": [
       {
         "label": "Physics Lab Overview",
-        "suggestedFile": "physics-lab-overview.jpg"
+        "suggestedFile": "physics-lab-overview.jpg",
+        "image": "../assets/images/facilites/physics-lab-overview.jpg"
       },
       {
         "label": "Pendulum Setup",
@@ -139,7 +140,8 @@
       },
       {
         "label": "Rock & Mineral Collection",
-        "suggestedFile": "geology-lab-minerals.jpg"
+        "suggestedFile": "geology-lab-minerals.jpg",
+        "image": "../assets/images/facilites/geology-lab-minerals.jpg"
       },
       {
         "label": "Earth Model Station",
@@ -193,7 +195,7 @@
       "Interdisciplinary fabrication tasks"
     ],
     "imageSlots": [
-      { "label": "FabLab Overview", "suggestedFile": "fablab-overview.jpg" },
+      { "label": "FabLab Overview", "suggestedFile": "fablab-overview.jpg", "image": "../assets/images/facilites/fablab-overview.jpg" },
       {
         "label": "Prototype Workbench",
         "suggestedFile": "fablab-workbench.jpg"
@@ -222,7 +224,8 @@
     "imageSlots": [
       {
         "label": "Assembly Hall Overview",
-        "suggestedFile": "assembly-hall-overview.jpg"
+        "suggestedFile": "assembly-hall-overview.jpg",
+        "image": "../assets/images/facilites/assembly-hall-overview.jpg"
       },
       { "label": "Stage View", "suggestedFile": "assembly-hall-stage.jpg" },
       { "label": "Seating Area", "suggestedFile": "assembly-hall-seating.jpg" }
@@ -244,7 +247,7 @@
       "Quiet self-study"
     ],
     "imageSlots": [
-      { "label": "Library Overview", "suggestedFile": "library-overview.jpg" },
+      { "label": "Library Overview", "suggestedFile": "library-overview.jpg", "image": "../assets/images/facilites/library-overview.jpg" },
       {
         "label": "Scientific Book Shelves",
         "suggestedFile": "library-books.jpg"
@@ -273,7 +276,8 @@
     "imageSlots": [
       {
         "label": "Room Overview",
-        "suggestedFile": "home-economics-overview.jpg"
+        "suggestedFile": "home-economics-overview.jpg",
+        "image": "../assets/images/facilites/home-economics-overview.jpg"
       },
       {
         "label": "Cooking Practice Area",
@@ -303,7 +307,8 @@
     "imageSlots": [
       {
         "label": "Art Room Overview",
-        "suggestedFile": "art-room-overview.jpg"
+        "suggestedFile": "art-room-overview.jpg",
+        "image": "../assets/images/facilites/art-room-overview.jpg"
       },
       {
         "label": "Drawing/Painting Area",
