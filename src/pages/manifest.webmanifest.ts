@@ -2,21 +2,18 @@ import { siteConfig } from "../data/constants";
 
 import type { ManifestOptions } from "vite-plugin-pwa";
 
-import logo from "../assets/images/logo.png";
-import logoDark from "../assets/images/logo.dark.png";
-
 const icons = [
   {
-    src: logo.src,
-    sizes: "1993x1856",
+    src: "/web-app-manifest-192x192.png",
+    sizes: "192x192",
     type: "image/png",
-    purpose: "any maskable",
+    purpose: "maskable",
   },
   {
-    src: logoDark.src,
-    sizes: "225x225",
+    src: "/web-app-manifest-512x512.png",
+    sizes: "512x512",
     type: "image/png",
-    purpose: "any",
+    purpose: "maskable",
   },
 ];
 
