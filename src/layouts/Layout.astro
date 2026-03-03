@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { siteConfig } from "../data/constants";
 import { pwaInfo } from "virtual:pwa-info";
+import { pwaAssetsHead } from "virtual:pwa-assets/head";
 import { ClientRouter } from "astro:transitions";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
@@ -90,6 +91,10 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 		<title>{metaTitle}</title>
 		<meta name="description" content={metaDescription} />
 		<meta name="keywords" content={siteConfig.keywords.join(", ")} />
+		{pwaAssetsHead.themeColor && <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />}
+		{pwaAssetsHead.links.map((link) => (
+			<link {...link} />
+		))}
 		<link rel="canonical" href={currentUrl} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta property="og:type" content="website" />
@@ -105,6 +110,7 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 		))}
 		{linksInHead.map((link) => <Fragment set:html={link} />)}
 		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+		<script src="/src/pwa.ts"></script>
 		<script is:inline>
 			const applySavedTheme = () => {
 				const savedTheme =
