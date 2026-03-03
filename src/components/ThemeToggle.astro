@@ -6,7 +6,6 @@ import { ICONS } from "../data/icons";
 <script>
     const updateToggle = (toggle: HTMLElement | null, theme: string) => {
         const isDark = theme === 'dark';
-        toggle?.setAttribute('data-theme', theme);
         if (isDark) {
             toggle?.classList.add('dark');
         } else {
@@ -45,22 +44,11 @@ import { ICONS } from "../data/icons";
 
 <button
     id="theme-toggle"
-    data-theme="light"
     class="flex items-center gap-2 rounded-full bg-secondary p-1 transition-colors hover:bg-accent"
     aria-label="Toggle theme"
 >
     <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-300" id="toggle-knob">
-        <Icon name={ICONS.sun} class="h-4 w-4 sun-icon" aria-hidden="true" />
-        <Icon name={ICONS.moon} class="hidden h-4 w-4 moon-icon" aria-hidden="true" />
+        <Icon name={ICONS.sun} class="h-4 w-4 sun-icon block dark:hidden" aria-hidden="true" />
+        <Icon name={ICONS.moon} class="hidden h-4 w-4 moon-icon dark:block" aria-hidden="true" />
     </div>
 </button>
-
-<style>
-    button[data-theme="dark"] .sun-icon {
-        display: none;
-    }
-    
-    button[data-theme="dark"] .moon-icon {
-        display: block;
-    }
-</style>
