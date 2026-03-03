@@ -5,6 +5,21 @@ import type { ManifestOptions } from "vite-plugin-pwa";
 import logo from "../assets/images/logo.png";
 import logoDark from "../assets/images/logo.dark.png";
 
+const icons = [
+  {
+    src: logo.src,
+    sizes: "1993x1856",
+    type: "image/png",
+    purpose: "any maskable",
+  },
+  {
+    src: logoDark.src,
+    sizes: "225x225",
+    type: "image/png",
+    purpose: "any",
+  },
+];
+
 export const manifest: Partial<ManifestOptions> = {
   id: "/",
   name: siteConfig.name,
@@ -20,56 +35,37 @@ export const manifest: Partial<ManifestOptions> = {
   dir: "ltr",
   orientation: "any",
   categories: ["education", "science", "productivity"],
-  icons: [
-    {
-      src: logo.src,
-      sizes: "1993x1856",
-      type: "image/png",
-      purpose: "any",
-    },
-    {
-      src: logoDark.src,
-      sizes: "225x225",
-      type: "image/png",
-      purpose: "any",
-    },
-    {
-      src: logo.src,
-      sizes: "1993x1856",
-      type: "image/png",
-      purpose: "any maskable",
-    },
-  ],
+  icons,
   shortcuts: [
     {
       name: "Home",
       short_name: "Home",
       url: "/",
-      icons: [{ src: logo.src, sizes: "1993x1856", type: "image/png" }],
+      icons,
     },
     {
       name: "About",
       short_name: "About",
       url: "/about",
-      icons: [{ src: logo.src, sizes: "1993x1856", type: "image/png" }],
+      icons,
     },
     {
       name: "Admissions",
       short_name: "Admissions",
       url: "/about/admission",
-      icons: [{ src: logo.src, sizes: "1993x1856", type: "image/png" }],
+      icons,
     },
     {
       name: "Alumni",
       short_name: "Alumni",
       url: "/alumni",
-      icons: [{ src: logo.src, sizes: "1993x1856", type: "image/png" }],
+      icons,
     },
     {
       name: "Contact",
       short_name: "Contact",
       url: "/contact",
-      icons: [{ src: logo.src, sizes: "1993x1856", type: "image/png" }],
+      icons,
     },
   ],
   prefer_related_applications: false,
