@@ -111,6 +111,10 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 					typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
 				if (savedTheme) {
 					document.documentElement.classList.toggle("dark", savedTheme === "dark");
+				} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
 				}
 			};
 
@@ -120,6 +124,12 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 					typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
 				if (savedTheme === "dark") {
 					ev.newDocument.documentElement.classList.add("dark");
+				} else if (savedTheme === "light") {
+					ev.newDocument.documentElement.classList.remove("dark");
+				} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					ev.newDocument.documentElement.classList.add('dark');
+				} else {
+					ev.newDocument.documentElement.classList.remove('dark');
 				}
 			});
 		</script>
