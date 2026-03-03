@@ -6,6 +6,9 @@ import { ClientRouter } from "astro:transitions";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 
+import logoLight from '../assets/images/logo.png';
+import logoDark from '../assets/images/logo.dark.png';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -80,7 +83,9 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 		<ClientRouter />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" href="/favicon.png" />
+		<link rel="icon" type="image/png" href={logoLight.src} media="(prefers-color-scheme: light)"/>
+		<link rel="icon" type="image/png" href={logoDark.src} media="(prefers-color-scheme: dark)"/>
+		<link rel="icon" type="image/png" href={logoLight.src}/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{metaTitle}</title>
 		<meta name="description" content={metaDescription} />
@@ -91,7 +96,7 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 		<meta property="og:site_name" content={siteConfig.title} />
 		<meta property="og:title" content={metaTitle} />
 		<meta property="og:description" content={metaDescription} />
-		<meta property="og:url" content={siteConfig.url} />
+		<meta property="og:url" content={currentUrl} />
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={metaTitle} />
 		<meta name="twitter:description" content={metaDescription} />
