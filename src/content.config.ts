@@ -125,10 +125,31 @@ const academicsCollection = defineCollection({
   }),
 });
 
+const facilitiesCollection = defineCollection({
+  loader: file("./src/data/facilities.json"),
+  schema: ({ image }) =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      tagline: z.string(),
+      description: z.string(),
+      features: z.array(z.string()),
+      activities: z.array(z.string()),
+      imageSlots: z.array(
+        z.object({
+          label: z.string(),
+          suggestedFile: z.string().optional(),
+          image: image().optional(),
+        }),
+      ),
+    }),
+});
+
 export const collections = {
   alumniCollection,
   staffCollection,
   clubsCollection,
   academicsCollection,
   teamCollection,
+  facilitiesCollection,
 };

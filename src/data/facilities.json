@@ -1,0 +1,353 @@
+[
+  {
+    "id": "gymnastics-hall",
+    "name": "Gymnastics & Sports Hall",
+    "tagline": "Indoor space for movement, team play, and wellness.",
+    "description": "A multi-use hall designed for school sports and physical activity sessions, with focus on student fitness, teamwork, and safe recreation.",
+    "features": [
+      "Table tennis area",
+      "Indoor mini football (soccer) setup",
+      "Open floor for gymnastics and physical training"
+    ],
+    "activities": [
+      "Physical education classes",
+      "Student tournaments",
+      "After-school wellness activities"
+    ],
+    "imageSlots": [
+      {
+        "label": "Hall Overview",
+        "suggestedFile": "gymnastics-hall-overview.jpg"
+      },
+      {
+        "label": "Table Tennis Area",
+        "suggestedFile": "gymnastics-hall-table-tennis.jpg"
+      },
+      {
+        "label": "Mini Football Area",
+        "suggestedFile": "gymnastics-hall-football.jpg"
+      }
+    ]
+  },
+  {
+    "id": "biology-lab",
+    "name": "Biology Lab",
+    "tagline": "Hands-on life science investigations.",
+    "description": "A practical lab for experiments in cell biology, anatomy, and ecological studies, supporting observation-based learning.",
+    "features": [
+      "Wet lab benches and specimen stations",
+      "Microscope-based observation",
+      "Anatomy models for structured learning"
+    ],
+    "activities": [
+      "Microscopy sessions",
+      "Plant and tissue analysis",
+      "Anatomy demonstrations"
+    ],
+    "imageSlots": [
+      {
+        "label": "Biology Lab Overview",
+        "suggestedFile": "biology-lab-overview.jpg",
+        "image": "../assets/images/facilites/biology-lab-overview.jpg"
+      },
+      {
+        "label": "Microscope Station",
+        "suggestedFile": "biology-lab-microscope.jpg"
+      },
+      { "label": "Skeleton Model", "suggestedFile": "biology-lab-skeleton.jpg" }
+    ]
+  },
+  {
+    "id": "physics-lab",
+    "name": "Physics Lab",
+    "tagline": "Experiment-driven understanding of physical laws.",
+    "description": "A lab equipped for mechanics, optics, electricity, and wave experiments that connect theory with measurable outcomes.",
+    "features": [
+      "Core mechanics apparatus",
+      "Optics and electricity experiment stations",
+      "Safe demonstration area"
+    ],
+    "activities": [
+      "Pendulum and motion experiments",
+      "Wave and optics practicals",
+      "Circuit design practice"
+    ],
+    "imageSlots": [
+      {
+        "label": "Physics Lab Overview",
+        "suggestedFile": "physics-lab-overview.jpg",
+        "image": "../assets/images/facilites/physics-lab-overview.jpg"
+      },
+      {
+        "label": "Pendulum Setup",
+        "suggestedFile": "physics-lab-pendulum.jpg"
+      },
+      {
+        "label": "Electricity Bench",
+        "suggestedFile": "physics-lab-electricity.jpg"
+      }
+    ]
+  },
+  {
+    "id": "chemistry-lab",
+    "name": "Chemistry Lab",
+    "tagline": "Controlled environment for chemical inquiry.",
+    "description": "A supervised laboratory space where students conduct qualitative and quantitative experiments with proper safety protocols.",
+    "features": [
+      "Chemical-safe work benches",
+      "Glassware and reagent preparation area",
+      "Safety-focused lab workflow"
+    ],
+    "activities": [
+      "Titration and reaction analysis",
+      "Acid-base practicals",
+      "Materials and compound testing"
+    ],
+    "imageSlots": [
+      {
+        "label": "Chemistry Lab Overview",
+        "suggestedFile": "chemistry-lab-overview.jpg"
+      },
+      {
+        "label": "Reaction Bench",
+        "suggestedFile": "chemistry-lab-reaction-bench.jpg"
+      },
+      {
+        "label": "Glassware Setup",
+        "suggestedFile": "chemistry-lab-glassware.jpg"
+      }
+    ]
+  },
+  {
+    "id": "geology-lab",
+    "name": "Geology (Earth Science) Lab",
+    "tagline": "Explore Earth systems through samples and models.",
+    "description": "A focused environment for learning about rocks, minerals, fossils, and Earth processes through practical investigation.",
+    "features": [
+      "Rock and mineral collections",
+      "Map and stratigraphy teaching resources",
+      "Sample examination stations"
+    ],
+    "activities": [
+      "Mineral identification",
+      "Earth structure study",
+      "Environmental and geological case analysis"
+    ],
+    "imageSlots": [
+      {
+        "label": "Geology Lab Overview",
+        "suggestedFile": "geology-lab-overview.jpg"
+      },
+      {
+        "label": "Rock & Mineral Collection",
+        "suggestedFile": "geology-lab-minerals.jpg",
+        "image": "../assets/images/facilites/geology-lab-minerals.jpg"
+      },
+      {
+        "label": "Earth Model Station",
+        "suggestedFile": "geology-lab-earth-model.jpg"
+      }
+    ]
+  },
+  {
+    "id": "mechanics-lab",
+    "name": "Mechanics Lab",
+    "tagline": "Applied engineering fundamentals in action.",
+    "description": "A technical space for studying force, motion, structures, and machine elements through model-based and practical activities.",
+    "features": [
+      "Mechanical demonstration models",
+      "Measurement and testing tools",
+      "Team-based workstation layout"
+    ],
+    "activities": [
+      "Statics and dynamics practicals",
+      "Mechanical systems analysis",
+      "Prototype testing"
+    ],
+    "imageSlots": [
+      {
+        "label": "Mechanics Lab Overview",
+        "suggestedFile": "mechanics-lab-overview.jpg"
+      },
+      {
+        "label": "Mechanical Models",
+        "suggestedFile": "mechanics-lab-models.jpg"
+      },
+      {
+        "label": "Testing Station",
+        "suggestedFile": "mechanics-lab-testing.jpg"
+      }
+    ]
+  },
+  {
+    "id": "fablab",
+    "name": "FabLab (Fabrication Lab)",
+    "tagline": "From idea to prototype.",
+    "description": "An innovation space where students build, iterate, and test project prototypes for coursework and capstone challenges.",
+    "features": [
+      "Fabrication-oriented workstations",
+      "Rapid prototyping workflow",
+      "Collaborative build environment"
+    ],
+    "activities": [
+      "Design-to-build projects",
+      "Prototype iteration",
+      "Interdisciplinary fabrication tasks"
+    ],
+    "imageSlots": [
+      { "label": "FabLab Overview", "suggestedFile": "fablab-overview.jpg", "image": "../assets/images/facilites/fablab-overview.jpg" },
+      {
+        "label": "Prototype Workbench",
+        "suggestedFile": "fablab-workbench.jpg"
+      },
+      {
+        "label": "Fabrication Activity",
+        "suggestedFile": "fablab-fabrication.jpg"
+      }
+    ]
+  },
+  {
+    "id": "assembly-hall",
+    "name": "Assembly Hall",
+    "tagline": "A central venue for school-wide events and outreach.",
+    "description": "A stage-and-seating hall used for meetings, student recognition, community events, admission sessions, and hosted school visits.",
+    "features": [
+      "Stage for talks and presentations",
+      "Audience seating area",
+      "Suitable for ceremonies and school events"
+    ],
+    "activities": [
+      "University admissions awareness talks",
+      "Club events and school honors",
+      "Visits from primary and preparatory schools"
+    ],
+    "imageSlots": [
+      {
+        "label": "Assembly Hall Overview",
+        "suggestedFile": "assembly-hall-overview.jpg",
+        "image": "../assets/images/facilites/assembly-hall-overview.jpg"
+      },
+      { "label": "Stage View", "suggestedFile": "assembly-hall-stage.jpg" },
+      { "label": "Seating Area", "suggestedFile": "assembly-hall-seating.jpg" }
+    ]
+  },
+  {
+    "id": "library",
+    "name": "Library",
+    "tagline": "A quiet learning hub for research and scholarship.",
+    "description": "The library supports independent study with scientific books, references, and guidance on citation and academic research habits.",
+    "features": [
+      "Scientific books and references",
+      "Study-focused reading area",
+      "Citation and research support"
+    ],
+    "activities": [
+      "Research and literature review",
+      "Citation practice sessions",
+      "Quiet self-study"
+    ],
+    "imageSlots": [
+      { "label": "Library Overview", "suggestedFile": "library-overview.jpg", "image": "../assets/images/facilites/library-overview.jpg" },
+      {
+        "label": "Scientific Book Shelves",
+        "suggestedFile": "library-books.jpg"
+      },
+      {
+        "label": "Citation Learning Corner",
+        "suggestedFile": "library-citation-corner.jpg"
+      }
+    ]
+  },
+  {
+    "id": "home-economics",
+    "name": "Home Economics & Crafts Room",
+    "tagline": "Practical life skills and creative making.",
+    "description": "A practical room focused on cooking basics, handmade crafts, and applied life skills through guided projects.",
+    "features": [
+      "Cooking practice area",
+      "Handmade crafts workspace",
+      "Project-based life skills activities"
+    ],
+    "activities": [
+      "Introductory cooking tasks",
+      "Craft and handmade production",
+      "Life-skills mini projects"
+    ],
+    "imageSlots": [
+      {
+        "label": "Room Overview",
+        "suggestedFile": "home-economics-overview.jpg",
+        "image": "../assets/images/facilites/home-economics-overview.jpg"
+      },
+      {
+        "label": "Cooking Practice Area",
+        "suggestedFile": "home-economics-cooking.jpg"
+      },
+      {
+        "label": "Handmade Crafts Corner",
+        "suggestedFile": "home-economics-crafts.jpg"
+      }
+    ]
+  },
+  {
+    "id": "art-room",
+    "name": "Art Room",
+    "tagline": "Visual expression and design exploration.",
+    "description": "A creative studio for drawing, painting, design, and exhibition of student artwork.",
+    "features": [
+      "Art worktables and display boards",
+      "Drawing and painting resources",
+      "Space for creative projects"
+    ],
+    "activities": [
+      "Studio sessions",
+      "Creative expression projects",
+      "Artwork presentation"
+    ],
+    "imageSlots": [
+      {
+        "label": "Art Room Overview",
+        "suggestedFile": "art-room-overview.jpg",
+        "image": "../assets/images/facilites/art-room-overview.jpg"
+      },
+      {
+        "label": "Drawing/Painting Area",
+        "suggestedFile": "art-room-drawing.jpg"
+      },
+      {
+        "label": "Student Artwork Display",
+        "suggestedFile": "art-room-display.jpg"
+      }
+    ]
+  },
+  {
+    "id": "music-room",
+    "name": "Music Room",
+    "tagline": "Space for rhythm, performance, and collaboration.",
+    "description": "A dedicated room for music practice, vocal and instrumental sessions, and student performances.",
+    "features": [
+      "Instrument and practice area",
+      "Group rehearsal layout",
+      "Performance-focused setup"
+    ],
+    "activities": [
+      "Music classes and rehearsals",
+      "Student performances",
+      "Club and event preparation"
+    ],
+    "imageSlots": [
+      {
+        "label": "Music Room Overview",
+        "suggestedFile": "music-room-overview.jpg"
+      },
+      {
+        "label": "Instrument Corner",
+        "suggestedFile": "music-room-instruments.jpg"
+      },
+      {
+        "label": "Rehearsal Session",
+        "suggestedFile": "music-room-rehearsal.jpg"
+      }
+    ]
+  }
+]

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import AboutLayout from '../../../layouts/AboutLayout.astro';
+import FacilitiesOverview from '../../../components/facilities/FacilitiesOverview.astro';
+
+const facilities = await getCollection('facilitiesCollection');
+const facilityList = facilities.map((facility) => facility.data);
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "STEM Gharbiya Facilities",
+  itemListElement: facilityList.map((facility, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: facility.name,
+    description: facility.tagline,
+  })),
+};
+---
+
+<AboutLayout
+  sectionTitle="Facilities"
+  sectionPath="/about/facilities"
+  description="Explore STEM Gharbiya facilities including labs, library, activity rooms, assembly hall, and student spaces that support learning, creativity, and school life."
+  eyebrow="Campus Facilities"
+  headline="Spaces that power learning, making, and student life."
+  lead="From specialized science labs to creative and activity spaces, our facilities support practical learning, collaboration, and school-wide events."
+  structuredData={structuredData}
+>
+  <FacilitiesOverview facilities={facilityList} />
+</AboutLayout>
