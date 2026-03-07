@@ -14,6 +14,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  image: {
+    layout: "constrained",
+  },
   integrations: [
     AstroPWA({
       registerType: "autoUpdate",
