@@ -1,71 +1,10 @@
 [
   {
-    "id": "amr-loksha",
-    "name": "Amr Loksha",
-    "status": "current",
-    "role": "Team Leader",
-    "avatar": "../assets/images/team/amr-loksha.jpeg",
-    "social": {
-      "email": "mailto:amrloksha151@proton.me",
-      "website": "https://amrloksha151.top",
-      "github": "https://github.com/Amrloksha151",
-      "linkedin": "https://www.linkedin.com/in/amr-loksha-ab0182301/"
-    }
-  },
-  {
-    "id": "saif-abdelrazek",
-    "name": "Saif Abdelrazek",
-    "status": "current",
-    "role": "Full Stack Developer & Codebase Maintainer",
-    "avatar": "../assets/images/team/saif-abdelrazek.jpg",
-    "social": {
-      "email": "mailto:saif@saifabdelrazek.com",
-      "website": "https://saifabdelrazek.com",
-      "github": "https://github.com/saif-abdelrazek",
-      "linkedin": "https://www.linkedin.com/in/saifabdelrazek/"
-    }
-  },
-  {
     "id": "abdelraham-abomousa",
     "name": "Abdelrahman Aboueissa",
     "status": "former",
     "role": "UI/UX Lead",
     "avatar": "../assets/images/team/abdelraham-abomousa.jpeg"
-  },
-  {
-    "id": "amjad-mounir",
-    "name": "Amjad Mounir",
-    "status": "former",
-    "role": "Frontend Lead",
-    "avatar": "../assets/images/team/amjad-mounir.jpeg"
-  },
-  {
-    "id": "mohammed-ebrahim",
-    "name": "Mohamed Ebrahim",
-    "status": "current",
-    "role": "Frontend Developer",
-    "avatar": "../assets/images/team/mohammed-ebrahim.jpeg"
-  },
-  {
-    "id": "ahmed-tamer",
-    "name": "Ahmed Tamer",
-    "status": "current",
-    "role": "Full Stack Developer",
-    "avatar": "../assets/images/team/ahmed-tamer.jpg"
-  },
-  {
-    "id": "mohamed-ismail",
-    "name": "Mohamed Ismail",
-    "status": "current",
-    "role": "Full Stack Developer",
-    "avatar": "../assets/images/team/mohamed-ismail.jpeg"
-  },
-  {
-    "id": "marwan-algharably",
-    "name": "Marwan Algharably",
-    "status": "current",
-    "role": "Consultant",
-    "avatar": "../assets/images/team/marwan-algharably.jpeg"
   },
   {
     "id": "ahmed-emad",
@@ -75,11 +14,46 @@
     "avatar": "../assets/images/team/ahmed-emad.jpg"
   },
   {
+    "id": "ahmed-tamer",
+    "name": "Ahmed Tamer",
+    "status": "current",
+    "role": "Full Stack Developer",
+    "avatar": "../assets/images/team/ahmed-tamer.jpg"
+  },
+  {
+    "id": "amjad-mounir",
+    "name": "Amjad Mounir",
+    "status": "former",
+    "role": "Frontend Lead",
+    "avatar": "../assets/images/team/amjad-mounir.jpeg"
+  },
+  {
+    "id": "amr-loksha",
+    "id": "marwan-algharably",
+    "name": "Marwan Algharably",
+    "status": "current",
+    "role": "Team Leader",
+    "avatar": "../assets/images/team/amr-loksha.jpeg",
+    "social": {
+      "email": "amrloksha151@proton.me",
+      "github": "https://github.com/Amrloksha151",
+      "linkedin": "https://www.linkedin.com/in/amr-loksha-ab0182301/"
+    },
+    "website": "https://amrloksha151.top"
+  },
+  {
     "id": "hala-elamory",
     "name": "Hala Hany",
     "status": "current",
     "role": "Public Relations Lead",
     "avatar": "../assets/images/team/hala-elamory.jpeg"
+  },
+  {
+    "id": "jana-elhebishy",
+    "name": "Jana Elhebishy",
+    "status": "current",
+    "role": "Full Stack Developer",
+    "avatar": "../assets/images/team/jana-elhebishy.jpeg"
   },
   {
     "id": "linah-elshorbagy",
@@ -89,10 +63,37 @@
     "avatar": "../assets/images/team/linah-elshorbagy.jpeg"
   },
   {
-    "id": "jana-elhebishy",
-    "name": "Jana Elhebishy",
+    "id": "marwan-algharably",
+    "name": "Marwan Algharably",
+    "status": "current",
+    "role": "Consultant",
+    "avatar": "../assets/images/team/marwan-algharably.jpeg"
+  },
+  {
+    "id": "mohammed-ebrahim",
+    "name": "Mohamed Ebrahim",
+    "status": "current",
+    "role": "Frontend Developer",
+    "avatar": "../assets/images/team/mohammed-ebrahim.jpeg"
+  },
+  {
+    "id": "mohamed-ismail",
+    "name": "Mohamed Ismail",
     "status": "current",
     "role": "Full Stack Developer",
+    "avatar": "../assets/images/team/mohamed-ismail.jpeg"
+  },
+  {
+    "id": "saif-abdelrazek",
     "avatar": "../assets/images/team/jana-elhebishy.jpeg"
+    "status": "current",
+    "role": "Full Stack Developer & Codebase Maintainer",
+    "avatar": "../assets/images/team/saif-abdelrazek.jpg",
+    "social": {
+      "email": "saif@saifabdelrazek.com",
+      "github": "https://github.com/saif-abdelrazek",
+      "linkedin": "https://www.linkedin.com/in/saifabdelrazek/"
+    },
+    "website": "https://saifabdelrazek.com"
   }
 ]
