@@ -4,7 +4,11 @@ import Layout from "../../layouts/Layout.astro";
 import TeamHero from "../../components/team/TeamHero.astro";
 import TeamGrid from "../../components/team/TeamGrid.astro";
 
-const team = await getCollection("teamCollection");
+const team = (await getCollection("teamCollection")).sort((a, b) => {
+  const aOrder = a.data.order ?? Infinity;
+  const bOrder = b.data.order ?? Infinity;
+  return aOrder - bOrder;
+});
 ---
 
 <Layout

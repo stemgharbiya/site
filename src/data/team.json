@@ -29,8 +29,8 @@
   },
   {
     "id": "amr-loksha",
-    "id": "marwan-algharably",
-    "name": "Marwan Algharably",
+    "name": "Amr Loksha",
+    "order": 1,
     "status": "current",
     "role": "Team Leader",
     "avatar": "../assets/images/team/amr-loksha.jpeg",
@@ -85,7 +85,8 @@
   },
   {
     "id": "saif-abdelrazek",
-    "avatar": "../assets/images/team/jana-elhebishy.jpeg"
+    "name": "Saif Abdelrazek",
+    "order": 2,
     "status": "current",
     "role": "Full Stack Developer & Codebase Maintainer",
     "avatar": "../assets/images/team/saif-abdelrazek.jpg",
