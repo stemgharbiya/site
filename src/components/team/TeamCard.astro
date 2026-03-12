@@ -27,10 +27,12 @@ const socialIconByKey: Partial<Record<string, IconKey>> = {
 };
 
 const socialLinks = buildSocialLinks(social, socialIconByKey);
---- 
+---
 
-<article class="group surface h-full overflow-hidden transition-colors hover:border-primary/50  border-2">
-  <div class="aspect-square overflow-hidden bg-secondary/40">
+<article
+  class="group surface hover:border-primary/50 h-full overflow-hidden border-2 transition-colors"
+>
+  <div class="bg-secondary/40 aspect-square overflow-hidden">
     <Image
       src={member.data.avatar}
       alt={member.data.name}
@@ -41,26 +43,29 @@ const socialLinks = buildSocialLinks(social, socialIconByKey);
   </div>
 
   <div class="p-5">
-    <h3 class="text-lg font-semibold text-foreground">{member.data.name}</h3>
-    <p class="mt-1 text-sm text-muted-foreground">{member.data.role}</p>
+    <h3 class="text-foreground text-lg font-semibold">{member.data.name}</h3>
+    <p class="text-muted-foreground mt-1 text-sm">{member.data.role}</p>
 
-    {socialLinks.length > 0 && (
-      <div class="mt-4 flex flex-wrap gap-2">
-        {socialLinks.map((link) =>
-          link && (
-            <a
-              href={link.href}
-              target={link.isExternal ? "_blank" : undefined}
-              rel={link.isExternal ? "noopener noreferrer" : undefined}
-              class="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-primary"
-              aria-label={`${member.data.name} ${link.label}`}
-            >
-              <Icon name={link.icon} class="h-4 w-4" aria-hidden="true" />
-              {link.label}
-            </a>
-          ),
-        )}
-      </div>
-    )}
+    {
+      socialLinks.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {socialLinks.map(
+            (link) =>
+              link && (
+                <a
+                  href={link.href}
+                  target={link.isExternal ? "_blank" : undefined}
+                  rel={link.isExternal ? "noopener noreferrer" : undefined}
+                  class="border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-primary inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition"
+                  aria-label={`${member.data.name} ${link.label}`}
+                >
+                  <Icon name={link.icon} class="h-4 w-4" aria-hidden="true" />
+                  {link.label}
+                </a>
+              ),
+          )}
+        </div>
+      )
+    }
   </div>
 </article>

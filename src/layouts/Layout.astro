@@ -7,141 +7,162 @@ import { ClientRouter } from "astro:transitions";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
 interface Props {
-	title?: string;
-	description?: string;
-	linksInHead?: string[];
-	structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  title?: string;
+  description?: string;
+  linksInHead?: string[];
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-	title,
-	description = siteConfig.description,
-	linksInHead = [],
-	structuredData,
+  title,
+  description = siteConfig.description,
+  linksInHead = [],
+  structuredData,
 } = Astro.props;
 
 const normalizedTitle = title
-	? title.replace(new RegExp(`\\s*\\|\\s*${siteConfig.name}\\s*$`, "i"), "").trim()
-	: undefined;
-const metaTitle = normalizedTitle ? `${normalizedTitle} | ${siteConfig.name}` : siteConfig.title;
+  ? title
+      .replace(new RegExp(`\\s*\\|\\s*${siteConfig.name}\\s*$`, "i"), "")
+      .trim()
+  : undefined;
+const metaTitle = normalizedTitle
+  ? `${normalizedTitle} | ${siteConfig.name}`
+  : siteConfig.title;
 const metaDescription = description || siteConfig.description;
 const currentUrl = Astro.url?.href ?? siteConfig.url;
 
 const baseStructuredData: Record<string, unknown>[] = [
-	{
-		"@context": "https://schema.org",
-		"@type": "WebSite",
-		name: siteConfig.name,
-		url: siteConfig.url,
-		description: siteConfig.description,
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "HighSchool",
-		name: siteConfig.name,
-		url: siteConfig.url,
-		description: siteConfig.description,
-		email: siteConfig.email,
-		address: {
-			"@type": "PostalAddress",
-			streetAddress: siteConfig.footer.address,
-			addressLocality: "Tanta",
-			addressRegion: "Gharbiya",
-			addressCountry: "EG",
-		},
-		sameAs: siteConfig.social.map((social) => social.href),
-	},
-	{
-		"@context": "https://schema.org",
-		"@type": "WebPage",
-		name: metaTitle,
-		description: metaDescription,
-		url: currentUrl,
-		isPartOf: {
-			"@type": "WebSite",
-			name: siteConfig.name,
-			url: siteConfig.url,
-		},
-	},
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HighSchool",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    email: siteConfig.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.footer.address,
+      addressLocality: "Tanta",
+      addressRegion: "Gharbiya",
+      addressCountry: "EG",
+    },
+    sameAs: siteConfig.social.map((social) => social.href),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: metaTitle,
+    description: metaDescription,
+    url: currentUrl,
+    isPartOf: {
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  },
 ];
 
 const normalizedStructuredData = structuredData
-	? Array.isArray(structuredData)
-		? structuredData
-		: [structuredData]
-	: [];
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
 
 const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
 ---
 
 <!doctype html>
 <html lang={siteConfig.locale}>
-	<head>
-		<ClientRouter />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<meta name="apple-mobile-web-app-title" content={siteConfig.name} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{metaTitle}</title>
-		<meta name="description" content={metaDescription} />
-		<meta name="keywords" content={siteConfig.keywords.join(", ")} />
-		{pwaAssetsHead.themeColor && <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />}
-		{pwaAssetsHead.links.map((link) => (
-			<link {...link} />
-		))}
-		<link rel="canonical" href={currentUrl} />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content={siteConfig.name} />
-		<meta property="og:title" content={metaTitle} />
-		<meta property="og:description" content={metaDescription} />
-		<meta property="og:url" content={currentUrl} />
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content={metaTitle} />
-		<meta name="twitter:description" content={metaDescription} />
-		{pageStructuredData.map((schema) => (
-			<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-		))}
-		{linksInHead.map((link) => <Fragment set:html={link} />)}
-		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
-		<script src="/src/pwa.ts"></script>
-		<script is:inline>
-			const applySavedTheme = () => {
-				const savedTheme =
-					typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
-				if (savedTheme) {
-					document.documentElement.classList.toggle("dark", savedTheme === "dark");
-				} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					document.documentElement.classList.add('dark');
-				} else {
-					document.documentElement.classList.remove('dark');
-				}
-			};
+  <head>
+    <ClientRouter />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="keywords" content={siteConfig.keywords.join(", ")} />
+    {
+      pwaAssetsHead.themeColor && (
+        <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+      )
+    }
+    {pwaAssetsHead.links.map((link) => <link {...link} />)}
+    <link rel="canonical" href={currentUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={currentUrl} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    {
+      pageStructuredData.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
+    {linksInHead.map((link) => <Fragment set:html={link} />)}
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script src="/src/pwa.ts"></script>
+    <script is:inline>
+      const applySavedTheme = () => {
+        const savedTheme =
+          typeof localStorage !== "undefined"
+            ? localStorage.getItem("theme")
+            : null;
+        if (savedTheme) {
+          document.documentElement.classList.toggle(
+            "dark",
+            savedTheme === "dark",
+          );
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      };
 
-			applySavedTheme();
-			document.addEventListener("astro:before-swap", (ev) => {
-				const savedTheme =
-					typeof localStorage !== "undefined" ? localStorage.getItem("theme") : null;
-				if (savedTheme === "dark") {
-					ev.newDocument.documentElement.classList.add("dark");
-				} else if (savedTheme === "light") {
-					ev.newDocument.documentElement.classList.remove("dark");
-				} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					ev.newDocument.documentElement.classList.add('dark');
-				} else {
-					ev.newDocument.documentElement.classList.remove('dark');
-				}
-			});
-		</script>
-	</head>
-	<body>
-		<NavBar />
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+      applySavedTheme();
+      document.addEventListener("astro:before-swap", (ev) => {
+        const savedTheme =
+          typeof localStorage !== "undefined"
+            ? localStorage.getItem("theme")
+            : null;
+        if (savedTheme === "dark") {
+          ev.newDocument.documentElement.classList.add("dark");
+        } else if (savedTheme === "light") {
+          ev.newDocument.documentElement.classList.remove("dark");
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          ev.newDocument.documentElement.classList.add("dark");
+        } else {
+          ev.newDocument.documentElement.classList.remove("dark");
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <NavBar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

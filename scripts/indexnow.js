@@ -9,7 +9,8 @@ const publicDir = path.join(workspaceRoot, "public");
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
-const endpoint = process.env.INDEXNOW_ENDPOINT || "https://api.indexnow.org/indexnow";
+const endpoint =
+  process.env.INDEXNOW_ENDPOINT || "https://api.indexnow.org/indexnow";
 const batchSize = Number(process.env.INDEXNOW_BATCH_SIZE || 1000);
 const forceBuild = args.includes("--build");
 
@@ -27,7 +28,11 @@ function runCommand(command, commandArgs) {
         resolve();
         return;
       }
-      reject(new Error(`Command failed: ${command} ${commandArgs.join(" ")} (exit code ${code})`));
+      reject(
+        new Error(
+          `Command failed: ${command} ${commandArgs.join(" ")} (exit code ${code})`,
+        ),
+      );
     });
   });
 }
@@ -49,9 +54,11 @@ async function ensureBuildArtifacts() {
     return;
   }
 
-  console.log(forceBuild
-    ? "Running build before IndexNow submission (--build enabled)..."
-    : "No sitemap build artifacts found. Running build before IndexNow submission...");
+  console.log(
+    forceBuild
+      ? "Running build before IndexNow submission (--build enabled)..."
+      : "No sitemap build artifacts found. Running build before IndexNow submission...",
+  );
   await runCommand("npm", ["run", "build"]);
 }
 
@@ -81,7 +88,10 @@ async function getSitemapFiles() {
     const sitemapLocs = extractLocValues(indexXml);
     const discoveredFiles = sitemapLocs
       .map(toLocalXmlPathFromLoc)
-      .filter((filePath) => filePath.endsWith(".xml") && !filePath.endsWith("sitemap-index.xml"));
+      .filter(
+        (filePath) =>
+          filePath.endsWith(".xml") && !filePath.endsWith("sitemap-index.xml"),
+      );
 
     if (discoveredFiles.length > 0) {
       return discoveredFiles;
@@ -114,12 +124,17 @@ async function detectIndexNowKey() {
   }
 
   if (process.env.INDEXNOW_KEY_FILE) {
-    const keyFromFile = await readFile(path.resolve(process.env.INDEXNOW_KEY_FILE), "utf8");
+    const keyFromFile = await readFile(
+      path.resolve(process.env.INDEXNOW_KEY_FILE),
+      "utf8",
+    );
     return keyFromFile.trim();
   }
 
   const publicFiles = await readdir(publicDir);
-  const txtFiles = publicFiles.filter((fileName) => fileName.toLowerCase().endsWith(".txt"));
+  const txtFiles = publicFiles.filter((fileName) =>
+    fileName.toLowerCase().endsWith(".txt"),
+  );
 
   for (const txtFile of txtFiles) {
     const fullPath = path.join(publicDir, txtFile);
@@ -132,7 +147,7 @@ async function detectIndexNowKey() {
   }
 
   throw new Error(
-    "Could not detect IndexNow key. Set INDEXNOW_KEY or INDEXNOW_KEY_FILE, or add a public/<key>.txt file with key content."
+    "Could not detect IndexNow key. Set INDEXNOW_KEY or INDEXNOW_KEY_FILE, or add a public/<key>.txt file with key content.",
   );
 }
 
@@ -178,7 +193,8 @@ async function main() {
   const firstUrl = new URL(urls[0]);
   const host = process.env.INDEXNOW_HOST || firstUrl.host;
   const key = await detectIndexNowKey();
-  const keyLocation = process.env.INDEXNOW_KEY_LOCATION || `${firstUrl.origin}/${key}.txt`;
+  const keyLocation =
+    process.env.INDEXNOW_KEY_LOCATION || `${firstUrl.origin}/${key}.txt`;
 
   if (dryRun) {
     console.log("[dry-run] IndexNow payload preview");
@@ -198,7 +214,9 @@ async function main() {
   for (let index = 0; index < batches.length; index += 1) {
     const batch = batches[index];
     await submitToIndexNow({ host, key, keyLocation, urls: batch });
-    console.log(`Submitted batch ${index + 1}/${batches.length} (${batch.length} URLs)`);
+    console.log(
+      `Submitted batch ${index + 1}/${batches.length} (${batch.length} URLs)`,
+    );
   }
 
   console.log(`IndexNow submission completed for ${urls.length} URLs.`);

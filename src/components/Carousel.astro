@@ -10,18 +10,28 @@ interface Props {
 }
 
 const { imagePath, altText, heading, caption } = Astro.props;
-const images = import.meta.glob<{ default: ImageMetadata }>("../assets/images/*.{jpg,png,gif,webp,jpeg}");
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/images/*.{jpg,png,gif,webp,jpeg}",
+);
 if (!images[imagePath]) {
   throw new Error(`Image not found: ${imagePath}`);
 }
 ---
 
-<div class="carousel w-full relative overflow-hidden">
-    <div class="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
-        <h1 class="text-center text-4xl md:text-6xl lg:text-7xl font-bold text-white">{heading}</h1>
-        <p class="text-center text-lg md:text-xl lg:text-2xl mt-4 text-white">{caption}</p>
-    </div>
-    <div class="carousel-item w-full">
-        <Image src={images[imagePath]()} alt={altText} />
-    </div>
+<div class="carousel relative w-full overflow-hidden">
+  <div
+    class="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center"
+  >
+    <h1
+      class="text-center text-4xl font-bold text-white md:text-6xl lg:text-7xl"
+    >
+      {heading}
+    </h1>
+    <p class="mt-4 text-center text-lg text-white md:text-xl lg:text-2xl">
+      {caption}
+    </p>
+  </div>
+  <div class="carousel-item w-full">
+    <Image src={images[imagePath]()} alt={altText} />
+  </div>
 </div>

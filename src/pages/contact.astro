@@ -14,7 +14,8 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   name: "Contact Us",
-  description: "Contact STEM Gharbiya for admissions, academics, activities, or partnerships.",
+  description:
+    "Contact STEM Gharbiya for admissions, academics, activities, or partnerships.",
   url: `${siteConfig.url}/contact`,
   mainEntity: {
     "@type": "HighSchool",
@@ -46,24 +47,68 @@ const structuredData = {
 >
   <Fragment slot="sidebarContent">
     <ul class="mt-6 space-y-3 text-sm">
-      <li class="flex gap-3 items-start">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-          <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <li class="flex items-start gap-3">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-primary mt-1"
+          aria-hidden
+        >
+          <path
+            d="M5 12l4 4L19 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
-        <span><strong>Quick responses</strong> during school working days.</span>
+        <span><strong>Quick responses</strong> during school working days.</span
+        >
       </li>
-      <li class="flex gap-3 items-start">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-          <path d="M12 20l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+      <li class="flex items-start gap-3">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-primary mt-1"
+          aria-hidden
+        >
+          <path
+            d="M12 20l9-5-9-5-9 5 9 5z"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
         <span><strong>Direct support</strong> for students and families.</span>
       </li>
-      <li class="flex gap-3 items-start">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-          <path d="M12 2v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <li class="flex items-start gap-3">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-primary mt-1"
+          aria-hidden
+        >
+          <path
+            d="M12 2v20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            d="M2 12h20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
-        <span><strong>Secure form</strong> protected by Turnstile verification.</span>
+        <span
+          ><strong>Secure form</strong> protected by Turnstile verification.</span
+        >
       </li>
     </ul>
   </Fragment>
@@ -72,7 +117,7 @@ const structuredData = {
 
   <form id="contactForm" class="mt-6 grid gap-3">
     <div class="space-y-2">
-      <label for="name" class="text-sm font-medium text-foreground">
+      <label for="name" class="text-foreground text-sm font-medium">
         Name <span class="text-destructive">*</span>
       </label>
       <input
@@ -80,13 +125,13 @@ const structuredData = {
         id="name"
         name="name"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <div class="error hidden text-xs text-destructive" id="nameError"></div>
+      <div class="error text-destructive hidden text-xs" id="nameError"></div>
     </div>
 
     <div class="space-y-2">
-      <label for="email" class="text-sm font-medium text-foreground">
+      <label for="email" class="text-foreground text-sm font-medium">
         Email <span class="text-destructive">*</span>
       </label>
       <input
@@ -94,13 +139,13 @@ const structuredData = {
         id="email"
         name="email"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <div class="error hidden text-xs text-destructive" id="emailError"></div>
+      <div class="error text-destructive hidden text-xs" id="emailError"></div>
     </div>
 
     <div class="space-y-2">
-      <label for="subject" class="text-sm font-medium text-foreground">
+      <label for="subject" class="text-foreground text-sm font-medium">
         Subject <span class="text-destructive">*</span>
       </label>
       <input
@@ -108,13 +153,14 @@ const structuredData = {
         id="subject"
         name="subject"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <div class="error hidden text-xs text-destructive" id="subjectError"></div>
+      <div class="error text-destructive hidden text-xs" id="subjectError">
+      </div>
     </div>
 
     <div class="space-y-2">
-      <label for="message" class="text-sm font-medium text-foreground">
+      <label for="message" class="text-foreground text-sm font-medium">
         Message <span class="text-destructive">*</span>
       </label>
       <textarea
@@ -122,12 +168,11 @@ const structuredData = {
         name="message"
         rows="5"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       ></textarea>
-      <span class="text-xs text-muted-foreground">
-        10-4000 characters
-      </span>
-      <div class="error hidden text-xs text-destructive" id="messageError"></div>
+      <span class="text-muted-foreground text-xs"> 10-4000 characters </span>
+      <div class="error text-destructive hidden text-xs" id="messageError">
+      </div>
     </div>
 
     <div
@@ -137,23 +182,34 @@ const structuredData = {
       data-callback="onTurnstileSuccess"
       data-error-callback="onTurnstileError"
       data-expired-callback="onTurnstileExpired"
-    ></div>
+    >
+    </div>
 
-    <button type="submit" class="btn-primary w-full justify-center mt-4" id="submitBtn" disabled>
+    <button
+      type="submit"
+      class="btn-primary mt-4 w-full justify-center"
+      id="submitBtn"
+      disabled
+    >
       <span id="submitText">Send Message</span>
     </button>
   </form>
 
   <Fragment slot="formFooter">
-    <div class="mt-8 md:mt-6 border-t border-border pt-6 text-center text-sm text-muted-foreground">
+    <div
+      class="border-border text-muted-foreground mt-8 border-t pt-6 text-center text-sm md:mt-6"
+    >
       <p>
         You can also email us directly at
         <a
           href={`mailto:${email}`}
-          class="text-primary underline underline-offset-4 transition hover:text-primary/80"
-        >{email}</a>
+          class="text-primary hover:text-primary/80 underline underline-offset-4 transition"
+          >{email}</a
+        >
       </p>
-      <p class="mt-4 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-xs">
+      <p
+        class="border-border bg-secondary/40 mt-4 rounded-xl border px-4 py-3 text-xs"
+      >
         To prevent spam, repeated submissions are rate-limited. If you get a
         "Too many requests" message, please wait a minute and try again.
       </p>
@@ -161,7 +217,7 @@ const structuredData = {
   </Fragment>
 
   <Fragment slot="scripts">
-    <script src="../scripts/contact.ts" />
+    <script src="../scripts/contact.ts"></script>
     <script is:inline>
       const setContactSubmitState = (enabled) => {
         const submitBtn = document.getElementById("submitBtn");
@@ -182,7 +238,7 @@ const structuredData = {
         window.showAlert?.(
           "error",
           "Verification Failed",
-          "Please complete the security check again."
+          "Please complete the security check again.",
         );
       };
 
@@ -191,7 +247,7 @@ const structuredData = {
         window.showAlert?.(
           "warning",
           "Verification Expired",
-          "Please complete the security check again."
+          "Please complete the security check again.",
         );
       };
 

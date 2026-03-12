@@ -20,10 +20,22 @@ function markdownToHtml(md: string | undefined) {
   if (!md) return "";
 
   let html = md
-    .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-foreground mt-4 mb-2">$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold text-foreground mt-6 mb-3">$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-semibold text-foreground mt-6 mb-4">$1</h1>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
+    .replace(
+      /^### (.*$)/gim,
+      '<h3 class="text-lg font-semibold text-foreground mt-4 mb-2">$1</h3>',
+    )
+    .replace(
+      /^## (.*$)/gim,
+      '<h2 class="text-2xl font-semibold text-foreground mt-6 mb-3">$1</h2>',
+    )
+    .replace(
+      /^# (.*$)/gim,
+      '<h1 class="text-3xl font-semibold text-foreground mt-6 mb-4">$1</h1>',
+    )
+    .replace(
+      /\*\*(.*?)\*\*/g,
+      '<strong class="font-semibold text-foreground">$1</strong>',
+    )
     .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
     .replace(/^\- (.*$)/gim, '<li class="ml-4 text-muted-foreground">$1</li>')
     .replace(/\n\n/g, '</p><p class="text-muted-foreground mt-2">');
@@ -41,12 +53,15 @@ const staffWithHtml = staff.map((member) => ({
 }));
 ---
 
-<dialog id="staff-modal" class="staffModal max-w-2xl w-full rounded-2xl border border-border bg-card p-0 shadow-2xl">
+<dialog
+  id="staff-modal"
+  class="staffModal border-border bg-card w-full max-w-2xl rounded-2xl border p-0 shadow-2xl"
+>
   <div class="relative max-h-[90vh] overflow-y-auto">
     <button
       type="button"
       id="close-modal"
-      class="sticky top-4 right-4 float-right z-10 rounded-full bg-secondary p-2 text-foreground hover:bg-secondary/80 transition-colors"
+      class="bg-secondary text-foreground hover:bg-secondary/80 sticky top-4 right-4 z-10 float-right rounded-full p-2 transition-colors"
       aria-label="Close"
     >
       <Icon name="mdi:close" class="h-6 w-6" />
@@ -93,7 +108,7 @@ const staffWithHtml = staff.map((member) => ({
 
 <script define:vars={{ staff: staffWithHtml }}>
   // Staff data map
-  const staffMap = new Map(staff.map(s => [s.id, s]));
+  const staffMap = new Map(staff.map((s) => [s.id, s]));
 
   const openStaffModal = (staffId, modal, modalContent) => {
     const member = staffMap.get(staffId);
@@ -115,23 +130,31 @@ const staffWithHtml = staff.map((member) => ({
         </div>
         <div class="md:w-2/3">
           <h2 class="text-3xl font-semibold text-foreground">${member.name}</h2>
-          ${member.role ? `<p class="mt-2 text-lg text-primary font-medium">${member.role}</p>` : ''}
-          ${member.committee ? `<p class="mt-1 text-sm text-muted-foreground">Committee: ${member.committee}</p>` : ''}
-          ${member.email ? `
+          ${member.role ? `<p class="mt-2 text-lg text-primary font-medium">${member.role}</p>` : ""}
+          ${member.committee ? `<p class="mt-1 text-sm text-muted-foreground">Committee: ${member.committee}</p>` : ""}
+          ${
+            member.email
+              ? `
             <a href="mailto:${member.email}" class="mt-2 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
               </svg>
               ${member.email}
             </a>
-          ` : ''}
+          `
+              : ""
+          }
         </div>
       </div>
-      ${member.bioHtml ? `
+      ${
+        member.bioHtml
+          ? `
         <div class="mt-6 prose prose-sm max-w-none border-t border-border pt-6">
           ${member.bioHtml}
         </div>
-      ` : ''}
+      `
+          : ""
+      }
     `;
 
     modalContent.innerHTML = content;
@@ -139,38 +162,42 @@ const staffWithHtml = staff.map((member) => ({
   };
 
   const initStaffModal = () => {
-    const modal = document.getElementById('staff-modal');
-    const closeButton = document.getElementById('close-modal');
-    const modalContent = document.getElementById('modal-content');
-    const staffCards = document.querySelectorAll('[data-staff-id]');
+    const modal = document.getElementById("staff-modal");
+    const closeButton = document.getElementById("close-modal");
+    const modalContent = document.getElementById("modal-content");
+    const staffCards = document.querySelectorAll("[data-staff-id]");
 
-    staffCards.forEach(card => {
+    staffCards.forEach((card) => {
       if (!(card instanceof HTMLElement)) {
         return;
       }
 
       const cardElement = card;
-      if (cardElement.dataset.modalBound === 'true') {
+      if (cardElement.dataset.modalBound === "true") {
         return;
       }
 
-      cardElement.dataset.modalBound = 'true';
-      cardElement.addEventListener('click', () => {
-        const staffId = cardElement.getAttribute('data-staff-id');
+      cardElement.dataset.modalBound = "true";
+      cardElement.addEventListener("click", () => {
+        const staffId = cardElement.getAttribute("data-staff-id");
         openStaffModal(staffId, modal, modalContent);
       });
     });
 
-    if (closeButton && modal && closeButton.getAttribute('data-modal-bound') !== 'true') {
-      closeButton.setAttribute('data-modal-bound', 'true');
-      closeButton.addEventListener('click', () => {
+    if (
+      closeButton &&
+      modal &&
+      closeButton.getAttribute("data-modal-bound") !== "true"
+    ) {
+      closeButton.setAttribute("data-modal-bound", "true");
+      closeButton.addEventListener("click", () => {
         modal.close();
       });
     }
 
-    if (modal && modal.getAttribute('data-backdrop-bound') !== 'true') {
-      modal.setAttribute('data-backdrop-bound', 'true');
-      modal.addEventListener('click', (e) => {
+    if (modal && modal.getAttribute("data-backdrop-bound") !== "true") {
+      modal.setAttribute("data-backdrop-bound", "true");
+      modal.addEventListener("click", (e) => {
         const rect = modal.getBoundingClientRect();
         if (
           e.clientX < rect.left ||
@@ -183,12 +210,12 @@ const staffWithHtml = staff.map((member) => ({
       });
     }
 
-    if (modal && document.body.dataset.staffEscapeBound !== 'true') {
-      document.body.dataset.staffEscapeBound = 'true';
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          const activeModal = document.getElementById('staff-modal');
-          if (activeModal && typeof activeModal.close === 'function') {
+    if (modal && document.body.dataset.staffEscapeBound !== "true") {
+      document.body.dataset.staffEscapeBound = "true";
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          const activeModal = document.getElementById("staff-modal");
+          if (activeModal && typeof activeModal.close === "function") {
             activeModal.close();
           }
         }
@@ -198,8 +225,8 @@ const staffWithHtml = staff.map((member) => ({
 
   initStaffModal();
 
-  if (document.documentElement.dataset.staffModalLifecycleBound !== 'true') {
-    document.addEventListener('astro:page-load', initStaffModal);
-    document.documentElement.dataset.staffModalLifecycleBound = 'true';
+  if (document.documentElement.dataset.staffModalLifecycleBound !== "true") {
+    document.addEventListener("astro:page-load", initStaffModal);
+    document.documentElement.dataset.staffModalLifecycleBound = "true";
   }
 </script>
