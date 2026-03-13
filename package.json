@@ -8,8 +8,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "indexnow": "node scripts/indexnow.js",
+    "lint:format": "prettier --check .",
     "format": "prettier --write .",
-    "lint:format": "prettier --check ."
+    "format:check": "prettier --list-different ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
