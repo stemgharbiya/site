@@ -2,6 +2,15 @@ import { defineCollection } from "astro:content";
 import { file } from "astro/loaders";
 import { z } from "zod";
 
+const socialMediaSchema = z.object({
+  email: z.string().email().optional(),
+  linkedin: z.string().url().optional(),
+  facebook: z.string().url().optional(),
+  instagram: z.string().url().optional(),
+  github: z.string().url().optional(),
+  youtube: z.string().url().optional(),
+});
+
 const alumniCollection = defineCollection({
   loader: file("./src/data/alumni.json"),
   schema: ({ image }) =>
@@ -15,16 +24,9 @@ const alumniCollection = defineCollection({
           class: z.string(),
           classRank: z.string().optional(),
           nationalRank: z.string().optional(),
-          socialMedia: z
-            .object({
-              cv: z.string().optional(),
-              website: z.string().optional(),
-              email: z.string().optional(),
-              linkedin: z.string().optional(),
-              facebook: z.string().optional(),
-              instagram: z.string().optional(),
-            })
-            .optional(),
+          cv: z.string().url().optional(),
+          website: z.string().url().optional(),
+          socialMedia: socialMediaSchema.optional(),
           university: z.object({
             logo: image(),
             name: z.string(),
@@ -46,7 +48,7 @@ const staffCollection = defineCollection({
       role: z.string(),
       committee: z.string().optional(),
       avatar: image(),
-      email: z.string().optional(),
+      email: z.string().email().optional(),
       bio: z.string().optional(),
     }),
 });
@@ -60,9 +62,12 @@ const teamCollection = defineCollection({
       status: z.enum(["current", "former"]),
       role: z.string(),
       avatar: image(),
-      email: z.string().optional(),
+      order: z.number().optional(),
+      email: z.string().email().optional(),
       bio: z.string().optional(),
-      social: z.record(z.string(), z.string()).optional(),
+      cv: z.string().url().optional(),
+      website: z.string().url().optional(),
+      social: socialMediaSchema.optional(),
     }),
 });
 
@@ -75,8 +80,8 @@ const clubsCollection = defineCollection({
       image: image(),
       short: z.string().optional(),
       description: z.string().optional(),
-      website: z.string().optional(),
-      social: z.record(z.string(), z.string()).optional(),
+      website: z.string().url().optional(),
+      social: socialMediaSchema.optional(),
       supervisor: z.string().optional(),
       president: z.string().optional(),
       type: z.string().optional(),

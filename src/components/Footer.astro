@@ -7,101 +7,135 @@ import { ICONS } from "../data/icons";
 const { footer, social } = siteConfig;
 ---
 
-<footer class="relative border-t border-border bg-background/95 text-foreground">
-	<div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background/90 to-transparent" aria-hidden="true"></div>
-	<div class="section-inner relative py-12">
-		<div class="surface grid gap-6 p-6 md:p-8 lg:grid-cols-[1.2fr_1fr]">
-			<div>
-				<p class="eyebrow">Admissions</p>
-				<h3 class="mt-3 text-2xl font-semibold text-foreground">Ready to join STEM Gharbiya?</h3>
-				<p class="mt-3 text-sm text-muted-foreground">
-					Learn eligibility details, key dates, and how to prepare for the entrance exam.
-				</p>
-				<div class="mt-5 flex flex-wrap gap-3">
-					<a href="/about/admission" class="btn-primary">Learn how to join</a>
-					<a href="/contact" class="btn-secondary">Have a question?</a>
-				</div>
-			</div>
-			<div class="rounded-2xl border border-border bg-background p-5">
-				<p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Campus address</p>
-				<p class="mt-3 text-sm text-foreground">{footer.address}</p>
-				<div class="mt-4 flex flex-col gap-3">
-					<a
-						href={footer.mapUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-sm text-muted-foreground hover:text-foreground transition"
-					>
-						View on Maps
-					</a>
-				</div>
-			</div>
-		</div>
+<footer
+  class="border-border bg-background/95 text-foreground relative border-t"
+>
+  <div
+    class="from-background/90 absolute inset-x-0 top-0 h-32 bg-gradient-to-b to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="section-inner relative py-12">
+    <div class="surface grid gap-6 p-6 md:p-8 lg:grid-cols-[1.2fr_1fr]">
+      <div>
+        <p class="eyebrow">Admissions</p>
+        <h3 class="text-foreground mt-3 text-2xl font-semibold">
+          Ready to join STEM Gharbiya?
+        </h3>
+        <p class="text-muted-foreground mt-3 text-sm">
+          Learn eligibility details, key dates, and how to prepare for the
+          entrance exam.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="/about/admission" class="btn-primary">Learn how to join</a>
+          <a href="/contact" class="btn-secondary">Have a question?</a>
+        </div>
+      </div>
+      <div class="border-border bg-background rounded-2xl border p-5">
+        <p class="text-muted-foreground text-xs tracking-[0.2em] uppercase">
+          Campus address
+        </p>
+        <p class="text-foreground mt-3 text-sm">{footer.address}</p>
+        <div class="mt-4 flex flex-col gap-3">
+          <a
+            href={footer.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-foreground text-sm transition"
+          >
+            View on Maps
+          </a>
+        </div>
+      </div>
+    </div>
 
-		<div class="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
-			<div>
-				<Logo size="lg" withText={true} />
-				<p class="mt-4 text-sm text-muted-foreground">
-					A public STEM high school in Gharbiya focused on research, innovation,
-					and academic excellence.
-				</p>
-			</div>
-			<div>
-				<h3 class="text-sm font-semibold text-foreground">Explore</h3>
-				<ul class="mt-4 space-y-2 text-sm">
-					{footer.explore.map((item) => (
-						<li>
-							<a href={item.href} class="footer-link">
-								{item.label}
-							</a>
-						</li>
-					))}
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-sm font-semibold text-foreground">Admissions</h3>
-				<ul class="mt-4 space-y-2 text-sm">
-					{footer.admissions.map((item) => (
-						<li>
-							<a href={item.href} class="footer-link">
-								{item.label}
-							</a>
-						</li>
-					))}
-				</ul>
-			</div>
-			<div>
-				<h3 class="text-sm font-semibold text-foreground">Quick links</h3>
-				<ul class="mt-4 space-y-2 text-sm">
-					{footer.quickLinks.map((item) => (
-						<li>
-							<a href={item.href} class="footer-link">
-								{item.label}
-							</a>
-						</li>
-					))}
-				</ul>
-			</div>
-		</div>
+    <div
+      class="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]"
+    >
+      <div>
+        <Logo size="lg" withText={true} />
+        <p class="text-muted-foreground mt-4 text-sm">
+          A public STEM high school in Gharbiya focused on research, innovation,
+          and academic excellence.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-foreground text-sm font-semibold">Explore</h3>
+        <ul class="mt-4 space-y-2 text-sm">
+          {
+            footer.explore.map((item) => (
+              <li>
+                <a href={item.href} class="footer-link">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-foreground text-sm font-semibold">Admissions</h3>
+        <ul class="mt-4 space-y-2 text-sm">
+          {
+            footer.admissions.map((item) => (
+              <li>
+                <a href={item.href} class="footer-link">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-foreground text-sm font-semibold">Quick links</h3>
+        <ul class="mt-4 space-y-2 text-sm">
+          {
+            footer.quickLinks.map((item) => (
+              <li>
+                <a href={item.href} class="footer-link">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
 
-		<div class="mt-12 border-t border-border pt-6 text-sm text-muted-foreground">
-			<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
-				<p class="text-center md:text-left">
-					&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-					<span class="mx-1">•</span>
-					Maintained by
-					<a href="/team" class="footer-link ml-1 font-medium text-foreground">
-						STEM Gharbiya Development Team
-					</a>
-				</p>
-				<div class="flex items-center gap-4">
-					{social.map((item) => (
-						<a href={item.href} target="_blank" rel="noopener noreferrer" class="footer-link" aria-label={item.label}>
-							<Icon name={ICONS[item.icon]} class="h-5 w-5" aria-hidden="true" />
-						</a>
-					))}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div
+      class="border-border text-muted-foreground mt-12 border-t pt-6 text-sm"
+    >
+      <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <p class="text-center md:text-left">
+          &copy; {new Date().getFullYear()}
+          {siteConfig.name}. All rights reserved.
+          <span class="mx-1">•</span>
+          Maintained by
+          <a href="/team" class="footer-link text-foreground ml-1 font-medium">
+            STEM Gharbiya Development Team
+          </a>
+        </p>
+        <div class="flex items-center gap-4">
+          {
+            social.map((item) => (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-link"
+                aria-label={item.label}
+              >
+                <Icon
+                  name={ICONS[item.icon]}
+                  class="h-5 w-5"
+                  aria-hidden="true"
+                />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>

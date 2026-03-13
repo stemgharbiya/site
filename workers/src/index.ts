@@ -37,7 +37,7 @@ let DB_INITIALIZED = false;
 
 async function ensureDatabase(envParam: Env) {
   try {
-    const db = envParam.DB as any;
+    const db = envParam.DB;
     if (!db) return;
     await db
       .prepare(

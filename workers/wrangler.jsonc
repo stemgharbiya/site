@@ -21,12 +21,12 @@
     },
   ],
   "vars": {
-    "RESEND_SENDER_EMAIL": "team@stemgharbiya.app",
-    "TEAM_NOTIFICATION_EMAIL": "team@stemgharbiya.app",
+    "RESEND_SENDER_EMAIL": "team@stemgh.org",
+    "TEAM_NOTIFICATION_EMAIL": "team@stemgh.org",
     "DISABLE_EMAILS": false,
     "APP_ENV": "production",
     "AUTO_CREATE_DB": false,
     "TURNSTILE_SITE_KEY": "0x4AAAAAACYCSDOBa1wv0RmS",
-    "CORS_ORIGIN": ["https://stemgharbiya.app"],
+    "CORS_ORIGIN": ["https://stemgh.org"],
   },
 }

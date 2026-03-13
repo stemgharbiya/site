@@ -14,5 +14,21 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [AstroPWA({}), sitemap(), icon()],
+  image: {
+    layout: "constrained",
+  },
+  integrations: [
+    AstroPWA({
+      registerType: "autoUpdate",
+      workbox: {
+        globDirectory: "dist",
+        globPatterns: [
+          "**/*.{html,js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}",
+        ],
+        navigateFallback: null,
+      },
+    }),
+    sitemap(),
+    icon(),
+  ],
 });

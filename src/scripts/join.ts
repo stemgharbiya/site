@@ -33,6 +33,8 @@ const fieldUiOptions = {
   setAriaInvalid: true,
 };
 
+const isDev = import.meta.env.DEV;
+
 function showFieldError(fieldId: string, message: string) {
   showFieldErrorBase(fieldId, message, fieldUiOptions);
 }
@@ -73,7 +75,11 @@ function saveFormData() {
   };
   try {
     localStorage.setItem("stemgharbiya-application", JSON.stringify(formData));
-  } catch {}
+  } catch (error) {
+    if (isDev) {
+      console.warn("Failed to save join form data to localStorage:", error);
+    }
+  }
 }
 
 function loadFormData() {
@@ -103,13 +109,21 @@ function loadFormData() {
           checkbox.checked = formData.interests.includes(checkbox.value);
         });
     }
-  } catch {}
+  } catch (error) {
+    if (isDev) {
+      console.warn("Failed to load join form data from localStorage:", error);
+    }
+  }
 }
 
 function clearFormData() {
   try {
     localStorage.removeItem("stemgharbiya-application");
-  } catch {}
+  } catch (error) {
+    if (isDev) {
+      console.warn("Failed to clear join form data from localStorage:", error);
+    }
+  }
 }
 
 function setLoading(loading: boolean) {
@@ -152,18 +166,26 @@ async function submitForm(formData: FormData) {
         }, 2000);
         return;
       } else if (response.status === 409) {
+        const duplicateMessage =
+          typeof result.error === "string"
+            ? result.error
+            : result.error?.message ||
+              "An application with this email and GitHub username already exists";
         showAlert(
           "error",
           "Duplicate Application",
-          result.error ||
-            "An application with this email and GitHub username already exists",
+          duplicateMessage,
           "",
           10000,
         );
       } else {
-        throw new Error(
-          result.error || result.message || `Server error: ${response.status}`,
-        );
+        const errorMessage =
+          typeof result.error === "string"
+            ? result.error
+            : result.error?.message ||
+              result.message ||
+              `Server error: ${response.status}`;
+        throw new Error(errorMessage);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -430,10 +452,9 @@ function ensureTurnstileWidget() {
   const widgetId = window.turnstile.render(widget, {
     sitekey,
     theme: widget.getAttribute("data-theme") || "auto",
-    callback: (token: string) => (window as any).onTurnstileSuccess?.(token),
-    "error-callback": (code: string) =>
-      (window as any).onTurnstileError?.(code),
-    "expired-callback": () => (window as any).onTurnstileExpired?.(),
+    callback: (token: string) => window.onTurnstileSuccess?.(token),
+    "error-callback": (code: string) => window.onTurnstileError?.(code),
+    "expired-callback": () => window.onTurnstileExpired?.(),
   });
 
   if (widgetId) {

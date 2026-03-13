@@ -4,63 +4,64 @@ import { ICONS } from "../data/icons";
 ---
 
 <script>
-    const updateToggle = (toggle: HTMLElement | null, theme: string) => {
-        const isDark = theme === 'dark';
-        toggle?.setAttribute('data-theme', theme);
-        if (isDark) {
-            toggle?.classList.add('dark');
-        } else {
-            toggle?.classList.remove('dark');
-        }
-    };
-
-    const initThemeToggle = () => {
-        const toggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-
-        const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
-        updateToggle(toggle, currentTheme);
-
-        if (!toggle || toggle.dataset.bound === 'true') {
-            return;
-        }
-
-        toggle.dataset.bound = 'true';
-        toggle.addEventListener('click', () => {
-            const isDark = html.classList.toggle('dark');
-            const newTheme = isDark ? 'dark' : 'light';
-            updateToggle(toggle, newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    };
-
-    initThemeToggle();
-
-    const globalWindow = window as Window & { __themeToggleLifecycleBound?: boolean };
-    if (!globalWindow.__themeToggleLifecycleBound) {
-        document.addEventListener('astro:after-swap', initThemeToggle);
-        globalWindow.__themeToggleLifecycleBound = true;
+  const updateToggle = (toggle: HTMLElement | null, theme: string) => {
+    const isDark = theme === "dark";
+    if (isDark) {
+      toggle?.classList.add("dark");
+    } else {
+      toggle?.classList.remove("dark");
     }
+  };
+
+  const initThemeToggle = () => {
+    const toggle = document.getElementById("theme-toggle");
+    const html = document.documentElement;
+
+    const currentTheme = html.classList.contains("dark") ? "dark" : "light";
+    updateToggle(toggle, currentTheme);
+
+    if (!toggle || toggle.dataset.bound === "true") {
+      return;
+    }
+
+    toggle.dataset.bound = "true";
+    toggle.addEventListener("click", () => {
+      const isDark = html.classList.toggle("dark");
+      const newTheme = isDark ? "dark" : "light";
+      updateToggle(toggle, newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
+  };
+
+  initThemeToggle();
+
+  const globalWindow = window as Window & {
+    __themeToggleLifecycleBound?: boolean;
+  };
+  if (!globalWindow.__themeToggleLifecycleBound) {
+    document.addEventListener("astro:after-swap", initThemeToggle);
+    globalWindow.__themeToggleLifecycleBound = true;
+  }
 </script>
 
 <button
-    id="theme-toggle"
-    data-theme="light"
-    class="flex items-center gap-2 rounded-full bg-secondary p-1 transition-colors hover:bg-accent"
-    aria-label="Toggle theme"
+  id="theme-toggle"
+  class="bg-secondary hover:bg-accent flex items-center gap-2 rounded-full p-1 transition-colors"
+  aria-label="Toggle theme"
 >
-    <div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-300" id="toggle-knob">
-        <Icon name={ICONS.sun} class="h-4 w-4 sun-icon" aria-hidden="true" />
-        <Icon name={ICONS.moon} class="hidden h-4 w-4 moon-icon" aria-hidden="true" />
-    </div>
+  <div
+    class="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full transition-all duration-300"
+    id="toggle-knob"
+  >
+    <Icon
+      name={ICONS.sun}
+      class="sun-icon block h-4 w-4 dark:hidden"
+      aria-hidden="true"
+    />
+    <Icon
+      name={ICONS.moon}
+      class="moon-icon hidden h-4 w-4 dark:block"
+      aria-hidden="true"
+    />
+  </div>
 </button>
-
-<style>
-    button[data-theme="dark"] .sun-icon {
-        display: none;
-    }
-    
-    button[data-theme="dark"] .moon-icon {
-        display: block;
-    }
-</style>

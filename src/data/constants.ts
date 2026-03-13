@@ -44,8 +44,8 @@ export const siteConfig: SiteConfig = {
   title: "STEM Gharbiya - A Public STEM High School in Egypt",
   description:
     "STEM Gharbiya is a public STEM high school in Egypt focused on project-based learning, innovation, and research-driven education.",
-  url: "https://stemgharbiya.app",
-  email: "team@stemgharbiya.app",
+  url: "https://stemgh.org",
+  email: "team@stemgh.org",
   locale: "en",
   nav: {
     primary: [
@@ -76,7 +76,7 @@ export const siteConfig: SiteConfig = {
       { label: "Contact Us", href: "/contact", icon: "contact" },
       {
         label: "Portal",
-        href: "https://portal.stemgharbiya.app",
+        href: "https://portal.stemgh.org",
         icon: "portal",
       },
     ],
@@ -114,7 +114,7 @@ export const siteConfig: SiteConfig = {
         label: "Campus Location",
         href: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
       },
-      { label: "Student Portal", href: "https://portal.stemgharbiya.app" },
+      { label: "Student Portal", href: "https://portal.stemgh.org" },
     ],
     address: "Galaa St., Tanta, Gharbiya, Egypt",
     mapUrl: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",

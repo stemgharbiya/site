@@ -21,7 +21,7 @@ const coursesBySubject = courses.reduce(
     acc[course.subject].push(course);
     return acc;
   },
-  {} as Record<string, Course[]>
+  {} as Record<string, Course[]>,
 );
 
 const subjects = Object.keys(coursesBySubject).sort();
@@ -33,43 +33,58 @@ const subjects = Object.keys(coursesBySubject).sort();
       <p class="eyebrow">Course Catalog</p>
       <h2 class="section-title mt-3">Courses and curriculum.</h2>
       <p class="section-lead">
-        Students across grades 10-12 take a rigorous mix of honors and regular courses 
-        in sciences, mathematics, engineering, languages, and humanities.
+        Students across grades 10-12 take a rigorous mix of honors and regular
+        courses in sciences, mathematics, engineering, languages, and
+        humanities.
       </p>
     </div>
 
     <div class="mt-12 space-y-8">
-      {subjects.map((subject) => (
-        <div class="surface p-6 md:p-8 overflow-x-auto">
-          <h3 class="text-lg font-semibold text-foreground mb-4">{subject}</h3>
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="border-b border-border">
-                <th class="text-left py-3 px-4 font-semibold text-foreground">Course Name</th>
-                <th class="text-left py-3 px-4 font-semibold text-foreground">Level</th>
-                <th class="text-left py-3 px-4 font-semibold text-foreground">Credits</th>
-              </tr>
-            </thead>
-            <tbody>
-              {coursesBySubject[subject]?.map((course) => (
-                <tr class="border-b border-border/50 hover:bg-muted/30 transition">
-                  <td class="py-3 px-4 text-foreground">{course.name}</td>
-                  <td class="py-3 px-4 text-muted-foreground">
-                    <span class={`inline-block px-2 py-1 rounded text-xs font-medium ${
-                      course.level === "Honors" 
-                        ? "bg-primary/20 text-primary" 
-                        : "bg-muted text-muted-foreground"
-                    }`}>
-                      {course.level}
-                    </span>
-                  </td>
-                  <td class="py-3 px-4 text-muted-foreground">{course.credits}</td>
+      {
+        subjects.map((subject) => (
+          <div class="surface overflow-x-auto p-6 md:p-8">
+            <h3 class="text-foreground mb-4 text-lg font-semibold">
+              {subject}
+            </h3>
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-border border-b">
+                  <th class="text-foreground px-4 py-3 text-left font-semibold">
+                    Course Name
+                  </th>
+                  <th class="text-foreground px-4 py-3 text-left font-semibold">
+                    Level
+                  </th>
+                  <th class="text-foreground px-4 py-3 text-left font-semibold">
+                    Credits
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ))}
+              </thead>
+              <tbody>
+                {coursesBySubject[subject]?.map((course) => (
+                  <tr class="border-border/50 hover:bg-muted/30 border-b transition">
+                    <td class="text-foreground px-4 py-3">{course.name}</td>
+                    <td class="text-muted-foreground px-4 py-3">
+                      <span
+                        class={`inline-block rounded px-2 py-1 text-xs font-medium ${
+                          course.level === "Honors"
+                            ? "bg-primary/20 text-primary"
+                            : "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        {course.level}
+                      </span>
+                    </td>
+                    <td class="text-muted-foreground px-4 py-3">
+                      {course.credits}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

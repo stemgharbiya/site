@@ -7,7 +7,8 @@ const steps = [
     number: "01",
     title: "Application Period",
     timeline: "Mid to Late July",
-    description: "Submit your application online through the STEM admissions portal.",
+    description:
+      "Submit your application online through the STEM admissions portal.",
     details: [
       "Enter personal and academic information",
       "Rank the 21 STEM Schools by preference",
@@ -19,7 +20,8 @@ const steps = [
     number: "02",
     title: "Document Submission",
     timeline: "During Application",
-    description: "Prepare and submit all required papers during the application window.",
+    description:
+      "Prepare and submit all required papers during the application window.",
     details: [
       "Official Grade 9 transcript",
       "Birth certificate",
@@ -46,7 +48,8 @@ const steps = [
     number: "04",
     title: "Results Released",
     timeline: "First week of September",
-    description: "Check your results and school placement on the admissions portal.",
+    description:
+      "Check your results and school placement on the admissions portal.",
     details: [
       "View acceptance status and ranking",
       "Receive assigned STEM School",
@@ -59,7 +62,8 @@ const steps = [
     number: "05",
     title: "Final Registration",
     timeline: "September",
-    description: "Complete registration at your assigned school with final documents.",
+    description:
+      "Complete registration at your assigned school with final documents.",
     details: [
       "Submit original documents to school",
       "Complete enrollment paperwork",
@@ -77,47 +81,56 @@ const steps = [
       <p class="eyebrow">Timeline</p>
       <h2 class="section-title mt-3">The admission process in 5 steps.</h2>
       <p class="section-lead">
-        From application to enrollment, the STEM admissions process is transparent and well-structured. 
-        Here's what to expect throughout the journey.
+        From application to enrollment, the STEM admissions process is
+        transparent and well-structured. Here's what to expect throughout the
+        journey.
       </p>
     </div>
 
     <div class="mt-12 space-y-6">
-      {steps.map((step, index) => (
-        <div class="surface overflow-hidden transition hover:shadow-md">
-          <div class="flex flex-col md:flex-row">
-            <div class="flex min-h-[200px] flex-col items-center justify-center border-b border-border bg-gradient-to-br from-primary/5 to-primary/10 px-6 py-6 text-center md:min-h-auto md:border-b-0 md:border-r md:w-32">
-              <div class="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                {step.timeline}
+      {
+        steps.map((step) => (
+          <div class="surface overflow-hidden transition hover:shadow-md">
+            <div class="flex flex-col md:flex-row">
+              <div class="border-border from-primary/5 to-primary/10 flex min-h-[200px] flex-col items-center justify-center border-b bg-gradient-to-br px-6 py-6 text-center md:min-h-auto md:w-32 md:border-r md:border-b-0">
+                <div class="text-muted-foreground text-sm font-semibold tracking-[0.15em] uppercase">
+                  {step.timeline}
+                </div>
+                <div class="text-primary mt-4 text-4xl font-bold">
+                  {step.number}
+                </div>
+                <Icon
+                  name={ICONS[step.icon as keyof typeof ICONS]}
+                  class="text-primary mt-4 h-6 w-6"
+                  aria-hidden="true"
+                />
               </div>
-              <div class="mt-4 text-4xl font-bold text-primary">{step.number}</div>
-              <Icon
-                name={ICONS[step.icon as keyof typeof ICONS]}
-                class="mt-4 h-6 w-6 text-primary"
-                aria-hidden="true"
-              />
-            </div>
 
-            <div class="flex flex-1 flex-col justify-center p-6 md:p-8">
-              <h3 class="text-xl font-semibold text-foreground">{step.title}</h3>
-              <p class="mt-2 text-sm text-muted-foreground">{step.description}</p>
+              <div class="flex flex-1 flex-col justify-center p-6 md:p-8">
+                <h3 class="text-foreground text-xl font-semibold">
+                  {step.title}
+                </h3>
+                <p class="text-muted-foreground mt-2 text-sm">
+                  {step.description}
+                </p>
 
-              <ul class="mt-5 space-y-2">
-                {step.details.map((detail) => (
-                  <li class="flex items-start gap-3 text-sm text-foreground">
-                    <Icon
-                      name={ICONS.checkCircle}
-                      class="mt-0.5 h-4 w-4 flex-shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul class="mt-5 space-y-2">
+                  {step.details.map((detail) => (
+                    <li class="text-foreground flex items-start gap-3 text-sm">
+                      <Icon
+                        name={ICONS.checkCircle}
+                        class="text-primary mt-0.5 h-4 w-4 flex-shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

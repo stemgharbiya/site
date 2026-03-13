@@ -106,38 +106,38 @@ body {
   }
 
   .eyebrow {
-    @apply text-xs uppercase tracking-[0.35em] text-muted-foreground;
+    @apply text-muted-foreground text-xs tracking-[0.35em] uppercase;
   }
 
   .section-title {
-    @apply text-3xl font-semibold text-foreground md:text-4xl lg:text-5xl;
+    @apply text-foreground text-3xl font-semibold md:text-4xl lg:text-5xl;
   }
 
   .section-lead {
-    @apply mt-4 text-base text-muted-foreground md:text-lg;
+    @apply text-muted-foreground mt-4 text-base md:text-lg;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition hover:bg-secondary;
+    @apply border-border bg-background text-foreground hover:bg-secondary inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition;
   }
 
   .surface {
-    @apply rounded-2xl border border-border bg-card shadow-sm;
+    @apply border-border bg-card rounded-2xl border shadow-sm;
   }
 
   .nav-link {
-    @apply rounded-full px-4 py-2 text-sm font-medium text-foreground transition hover:bg-secondary;
+    @apply text-foreground hover:bg-secondary rounded-full px-4 py-2 text-sm font-medium transition;
   }
 
   .dropdown-link {
-    @apply block rounded-xl px-4 py-2 text-sm text-foreground transition hover:bg-secondary;
+    @apply text-foreground hover:bg-secondary block rounded-xl px-4 py-2 text-sm transition;
   }
 
   .footer-link {
-    @apply text-muted-foreground transition hover:text-foreground;
+    @apply text-muted-foreground hover:text-foreground transition;
   }
 }

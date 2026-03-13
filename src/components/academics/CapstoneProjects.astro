@@ -19,42 +19,47 @@ const { projects } = Astro.props;
       <p class="eyebrow">Student Research</p>
       <h2 class="section-title mt-3">Capstone Projects.</h2>
       <p class="section-lead">
-        Every student completes an independent or collaborative capstone project, 
-        resulting in publishable research, patent filings, or real-world applications.
+        Every student completes an independent or collaborative capstone
+        project, resulting in publishable research, patent filings, or
+        real-world applications.
       </p>
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-2">
-      {projects.map((project) => (
-        <div class="surface p-8 flex flex-col h-full">
-          <div class="flex items-start justify-between gap-4 mb-4">
+      {
+        projects.map((project) => (
+          <div class="surface flex h-full flex-col p-8">
+            <div class="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <h3 class="text-foreground text-xl font-semibold">
+                  {project.title}
+                </h3>
+                <p class="text-muted-foreground mt-1 text-xs tracking-[0.1em] uppercase">
+                  Class of {project.year}
+                </p>
+              </div>
+            </div>
+
+            <p class="text-muted-foreground mb-4 flex-grow text-sm">
+              {project.description}
+            </p>
+
             <div>
-              <h3 class="text-xl font-semibold text-foreground">{project.title}</h3>
-              <p class="mt-1 text-xs uppercase tracking-[0.1em] text-muted-foreground">
-                Class of {project.year}
+              <p class="text-muted-foreground mb-3 text-xs tracking-[0.1em] uppercase">
+                Outcomes
               </p>
+              <ul class="space-y-2">
+                {project.outcomes.map((outcome) => (
+                  <li class="text-foreground flex items-center gap-2 text-sm">
+                    <span class="bg-primary h-1.5 w-1.5 flex-shrink-0 rounded-full" />
+                    {outcome}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-
-          <p class="text-sm text-muted-foreground mb-4 flex-grow">
-            {project.description}
-          </p>
-
-          <div>
-            <p class="text-xs uppercase tracking-[0.1em] text-muted-foreground mb-3">
-              Outcomes
-            </p>
-            <ul class="space-y-2">
-              {project.outcomes.map((outcome) => (
-                <li class="flex items-center gap-2 text-sm text-foreground">
-                  <span class="h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"></span>
-                  {outcome}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

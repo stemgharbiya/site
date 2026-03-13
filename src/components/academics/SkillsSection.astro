@@ -21,27 +21,34 @@ const { skills } = Astro.props;
       <p class="eyebrow">Core Competencies</p>
       <h2 class="section-title mt-3">The skills you will develop.</h2>
       <p class="section-lead">
-        Beyond traditional classroom learning, our curriculum builds critical thinking, 
-        research capabilities, and leadership skills essential for success in STEM fields.
+        Beyond traditional classroom learning, our curriculum builds critical
+        thinking, research capabilities, and leadership skills essential for
+        success in STEM fields.
       </p>
     </div>
 
     <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {skills.map((skill, index) => (
-        <div class="surface p-6">
-          <div class="flex items-start justify-between">
-            <div>
-              <h3 class="text-lg font-semibold text-foreground">{skill.title}</h3>
-              <p class="mt-2 text-sm text-muted-foreground">{skill.description}</p>
+      {
+        skills.map((skill) => (
+          <div class="surface p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <h3 class="text-foreground text-lg font-semibold">
+                  {skill.title}
+                </h3>
+                <p class="text-muted-foreground mt-2 text-sm">
+                  {skill.description}
+                </p>
+              </div>
+              <Icon
+                name={ICONS[skill.icon as IconKey]}
+                class="text-primary h-6 w-6 flex-shrink-0"
+                aria-hidden="true"
+              />
             </div>
-            <Icon 
-              name={ICONS[skill.icon as IconKey]} 
-              class="h-6 w-6 flex-shrink-0 text-primary" 
-              aria-hidden="true" 
-            />
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

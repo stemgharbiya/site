@@ -17,9 +17,9 @@ const { id, name, role, avatar, email } = Astro.props;
 <button
   type="button"
   data-staff-id={id}
-  class="staff-card group surface h-full cursor-pointer overflow-hidden border-border text-left transition-colors duration-300 hover:border-primary/70"
+  class="staff-card group surface border-border hover:border-primary/70 h-full cursor-pointer overflow-hidden text-left transition-colors duration-300"
 >
-  <div class="relative aspect-square w-full overflow-hidden bg-secondary/40">
+  <div class="bg-secondary/40 relative aspect-square w-full overflow-hidden">
     <Image
       src={avatar}
       alt={name}
@@ -29,23 +29,23 @@ const { id, name, role, avatar, email } = Astro.props;
     />
   </div>
   <div class="p-5">
-    <h3 class="text-lg font-semibold text-foreground">{name}</h3>
-    {role && (
-      <p class="mt-1 text-sm text-muted-foreground">{role}</p>
-    )}
+    <h3 class="text-foreground text-lg font-semibold">{name}</h3>
+    {role && <p class="text-muted-foreground mt-1 text-sm">{role}</p>}
 
-    {email && (
-      <div class="mt-4 min-w-0">
-        <a
-          href={`mailto:${email}`}
-          class="inline-flex max-w-full items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground transition group-hover:border-primary/40 group-hover:text-primary"
-          aria-label={`Email ${name}`}
-          title={email}
-        >
-          <Icon name="mdi:email-outline" class="h-4 w-4" aria-hidden="true" />
-          <span class="min-w-0 max-w-60 truncate">{email}</span>
-        </a>
-      </div>
-    )}
+    {
+      email && (
+        <div class="mt-4 min-w-0">
+          <a
+            href={`mailto:${email}`}
+            class="border-border bg-background text-muted-foreground group-hover:border-primary/40 group-hover:text-primary inline-flex max-w-full items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition"
+            aria-label={`Email ${name}`}
+            title={email}
+          >
+            <Icon name="mdi:email-outline" class="h-4 w-4" aria-hidden="true" />
+            <span class="max-w-60 min-w-0 truncate">{email}</span>
+          </a>
+        </div>
+      )
+    }
   </div>
 </button>

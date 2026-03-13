@@ -2,12 +2,27 @@
   "name": "gharbiya-stem-school-website",
   "type": "module",
   "version": "0.0.1",
+  "lint-staged": {
+    "*.{ts,js,mjs,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,jsonc,css,md,yml}": [
+      "prettier --write"
+    ]
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "indexnow": "node scripts/indexnow.js"
+    "indexnow": "node scripts/indexnow.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:format": "prettier --check .",
+    "format": "prettier --write .",
+    "format:check": "prettier --list-different .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -19,6 +34,19 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@vite-pwa/astro": "^1.2.0"
+    "@eslint/js": "^10.0.1",
+    "@eslint/json": "^1.1.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@vite-pwa/astro": "^1.2.0",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.6.0",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.3",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.7.2",
+    "typescript-eslint": "^8.57.0"
   }
 }

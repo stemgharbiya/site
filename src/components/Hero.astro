@@ -3,19 +3,31 @@ import { Image } from "astro:assets";
 import heroImage from "../assets/images/landing.jpg";
 ---
 
-<section class="relative overflow-hidden bg-gradient-to-b from-secondary/70 via-background to-background py-5 md:py-8 min-h-[calc(100vh-72px)] flex items-center">
-  <div class="absolute -top-32 right-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div>
-  <div class="absolute -bottom-32 left-0 h-72 w-72 rounded-full bg-secondary/80 blur-3xl" aria-hidden="true"></div>
+<section
+  class="from-secondary/70 via-background to-background relative flex min-h-[calc(100vh-72px)] items-center overflow-hidden bg-gradient-to-b py-5 md:py-8"
+>
+  <div
+    class="bg-primary/10 absolute -top-32 right-0 h-72 w-72 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="bg-secondary/80 absolute -bottom-32 left-0 h-72 w-72 rounded-full blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
 
-  <div class="section-inner relative grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+  <div
+    class="section-inner relative grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]"
+  >
     <div>
       <p class="eyebrow">STEM Gharbiya</p>
       <h1 class="section-title mt-3 text-4xl md:text-5xl lg:text-6xl">
         A public STEM high school that builds future researchers and innovators.
       </h1>
       <p class="section-lead max-w-xl">
-        Rigorous academics, residential life, and real-world research experiences that prepare students
-        for the world’s top universities.
+        Rigorous academics, residential life, and real-world research
+        experiences that prepare students for the world’s top universities.
       </p>
 
       <div class="mt-8 flex flex-wrap gap-4">
@@ -25,26 +37,44 @@ import heroImage from "../assets/images/landing.jpg";
 
       <div class="mt-10 grid gap-4 sm:grid-cols-2">
         <div class="surface p-4">
-          <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Outcomes</p>
-          <p class="mt-2 text-2xl font-semibold text-foreground">90%+</p>
-          <p class="text-sm text-muted-foreground">graduates in STEM majors</p>
+          <p class="text-muted-foreground text-xs tracking-[0.2em] uppercase">
+            Outcomes
+          </p>
+          <p class="text-foreground mt-2 text-2xl font-semibold">90%+</p>
+          <p class="text-muted-foreground text-sm">graduates in STEM majors</p>
         </div>
         <div class="surface p-4">
-          <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Community</p>
-          <p class="mt-2 text-2xl font-semibold text-foreground">40+</p>
-          <p class="text-sm text-muted-foreground">student-led clubs and teams</p>
+          <p class="text-muted-foreground text-xs tracking-[0.2em] uppercase">
+            Community
+          </p>
+          <p class="text-foreground mt-2 text-2xl font-semibold">40+</p>
+          <p class="text-muted-foreground text-sm">
+            student-led clubs and teams
+          </p>
         </div>
       </div>
     </div>
 
     <div class="relative">
       <div class="surface p-2">
-        <Image src={heroImage} alt="STEM Gharbiya campus" class="h-full w-full rounded-2xl object-cover" />
+        <Image
+          src={heroImage}
+          alt="STEM Gharbiya campus"
+          class="h-full w-full rounded-2xl object-cover"
+        />
       </div>
-      <div class="absolute -bottom-6 right-6 hidden w-56 rounded-2xl border border-border bg-card p-4 shadow-lg lg:block">
-        <p class="text-xs uppercase tracking-[0.2em] text-muted-foreground">Residential</p>
-        <p class="mt-2 text-lg font-semibold text-foreground">Boarding campus</p>
-        <p class="text-sm text-muted-foreground">Live, learn, and build together.</p>
+      <div
+        class="border-border bg-card absolute right-6 -bottom-6 hidden w-56 rounded-2xl border p-4 shadow-lg lg:block"
+      >
+        <p class="text-muted-foreground text-xs tracking-[0.2em] uppercase">
+          Residential
+        </p>
+        <p class="text-foreground mt-2 text-lg font-semibold">
+          Boarding campus
+        </p>
+        <p class="text-muted-foreground text-sm">
+          Live, learn, and build together.
+        </p>
       </div>
     </div>
   </div>
