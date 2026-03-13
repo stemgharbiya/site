@@ -23,28 +23,71 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
 >
   <Fragment slot="sidebarContent">
     <ul class="mt-6 space-y-3 text-sm">
-      <li class="flex gap-3 items-start">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-          <path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <li class="flex items-start gap-3">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-primary mt-1"
+          aria-hidden
+        >
+          <path
+            d="M5 12l4 4L19 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
         <span><strong>Mentorship</strong> from experienced contributors.</span>
       </li>
-      <li class="flex gap-3 items-start">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-          <path d="M12 20l9-5-9-5-9 5 9 5z" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+      <li class="flex items-start gap-3">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-primary mt-1"
+          aria-hidden
+        >
+          <path
+            d="M12 20l9-5-9-5-9 5 9 5z"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
         <span><strong>Hands-on</strong> work on real projects.</span>
       </li>
-      <li class="flex gap-3 items-start">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-1 text-primary" aria-hidden>
-          <path d="M12 2v20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <li class="flex items-start gap-3">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-primary mt-1"
+          aria-hidden
+        >
+          <path
+            d="M12 2v20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            d="M2 12h20"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
         <span><strong>Community</strong> & networking with peers.</span>
       </li>
     </ul>
 
-    <p class="mt-6 text-xs text-muted-foreground">Tip: Have your GitHub profile ready and use your school email.</p>
+    <p class="text-muted-foreground mt-6 text-xs">
+      Tip: Have your GitHub profile ready and use your school email.
+    </p>
   </Fragment>
 
   <div id="alertsContainer" class="mt-4"></div>
@@ -52,7 +95,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
   <div class="mt-3">
     <a
       href="/team"
-      class="inline-flex items-center text-sm font-medium text-primary underline underline-offset-4 transition hover:text-primary/80"
+      class="text-primary hover:text-primary/80 inline-flex items-center text-sm font-medium underline underline-offset-4 transition"
     >
       ← View current development team
     </a>
@@ -60,7 +103,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
 
   <form id="applicationForm" class="mt-6 grid gap-3">
     <div class="space-y-2">
-      <label for="fullName" class="text-sm font-medium text-foreground">
+      <label for="fullName" class="text-foreground text-sm font-medium">
         Full Name <span class="text-destructive">*</span>
       </label>
       <input
@@ -68,13 +111,13 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         id="fullName"
         name="fullName"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <div class="error hidden text-xs text-destructive" id="nameError"></div>
+      <div class="error text-destructive hidden text-xs" id="nameError"></div>
     </div>
 
     <div class="space-y-2">
-      <label for="schoolEmail" class="text-sm font-medium text-foreground">
+      <label for="schoolEmail" class="text-foreground text-sm font-medium">
         School Email <span class="text-destructive">*</span>
       </label>
       <input
@@ -82,16 +125,16 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         id="schoolEmail"
         name="schoolEmail"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <span class="text-xs text-muted-foreground">
+      <span class="text-muted-foreground text-xs">
         Must end with @stemgharbiya.moe.edu.eg
       </span>
-      <div class="error hidden text-xs text-destructive" id="emailError"></div>
+      <div class="error text-destructive hidden text-xs" id="emailError"></div>
     </div>
 
     <div class="space-y-2">
-      <label for="githubUsername" class="text-sm font-medium text-foreground">
+      <label for="githubUsername" class="text-foreground text-sm font-medium">
         GitHub Username <span class="text-destructive">*</span>
       </label>
       <input
@@ -99,13 +142,13 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         id="githubUsername"
         name="githubUsername"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <div class="error hidden text-xs text-destructive" id="githubError"></div>
+      <div class="error text-destructive hidden text-xs" id="githubError"></div>
     </div>
 
     <div class="space-y-2">
-      <label for="seniorYear" class="text-sm font-medium text-foreground">
+      <label for="seniorYear" class="text-foreground text-sm font-medium">
         Senior Year <span class="text-destructive">*</span>
       </label>
       <input
@@ -116,37 +159,43 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         title="Format: S25, S26, S27, S28, S29, or S30 only"
         placeholder="S25, S26, S27, etc."
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       />
-      <span class="text-xs text-muted-foreground">
+      <span class="text-muted-foreground text-xs">
         Format: S followed by graduation year (S25-S30 only)
       </span>
-      <div class="error hidden text-xs text-destructive" id="seniorYearError"></div>
+      <div class="error text-destructive hidden text-xs" id="seniorYearError">
+      </div>
     </div>
 
     <div class="space-y-3">
-      <label class="text-sm font-medium text-foreground">
+      <label class="text-foreground text-sm font-medium">
         Interests <span class="text-destructive">*</span>
       </label>
       <div class="grid gap-3 sm:grid-cols-2" id="interestsContainer">
-        {ALLOWED_INTERESTS.map((interest) => (
-          <div class="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 px-3 py-3 text-sm text-foreground">
-            <input
-              type="checkbox"
-              name="interests"
-              value={interest}
-              id={`interest-${interest}`}
-              class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
-            />
-            <label for={`interest-${interest}`} class="leading-5">{interest}</label>
-          </div>
-        ))}
+        {
+          ALLOWED_INTERESTS.map((interest) => (
+            <div class="border-border bg-secondary/40 text-foreground flex items-start gap-3 rounded-xl border px-3 py-3 text-sm">
+              <input
+                type="checkbox"
+                name="interests"
+                value={interest}
+                id={`interest-${interest}`}
+                class="border-border text-primary focus:ring-primary/30 mt-1 h-4 w-4 rounded"
+              />
+              <label for={`interest-${interest}`} class="leading-5">
+                {interest}
+              </label>
+            </div>
+          ))
+        }
       </div>
-      <div class="error hidden text-xs text-destructive" id="interestsError"></div>
+      <div class="error text-destructive hidden text-xs" id="interestsError">
+      </div>
     </div>
 
     <div class="space-y-2">
-      <label for="motivation" class="text-sm font-medium text-foreground">
+      <label for="motivation" class="text-foreground text-sm font-medium">
         Motivation <span class="text-destructive">*</span>
       </label>
       <textarea
@@ -154,25 +203,28 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         name="motivation"
         rows="4"
         required
-        class="w-full rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+        class="border-border bg-background text-foreground focus:border-ring focus:ring-ring/20 w-full rounded-xl border px-3 py-2 text-sm shadow-sm transition focus:ring-2 focus:outline-none"
       ></textarea>
-      <span class="text-xs text-muted-foreground">
+      <span class="text-muted-foreground text-xs">
         Why do you want to join? (10-500 characters)
       </span>
-      <div class="error hidden text-xs text-destructive" id="motivationError"></div>
+      <div class="error text-destructive hidden text-xs" id="motivationError">
+      </div>
     </div>
 
     <div class="space-y-3">
-      <label class="text-sm font-medium text-foreground">
+      <label class="text-foreground text-sm font-medium">
         Code of Conduct Agreement <span class="text-destructive">*</span>
       </label>
-      <div class="flex items-start gap-3 rounded-xl border border-border bg-secondary/40 px-3 py-3 text-sm text-foreground">
+      <div
+        class="border-border bg-secondary/40 text-foreground flex items-start gap-3 rounded-xl border px-3 py-3 text-sm"
+      >
         <input
           type="checkbox"
           id="agreement"
           name="agreement"
           required
-          class="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
+          class="border-border text-primary focus:ring-primary/30 mt-1 h-4 w-4 rounded"
         />
         <label for="agreement" class="leading-5">
           I agree to follow the organization's
@@ -180,11 +232,13 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
             href="https://github.com/stemgharbiya/.github/blob/main/CODE_OF_CONDUCT.md"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-primary underline underline-offset-4 transition hover:text-primary/80"
-          >Code of Conduct</a>
+            class="text-primary hover:text-primary/80 underline underline-offset-4 transition"
+            >Code of Conduct</a
+          >
         </label>
       </div>
-      <div class="error hidden text-xs text-destructive" id="agreementError"></div>
+      <div class="error text-destructive hidden text-xs" id="agreementError">
+      </div>
     </div>
     <div
       class="cf-turnstile mt-2"
@@ -193,33 +247,44 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
       data-callback="onTurnstileSuccess"
       data-error-callback="onTurnstileError"
       data-expired-callback="onTurnstileExpired"
-    ></div>
+    >
+    </div>
 
-    <button type="submit" class="btn-primary w-full justify-center mt-4" id="submitBtn" disabled>
+    <button
+      type="submit"
+      class="btn-primary mt-4 w-full justify-center"
+      id="submitBtn"
+      disabled
+    >
       <span id="submitText">Submit Application</span>
     </button>
   </form>
 
   <Fragment slot="formFooter">
-    <div class="mt-8 md:mt-6 border-t border-border pt-6 text-center text-sm text-muted-foreground">
+    <div
+      class="border-border text-muted-foreground mt-8 border-t pt-6 text-center text-sm md:mt-6"
+    >
       <p>
         <a
           href="https://github.com/stemgharbiya/site/issues/new"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-primary underline underline-offset-4 transition hover:text-primary/80"
-        >Have a problem?</a>
+          class="text-primary hover:text-primary/80 underline underline-offset-4 transition"
+          >Have a problem?</a
+        >
       </p>
-      <p class="mt-4 rounded-xl border border-border bg-secondary/40 px-4 py-3 text-xs">
+      <p
+        class="border-border bg-secondary/40 mt-4 rounded-xl border px-4 py-3 text-xs"
+      >
         To prevent spam, you can only submit one application per minute per
-        school email. If you get a "Too many requests" message, please wait
-        a minute before trying again.
+        school email. If you get a "Too many requests" message, please wait a
+        minute before trying again.
       </p>
     </div>
   </Fragment>
 
   <Fragment slot="scripts">
-    <script src="../../scripts/join.ts" />
+    <script src="../../scripts/join.ts"></script>
     <script is:inline>
       const setJoinSubmitState = (enabled) => {
         const submitBtn = document.getElementById("submitBtn");
@@ -240,7 +305,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         window.showAlert?.(
           "error",
           "Verification Failed",
-          "Please complete the security check again."
+          "Please complete the security check again.",
         );
       };
 
@@ -249,7 +314,7 @@ const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
         window.showAlert?.(
           "warning",
           "Verification Expired",
-          "Please complete the security check again."
+          "Please complete the security check again.",
         );
       };
 

@@ -20,35 +20,38 @@ const amenities = [
         <p class="eyebrow">Living Spaces</p>
         <h2 class="section-title mt-3">Residential Rooms</h2>
         <p class="section-lead">
-          Each room is designed for comfort and functionality, housing 4 students per room. 
-          Our random roommate assignment policy promotes diversity and new friendships.
+          Each room is designed for comfort and functionality, housing 4
+          students per room. Our random roommate assignment policy promotes
+          diversity and new friendships.
         </p>
 
         <div class="mt-8 space-y-4">
-          {amenities.map((amenity) => (
-            <div class="flex items-start gap-3">
-              <Icon 
-                name={ICONS.checkCircle}
-                class="h-5 w-5 flex-shrink-0 text-primary mt-0.5"
-                aria-hidden="true"
-              />
-              <p class="text-foreground">{amenity}</p>
-            </div>
-          ))}
+          {
+            amenities.map((amenity) => (
+              <div class="flex items-start gap-3">
+                <Icon
+                  name={ICONS.checkCircle}
+                  class="text-primary mt-0.5 h-5 w-5 flex-shrink-0"
+                  aria-hidden="true"
+                />
+                <p class="text-foreground">{amenity}</p>
+              </div>
+            ))
+          }
         </div>
 
-        <p class="mt-8 text-sm text-muted-foreground">
-          <strong>Roommate Assignment:</strong> Students are randomly assigned roommates 
+        <p class="text-muted-foreground mt-8 text-sm">
+          <strong>Roommate Assignment:</strong> Students are randomly assigned roommates
           to foster diverse relationships and community building across the school.
         </p>
       </div>
 
       <div class="relative">
         <div class="surface p-2">
-          <Image 
-            src={roomImage} 
-            alt="Residential room with beds and storage" 
-            class="h-full w-full rounded-2xl object-cover" 
+          <Image
+            src={roomImage}
+            alt="Residential room with beds and storage"
+            class="h-full w-full rounded-2xl object-cover"
           />
         </div>
       </div>

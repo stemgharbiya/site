@@ -15,14 +15,23 @@ export async function getStaticPaths() {
 
 const clubs = await getCollection("clubsCollection");
 const requestedSegments = Astro.params.type;
-const requestedType = Array.isArray(requestedSegments) ? requestedSegments[0] : requestedSegments;
-const hasExtraSegments = Array.isArray(requestedSegments) && requestedSegments.length > 1;
+const requestedType = Array.isArray(requestedSegments)
+  ? requestedSegments[0]
+  : requestedSegments;
+const hasExtraSegments =
+  Array.isArray(requestedSegments) && requestedSegments.length > 1;
 const selectedType = requestedType?.toLowerCase();
 
-const normalized = [...clubs].sort((first, second) => first.data.title.localeCompare(second.data.title));
+const normalized = [...clubs].sort((first, second) =>
+  first.data.title.localeCompare(second.data.title),
+);
 
-const clubItems = normalized.filter((item) => item.data.type?.toLowerCase() !== "team");
-const teamItems = normalized.filter((item) => item.data.type?.toLowerCase() === "team");
+const clubItems = normalized.filter(
+  (item) => item.data.type?.toLowerCase() !== "team",
+);
+const teamItems = normalized.filter(
+  (item) => item.data.type?.toLowerCase() === "team",
+);
 
 const hasSelectedType = selectedType === "clubs" || selectedType === "teams";
 
@@ -32,7 +41,8 @@ const visibleItems: ClubEntry[] = hasSelectedType
     : clubItems
   : normalized;
 
-const invalidType = Boolean(requestedType) && (hasExtraSegments || !hasSelectedType);
+const invalidType =
+  Boolean(requestedType) && (hasExtraSegments || !hasSelectedType);
 
 const sectionTitle = invalidType
   ? "Activities Not Found"
@@ -68,7 +78,9 @@ if (invalidType) {
   sectionPath={sectionPath}
   description={pageDescription}
   eyebrow="Student Life"
-  headline={invalidType ? "Category not found" : "Clubs and teams powering student innovation."}
+  headline={invalidType
+    ? "Category not found"
+    : "Clubs and teams powering student innovation."}
   lead={invalidType
     ? "This activities category is not available. Explore all groups or select one of the available categories."
     : "Discover STEM Gharbiya clubs and teams—from science and robotics to diplomacy and maker spaces. Explore each group’s focus, leadership, and social links."}
@@ -108,58 +120,77 @@ if (invalidType) {
         </a>
       </div>
 
-      {!invalidType && (
-        <div class="mb-6 flex items-center justify-between gap-4">
-          <h2 class="text-2xl font-semibold text-foreground">
-            {hasSelectedType ? (selectedType === "teams" ? "All teams" : "All clubs") : "All clubs and teams"}
-          </h2>
-          <p class="text-sm text-muted-foreground">{visibleItems.length} groups</p>
-        </div>
-      )}
-
-      {!invalidType && (
-        hasSelectedType ? (
-          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {visibleItems.map((item) => (
-              <ClubCard club={item} />
-            ))}
-          </div>
-        ) : (
-          <div class="space-y-12">
-            <div class="space-y-4" id="clubs">
-              <h3 class="text-xl font-semibold text-foreground">Clubs</h3>
-              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {clubItems.map((item) => (
-                  <ClubCard club={item} />
-                ))}
-              </div>
-            </div>
-
-            <div class="space-y-4" id="teams">
-              <h3 class="text-xl font-semibold text-foreground">Teams</h3>
-              <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {teamItems.map((item) => (
-                  <ClubCard club={item} />
-                ))}
-              </div>
-            </div>
+      {
+        !invalidType && (
+          <div class="mb-6 flex items-center justify-between gap-4">
+            <h2 class="text-foreground text-2xl font-semibold">
+              {hasSelectedType
+                ? selectedType === "teams"
+                  ? "All teams"
+                  : "All clubs"
+                : "All clubs and teams"}
+            </h2>
+            <p class="text-muted-foreground text-sm">
+              {visibleItems.length} groups
+            </p>
           </div>
         )
-      )}
+      }
 
-      {!invalidType && visibleItems.length === 0 && (
-        <div class="surface p-8 text-center">
-          <p class="text-lg font-semibold text-foreground">No groups found</p>
-          <p class="mt-2 text-sm text-muted-foreground">Check back later for updates.</p>
-        </div>
-      )}
+      {
+        !invalidType &&
+          (hasSelectedType ? (
+            <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {visibleItems.map((item) => (
+                <ClubCard club={item} />
+              ))}
+            </div>
+          ) : (
+            <div class="space-y-12">
+              <div class="space-y-4" id="clubs">
+                <h3 class="text-foreground text-xl font-semibold">Clubs</h3>
+                <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {clubItems.map((item) => (
+                    <ClubCard club={item} />
+                  ))}
+                </div>
+              </div>
 
-      {invalidType && (
-        <div class="surface p-8 text-center">
-          <p class="text-lg font-semibold text-foreground">No groups found for {requestedType}</p>
-          <p class="mt-2 text-sm text-muted-foreground">Choose one of the available categories above or browse all groups.</p>
-        </div>
-      )}
+              <div class="space-y-4" id="teams">
+                <h3 class="text-foreground text-xl font-semibold">Teams</h3>
+                <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                  {teamItems.map((item) => (
+                    <ClubCard club={item} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))
+      }
+
+      {
+        !invalidType && visibleItems.length === 0 && (
+          <div class="surface p-8 text-center">
+            <p class="text-foreground text-lg font-semibold">No groups found</p>
+            <p class="text-muted-foreground mt-2 text-sm">
+              Check back later for updates.
+            </p>
+          </div>
+        )
+      }
+
+      {
+        invalidType && (
+          <div class="surface p-8 text-center">
+            <p class="text-foreground text-lg font-semibold">
+              No groups found for {requestedType}
+            </p>
+            <p class="text-muted-foreground mt-2 text-sm">
+              Choose one of the available categories above or browse all groups.
+            </p>
+          </div>
+        )
+      }
     </div>
   </section>
 </AboutLayout>

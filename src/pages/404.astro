@@ -5,23 +5,24 @@ import { ICONS } from "../data/icons";
 ---
 
 <Layout
-    title="Page Not Found"
-    description="The page you requested could not be found. Return to the STEM Gharbiya homepage to continue browsing."
+  title="Page Not Found"
+  description="The page you requested could not be found. Return to the STEM Gharbiya homepage to continue browsing."
 >
-<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="flex min-h-screen items-center justify-center px-4">
     <div class="text-center">
-        <h1 class="text-9xl font-bold text-primary mb-4">404</h1>
-        <h2 class="text-3xl font-semibold mb-4">Page Not Found</h2>
-        <p class="text-muted-foreground mb-8 max-w-md mx-auto">
-            Sorry, we couldn't find the page you're looking for. The page might have been moved, deleted, or never existed.
-        </p>
-        <a 
-            href="/" 
-            class="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition"
-        >
-            <Icon name={ICONS.home} class="h-5 w-5" aria-hidden="true" />
-            Return to Home
-        </a>
+      <h1 class="text-primary mb-4 text-9xl font-bold">404</h1>
+      <h2 class="mb-4 text-3xl font-semibold">Page Not Found</h2>
+      <p class="text-muted-foreground mx-auto mb-8 max-w-md">
+        Sorry, we couldn't find the page you're looking for. The page might have
+        been moved, deleted, or never existed.
+      </p>
+      <a
+        href="/"
+        class="bg-primary text-primary-foreground inline-flex items-center gap-2 rounded-lg px-6 py-3 font-medium transition hover:opacity-90"
+      >
+        <Icon name={ICONS.home} class="h-5 w-5" aria-hidden="true" />
+        Return to Home
+      </a>
     </div>
-</div>
+  </div>
 </Layout>

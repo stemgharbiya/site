@@ -1,4 +1,8 @@
-export async function verifyTurnstile(token: string, secret: string, ip: string) {
+export async function verifyTurnstile(
+  token: string,
+  secret: string,
+  ip: string,
+) {
   if (!token || typeof token !== "string" || token.trim().length === 0) {
     return new Response(
       JSON.stringify({ error: "Invalid verification token" }),

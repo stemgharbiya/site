@@ -7,7 +7,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "indexnow": "node scripts/indexnow.js"
+    "indexnow": "node scripts/indexnow.js",
+    "lint:format": "prettier --check .",
+    "format": "prettier --write .",
+    "format:check": "prettier --list-different ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -19,6 +22,9 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@vite-pwa/astro": "^1.2.0"
+    "@vite-pwa/astro": "^1.2.0",
+    "prettier": "3.8.1",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.7.2"
   }
 }
