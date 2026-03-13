@@ -195,7 +195,11 @@
       "Interdisciplinary fabrication tasks"
     ],
     "imageSlots": [
-      { "label": "FabLab Overview", "suggestedFile": "fablab-overview.jpg", "image": "../assets/images/facilites/fablab-overview.jpg" },
+      {
+        "label": "FabLab Overview",
+        "suggestedFile": "fablab-overview.jpg",
+        "image": "../assets/images/facilites/fablab-overview.jpg"
+      },
       {
         "label": "Prototype Workbench",
         "suggestedFile": "fablab-workbench.jpg"
@@ -247,7 +251,11 @@
       "Quiet self-study"
     ],
     "imageSlots": [
-      { "label": "Library Overview", "suggestedFile": "library-overview.jpg", "image": "../assets/images/facilites/library-overview.jpg" },
+      {
+        "label": "Library Overview",
+        "suggestedFile": "library-overview.jpg",
+        "image": "../assets/images/facilites/library-overview.jpg"
+      },
       {
         "label": "Scientific Book Shelves",
         "suggestedFile": "library-books.jpg"

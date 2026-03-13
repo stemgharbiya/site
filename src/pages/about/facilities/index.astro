@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
-import AboutLayout from '../../../layouts/AboutLayout.astro';
-import FacilitiesOverview from '../../../components/facilities/FacilitiesOverview.astro';
+import { getCollection } from "astro:content";
+import AboutLayout from "../../../layouts/AboutLayout.astro";
+import FacilitiesOverview from "../../../components/facilities/FacilitiesOverview.astro";
 
-const facilities = await getCollection('facilitiesCollection');
+const facilities = await getCollection("facilitiesCollection");
 const facilityList = facilities.map((facility) => facility.data);
 
 const structuredData = {
