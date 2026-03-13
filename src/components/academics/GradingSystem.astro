@@ -41,7 +41,7 @@ const { grades } = Astro.props;
           </thead>
           <tbody>
             {
-              grades.map((entry, index) => {
+              grades.map((entry) => {
                 let interpretation = "";
                 if (entry.grade === "A+" || entry.grade === "A") {
                   interpretation = "Excellent";

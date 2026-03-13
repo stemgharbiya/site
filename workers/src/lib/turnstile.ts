@@ -19,7 +19,7 @@ export async function verifyTurnstile(
 
   try {
     // Validate the token by calling the "/siteverify" API.
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("secret", secret);
     formData.append("response", token.trim());
     formData.append("remoteip", ip);
@@ -37,7 +37,12 @@ export async function verifyTurnstile(
       throw new Error(`Verification service returned ${result.status}`);
     }
 
-    const outcome: any = await result.json();
+    type TurnstileOutcome = {
+      success?: boolean;
+      "error-codes"?: string[];
+    };
+
+    const outcome = (await result.json()) as TurnstileOutcome;
 
     if (!outcome.success) {
       console.error("Turnstile verification failed:", {
@@ -53,8 +58,9 @@ export async function verifyTurnstile(
     }
 
     return null;
-  } catch (error: any) {
-    console.error("Turnstile verification error:", error.message);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("Turnstile verification error:", message);
 
     return new Response(
       JSON.stringify({ error: "Verification service temporarily unavailable" }),

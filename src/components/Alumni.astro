@@ -3,15 +3,21 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import defaultImage from "../assets/images/alumni/default.png";
 import "../styles/image-filters.css";
+import type { CollectionEntry } from "astro:content";
 
 const alumni = await getCollection("alumniCollection");
-const students = alumni
-  .flatMap((batch: any) => batch.data.students)
+type Batch = CollectionEntry<"alumniCollection">;
+type Student = Batch["data"]["students"][0];
+
+const students: Student[] = alumni
+  .flatMap((batch) => batch.data.students)
   .slice(0, 6);
-const universityLogos: { logo: any; name: string }[] = [];
+
+const universityLogos: { logo: Student["university"]["logo"]; name: string }[] =
+  [];
 const seen = new Set<string>();
 
-for (const student of alumni.flatMap((batch: any) => batch.data.students)) {
+for (const student of alumni.flatMap((batch) => batch.data.students)) {
   const logo = student.university?.logo;
   const name = student.university?.name || "";
   if (logo && name && !seen.has(name)) {
@@ -36,7 +42,7 @@ for (const student of alumni.flatMap((batch: any) => batch.data.students)) {
 
       <div class="mt-8 grid gap-4 sm:grid-cols-2">
         {
-          students.map((student: any) => (
+          students.map((student) => (
             <div class="surface p-4">
               <div class="flex items-center gap-4">
                 <div class="border-border h-12 w-12 overflow-hidden rounded-full border">
