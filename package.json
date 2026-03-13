@@ -2,6 +2,15 @@
   "name": "gharbiya-stem-school-website",
   "type": "module",
   "version": "0.0.1",
+  "lint-staged": {
+    "*.{ts,js,mjs,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,jsonc,css,md,yml}": [
+      "prettier --write"
+    ]
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -12,7 +21,8 @@
     "lint:fix": "eslint . --fix",
     "lint:format": "prettier --check .",
     "format": "prettier --write .",
-    "format:check": "prettier --list-different ."
+    "format:check": "prettier --list-different .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -32,6 +42,8 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.6.0",
     "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.3",
     "prettier": "3.8.1",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.7.2",
