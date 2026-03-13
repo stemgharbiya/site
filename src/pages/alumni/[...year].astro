@@ -1,9 +1,7 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import AlumniCard from "../../components/alumni/AlumniCard.astro";
-
-type AlumniBatch = CollectionEntry<"alumniCollection">;
 
 export async function getStaticPaths() {
   const alumni = await getCollection("alumniCollection");

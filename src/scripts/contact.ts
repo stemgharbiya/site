@@ -13,6 +13,8 @@ import {
   showFieldError as showFieldErrorBase,
 } from "./sharedForm";
 
+const isDev = import.meta.env.DEV;
+
 function showFieldError(fieldId: string, message: string) {
   showFieldErrorBase(fieldId, message);
 }
@@ -32,7 +34,11 @@ function saveFormData() {
   };
   try {
     localStorage.setItem("stemgharbiya-contact", JSON.stringify(formData));
-  } catch {}
+  } catch (error) {
+    if (isDev) {
+      console.warn("Failed to save contact form data to localStorage:", error);
+    }
+  }
 }
 
 function loadFormData() {
@@ -52,13 +58,27 @@ function loadFormData() {
     if (formData.message)
       (document.getElementById("message") as HTMLTextAreaElement).value =
         formData.message;
-  } catch {}
+  } catch (error) {
+    if (isDev) {
+      console.warn(
+        "Failed to load contact form data from localStorage:",
+        error,
+      );
+    }
+  }
 }
 
 function clearFormData() {
   try {
     localStorage.removeItem("stemgharbiya-contact");
-  } catch {}
+  } catch (error) {
+    if (isDev) {
+      console.warn(
+        "Failed to clear contact form data from localStorage:",
+        error,
+      );
+    }
+  }
 }
 
 function setLoading(loading: boolean) {
@@ -88,9 +108,13 @@ async function submitForm(formData: FormData) {
           detailsText || "",
         );
       } else {
-        throw new Error(
-          result.error || result.message || `Server error: ${response.status}`,
-        );
+        const errorMessage =
+          typeof result.error === "string"
+            ? result.error
+            : result.error?.message ||
+              result.message ||
+              `Server error: ${response.status}`;
+        throw new Error(errorMessage);
       }
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -247,10 +271,9 @@ function ensureTurnstileWidget() {
   const widgetId = window.turnstile.render(widget, {
     sitekey,
     theme: widget.getAttribute("data-theme") || "auto",
-    callback: (token: string) => (window as any).onTurnstileSuccess?.(token),
-    "error-callback": (code: string) =>
-      (window as any).onTurnstileError?.(code),
-    "expired-callback": () => (window as any).onTurnstileExpired?.(),
+    callback: (token: string) => window.onTurnstileSuccess?.(token),
+    "error-callback": (code: string) => window.onTurnstileError?.(code),
+    "expired-callback": () => window.onTurnstileExpired?.(),
   });
 
   if (widgetId) {

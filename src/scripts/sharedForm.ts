@@ -11,6 +11,9 @@ export type AlertFn = (
 declare global {
   interface Window {
     showAlert?: AlertFn;
+    onTurnstileSuccess?: (token: string) => void;
+    onTurnstileError?: (errorCode: string) => void;
+    onTurnstileExpired?: () => void;
     turnstile?: {
       getResponse: () => string;
       reset?: (widgetId?: string) => void;
@@ -204,33 +207,53 @@ export function setLoading(
   }
 }
 
-export async function safeParseResponse(response: Response): Promise<any> {
+type ValidationIssue = {
+  message?: string;
+};
+
+type ParsedResponse = {
+  error?: string | { message?: string };
+  message?: string;
+  details?: string;
+  issues?: ValidationIssue[];
+  [key: string]: unknown;
+};
+
+export async function safeParseResponse(
+  response: Response,
+): Promise<ParsedResponse> {
   try {
-    return await response.json();
+    return (await response.json()) as ParsedResponse;
   } catch {
     return {};
   }
 }
 
-export function extractValidationError(result: any) {
-  let errMsg = "";
+export function extractValidationError(
+  result: ParsedResponse | null | undefined,
+) {
+  let errMsg: string;
   let detailsText = "";
 
   if (result) {
-    if (typeof result.error === "string") errMsg = result.error;
-    else if (
+    if (typeof result.error === "string") {
+      errMsg = result.error;
+    } else if (
       result.error &&
       typeof result.error === "object" &&
       result.error.message
-    )
+    ) {
       errMsg = result.error.message;
-    else if (result.message) errMsg = result.message;
-    else if (result.issues && Array.isArray(result.issues)) {
+    } else if (result.message) {
+      errMsg = result.message;
+    } else if (result.issues && Array.isArray(result.issues)) {
       errMsg = "Validation failed";
       detailsText = result.issues
-        .map((i: any) => i.message || JSON.stringify(i))
+        .map((i) => i.message || JSON.stringify(i))
         .join("; ");
-    } else errMsg = JSON.stringify(result);
+    } else {
+      errMsg = JSON.stringify(result);
+    }
 
     if (!detailsText && result.details) detailsText = result.details;
   } else {
