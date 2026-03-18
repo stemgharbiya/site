@@ -1,4 +1,5 @@
 ---
+import { TURNSTILE_SITE_KEY } from "astro:env/client";
 import FormLayout from "../../layouts/FormLayout.astro";
 import { ALLOWED_INTERESTS } from "../../data/forms";
 
@@ -6,8 +7,6 @@ const linksInHead = [
   '<link rel="preconnect" href="https://challenges.cloudflare.com" />',
   '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer async></script>',
 ];
-
-const TURNSTILE_SITE_KEY = import.meta.env.TURNSTILE_SITE_KEY;
 ---
 
 <FormLayout
