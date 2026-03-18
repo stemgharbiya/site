@@ -236,9 +236,18 @@ const isPathActive = (href: string) => {
                   <a
                     href={item.href}
                     aria-current={isPathActive(item.href) ? "page" : undefined}
-                    class="dropdown-link focus-visible:ring-ring/50 focus-visible:ring-2 focus-visible:outline-none"
+                    class:list={[
+                      "dropdown-link focus-visible:ring-ring/50 relative isolate focus-visible:ring-2 focus-visible:outline-none",
+                      isPathActive(item.href) && "text-foreground font-medium",
+                    ]}
                   >
-                    <span class="inline-flex items-center gap-2">
+                    {isPathActive(item.href) && (
+                      <span
+                        class="bg-secondary/80 dark:bg-muted/70 border-border/80 pointer-events-none absolute inset-0 rounded-xl border"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span class="relative inline-flex items-center gap-2">
                       <Icon
                         name={ICONS[item.icon]}
                         class="h-4.5 w-4.5"
