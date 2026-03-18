@@ -62,11 +62,6 @@ export const siteConfig: SiteConfig = {
             href: "/about/faculty-staff",
             icon: "faculty",
           },
-          {
-            label: "Facilities",
-            href: "/about/facilities",
-            icon: "facilities",
-          },
           { label: "Dorm", href: "/about/dorm", icon: "dorm" },
           { label: "Academics", href: "/about/academics", icon: "academics" },
           { label: "Admission", href: "/about/admission", icon: "admission" },
@@ -75,12 +70,6 @@ export const siteConfig: SiteConfig = {
       },
       { label: "Alumni", href: "/alumni", icon: "graduates" },
       { label: "Contact", href: "/contact", icon: "contact" },
-      {
-        label: "Portal",
-        href: "https://portal.stemgh.org",
-        icon: "portal",
-        variant: "portal",
-      },
     ],
   },
   footer: {
@@ -89,7 +78,6 @@ export const siteConfig: SiteConfig = {
       { label: "Academics", href: "/about/academics" },
       { label: "Activities", href: "/about/activities" },
       { label: "Faculty & Staff", href: "/about/faculty-staff" },
-      { label: "Alumni", href: "/alumni" },
     ],
     admissions: [
       {
@@ -107,6 +95,7 @@ export const siteConfig: SiteConfig = {
       { label: "Admission FAQ", href: "/about/admission#admission-faq" },
     ],
     quickLinks: [
+      { label: "Alumni", href: "/alumni" },
       { label: "Contact", href: "/contact" },
       {
         label: "Admissions Contact",
@@ -116,7 +105,6 @@ export const siteConfig: SiteConfig = {
         label: "Campus Location",
         href: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
       },
-      { label: "Student Portal", href: "https://portal.stemgh.org" },
     ],
     address: "Galaa St., Tanta, Gharbiya, Egypt",
     mapUrl: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
