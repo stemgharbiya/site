@@ -1,4 +1,4 @@
-const apiBase = import.meta.env.API_BASE_URL || "http://localhost:8787";
+import { API_BASE_URL as apiBase } from "astro:env/client";
 
 function apiPost(path: string, payload: Record<string, unknown>) {
   return fetch(`${apiBase}${path}`, {

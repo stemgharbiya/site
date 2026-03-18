@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
@@ -16,6 +16,21 @@ export default defineConfig({
   },
   image: {
     layout: "constrained",
+  },
+  env: {
+    schema: {
+      API_BASE_URL: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+        default: "http://localhost:8787",
+      }),
+      TURNSTILE_SITE_KEY: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+    },
   },
   integrations: [
     AstroPWA({
