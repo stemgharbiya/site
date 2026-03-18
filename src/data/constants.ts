@@ -4,6 +4,7 @@ type NavItem = {
   label: string;
   href: string;
   icon: IconKey;
+  variant?: string;
   children?: NavItem[];
 };
 
@@ -73,11 +74,12 @@ export const siteConfig: SiteConfig = {
         ],
       },
       { label: "Alumni", href: "/alumni", icon: "graduates" },
-      { label: "Contact Us", href: "/contact", icon: "contact" },
+      { label: "Contact", href: "/contact", icon: "contact" },
       {
         label: "Portal",
         href: "https://portal.stemgh.org",
         icon: "portal",
+        variant: "portal",
       },
     ],
   },
@@ -105,7 +107,7 @@ export const siteConfig: SiteConfig = {
       { label: "Admission FAQ", href: "/about/admission#admission-faq" },
     ],
     quickLinks: [
-      { label: "Contact Us", href: "/contact" },
+      { label: "Contact", href: "/contact" },
       {
         label: "Admissions Contact",
         href: "/about/admission#contact-admissions",

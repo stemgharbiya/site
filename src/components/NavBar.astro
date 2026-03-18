@@ -6,6 +6,33 @@ import { ICONS } from "../data/icons";
 import { siteConfig } from "../data/constants";
 
 const navItems = siteConfig.nav.primary;
+const pathname = Astro.url.pathname;
+
+const portalItem = navItems.find(
+  (item) => item.variant === "portal" || item.href?.startsWith("http"),
+);
+const portalIsExternal = !!portalItem && portalItem.href.startsWith("http");
+const mainNavItems = navItems.filter((item) => item !== portalItem);
+
+const normalizePath = (path: string) =>
+  path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path;
+
+const currentPath = normalizePath(pathname);
+
+const isPathExact = (href: string) => currentPath === normalizePath(href);
+
+const isPathActive = (href: string) => {
+  if (!href.startsWith("/")) {
+    return false;
+  }
+
+  const normalizedHref = normalizePath(href);
+
+  return normalizedHref === "/"
+    ? currentPath === "/"
+    : currentPath === normalizedHref ||
+        currentPath.startsWith(`${normalizedHref}/`);
+};
 ---
 
 <nav
@@ -24,106 +51,215 @@ const navItems = siteConfig.nav.primary;
 
     <div class="hidden items-center gap-1 lg:flex">
       {
-        navItems.map((item) =>
-          item.children ? (
+        mainNavItems.map((item) => {
+          const isItemIndex = item.children?.some(
+            (child) => child.href === item.href,
+          );
+          const isActive = item.children
+            ? item.children.some((child) =>
+                isItemIndex && child.href === item.href
+                  ? isPathExact(child.href)
+                  : isPathActive(child.href),
+              )
+            : isPathActive(item.href);
+
+          return item.children ? (
             <div class="group relative">
-              <button class="nav-link flex items-center gap-2">
-                <Icon
-                  name={ICONS[item.icon]}
-                  class="h-[18px] w-[18px]"
-                  aria-hidden="true"
-                />
-                {item.label}
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  class="text-muted-foreground size-5"
-                >
-                  <path
-                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
+              <button
+                class:list={[
+                  "nav-link focus-visible:ring-ring/50 relative isolate flex items-center gap-2 focus-visible:ring-2 focus-visible:outline-none",
+                  isActive && "text-foreground font-semibold",
+                ]}
+                aria-haspopup="true"
+              >
+                {isActive && (
+                  <span
+                    transition:name="active-nav-pill"
+                    class="bg-secondary/80 dark:bg-muted/70 border-border/80 pointer-events-none absolute inset-0 rounded-full border"
+                    aria-hidden="true"
                   />
-                </svg>
+                )}
+                <span class="relative inline-flex items-center gap-2">
+                  <Icon
+                    name={ICONS[item.icon]}
+                    class="h-4.5 w-4.5"
+                    aria-hidden="true"
+                  />
+                  {item.label}
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    class="text-muted-foreground size-5"
+                  >
+                    <path
+                      d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                      clip-rule="evenodd"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </span>
               </button>
-              <div class="border-border bg-background invisible absolute left-0 mt-3 w-56 rounded-2xl border p-2 opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                {item.children.map((child) => (
-                  <a href={child.href} class="dropdown-link">
-                    <span class="inline-flex items-center gap-2">
-                      <Icon
-                        name={ICONS[child.icon]}
-                        class="h-[18px] w-[18px]"
-                        aria-hidden="true"
-                      />
-                      {child.label}
-                    </span>
-                  </a>
-                ))}
+              <div class="border-border bg-background invisible absolute left-0 mt-3 w-60 rounded-2xl border p-2 opacity-0 shadow-lg transition-all duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                {item.children.map((child) => {
+                  const isChildActive =
+                    item.href === child.href
+                      ? isPathExact(child.href)
+                      : isPathActive(child.href);
+
+                  return (
+                    <a
+                      href={child.href}
+                      aria-current={isChildActive ? "page" : undefined}
+                      class:list={[
+                        "dropdown-link focus-visible:ring-ring/50 relative isolate focus-visible:ring-2 focus-visible:outline-none",
+                        isChildActive && "text-foreground font-medium",
+                      ]}
+                    >
+                      {isChildActive && (
+                        <span
+                          transition:name="active-nav-child-pill"
+                          class="bg-secondary/80 dark:bg-muted/70 border-border/80 pointer-events-none absolute inset-0 rounded-xl border"
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span class="relative inline-flex items-center gap-2">
+                        <Icon
+                          name={ICONS[child.icon]}
+                          class="h-4.5 w-4.5"
+                          aria-hidden="true"
+                        />
+                        {child.label}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
             </div>
           ) : (
-            <a href={item.href} class="nav-link">
-              <span class="inline-flex items-center gap-2">
+            <a
+              href={item.href}
+              aria-current={isActive ? "page" : undefined}
+              class:list={[
+                "nav-link focus-visible:ring-ring/50 relative isolate focus-visible:ring-2 focus-visible:outline-none",
+                isActive && "text-foreground font-semibold",
+              ]}
+            >
+              {isActive && (
+                <span
+                  transition:name="active-nav-pill"
+                  class="bg-secondary/80 dark:bg-muted/70 border-border/80 pointer-events-none absolute inset-0 rounded-full border"
+                  aria-hidden="true"
+                />
+              )}
+              <span class="relative inline-flex items-center gap-2">
                 <Icon
                   name={ICONS[item.icon]}
-                  class="h-[18px] w-[18px]"
+                  class="h-4.5 w-4.5"
                   aria-hidden="true"
                 />
                 {item.label}
               </span>
             </a>
-          ),
-        )
+          );
+        })
       }
     </div>
 
     <div class="flex items-center gap-2">
+      {
+        portalItem && (
+          <a
+            href={portalItem.href}
+            class="btn-secondary hidden h-9 px-4 text-xs font-semibold tracking-wide uppercase lg:inline-flex"
+            target={portalIsExternal ? "_blank" : undefined}
+            rel={portalIsExternal ? "noreferrer" : undefined}
+          >
+            {portalItem.label}
+          </a>
+        )
+      }
       <details class="relative lg:hidden">
         <summary
-          class="border-border bg-background/80 text-foreground hover:bg-secondary list-none rounded-full border p-2 transition"
+          class="border-border bg-background/80 text-foreground hover:bg-secondary focus-visible:ring-ring/50 list-none rounded-full border p-2 transition focus-visible:ring-2 focus-visible:outline-none"
         >
           <span class="sr-only">Toggle navigation</span>
           <Icon name={ICONS.menu} class="h-5 w-5" aria-hidden="true" />
         </summary>
         <div
-          class="border-border bg-background absolute right-0 mt-3 w-72 rounded-2xl border p-4 shadow-xl"
+          class="border-border bg-background absolute right-0 mt-3 w-72 rounded-2xl border p-4 shadow-lg"
         >
           <div class="grid gap-2 text-sm">
             {
-              navItems.map((item) =>
+              mainNavItems.map((item) =>
                 item.children ? (
                   <div class="border-border bg-secondary/40 rounded-xl border p-3">
                     <p class="text-muted-foreground text-xs tracking-[0.2em] uppercase">
                       {item.label}
                     </p>
                     <div class="mt-2 grid gap-2">
-                      {item.children.map((child) => (
-                        <a href={child.href} class="dropdown-link">
-                          <span class="inline-flex items-center gap-2">
-                            <Icon
-                              name={ICONS[child.icon]}
-                              class="h-[18px] w-[18px]"
-                              aria-hidden="true"
-                            />
-                            {child.label}
-                          </span>
-                        </a>
-                      ))}
+                      {item.children.map((child) => {
+                        const isChildActive =
+                          item.href === child.href
+                            ? isPathExact(child.href)
+                            : isPathActive(child.href);
+
+                        return (
+                          <a
+                            href={child.href}
+                            aria-current={isChildActive ? "page" : undefined}
+                            class:list={[
+                              "dropdown-link focus-visible:ring-ring/50 relative isolate focus-visible:ring-2 focus-visible:outline-none",
+                              isChildActive && "text-foreground font-medium",
+                            ]}
+                          >
+                            {isChildActive && (
+                              <span
+                                class="bg-secondary/80 dark:bg-muted/70 border-border/80 pointer-events-none absolute inset-0 rounded-xl border"
+                                aria-hidden="true"
+                              />
+                            )}
+                            <span class="relative inline-flex items-center gap-2">
+                              <Icon
+                                name={ICONS[child.icon]}
+                                class="h-4.5 w-4.5"
+                                aria-hidden="true"
+                              />
+                              {child.label}
+                            </span>
+                          </a>
+                        );
+                      })}
                     </div>
                   </div>
                 ) : (
-                  <a href={item.href} class="dropdown-link">
+                  <a
+                    href={item.href}
+                    aria-current={isPathActive(item.href) ? "page" : undefined}
+                    class="dropdown-link focus-visible:ring-ring/50 focus-visible:ring-2 focus-visible:outline-none"
+                  >
                     <span class="inline-flex items-center gap-2">
                       <Icon
                         name={ICONS[item.icon]}
-                        class="h-[18px] w-[18px]"
+                        class="h-4.5 w-4.5"
                         aria-hidden="true"
                       />
                       {item.label}
                     </span>
                   </a>
                 ),
+              )
+            }
+            {
+              portalItem && (
+                <a
+                  href={portalItem.href}
+                  class="btn-secondary mt-2 h-9 justify-center px-4 text-xs font-semibold tracking-wide uppercase"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {portalItem.label}
+                </a>
               )
             }
           </div>
