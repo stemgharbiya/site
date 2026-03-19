@@ -236,8 +236,8 @@ const structuredData = {
         setContactSubmitState(false);
         window.showAlert?.(
           "error",
-          "Verification Failed",
-          "Please complete the security check again.",
+          "Captcha Failed",
+          "Verification failed. Please reload the page and try again.",
         );
       };
 
@@ -245,8 +245,8 @@ const structuredData = {
         setContactSubmitState(false);
         window.showAlert?.(
           "warning",
-          "Verification Expired",
-          "Please complete the security check again.",
+          "Captcha Expired",
+          "Verification expired. Please reload the page and try again.",
         );
       };
 
