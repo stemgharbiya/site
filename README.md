@@ -132,6 +132,19 @@ http://localhost:8787
 - `npm run preview` — Preview the production build locally
 - `npm run astro` — Run Astro CLI commands
 - `npm run indexnow` — Submit site URLs via IndexNow helper script
+- `npm run lint` — Run ESLint across the project
+- `npm run lint:fix` — Auto-fix ESLint issues where possible
+- `npm run lint:format` — Check formatting with Prettier
+- `npm run format` — Format files with Prettier
+- `npm run format:check` — List files that differ from Prettier formatting
+
+---
+
+## Quality Checks
+
+- Pre-commit hooks run `eslint --fix` and `prettier --write` on staged files.
+- CI runs lint/format checks and an Astro build for pull requests.
+- Use `npm run lint` and `npm run format:check` locally before opening a PR.
 
 ---
 

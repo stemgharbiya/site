@@ -194,6 +194,8 @@ npm run deploy
 npx wrangler deploy --minify
 ```
 
+This deploys the worker configured in `wrangler.jsonc` as `site-api`.
+
 ## 3. Set Production Secrets
 
 Only set sensitive values as secrets. Non-sensitive values should be configured in `wrangler.jsonc` under `vars`.
@@ -337,6 +339,8 @@ npx wrangler d1 backup create stemgharbiya-site --name backup-$(date +%Y%m%d)
 
 - `npm run dev` — Start local dev server
 - `npm run deploy` — Deploy to production
+- `npm run cf-typegen` — Generate Cloudflare binding types
+- `npm run type:gen` — Generate Wrangler types file
 
 ---
 
