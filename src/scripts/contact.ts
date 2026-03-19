@@ -212,7 +212,7 @@ function bindFormHandlers() {
       showAlert(
         "error",
         "Captcha Required",
-        "Please complete the Turnstile captcha before submitting.",
+        "Verification failed. Please reload the page and try again.",
       );
       hasErrors = true;
     }

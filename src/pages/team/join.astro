@@ -303,8 +303,8 @@ const linksInHead = [
         setJoinSubmitState(false);
         window.showAlert?.(
           "error",
-          "Verification Failed",
-          "Please complete the security check again.",
+          "Captcha Failed",
+          "Verification failed. Please reload the page and try again.",
         );
       };
 
@@ -312,8 +312,8 @@ const linksInHead = [
         setJoinSubmitState(false);
         window.showAlert?.(
           "warning",
-          "Verification Expired",
-          "Please complete the security check again.",
+          "Captcha Expired",
+          "Verification expired. Please reload the page and try again.",
         );
       };
 
