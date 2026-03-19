@@ -22,7 +22,8 @@
     "lint:format": "prettier --check .",
     "format": "prettier --write .",
     "format:check": "prettier --list-different .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -34,6 +35,8 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@eslint/js": "^10.0.1",
     "@eslint/json": "^1.1.0",
     "@typescript-eslint/parser": "^8.57.0",
