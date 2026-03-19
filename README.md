@@ -133,6 +133,28 @@ http://localhost:8787
 - `npm run astro` — Run Astro CLI commands
 - `npm run indexnow` — Submit site URLs via IndexNow helper script
 
+## Commit Message Convention
+
+Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/).
+
+Format:
+
+```text
+type(scope): short summary
+```
+
+Examples:
+
+- `feat(nav): improve mobile menu keyboard support`
+- `fix(forms): use astro:env/client for API base URL`
+- `docs(readme): add contribution notes`
+
+Notes:
+
+- Keep the header (first line) <= 100 characters.
+- Extended squash-merge descriptions are allowed.
+- Header length violations fail commitlint; body/footer line length only shows warnings.
+
 ---
 
 ## Configuration Notes
