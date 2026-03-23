@@ -4,7 +4,7 @@ import Logo from "./Logo.astro";
 import { siteConfig } from "../data/constants";
 import { ICONS } from "../data/icons";
 
-const { footer, social } = siteConfig;
+const { footer, social, address, mapUrl } = siteConfig;
 ---
 
 <footer
@@ -35,10 +35,10 @@ const { footer, social } = siteConfig;
         <p class="text-muted-foreground text-xs tracking-[0.2em] uppercase">
           Campus address
         </p>
-        <p class="text-foreground mt-3 text-sm">{footer.address}</p>
+        <p class="text-foreground mt-3 text-sm">{address}</p>
         <div class="mt-4 flex flex-col gap-3">
           <a
-            href={footer.mapUrl}
+            href={mapUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="text-muted-foreground hover:text-foreground text-sm transition"

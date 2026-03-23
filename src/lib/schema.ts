@@ -1,15 +1,5 @@
 type SchemaNode = Record<string, unknown>;
-
-type SiteConfigShape = {
-  name: string;
-  url: string;
-  description: string;
-  email: string;
-  social: Array<{ href: string }>;
-  footer: {
-    address: string;
-  };
-};
+import { type SiteConfig } from "../data/constants";
 
 type BreadcrumbItem = {
   name: string;
@@ -27,6 +17,9 @@ export type { SchemaNode, BreadcrumbItem, ItemListEntity };
 
 export function cleanCanonicalUrl(url: string, fallbackSiteUrl: string) {
   const parsed = new URL(url || fallbackSiteUrl);
+  if (!parsed.pathname.endsWith("/")) {
+    parsed.pathname += "/";
+  }
   parsed.hash = "";
   parsed.search = "";
   return parsed.href;
@@ -44,7 +37,7 @@ export function getGlobalSchemaIds(siteUrl: string) {
 }
 
 export function buildWebSiteNode(
-  siteConfig: SiteConfigShape,
+  siteConfig: SiteConfig,
   websiteId: string,
 ): SchemaNode {
   return {
@@ -57,7 +50,7 @@ export function buildWebSiteNode(
 }
 
 export function buildOrganizationNodes(
-  siteConfig: SiteConfigShape,
+  siteConfig: SiteConfig,
   organizationId: string,
   highSchoolId: string,
 ): SchemaNode[] {
@@ -76,7 +69,8 @@ export function buildOrganizationNodes(
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: siteConfig.footer.address,
+      postalCode: siteConfig.postalCode,
+      streetAddress: siteConfig.address,
       addressLocality: "Tanta",
       addressRegion: "Gharbiya",
       addressCountry: "EG",
@@ -143,7 +137,7 @@ export function buildBreadcrumbListNode(params: {
       "@type": "ListItem",
       position: index + 1,
       name: entry.name,
-      item: entry.item,
+      item: cleanCanonicalUrl(entry.item, pageUrl),
     })),
   };
 }
