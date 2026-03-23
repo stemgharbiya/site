@@ -6,6 +6,8 @@ interface Props {
   description?: string;
   linksInHead?: string[];
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  pageType?: string;
+  noIndex?: boolean;
   sidebarEyebrow: string;
   sidebarTitle: string;
   sidebarDescription: string;
@@ -19,6 +21,8 @@ const {
   description,
   linksInHead = [],
   structuredData,
+  pageType,
+  noIndex,
   sidebarEyebrow,
   sidebarTitle,
   sidebarDescription,
@@ -33,6 +37,8 @@ const {
   description={description}
   linksInHead={linksInHead}
   structuredData={structuredData}
+  pageType={pageType}
+  noIndex={noIndex}
 >
   <section class="section">
     <div class="section-inner">

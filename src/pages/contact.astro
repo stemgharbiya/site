@@ -2,6 +2,7 @@
 import { TURNSTILE_SITE_KEY } from "astro:env/client";
 import FormLayout from "../layouts/FormLayout.astro";
 import { siteConfig } from "../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../lib/schema";
 const { email } = siteConfig;
 
 const linksInHead = [
@@ -9,32 +10,35 @@ const linksInHead = [
   '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer async></script>',
 ];
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
-  name: "Contact Us",
-  description:
-    "Contact STEM Gharbiya for admissions, academics, activities, or partnerships.",
-  url: `${siteConfig.url}/contact`,
-  mainEntity: {
-    "@type": "HighSchool",
-    name: siteConfig.name,
-    email,
-    url: siteConfig.url,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: siteConfig.footer.address,
-      addressLocality: "Tanta",
-      addressRegion: "Gharbiya",
-      addressCountry: "EG",
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/contact`,
+  siteConfig.url,
+);
+
+const structuredData = [
+  {
+    "@id": `${siteConfig.url}/#organization`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Support",
+      email,
+      availableLanguage: "en",
     },
   },
-};
+  buildBreadcrumbListNode({
+    pageUrl: currentUrl,
+    items: [
+      { name: "Home", item: siteConfig.url },
+      { name: "Contact", item: `${siteConfig.url}/contact` },
+    ],
+  }),
+];
 ---
 
 <FormLayout
   title="Contact Us"
   description="Contact STEM Gharbiya for admissions, academics, activities, or partnerships, and receive support from the school team."
+  pageType="ContactPage"
   linksInHead={linksInHead}
   structuredData={structuredData}
   sidebarEyebrow="Contact STEM Gharbiya"

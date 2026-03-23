@@ -6,21 +6,32 @@ import CapstoneProjects from "../../../components/academics/CapstoneProjects.ast
 import CoursesTable from "../../../components/academics/CoursesTable.astro";
 import GradingSystem from "../../../components/academics/GradingSystem.astro";
 import AcademicsFAQ from "../../../components/academics/AcademicsFAQ.astro";
+import { siteConfig } from "../../../data/constants";
+import { cleanCanonicalUrl } from "../../../lib/schema";
 
 const [academicsData] = await getCollection("academicsCollection");
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/about/academics`,
+  siteConfig.url,
+);
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: academicsData.data.faq.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
+const structuredData = [
+  {
+    "@id": `${currentUrl}#faq`,
+    "@type": "FAQPage",
+    name: "Academics FAQ",
+    url: currentUrl,
+    inLanguage: "en",
+    mainEntity: academicsData.data.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  },
+];
 ---
 
 <AboutLayout

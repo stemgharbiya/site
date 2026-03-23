@@ -1,6 +1,7 @@
 ---
 import Layout from "./Layout.astro";
 import { siteConfig } from "../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../lib/schema";
 
 interface Props {
   sectionTitle: string;
@@ -11,6 +12,9 @@ interface Props {
   lead?: string;
   linksInHead?: string[];
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  breadcrumbItems?: { name: string; path: string }[];
+  pageType?: string;
+  noIndex?: boolean;
 }
 
 const {
@@ -22,33 +26,48 @@ const {
   lead,
   linksInHead = [],
   structuredData,
+  breadcrumbItems = [],
+  pageType,
+  noIndex,
 } = Astro.props;
 
 const normalizedSectionPath = sectionPath.startsWith("/")
   ? sectionPath
   : `/${sectionPath}`;
 const aboutPath = "/about";
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? siteConfig.url,
+  siteConfig.url,
+);
 const normalizedHeadline = headline ?? sectionTitle;
 const normalizedLead = lead ?? description;
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "About",
-      item: `${siteConfig.url}${aboutPath}`,
-    },
-    {
-      "@type": "ListItem",
-      position: 2,
-      name: sectionTitle,
-      item: `${siteConfig.url}${normalizedSectionPath}`,
-    },
-  ],
-};
+const breadcrumbTrail = [
+  { name: "Home", path: "/" },
+  ...(normalizedSectionPath === aboutPath
+    ? []
+    : [{ name: "About", path: aboutPath }]),
+  ...breadcrumbItems,
+  ...(normalizedSectionPath === aboutPath
+    ? [{ name: "About", path: aboutPath }]
+    : [{ name: sectionTitle, path: normalizedSectionPath }]),
+];
+
+const dedupedBreadcrumbTrail = breadcrumbTrail.filter(
+  (item, index, array) =>
+    index ===
+    array.findIndex(
+      (entry) => entry.name === item.name && entry.path === item.path,
+    ),
+);
+
+const breadcrumbSchema = buildBreadcrumbListNode({
+  pageUrl: currentUrl,
+  items: dedupedBreadcrumbTrail.map((item) => ({
+    name: item.name,
+    item: `${siteConfig.url}${item.path}`,
+  })),
+});
 
 const additionalStructuredData = structuredData
   ? Array.isArray(structuredData)
@@ -64,6 +83,8 @@ const pageStructuredData = [breadcrumbSchema, ...additionalStructuredData];
   description={description}
   linksInHead={linksInHead}
   structuredData={pageStructuredData}
+  pageType={pageType}
+  noIndex={noIndex}
 >
   <section
     class="from-primary/10 via-background to-background relative overflow-hidden bg-linear-to-b py-16 md:py-20"
@@ -83,11 +104,28 @@ const pageStructuredData = [breadcrumbSchema, ...additionalStructuredData];
     <div class="section-inner relative">
       <nav aria-label="Breadcrumb" class="text-muted-foreground text-sm">
         <ol class="flex flex-wrap items-center gap-2">
-          <li>
-            <a href="/about" class="hover:text-foreground transition">About</a>
-          </li>
-          <li aria-hidden="true">/</li>
-          <li class="text-foreground">{sectionTitle}</li>
+          {
+            dedupedBreadcrumbTrail.map((item, index) => {
+              const isLast = index === dedupedBreadcrumbTrail.length - 1;
+              return (
+                <Fragment>
+                  <li>
+                    {isLast ? (
+                      <span class="text-foreground">{item.name}</span>
+                    ) : (
+                      <a
+                        href={item.path}
+                        class="hover:text-foreground transition"
+                      >
+                        {item.name}
+                      </a>
+                    )}
+                  </li>
+                  {!isLast && <li aria-hidden="true">/</li>}
+                </Fragment>
+              );
+            })
+          }
         </ol>
       </nav>
 

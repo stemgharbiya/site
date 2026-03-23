@@ -5,6 +5,8 @@ import AdmissionProcess from "../../../components/admission/AdmissionProcess.ast
 import RequiredDocuments from "../../../components/admission/RequiredDocuments.astro";
 import AdmissionFAQ from "../../../components/admission/AdmissionFAQ.astro";
 import AdmissionContact from "../../../components/admission/AdmissionContact.astro";
+import { siteConfig } from "../../../data/constants";
+import { cleanCanonicalUrl } from "../../../lib/schema";
 
 const admissionFaq = [
   {
@@ -44,18 +46,28 @@ const admissionFaq = [
   },
 ];
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: admissionFaq.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.answer,
-    },
-  })),
-};
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/about/admission`,
+  siteConfig.url,
+);
+
+const structuredData = [
+  {
+    "@id": `${currentUrl}#faq`,
+    "@type": "FAQPage",
+    name: "Admission FAQ",
+    url: currentUrl,
+    inLanguage: "en",
+    mainEntity: admissionFaq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  },
+];
 ---
 
 <AboutLayout

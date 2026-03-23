@@ -6,11 +6,21 @@ import { pwaAssetsHead } from "virtual:pwa-assets/head";
 import { ClientRouter } from "astro:transitions";
 import NavBar from "../components/NavBar.astro";
 import Footer from "../components/Footer.astro";
+import {
+  buildOrganizationNodes,
+  buildWebPageNode,
+  buildWebSiteNode,
+  cleanCanonicalUrl,
+  getGlobalSchemaIds,
+  toSchemaArray,
+} from "../lib/schema";
 interface Props {
   title?: string;
   description?: string;
   linksInHead?: string[];
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  pageType?: string;
+  noIndex?: boolean;
 }
 
 const {
@@ -18,6 +28,8 @@ const {
   description = siteConfig.description,
   linksInHead = [],
   structuredData,
+  pageType,
+  noIndex = false,
 } = Astro.props;
 
 const normalizedTitle = title
@@ -29,53 +41,39 @@ const metaTitle = normalizedTitle
   ? `${normalizedTitle} | ${siteConfig.name}`
   : siteConfig.title;
 const metaDescription = description || siteConfig.description;
-const currentUrl = Astro.url?.href ?? siteConfig.url;
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? siteConfig.url,
+  siteConfig.url,
+);
+const schemaIds = getGlobalSchemaIds(siteConfig.url);
 
 const baseStructuredData: Record<string, unknown>[] = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "HighSchool",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    description: siteConfig.description,
-    email: siteConfig.email,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: siteConfig.footer.address,
-      addressLocality: "Tanta",
-      addressRegion: "Gharbiya",
-      addressCountry: "EG",
-    },
-    sameAs: siteConfig.social.map((social) => social.href),
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: metaTitle,
-    description: metaDescription,
-    url: currentUrl,
-    isPartOf: {
-      "@type": "WebSite",
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
-  },
+  buildWebSiteNode(siteConfig, schemaIds.website),
+  ...buildOrganizationNodes(
+    siteConfig,
+    schemaIds.organization,
+    schemaIds.highSchool,
+  ),
+  buildWebPageNode({
+    pageType,
+    pageUrl: currentUrl,
+    pageName: metaTitle,
+    pageDescription: metaDescription,
+    websiteId: schemaIds.website,
+    organizationId: schemaIds.organization,
+  }),
 ];
 
-const normalizedStructuredData = structuredData
-  ? Array.isArray(structuredData)
-    ? structuredData
-    : [structuredData]
-  : [];
+const normalizedStructuredData = toSchemaArray(structuredData).map((schema) =>
+  Object.fromEntries(
+    Object.entries(schema).filter(([key]) => key !== "@context"),
+  ),
+);
 
-const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
+const pageStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [...baseStructuredData, ...normalizedStructuredData],
+};
 ---
 
 <!doctype html>
@@ -92,6 +90,7 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
     <title>{metaTitle}</title>
     <meta name="description" content={metaDescription} />
     <meta name="keywords" content={siteConfig.keywords.join(", ")} />
+    {noIndex && <meta name="robots" content="noindex, follow" />}
     {
       pwaAssetsHead.themeColor && (
         <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
@@ -105,14 +104,21 @@ const pageStructuredData = [...baseStructuredData, ...normalizedStructuredData];
     <meta property="og:title" content={metaTitle} />
     <meta property="og:description" content={metaDescription} />
     <meta property="og:url" content={currentUrl} />
+    <meta
+      property="og:image"
+      content={`${siteConfig.url}/web-app-manifest-512x512.png`}
+    />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={metaTitle} />
     <meta name="twitter:description" content={metaDescription} />
-    {
-      pageStructuredData.map((schema) => (
-        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-      ))
-    }
+    <meta
+      name="twitter:image"
+      content={`${siteConfig.url}/web-app-manifest-512x512.png`}
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(pageStructuredData)}
+    />
     {linksInHead.map((link) => <Fragment set:html={link} />)}
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <script src="/src/pwa.ts"></script>

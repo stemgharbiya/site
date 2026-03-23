@@ -3,17 +3,51 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import TeamHero from "../../components/team/TeamHero.astro";
 import TeamGrid from "../../components/team/TeamGrid.astro";
+import { siteConfig } from "../../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../../lib/schema";
 
 const team = (await getCollection("teamCollection")).sort((a, b) => {
   const aOrder = a.data.order ?? Infinity;
   const bOrder = b.data.order ?? Infinity;
   return aOrder - bOrder;
 });
+
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/team`,
+  siteConfig.url,
+);
+
+const structuredData = [
+  {
+    "@id": `${currentUrl}#team-members`,
+    "@type": "ItemList",
+    name: "Development Team Members",
+    numberOfItems: team.length,
+    itemListElement: team.map((member) => ({
+      "@type": "Person",
+      name: member.data.name,
+      jobTitle: member.data.role,
+      ...(member.data.website ? { url: member.data.website } : {}),
+      ...(member.data.social
+        ? { sameAs: Object.values(member.data.social).filter(Boolean) }
+        : {}),
+    })),
+  },
+  buildBreadcrumbListNode({
+    pageUrl: currentUrl,
+    items: [
+      { name: "Home", item: siteConfig.url },
+      { name: "Team", item: `${siteConfig.url}/team` },
+    ],
+  }),
+];
 ---
 
 <Layout
   title="Development Team"
   description="Meet the STEM Gharbiya development team building and maintaining the school’s website, tools, and digital experiences."
+  pageType="CollectionPage"
+  structuredData={structuredData}
 >
   <TeamHero />
   <TeamGrid members={team} />

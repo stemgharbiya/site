@@ -2,11 +2,30 @@
 import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import { ICONS } from "../data/icons";
+import { siteConfig } from "../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../lib/schema";
+
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/404`,
+  siteConfig.url,
+);
+
+const structuredData = [
+  buildBreadcrumbListNode({
+    pageUrl: currentUrl,
+    items: [
+      { name: "Home", item: siteConfig.url },
+      { name: "Page Not Found", item: currentUrl },
+    ],
+  }),
+];
 ---
 
 <Layout
   title="Page Not Found"
   description="The page you requested could not be found. Return to the STEM Gharbiya homepage to continue browsing."
+  noIndex={true}
+  structuredData={structuredData}
 >
   <div class="flex min-h-screen items-center justify-center px-4">
     <div class="text-center">

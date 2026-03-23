@@ -5,9 +5,23 @@ import Statistics from "../components/Statistics.astro";
 import Programs from "../components/Programs.astro";
 import StudentLife from "../components/StudentLife.astro";
 import Alumni from "../components/Alumni.astro";
+import { siteConfig } from "../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../lib/schema";
+
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? siteConfig.url,
+  siteConfig.url,
+);
+
+const structuredData = [
+  buildBreadcrumbListNode({
+    pageUrl: currentUrl,
+    items: [{ name: "Home", item: siteConfig.url }],
+  }),
+];
 ---
 
-<Layout>
+<Layout structuredData={structuredData}>
   <Hero />
   <Statistics
     title="Measured outcomes that speak for themselves."
