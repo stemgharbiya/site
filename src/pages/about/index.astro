@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import { siteConfig } from "../../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../../lib/schema";
 import headImage from "../../assets/images/head.jpg";
 
 const aboutLinks = [
@@ -37,25 +38,35 @@ const aboutLinks = [
   },
 ];
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  name: siteConfig.name,
-  url: `${siteConfig.url}/about`,
-  description:
-    "STEM Gharbiya is a public boarding STEM high school founded in 2016 as part of Egypt's national STEM schools network.",
-  foundingDate: "2016",
-  numberOfStudents: "300+",
-  parentOrganization: {
-    "@type": "EducationalOrganization",
-    name: "Egyptian Ministry of Education",
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/about`,
+  siteConfig.url,
+);
+
+const structuredData = [
+  {
+    "@id": `${siteConfig.url}/#organization`,
+    foundingDate: "2016",
+    numberOfStudents: 300,
+    parentOrganization: {
+      "@type": "EducationalOrganization",
+      name: "Egyptian Ministry of Education",
+    },
   },
-};
+  buildBreadcrumbListNode({
+    pageUrl: currentUrl,
+    items: [
+      { name: "Home", item: siteConfig.url },
+      { name: "About", item: `${siteConfig.url}/about` },
+    ],
+  }),
+];
 ---
 
 <Layout
   title="About"
   description="Learn about STEM Gharbiya, its mission, and how it contributes as part of Egypt's national STEM school network."
+  pageType="AboutPage"
   structuredData={structuredData}
 >
   <section

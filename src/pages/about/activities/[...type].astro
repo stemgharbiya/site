@@ -2,6 +2,12 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import AboutLayout from "../../../layouts/AboutLayout.astro";
 import ClubCard from "../../../components/clubs/ClubCard.astro";
+import { siteConfig } from "../../../data/constants";
+import {
+  buildEntityItemListNode,
+  cleanCanonicalUrl,
+  type ItemListEntity,
+} from "../../../lib/schema";
 
 type ClubEntry = CollectionEntry<"clubsCollection">;
 
@@ -68,6 +74,42 @@ const sectionPath = invalidType
       ? "/about/activities/clubs"
       : "/about/activities";
 
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}${sectionPath}`,
+  siteConfig.url,
+);
+
+const visibleEntities: ItemListEntity[] = visibleItems.map((item) => {
+  const socialLinks = item.data.social ? Object.values(item.data.social) : [];
+  const sameAs = [item.data.website, ...socialLinks].filter(
+    (value): value is string => Boolean(value),
+  );
+
+  return {
+    name: item.data.title,
+    url:
+      item.data.website ??
+      `${siteConfig.url}${selectedType === "teams" ? "/about/activities/teams" : "/about/activities/clubs"}#${item.id}`,
+    description: item.data.short ?? item.data.description,
+    sameAs: sameAs.length > 0 ? sameAs : undefined,
+  };
+});
+
+const listName = hasSelectedType
+  ? selectedType === "teams"
+    ? "Student Teams"
+    : "Student Clubs"
+  : "Student Clubs and Teams";
+
+const itemListSchema = buildEntityItemListNode({
+  id: "groups",
+  name: listName,
+  pageUrl: currentUrl,
+  entities: visibleEntities,
+});
+
+const structuredData = invalidType ? [] : [itemListSchema];
+
 if (invalidType) {
   Astro.response.status = 404;
 }
@@ -84,6 +126,12 @@ if (invalidType) {
   lead={invalidType
     ? "This activities category is not available. Explore all groups or select one of the available categories."
     : "Discover STEM Gharbiya clubs and teams—from science and robotics to diplomacy and maker spaces. Explore each group’s focus, leadership, and social links."}
+  pageType={invalidType ? "WebPage" : "CollectionPage"}
+  noIndex={invalidType}
+  breadcrumbItems={hasSelectedType
+    ? [{ name: "Activities", path: "/about/activities" }]
+    : []}
+  structuredData={structuredData}
 >
   <section class="py-8 md:py-12">
     <div class="section-inner">

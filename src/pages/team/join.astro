@@ -2,17 +2,37 @@
 import { TURNSTILE_SITE_KEY } from "astro:env/client";
 import FormLayout from "../../layouts/FormLayout.astro";
 import { ALLOWED_INTERESTS } from "../../data/forms";
+import { siteConfig } from "../../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../../lib/schema";
 
 const linksInHead = [
   '<link rel="preconnect" href="https://challenges.cloudflare.com" />',
   '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer async></script>',
+];
+
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}/team/join`,
+  siteConfig.url,
+);
+
+const structuredData = [
+  buildBreadcrumbListNode({
+    pageUrl: currentUrl,
+    items: [
+      { name: "Home", item: siteConfig.url },
+      { name: "Team", item: `${siteConfig.url}/team` },
+      { name: "Join", item: currentUrl },
+    ],
+  }),
 ];
 ---
 
 <FormLayout
   title="Join Development Team"
   description="Apply to join the STEM Gharbiya development team and contribute to real projects, open-source workflows, and student-focused products."
+  pageType="WebPage"
   linksInHead={linksInHead}
+  structuredData={structuredData}
   sidebarEyebrow="Dev team applications"
   sidebarTitle="Join STEM Gharbiya Dev Team"
   sidebarDescription="Apply to join our dev team to collaborate on open-source projects, learn industry workflows, and build real impact for students."

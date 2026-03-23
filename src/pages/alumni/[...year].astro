@@ -2,6 +2,8 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import AlumniCard from "../../components/alumni/AlumniCard.astro";
+import { siteConfig } from "../../data/constants";
+import { buildBreadcrumbListNode, cleanCanonicalUrl } from "../../lib/schema";
 
 export async function getStaticPaths() {
   const alumni = await getCollection("alumniCollection");
@@ -61,9 +63,71 @@ const finalTitle = invalidYear ? "Alumni Not Found" : pageTitle;
 const finalDescription = invalidYear
   ? "The requested alumni graduation year is unavailable. Browse all STEM Gharbiya alumni batches."
   : pageDescription;
+
+const pagePath = invalidYear
+  ? "/alumni"
+  : hasSelectedYear
+    ? `/alumni/${selectedYear}`
+    : "/alumni";
+
+const currentUrl = cleanCanonicalUrl(
+  Astro.url?.href ?? `${siteConfig.url}${pagePath}`,
+  siteConfig.url,
+);
+
+const alumniEntities = visibleStudents.map((item) => ({
+  "@type": "Person",
+  name: item.student.name,
+  alumniOf: {
+    "@id": `${siteConfig.url}/#organization`,
+  },
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: item.student.university.name,
+  },
+  description: `Class of ${item.year}${item.student.university.major ? `, ${item.student.university.major}` : ""}`,
+}));
+
+const structuredData = invalidYear
+  ? [
+      buildBreadcrumbListNode({
+        pageUrl: currentUrl,
+        items: [
+          { name: "Home", item: siteConfig.url },
+          { name: "Alumni", item: `${siteConfig.url}/alumni` },
+        ],
+      }),
+    ]
+  : [
+      {
+        "@id": `${currentUrl}#alumni-list`,
+        "@type": "ItemList",
+        name: hasSelectedYear
+          ? `Alumni Class of ${selectedYear}`
+          : "STEM Gharbiya Alumni",
+        numberOfItems: alumniEntities.length,
+        itemListElement: alumniEntities,
+      },
+      buildBreadcrumbListNode({
+        pageUrl: currentUrl,
+        items: [
+          { name: "Home", item: siteConfig.url },
+          { name: "Alumni", item: `${siteConfig.url}/alumni` },
+          ...(hasSelectedYear
+            ? [{ name: `Class of ${selectedYear}`, item: currentUrl }]
+            : []),
+        ],
+      }),
+    ];
 ---
 
-<Layout title={finalTitle} description={finalDescription}>
+<Layout
+  title={finalTitle}
+  description={finalDescription}
+  pageType={invalidYear ? "WebPage" : "CollectionPage"}
+  noIndex={invalidYear}
+  structuredData={structuredData}
+>
   <section
     class="from-secondary/70 via-background to-background relative overflow-hidden bg-gradient-to-b py-16 md:py-20"
   >
