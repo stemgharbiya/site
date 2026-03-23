@@ -19,13 +19,16 @@ type SocialLink = {
   icon: IconKey;
 };
 
-type SiteConfig = {
+export type SiteConfig = {
   name: string;
   title: string;
   description: string;
   url: string;
   email: string;
   locale: string;
+  address: string;
+  postalCode: number;
+  mapUrl: string;
   nav: {
     primary: NavItem[];
   };
@@ -33,8 +36,6 @@ type SiteConfig = {
     explore: FooterLink[];
     admissions: FooterLink[];
     quickLinks: FooterLink[];
-    address: string;
-    mapUrl: string;
   };
   social: SocialLink[];
   keywords: string[];
@@ -48,6 +49,9 @@ export const siteConfig: SiteConfig = {
   url: "https://stemgh.org",
   email: "team@stemgh.org",
   locale: "en",
+  address: "Galaa St., Tanta, Gharbiya, Egypt",
+  postalCode: 6630083,
+  mapUrl: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
   nav: {
     primary: [
       { label: "Home", href: "/", icon: "home" },
@@ -106,8 +110,6 @@ export const siteConfig: SiteConfig = {
         href: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
       },
     ],
-    address: "Galaa St., Tanta, Gharbiya, Egypt",
-    mapUrl: "https://maps.app.goo.gl/qAHoUc5avbPMAyoU8",
   },
   social: [
     {

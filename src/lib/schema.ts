@@ -1,15 +1,5 @@
 type SchemaNode = Record<string, unknown>;
-
-type SiteConfigShape = {
-  name: string;
-  url: string;
-  description: string;
-  email: string;
-  social: Array<{ href: string }>;
-  footer: {
-    address: string;
-  };
-};
+import { type SiteConfig } from "../data/constants";
 
 type BreadcrumbItem = {
   name: string;
@@ -44,7 +34,7 @@ export function getGlobalSchemaIds(siteUrl: string) {
 }
 
 export function buildWebSiteNode(
-  siteConfig: SiteConfigShape,
+  siteConfig: SiteConfig,
   websiteId: string,
 ): SchemaNode {
   return {
@@ -57,7 +47,7 @@ export function buildWebSiteNode(
 }
 
 export function buildOrganizationNodes(
-  siteConfig: SiteConfigShape,
+  siteConfig: SiteConfig,
   organizationId: string,
   highSchoolId: string,
 ): SchemaNode[] {
@@ -76,7 +66,8 @@ export function buildOrganizationNodes(
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: siteConfig.footer.address,
+      postalCode: siteConfig.postalCode,
+      streetAddress: siteConfig.address,
       addressLocality: "Tanta",
       addressRegion: "Gharbiya",
       addressCountry: "EG",
