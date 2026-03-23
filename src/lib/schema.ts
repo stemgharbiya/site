@@ -17,6 +17,9 @@ export type { SchemaNode, BreadcrumbItem, ItemListEntity };
 
 export function cleanCanonicalUrl(url: string, fallbackSiteUrl: string) {
   const parsed = new URL(url || fallbackSiteUrl);
+  if (!parsed.pathname.endsWith("/")) {
+    parsed.pathname += "/";
+  }
   parsed.hash = "";
   parsed.search = "";
   return parsed.href;
@@ -134,7 +137,7 @@ export function buildBreadcrumbListNode(params: {
       "@type": "ListItem",
       position: index + 1,
       name: entry.name,
-      item: entry.item,
+      item: cleanCanonicalUrl(entry.item, pageUrl),
     })),
   };
 }

@@ -41,6 +41,8 @@ const currentUrl = cleanCanonicalUrl(
 );
 const normalizedHeadline = headline ?? sectionTitle;
 const normalizedLead = lead ?? description;
+const normalizeBreadcrumbPath = (path: string) =>
+  path === "/" ? "/" : path.endsWith("/") ? path : `${path}/`;
 
 const breadcrumbTrail = [
   { name: "Home", path: "/" },
@@ -51,7 +53,10 @@ const breadcrumbTrail = [
   ...(normalizedSectionPath === aboutPath
     ? [{ name: "About", path: aboutPath }]
     : [{ name: sectionTitle, path: normalizedSectionPath }]),
-];
+].map((item) => ({
+  ...item,
+  path: normalizeBreadcrumbPath(item.path),
+}));
 
 const dedupedBreadcrumbTrail = breadcrumbTrail.filter(
   (item, index, array) =>
