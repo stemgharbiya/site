@@ -17,6 +17,9 @@ export default defineConfig({
   image: {
     layout: "constrained",
   },
+  build: {
+    assets: "assets",
+  },
   env: {
     schema: {
       API_BASE_URL: envField.string({
