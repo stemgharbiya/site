@@ -81,6 +81,14 @@ body {
   color: var(--foreground);
 }
 
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
 @layer base {
   body {
     font-family: var(--font-sans);

@@ -4,20 +4,90 @@ import { ICONS } from "../data/icons";
 ---
 
 <script>
-  const updateToggle = (toggle: HTMLElement | null, theme: string) => {
-    const isDark = theme === "dark";
-    if (isDark) {
-      toggle?.classList.add("dark");
-    } else {
-      toggle?.classList.remove("dark");
+  type ThemePreference = "light" | "dark" | "system";
+
+  const THEME_OPTIONS: ThemePreference[] = ["light", "dark", "system"];
+
+  const getSavedThemePreference = (): ThemePreference => {
+    const savedTheme =
+      typeof localStorage !== "undefined"
+        ? localStorage.getItem("theme")
+        : null;
+
+    return THEME_OPTIONS.includes(savedTheme as ThemePreference)
+      ? (savedTheme as ThemePreference)
+      : "system";
+  };
+
+  const resolveTheme = (themePreference: ThemePreference) => {
+    if (themePreference !== "system") {
+      return themePreference;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+
+  const applyWithoutTransitions = (callback: () => void) => {
+    const root = document.documentElement;
+    root.classList.add("theme-switching");
+    callback();
+
+    requestAnimationFrame(() => {
+      root.classList.remove("theme-switching");
+    });
+  };
+
+  const applyThemePreference = (themePreference: ThemePreference) => {
+    const html = document.documentElement;
+    const resolvedTheme = resolveTheme(themePreference);
+    applyWithoutTransitions(() => {
+      html.classList.toggle("dark", resolvedTheme === "dark");
+      html.dataset.themePreference = themePreference;
+    });
+  };
+
+  const updateToggle = (
+    toggle: HTMLElement | null,
+    themePreference: ThemePreference,
+  ) => {
+    if (!toggle) {
+      return;
+    }
+
+    toggle.dataset.theme = themePreference;
+    const iconMap: Record<ThemePreference, string> = {
+      light: "sun",
+      dark: "moon",
+      system: "system",
+    };
+
+    const icons = toggle.querySelectorAll<HTMLElement>("[data-theme-icon]");
+    icons.forEach((icon) => {
+      const isActive = icon.dataset.themeIcon === iconMap[themePreference];
+      icon.classList.toggle("hidden", !isActive);
+      icon.classList.toggle("block", isActive);
+    });
+
+    const button = toggle.querySelector<HTMLButtonElement>(
+      "[data-theme-button]",
+    );
+    if (button) {
+      const labelMap: Record<ThemePreference, string> = {
+        light: "Theme: Light (click to switch)",
+        dark: "Theme: Dark (click to switch)",
+        system: "Theme: System (click to switch)",
+      };
+      button.setAttribute("aria-label", labelMap[themePreference]);
+      button.setAttribute("title", labelMap[themePreference]);
     }
   };
 
   const initThemeToggle = () => {
     const toggle = document.getElementById("theme-toggle");
-    const html = document.documentElement;
-
-    const currentTheme = html.classList.contains("dark") ? "dark" : "light";
+    const currentTheme = getSavedThemePreference();
+    applyThemePreference(currentTheme);
     updateToggle(toggle, currentTheme);
 
     if (!toggle || toggle.dataset.bound === "true") {
@@ -25,11 +95,17 @@ import { ICONS } from "../data/icons";
     }
 
     toggle.dataset.bound = "true";
-    toggle.addEventListener("click", () => {
-      const isDark = html.classList.toggle("dark");
-      const newTheme = isDark ? "dark" : "light";
-      updateToggle(toggle, newTheme);
-      localStorage.setItem("theme", newTheme);
+    const button = toggle.querySelector<HTMLButtonElement>(
+      "[data-theme-button]",
+    );
+    button?.addEventListener("click", () => {
+      const activeTheme = getSavedThemePreference();
+      const activeIndex = THEME_OPTIONS.indexOf(activeTheme);
+      const nextTheme = THEME_OPTIONS[(activeIndex + 1) % THEME_OPTIONS.length];
+
+      applyThemePreference(nextTheme);
+      updateToggle(toggle, nextTheme);
+      localStorage.setItem("theme", nextTheme);
     });
   };
 
@@ -37,31 +113,55 @@ import { ICONS } from "../data/icons";
 
   const globalWindow = window as Window & {
     __themeToggleLifecycleBound?: boolean;
+    __themeToggleSystemChangeBound?: boolean;
   };
+
+  if (!globalWindow.__themeToggleSystemChangeBound) {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    media.addEventListener("change", () => {
+      const savedTheme = getSavedThemePreference();
+      if (savedTheme === "system") {
+        applyThemePreference("system");
+        updateToggle(document.getElementById("theme-toggle"), "system");
+      }
+    });
+    globalWindow.__themeToggleSystemChangeBound = true;
+  }
+
   if (!globalWindow.__themeToggleLifecycleBound) {
     document.addEventListener("astro:after-swap", initThemeToggle);
     globalWindow.__themeToggleLifecycleBound = true;
   }
 </script>
 
-<button
+<div
   id="theme-toggle"
-  class="bg-secondary hover:bg-accent flex items-center gap-2 rounded-full p-1 transition-colors"
-  aria-label="Toggle theme"
+  class="border-border/80 bg-background/80 supports-[backdrop-filter]:bg-background/65 inline-flex rounded-full border p-1 shadow-sm backdrop-blur"
 >
-  <div
-    class="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full transition-all duration-300"
-    id="toggle-knob"
+  <button
+    type="button"
+    data-theme-button
+    class="text-muted-foreground hover:bg-secondary hover:text-foreground flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200"
+    aria-label="Theme switch"
+    title="Theme switch"
   >
     <Icon
       name={ICONS.sun}
-      class="sun-icon block h-4 w-4 dark:hidden"
+      data-theme-icon="sun"
+      class="block h-4 w-4"
+      aria-hidden="true"
+    />
+    <Icon
+      name={ICONS.system}
+      data-theme-icon="system"
+      class="hidden h-4 w-4"
       aria-hidden="true"
     />
     <Icon
       name={ICONS.moon}
-      class="moon-icon hidden h-4 w-4 dark:block"
+      data-theme-icon="moon"
+      class="hidden h-4 w-4"
       aria-hidden="true"
     />
-  </div>
-</button>
+  </button>
+</div>

@@ -122,45 +122,59 @@ const pageStructuredData = {
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <script src="/src/pwa.ts"></script>
     <script is:inline>
-      const applySavedTheme = () => {
-        const savedTheme =
-          typeof localStorage !== "undefined"
-            ? localStorage.getItem("theme")
-            : null;
-        if (savedTheme) {
-          document.documentElement.classList.toggle(
-            "dark",
-            savedTheme === "dark",
-          );
-        } else if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
+      const THEME_OPTIONS = ["light", "dark", "system"];
+
+      const getSavedThemePreference = () => {
+        if (typeof localStorage === "undefined") {
+          return "system";
         }
+
+        const savedTheme = localStorage.getItem("theme");
+        return THEME_OPTIONS.includes(savedTheme ?? "") ? savedTheme : "system";
+      };
+
+      const resolveThemeMode = (themePreference) => {
+        if (themePreference !== "system") {
+          return themePreference;
+        }
+
+        return window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      };
+
+      const applyThemePreference = (documentElement, themePreference) => {
+        const resolvedTheme = resolveThemeMode(themePreference);
+        documentElement.classList.toggle("dark", resolvedTheme === "dark");
+        documentElement.dataset.themePreference = themePreference;
+      };
+
+      const applySavedTheme = () => {
+        applyThemePreference(
+          document.documentElement,
+          getSavedThemePreference(),
+        );
       };
 
       applySavedTheme();
       document.addEventListener("astro:before-swap", (ev) => {
-        const savedTheme =
-          typeof localStorage !== "undefined"
-            ? localStorage.getItem("theme")
-            : null;
-        if (savedTheme === "dark") {
-          ev.newDocument.documentElement.classList.add("dark");
-        } else if (savedTheme === "light") {
-          ev.newDocument.documentElement.classList.remove("dark");
-        } else if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        ) {
-          ev.newDocument.documentElement.classList.add("dark");
-        } else {
-          ev.newDocument.documentElement.classList.remove("dark");
-        }
+        applyThemePreference(
+          ev.newDocument.documentElement,
+          getSavedThemePreference(),
+        );
       });
+
+      const globalWindow = window;
+      if (!globalWindow.__themeSystemListenerBound) {
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        media.addEventListener("change", () => {
+          if (getSavedThemePreference() === "system") {
+            applyThemePreference(document.documentElement, "system");
+          }
+        });
+        globalWindow.__themeSystemListenerBound = true;
+      }
     </script>
   </head>
   <body>
