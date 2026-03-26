@@ -6,6 +6,7 @@ export const ICONS = {
   instagram: "simple-icons:instagram",
   sun: "mdi:weather-sunny",
   moon: "mdi:weather-night",
+  system: "mdi:monitor",
   mapMarker: "mdi:map-marker",
   home: "mdi:home",
   menu: "mdi:menu",
