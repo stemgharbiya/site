@@ -29,11 +29,23 @@ import { ICONS } from "../data/icons";
       : "light";
   };
 
+  const applyWithoutTransitions = (callback: () => void) => {
+    const root = document.documentElement;
+    root.classList.add("theme-switching");
+    callback();
+
+    requestAnimationFrame(() => {
+      root.classList.remove("theme-switching");
+    });
+  };
+
   const applyThemePreference = (themePreference: ThemePreference) => {
     const html = document.documentElement;
     const resolvedTheme = resolveTheme(themePreference);
-    html.classList.toggle("dark", resolvedTheme === "dark");
-    html.dataset.themePreference = themePreference;
+    applyWithoutTransitions(() => {
+      html.classList.toggle("dark", resolvedTheme === "dark");
+      html.dataset.themePreference = themePreference;
+    });
   };
 
   const updateToggle = (
